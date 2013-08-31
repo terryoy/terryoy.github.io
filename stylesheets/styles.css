@@ -255,4 +255,6 @@ footer {
 }
 
 /* customize styles */
-
+.gist pre, .gist table {
+    font-size: 14px;
+}
