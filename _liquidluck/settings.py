@@ -13,7 +13,7 @@ site = {
 #: this config defined information of your site
 #: 1. where the resources  2. how should the site be generated
 config = {
-    "source": "../content",
+    "source": "../_content",
     "output": "../",
     "static": "../static",
     "static_prefix": "/static/",
