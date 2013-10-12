@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Hello, World!" />
+    <meta name="application-name" content="Hello, World!" />
+    <title>Useful Aliases - Hello, World!</title>
+    <meta name="keywords" content="linux,shell" />
+    <meta name="description" content="" />
+    
+    <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="Hello, World!" />
+    <link rel="stylesheet" href="/static/css/styles.css?v=5d528" />
+    <link rel="stylesheet" href="/static/css/pygment_trac.css?v=a6c15" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div id="wrapper">   
+<header id="header" class="clear">
+    <h1>Hello, World!</h1>
+    <p>I'm <i>terryoy</i></p>
+    <p class="view"><a href="https://github.com/terryoy">View My GitHub Profile</a></p>
+</header><!-- #header -->
+<nav id="nav" role="navigation">
+    <a href="/">Home</a>
+    <a href="/construction.html">Guides</a>
+    <a href="/tricks/">Tricks</a>
+    <a href="/about.html">About Me</a>
+</nav>
+
+<section><article id="main" class="hentry">
+	<h1>Useful Aliases</h1>
+    <p class="sub_text">2013-09-23 by <i>terryoy</i>, in <a href="/tricks/">tricks</a>
+    </p>
+    
+	<p>Below is a list of some useful aliases, which you could add to your linux shell environment.</p>
+<p>Copy and paste below content to your <strong><em>~/.bashrc</em></strong>.</p>
+
+<!--script src="https://gist.github.com/terryoy/6374725.js"></script-->
+<div class="highlight"><pre><span class="c"># open a browser and view raw html (e.g. &quot;cat some.html | viewhtml&quot;)</span>
+<span class="nb">alias </span><span class="nv">viewhtml</span><span class="o">=</span><span class="s1">&#39;firefox &quot;data:text/html;charset=utf-8;base64,$(base64 -w 0 &lt;&amp;0)&quot;&#39;</span>
+
+<span class="c"># url encode / decode</span>
+<span class="nb">alias </span><span class="nv">urlencode</span><span class="o">=</span><span class="s1">&#39;python -c &quot;import sys, urllib as ul; print ul.quote_plus(sys.argv[1])&quot;&#39;</span>
+<span class="nb">alias </span><span class="nv">urldecode</span><span class="o">=</span><span class="s1">&#39;python -c &quot;import sys, urllib as ul; print ul.unquote_plus(sys.argv[1])&quot;&#39;</span>
+
+<span class="c"># url shortener</span>
+<span class="nb">alias </span><span class="nv">shortenurl</span><span class="o">=</span><span class="s2">&quot;python -c \&quot;import sys, urllib as ul; print ul.urlopen(&#39;http://tinyurl.com/api-create.php?url=%s&#39; % ul.quote_plus(sys.argv[1])).readline()\&quot;&quot;</span>
+</pre></div>
+
+    
+    
+	<p/>
+	<hr/>
+    
+    <div class="sub_text">
+        <span>Tags:
+            <a href="/tag/linux/">linux</a>,&nbsp;<a href="/tag/shell/">shell</a>
+		</span>
+    
+        
+    </div>
+    
+
+	<p/>
+	
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'terryoy';
+        var disqus_title = 'Useful Aliases';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+</article></section>
+
+<footer id="footer">
+    <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+</footer><!-- #footer -->
+</div><!-- #wrapper -->
+
+
+</body>
+</html>

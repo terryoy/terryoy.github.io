@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>Hello, World!</title>
+    <link href="http://terryoy.github.io/feed.xml" rel="self" />
+    <link href="http://terryoy.github.io/" />
+    <updated>2013-10-12T20:19:38+08:00</updated>
+    <id>http://terryoy.github.io/</id>
+    <entry>
+        <title type="html"><![CDATA[Preferences for Vim]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2013/09/vimrc.html"/>
+        <published>2013-09-23T23:16:00+08:00</published>
+        <updated>2013-10-12T20:14:12+08:00</updated>
+        <id>http://terryoy.github.io/2013/09/vimrc.html</id>
+        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
+        <category scheme="http://terryoy.github.io/tag/#vim" term="vim" label="vim" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <p>These are settings that to improve usage of VI text editor for various purposes.</p>
+<p>Copy &amp; paste below lines to <strong><em>~/.vimrc</em></strong>:</p>
+
+<pre><code>set smartindent
+set tabstop=4
+set shiftwidth=4
+set expandtab</code></pre>
+
+<ol>
+<li>smartindent - Do smart autoindenting when starting a new line for C-like programs.</li>
+<li>tabstop - Number of spaces that a <Tab> in the file counts for.</li>
+<li>shiftwidth - Number of spaces to use for each step of (auto)indent.</li>
+<li>expandtab - Spaces are used in indents with <Tab>.</li>
+</ol>
+<p>For color scheme preferences:</p>
+
+<pre><code>colorscheme torte</code></pre>
+<p>It is the default black/white scheme.</p>
+]]>
+        </content>
+    </entry><entry>
+        <title type="html"><![CDATA[Useful Aliases]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2013/09/useful_alias.html"/>
+        <published>2013-09-23T00:00:00+08:00</published>
+        <updated>2013-10-12T20:19:38+08:00</updated>
+        <id>http://terryoy.github.io/2013/09/useful_alias.html</id>
+        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
+        <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <p>Below is a list of some useful aliases, which you could add to your linux shell environment.</p>
+<p>Copy and paste below content to your <strong><em>~/.bashrc</em></strong>.</p>
+
+<!--script src="https://gist.github.com/terryoy/6374725.js"></script-->
+<div class="highlight"><pre><span class="c"># open a browser and view raw html (e.g. &quot;cat some.html | viewhtml&quot;)</span>
+<span class="nb">alias </span><span class="nv">viewhtml</span><span class="o">=</span><span class="s1">&#39;firefox &quot;data:text/html;charset=utf-8;base64,$(base64 -w 0 &lt;&amp;0)&quot;&#39;</span>
+
+<span class="c"># url encode / decode</span>
+<span class="nb">alias </span><span class="nv">urlencode</span><span class="o">=</span><span class="s1">&#39;python -c &quot;import sys, urllib as ul; print ul.quote_plus(sys.argv[1])&quot;&#39;</span>
+<span class="nb">alias </span><span class="nv">urldecode</span><span class="o">=</span><span class="s1">&#39;python -c &quot;import sys, urllib as ul; print ul.unquote_plus(sys.argv[1])&quot;&#39;</span>
+
+<span class="c"># url shortener</span>
+<span class="nb">alias </span><span class="nv">shortenurl</span><span class="o">=</span><span class="s2">&quot;python -c \&quot;import sys, urllib as ul; print ul.urlopen(&#39;http://tinyurl.com/api-create.php?url=%s&#39; % ul.quote_plus(sys.argv[1])).readline()\&quot;&quot;</span>
+</pre></div>
+]]>
+        </content>
+    </entry>
+</feed>
