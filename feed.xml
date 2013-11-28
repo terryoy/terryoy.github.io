@@ -3,14 +3,14 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2013-11-27T11:17:54+08:00</updated>
+    <updated>2013-11-28T10:54:46+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
         <title type="html"><![CDATA[Cocos2d-x-2.2.0 Setup Guide (for Android and iOS)]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/11/cocos2d-x-setup.html"/>
         <published>2013-11-27T09:00:00+08:00</published>
-        <updated>2013-11-27T11:17:54+08:00</updated>
+        <updated>2013-11-28T10:54:46+08:00</updated>
         <id>http://terryoy.github.io/2013/11/cocos2d-x-setup.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#game" term="game" label="game" />
@@ -21,9 +21,29 @@
 <h2 id="toc_0">1. Download packages</h2>
 <p>In this guide, we&#39;ll use cocos2d-x-2.x as example, and we&#39;ll setup for Android and iOS app development. So, the following packages will be needed:</p>
 
-<pre><code>Cocos2d-x(latest of v2.x): http://www.cocos2d-x.org/download
-Android Development Tools(ADT bundle): http://developer.android.com/sdk/index.html
-Android NDK(legacy-toolchains package is not neccessary): http://developer.android.com/tools/sdk/ndk/index.html</code></pre>
+<table><thead>
+<tr>
+<th>Packages</th>
+<th>Links</th>
+<th>Remark</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Cocos2d-x:</td>
+<td><a href="http://www.cocos2d-x.org/download">www.cocos2d-x.org/download</a></td>
+<td>use latest of v2.x</td>
+</tr>
+<tr>
+<td>ADT bundle:</td>
+<td><a href="http://developer.android.com/sdk/index.html">developer.android.com/sdk/index.html</a></td>
+<td>Android Development Tools</td>
+</tr>
+<tr>
+<td>Android NDK:</td>
+<td><a href="http://developer.android.com/tools/sdk/ndk/index.html">developer.android.com/tools/sdk/ndk/index.html</a></td>
+<td>legacy-toolchains package is not neccessary</td>
+</tr>
+</tbody></table>
 <p>Unzip the three packages to a folder. For example, after I extract the files, the paths looks like:</p>
 
 <pre><code>~/develop/android/adt-bundle-linux-x86-20131030/eclipse
@@ -70,6 +90,7 @@ $ ./adb shell</code></pre>
 <p><img src="/images/2013/cocos_import_success.png" alt="alt" title="Imported projects"/></p>
 
 <h2 id="toc_4">Setting Environment Variables</h2>
+<p>(still writing&hellip;)</p>
 ]]>
         </content>
     </entry><entry>

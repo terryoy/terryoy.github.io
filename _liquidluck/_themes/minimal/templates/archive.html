@@ -15,7 +15,7 @@
             {%- endif %}
             {% set year = item.date.year -%}
             <section class="item">
-                <h2>{{item.date.year}}</h2>
+                <h1>{{item.date.year}}</h1>
                 <ul>
         {%- endif %}
                     <li><a href="{{ item|permalink }}">{{ item.title }}</a> <time class="updated">{{item.date.strftime('%Y-%m-%d')}}</time></li>

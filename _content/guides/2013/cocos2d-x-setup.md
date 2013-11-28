@@ -13,9 +13,13 @@ This guide describes the steps to setup a development environment for Cocos2d-x 
 
 In this guide, we'll use cocos2d-x-2.x as example, and we'll setup for Android and iOS app development. So, the following packages will be needed:
 
-    Cocos2d-x(latest of v2.x): http://www.cocos2d-x.org/download
-    Android Development Tools(ADT bundle): http://developer.android.com/sdk/index.html
-    Android NDK(legacy-toolchains package is not neccessary): http://developer.android.com/tools/sdk/ndk/index.html
+
+| Packages | Links | Remark |
+|------|------|------|
+| Cocos2d-x: | http://www.cocos2d-x.org/download | use latest of v2.x |
+| ADT bundle: |  http://developer.android.com/sdk/index.html | Android Development Tools |
+| Android NDK: | http://developer.android.com/tools/sdk/ndk/index.html | legacy-toolchains package is not neccessary |
+
 
 Unzip the three packages to a folder. For example, after I extract the files, the paths looks like:
 
@@ -83,7 +87,7 @@ Setting Environment Variables
 
 
 
-
+(still writing...)
 
 
 
