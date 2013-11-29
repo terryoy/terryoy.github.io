@@ -3,14 +3,14 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/guides/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/guides/" />
-    <updated>2013-11-28T10:54:46+08:00</updated>
+    <updated>2013-11-29T11:12:08+08:00</updated>
     <id>http://terryoy.github.io/guides/</id>
     <entry>
         <title type="html"><![CDATA[Cocos2d-x-2.2.0 Setup Guide (for Android and iOS)]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/11/cocos2d-x-setup.html"/>
         <published>2013-11-27T09:00:00+08:00</published>
-        <updated>2013-11-28T10:54:46+08:00</updated>
+        <updated>2013-11-29T11:12:08+08:00</updated>
         <id>http://terryoy.github.io/2013/11/cocos2d-x-setup.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#game" term="game" label="game" />
@@ -90,6 +90,20 @@ $ ./adb shell</code></pre>
 <p><img src="/images/2013/cocos_import_success.png" alt="alt" title="Imported projects"/></p>
 
 <h2 id="toc_4">Setting Environment Variables</h2>
+<p>If you try building the project &ldquo;TestCpp&rdquo; now, you will probably find the below error:</p>
+<p><img src="/images/2013/cocos_build_ndk_error.png" alt="alt" title="Compile error"/></p>
+<p>It&#39;s because we have to set the environment variables for the compiler. It needs &ldquo;<strong>COCOS2DX_ROOT</strong>&rdquo; and &ldquo;<strong>NDK_ROOT</strong>&rdquo; to build the project. So open &ldquo;Window -&gt; Preferences -&gt; C/C++ -&gt; Build -&gt; Environment&rdquo; in the Eclipse IDE, and set the variables similar to below:</p>
+<p><img src="/images/2013/cocos_set_env_vars.png" alt="alt" title="Path variables"/></p>
+<p>After that, select the &ldquo;TestCpp&rdquo; and build again, you should be able to see the build succesful messages:</p>
+<p><img src="/images/2013/cocos_build_sucessful.png" alt="alt" title="NDK build successful"/></p>
+
+<h2 id="toc_5">Running on Tablet</h2>
+<p>Next try running it on the tablet. Click &ldquo;Run&rdquo; and (after the build) you will get the &ldquo;Android Device Chooser&rdquo; below:</p>
+<p><img src="/images/2013/cocos_avd.png" alt="alt" title="Android Device Chooser"/></p>
+<p>Here you could choose the plugged in tablet which you have configured in the previous steps to run the program. Or you could choose to create a new emulator to run it on your computer. If you have problem seeing the device in the list, go back to the &ldquo;Check device accessible&rdquo; step to check the device again. </p>
+<p>If you find running the emulators very slow, check out the <a href="http://stackoverflow.com/questions/16732021/why-emulator-is-very-slow-in-android-studio">post here</a> for suggestions.</p>
+
+<h2 id="toc_6">3. Xcode Setup</h2>
 <p>(still writing&hellip;)</p>
 ]]>
         </content>

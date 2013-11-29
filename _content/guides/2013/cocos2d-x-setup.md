@@ -32,8 +32,7 @@ Next go to Eclipe(for Android) or Xcode(for iOS) for next step.
 
 ## 2. Android Setup
 
-Check device accessible
-------------------
+### Check device accessible
 
 You better make sure you can access your android tablet before building it on the device. The method to check is a "adb devices" command(don't forget to turn on the debug mode on the tablet first):
 
@@ -61,8 +60,7 @@ If you see the device listed without a valid name, and marked with "no permissio
 
 If all successful, open Eclipse IDE and we'll build the project.
 
-Importing The Library and The Projects
---------------------
+### Importing The Library and The Projects
 
 We'll import twice: one for the **cocos2d-x library**, one for the **sample projects**.
 
@@ -82,10 +80,32 @@ After that we'll see the projects in the workspace:
 ![alt](/images/2013/cocos_import_success.png "Imported projects")
 
 
-Setting Environment Variables
---------------------
+### Setting Environment Variables
+
+If you try building the project "TestCpp" now, you will probably find the below error:
+
+![alt](/images/2013/cocos_build_ndk_error.png "Compile error")
+
+It's because we have to set the environment variables for the compiler. It needs "**COCOS2DX_ROOT**" and "**NDK_ROOT**" to build the project. So open "Window -> Preferences -> C/C++ -> Build -> Environment" in the Eclipse IDE, and set the variables similar to below:
+
+![alt] (/images/2013/cocos_set_env_vars.png "Path variables")
+
+After that, select the "TestCpp" and build again, you should be able to see the build succesful messages:
+
+![alt] (/images/2013/cocos_build_sucessful.png "NDK build successful")
+
+### Running on Tablet
+
+Next try running it on the tablet. Click "Run" and (after the build) you will get the "Android Device Chooser" below:
+
+![alt] (/images/2013/cocos_avd.png "Android Device Chooser")
+
+Here you could choose the plugged in tablet which you have configured in the previous steps to run the program. Or you could choose to create a new emulator to run it on your computer. If you have problem seeing the device in the list, go back to the "Check device accessible" step to check the device again. 
+
+If you find running the emulators very slow, check out the [post here] (http://stackoverflow.com/questions/16732021/why-emulator-is-very-slow-in-android-studio) for suggestions.
 
 
+## 3. Xcode Setup
 
 (still writing...)
 
