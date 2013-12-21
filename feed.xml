@@ -3,14 +3,111 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2013-11-29T11:12:08+08:00</updated>
+    <updated>2013-12-21T16:03:50+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
+        <title type="html"><![CDATA[Python Main Args, Config, and Exception Snippets]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2013/12/python_main_args.html"/>
+        <published>2013-12-21T15:35:00+08:00</published>
+        <updated>2013-12-21T16:03:50+08:00</updated>
+        <id>http://terryoy.github.io/2013/12/python_main_args.html</id>
+        <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <p>Part 1. Below is an example showing how to use <strong>arguments</strong> in a python script. It&#39;s taken from this <a href="http://www.tutorialspoint.com/python/python_command_line_arguments.htm">example</a>.</p>
+<div class="highlight"><pre><span class="c">#!/usr/bin/python</span>
+
+<span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">getopt</span>
+
+<span class="k">def</span> <span class="nf">print_usage</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s">&#39;main.py -i &lt;input_file&gt; -o &lt;output_file&gt;&#39;</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">argv</span><span class="p">):</span>
+    <span class="n">inputfile</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+    <span class="n">outputfile</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c"># opts is a list of returning key-value pairs, args is the options left after striped</span>
+        <span class="c"># the short options &#39;hi:o:&#39;, if an option requires an input, it should be followed by a &quot;:&quot;</span>
+        <span class="c"># the long options &#39;ifile=&#39; is an option that requires an input, followed by a &quot;=&quot;</span>
+        <span class="n">opts</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="n">getopt</span><span class="o">.</span><span class="n">getopt</span><span class="p">(</span><span class="n">argv</span><span class="p">,</span> <span class="s">&#39;hi:o:&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;ifile=&#39;</span><span class="p">,</span> <span class="s">&#39;ofile=&#39;</span><span class="p">])</span>
+    <span class="k">except</span> <span class="n">getopt</span><span class="o">.</span><span class="n">GetoptError</span><span class="p">:</span>
+        <span class="n">print_usage</span><span class="p">()</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="c"># print(args) # debug line</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">opts</span><span class="p">:</span>
+        <span class="n">print_usage</span><span class="p">()</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="c"># print arguments</span>
+    <span class="k">for</span> <span class="n">opt</span><span class="p">,</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">opts</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">opt</span> <span class="o">==</span> <span class="s">&#39;-h&#39;</span><span class="p">:</span>
+            <span class="n">print_usage</span><span class="p">()</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">opt</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&quot;-i&quot;</span><span class="p">,</span> <span class="s">&quot;--ifile&quot;</span><span class="p">):</span>
+            <span class="n">inputfile</span> <span class="o">=</span> <span class="n">arg</span>
+        <span class="k">elif</span> <span class="n">opt</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&quot;-o&quot;</span><span class="p">,</span> <span class="s">&quot;--ofile&quot;</span><span class="p">):</span>
+            <span class="n">outputfile</span> <span class="o">=</span> <span class="n">arg</span>
+    <span class="k">print</span> <span class="s">&quot;Input file:&quot;</span><span class="p">,</span> <span class="n">inputfile</span>
+    <span class="k">print</span> <span class="s">&quot;Output file:&quot;</span><span class="p">,</span> <span class="n">outputfile</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+</pre></div>
+<p>Below is the example running result:</p>
+
+<pre><code>$ ./main.py -h
+main.py -i &lt;input_file&gt; -o &lt;output_file&gt;
+$ ./main.py
+main.py -i &lt;input_file&gt; -o &lt;output_file&gt;
+$ ./main.py -i inputfile
+Input file: inputfile
+Output file: 
+$ ./main.py -i inputfile --ofile=outputfile
+Input file: inputfile
+Output file: outputfile</code></pre>
+<p>Part 2. Below is an example showing how to use <strong>configuration</strong> and <strong>exceptions</strong>.</p>
+<div class="highlight"><pre><span class="c">#!/usr/bin/python</span>
+
+<span class="kn">from</span> <span class="nn">ConfigParser</span> <span class="kn">import</span> <span class="n">ConfigParser</span><span class="p">,</span> <span class="n">NoOptionError</span>
+<span class="kn">import</span> <span class="nn">traceback</span>
+
+<span class="c">## The configuration is a file named &quot;config.ini&quot; with below content</span>
+<span class="c"># [helloworld]</span>
+<span class="c"># name = Terry</span>
+<span class="c">##</span>
+
+<span class="c"># read configuration</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">ConfigParser</span><span class="p">()</span>
+<span class="n">config</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&#39;config.ini&#39;</span><span class="p">)</span>
+
+<span class="c"># use configuration</span>
+<span class="k">print</span> <span class="s">&#39;an existing item value:&#39;</span><span class="p">,</span> <span class="s">&#39;[ name =&#39;</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;helloworld&#39;</span><span class="p">,</span> <span class="s">&#39;name&#39;</span><span class="p">),</span> <span class="s">&#39;]&#39;</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">print</span> <span class="s">&#39;an non-existing item value:&#39;</span><span class="p">,</span> <span class="s">&#39;[ non-exist =&#39;</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;helloworld&#39;</span><span class="p">,</span> <span class="s">&#39;non-exist&#39;</span><span class="p">),</span> <span class="s">&#39;]&#39;</span>
+<span class="k">except</span> <span class="n">NoOptionError</span><span class="p">:</span>
+    <span class="c"># pass</span>
+    <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span> <span class="c"># display exception information</span>
+</pre></div>
+<p>Here is the output result:</p>
+
+<pre><code>an existing item value: [ name = Terry ]
+Traceback (most recent call last):
+  File &quot;./config_parser.py&quot;, line 12, in &lt;module&gt;
+    print 'an non-existing item value:', '[ non-exist =', config.get('helloworld', 'non-exist'), ']'
+  File &quot;/usr/lib/python2.7/ConfigParser.py&quot;, line 618, in get
+    raise NoOptionError(option, section)
+NoOptionError: No option 'non-exist' in section: 'helloworld'
+an non-existing item value: [ non-exist =</code></pre>
+<p>As you can see the line <em>&ldquo;an non-existing item value: [ non-exist = &rdquo;</em> is output belowthe exception trace information. It is because the traceback.print_exc() output to <strong>stderr</strong> while the others output to <strong>stdout</strong>, they&#39;re two separate buffers and no particular order when output to console.</p>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[Cocos2d-x-2.2.0 Setup Guide (for Android and iOS)]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/11/cocos2d-x-setup.html"/>
         <published>2013-11-27T09:00:00+08:00</published>
-        <updated>2013-11-29T11:12:08+08:00</updated>
+        <updated>2013-12-03T12:53:55+08:00</updated>
         <id>http://terryoy.github.io/2013/11/cocos2d-x-setup.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#game" term="game" label="game" />
@@ -54,7 +151,7 @@
 
 <h2 id="toc_1">2. Android Setup</h2>
 
-<h2 id="toc_2">Check device accessible</h2>
+<h3 id="toc_2">Check device accessible</h3>
 <p>You better make sure you can access your android tablet before building it on the device. The method to check is a &ldquo;adb devices&rdquo; command(don&#39;t forget to turn on the debug mode on the tablet first):</p>
 
 <pre><code>$ cd $ANDROID_SDK_HOME/platform-tools
@@ -79,7 +176,7 @@ List of devices attached
 $ ./adb shell</code></pre>
 <p>If all successful, open Eclipse IDE and we&#39;ll build the project.</p>
 
-<h2 id="toc_3">Importing The Library and The Projects</h2>
+<h3 id="toc_3">Importing The Library and The Projects</h3>
 <p>We&#39;ll import twice: one for the <strong>cocos2d-x library</strong>, one for the <strong>sample projects</strong>.</p>
 <p><img src="/images/2013/cocos_import.png" alt="alt" title="Import existing projects"/></p>
 <p>The search path for cocos2d-x library is &ldquo;<strong><em>$COCOS2DX_ROOT/cocos2dx</em></strong>&rdquo;</p>
@@ -89,7 +186,7 @@ $ ./adb shell</code></pre>
 <p>After that we&#39;ll see the projects in the workspace:</p>
 <p><img src="/images/2013/cocos_import_success.png" alt="alt" title="Imported projects"/></p>
 
-<h2 id="toc_4">Setting Environment Variables</h2>
+<h3 id="toc_4">Setting Environment Variables</h3>
 <p>If you try building the project &ldquo;TestCpp&rdquo; now, you will probably find the below error:</p>
 <p><img src="/images/2013/cocos_build_ndk_error.png" alt="alt" title="Compile error"/></p>
 <p>It&#39;s because we have to set the environment variables for the compiler. It needs &ldquo;<strong>COCOS2DX_ROOT</strong>&rdquo; and &ldquo;<strong>NDK_ROOT</strong>&rdquo; to build the project. So open &ldquo;Window -&gt; Preferences -&gt; C/C++ -&gt; Build -&gt; Environment&rdquo; in the Eclipse IDE, and set the variables similar to below:</p>
@@ -97,7 +194,7 @@ $ ./adb shell</code></pre>
 <p>After that, select the &ldquo;TestCpp&rdquo; and build again, you should be able to see the build succesful messages:</p>
 <p><img src="/images/2013/cocos_build_sucessful.png" alt="alt" title="NDK build successful"/></p>
 
-<h2 id="toc_5">Running on Tablet</h2>
+<h3 id="toc_5">Running on Tablet</h3>
 <p>Next try running it on the tablet. Click &ldquo;Run&rdquo; and (after the build) you will get the &ldquo;Android Device Chooser&rdquo; below:</p>
 <p><img src="/images/2013/cocos_avd.png" alt="alt" title="Android Device Chooser"/></p>
 <p>Here you could choose the plugged in tablet which you have configured in the previous steps to run the program. Or you could choose to create a new emulator to run it on your computer. If you have problem seeing the device in the list, go back to the &ldquo;Check device accessible&rdquo; step to check the device again. </p>
@@ -112,7 +209,7 @@ $ ./adb shell</code></pre>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/09/vimrc.html"/>
         <published>2013-09-23T23:16:00+08:00</published>
-        <updated>2013-10-12T20:14:12+08:00</updated>
+        <updated>2013-12-03T12:53:55+08:00</updated>
         <id>http://terryoy.github.io/2013/09/vimrc.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#vim" term="vim" label="vim" />
@@ -142,7 +239,7 @@ set expandtab</code></pre>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/09/useful_alias.html"/>
         <published>2013-09-23T00:00:00+08:00</published>
-        <updated>2013-10-12T20:19:38+08:00</updated>
+        <updated>2013-12-03T12:53:55+08:00</updated>
         <id>http://terryoy.github.io/2013/09/useful_alias.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />

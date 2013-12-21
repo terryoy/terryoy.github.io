@@ -75,7 +75,7 @@
 
 <h2 id="toc_1">2. Android Setup</h2>
 
-<h2 id="toc_2">Check device accessible</h2>
+<h3 id="toc_2">Check device accessible</h3>
 <p>You better make sure you can access your android tablet before building it on the device. The method to check is a &ldquo;adb devices&rdquo; command(don&#39;t forget to turn on the debug mode on the tablet first):</p>
 
 <pre><code>$ cd $ANDROID_SDK_HOME/platform-tools
@@ -100,7 +100,7 @@ List of devices attached
 $ ./adb shell</code></pre>
 <p>If all successful, open Eclipse IDE and we&#39;ll build the project.</p>
 
-<h2 id="toc_3">Importing The Library and The Projects</h2>
+<h3 id="toc_3">Importing The Library and The Projects</h3>
 <p>We&#39;ll import twice: one for the <strong>cocos2d-x library</strong>, one for the <strong>sample projects</strong>.</p>
 <p><img src="/images/2013/cocos_import.png" alt="alt" title="Import existing projects"/></p>
 <p>The search path for cocos2d-x library is &ldquo;<strong><em>$COCOS2DX_ROOT/cocos2dx</em></strong>&rdquo;</p>
@@ -110,7 +110,7 @@ $ ./adb shell</code></pre>
 <p>After that we&#39;ll see the projects in the workspace:</p>
 <p><img src="/images/2013/cocos_import_success.png" alt="alt" title="Imported projects"/></p>
 
-<h2 id="toc_4">Setting Environment Variables</h2>
+<h3 id="toc_4">Setting Environment Variables</h3>
 <p>If you try building the project &ldquo;TestCpp&rdquo; now, you will probably find the below error:</p>
 <p><img src="/images/2013/cocos_build_ndk_error.png" alt="alt" title="Compile error"/></p>
 <p>It&#39;s because we have to set the environment variables for the compiler. It needs &ldquo;<strong>COCOS2DX_ROOT</strong>&rdquo; and &ldquo;<strong>NDK_ROOT</strong>&rdquo; to build the project. So open &ldquo;Window -&gt; Preferences -&gt; C/C++ -&gt; Build -&gt; Environment&rdquo; in the Eclipse IDE, and set the variables similar to below:</p>
@@ -118,7 +118,7 @@ $ ./adb shell</code></pre>
 <p>After that, select the &ldquo;TestCpp&rdquo; and build again, you should be able to see the build succesful messages:</p>
 <p><img src="/images/2013/cocos_build_sucessful.png" alt="alt" title="NDK build successful"/></p>
 
-<h2 id="toc_5">Running on Tablet</h2>
+<h3 id="toc_5">Running on Tablet</h3>
 <p>Next try running it on the tablet. Click &ldquo;Run&rdquo; and (after the build) you will get the &ldquo;Android Device Chooser&rdquo; below:</p>
 <p><img src="/images/2013/cocos_avd.png" alt="alt" title="Android Device Chooser"/></p>
 <p>Here you could choose the plugged in tablet which you have configured in the previous steps to run the program. Or you could choose to create a new emulator to run it on your computer. If you have problem seeing the device in the list, go back to the &ldquo;Check device accessible&rdquo; step to check the device again. </p>
