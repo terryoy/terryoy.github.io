@@ -3,14 +3,64 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/tricks/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/tricks/" />
-    <updated>2013-12-24T00:24:46+08:00</updated>
+    <updated>2014-01-07T19:19:42+08:00</updated>
     <id>http://terryoy.github.io/tricks/</id>
     <entry>
+        <title type="html"><![CDATA[Archive Commands in Linux]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2014/01/archive-commands-in-linux.html"/>
+        <published>2014-01-07T19:13:00+08:00</published>
+        <updated>2014-01-07T19:19:42+08:00</updated>
+        <id>http://terryoy.github.io/2014/01/archive-commands-in-linux.html</id>
+        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
+        <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <p>Below is a collection of commands compressing and uncompressing various file formats.  </p>
+<div class="highlight"><pre><span class="c">#### compress ####</span>
+<span class="nv">$ </span>tar -cvf output.tar <span class="nb">test</span>-files
+<span class="nv">$ </span>gzip output.tar       <span class="c"># result file &quot;output.tar.gz&quot;</span>
+<span class="nv">$ </span>tar -cvzf output.tar.gz <span class="nb">test</span>-files        <span class="c"># combined with the two above</span>
+<span class="nv">$ </span>bzip2 output.tar      <span class="c"># result file &quot;output.tar.bz2&quot;</span>
+<span class="nv">$ </span>tar -cvjf output.tar.bz2 <span class="nb">test</span>-files
+<span class="c"># other formats (zip, gz, rar, 7z, ...)</span>
+<span class="nv">$ </span>zip -r archive.zip <span class="nb">test</span>-files
+<span class="nv">$ </span>star -cv <span class="nv">f</span><span class="o">=</span>output.star <span class="nb">test</span>-files
+<span class="nv">$ </span>find <span class="nb">test</span>-dir | cpio -ov &gt; output.cpio
+<span class="nv">$ </span>7z a archive.7z <span class="nb">test</span>-files    <span class="c"># the package name for 7z is &quot;p7zip&quot;</span>
+
+<span class="c">####  list files in the archive ####</span>
+<span class="nv">$ </span>tar -tvf file.tar
+<span class="nv">$ </span>star -tv <span class="nv">f</span><span class="o">=</span>file.tar
+<span class="nv">$ </span>unzip -l file.zip
+<span class="nv">$ </span>cpio -t &lt; file.cpio
+<span class="nv">$ </span>7z l file.7z
+
+<span class="c">#### uncompress ####</span>
+<span class="c"># tar</span>
+<span class="nv">$ </span>tar xvf file.tar
+<span class="nv">$ </span>tar xvzf file.tar.gz
+<span class="nv">$ </span>tar xvzf file.tar.tgz
+<span class="nv">$ </span>tar xvjf file.tar.bz2
+<span class="nv">$ </span>tar xvjf file.tar.tbz2
+<span class="c"># other formats </span>
+<span class="nv">$ </span>gunzip file.**gz**    
+<span class="nv">$ </span>bunzip2 file.**bz2**
+<span class="nv">$ </span>uncompress file.**Z**
+<span class="nv">$ </span>unzip file.zip
+<span class="nv">$ </span>unrar x file.rar      <span class="c"># or &quot;$ rar x file.rar&quot;</span>
+<span class="nv">$ </span>7z x file.**7z        <span class="c"># or &quot;$ 7z e file.7z**&quot;</span>
+<span class="nv">$ </span>star -xv <span class="nv">f</span><span class="o">=</span>archive.star 
+<span class="nv">$ </span>cpio -idmv &lt; archive.cpio
+<span class="nv">$ </span>unace x file.ace
+</pre></div>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[Simple Examples of &quot;yield&quot; in Python]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/12/python_yield.html"/>
         <published>2013-12-23T23:43:00+08:00</published>
-        <updated>2013-12-24T00:24:46+08:00</updated>
+        <updated>2014-01-07T15:19:11+08:00</updated>
         <id>http://terryoy.github.io/2013/12/python_yield.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -83,7 +133,7 @@ init value:0
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/12/python_main_args.html"/>
         <published>2013-12-21T15:35:00+08:00</published>
-        <updated>2013-12-23T23:42:35+08:00</updated>
+        <updated>2013-12-21T16:03:50+08:00</updated>
         <id>http://terryoy.github.io/2013/12/python_main_args.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -180,7 +230,7 @@ an non-existing item value: [ non-exist =</code></pre>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/09/vimrc.html"/>
         <published>2013-09-23T23:16:00+08:00</published>
-        <updated>2013-10-12T20:14:12+08:00</updated>
+        <updated>2013-12-03T12:53:55+08:00</updated>
         <id>http://terryoy.github.io/2013/09/vimrc.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#vim" term="vim" label="vim" />
@@ -210,7 +260,7 @@ set expandtab</code></pre>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/09/useful_alias.html"/>
         <published>2013-09-23T00:00:00+08:00</published>
-        <updated>2013-10-12T20:19:38+08:00</updated>
+        <updated>2013-12-03T12:53:55+08:00</updated>
         <id>http://terryoy.github.io/2013/09/useful_alias.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
