@@ -3,9 +3,107 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2014-01-07T19:19:42+08:00</updated>
+    <updated>2014-01-08T15:46:42+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
+        <title type="html"><![CDATA[Setup SSH Identity Key Login in Linux]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2014/01/ssh-key-based-auth-server.html"/>
+        <published>2014-01-08T15:40:00+08:00</published>
+        <updated>2014-01-08T15:46:42+08:00</updated>
+        <id>http://terryoy.github.io/2014/01/ssh-key-based-auth-server.html</id>
+        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
+        <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <p>This example is about how to create a new user and enable SSH public-key authentication in Ubuntu Server. It is necessary if your server is open to the public on internet.</p>
+
+<h2 id="toc_0">1. Create a New User on Server</h2>
+<p>In a traditional way, people use the command &ldquo;useradd&rdquo; to create user account, then together with other commands to setup the group, the home folder for the user.</p>
+<div class="highlight"><pre><span class="nv">$ </span>useradd terry
+<span class="nv">$ </span>passwd terry
+<span class="nv">$ </span>mkdir /home/terry
+<span class="nv">$ </span>chown -R terry:users /home/terry
+</pre></div>
+<p>In a debian way, there is one command which does it all: &ldquo;adduser&rdquo;.</p>
+<div class="highlight"><pre><span class="nv">$ </span>adduser edmund
+Adding user <span class="s1">&#39;edmund&#39;</span> ...
+Adding new group <span class="s1">&#39;edmund&#39;</span> <span class="o">(</span>1001<span class="o">)</span> ...
+Adding new user <span class="s1">&#39;edmund&#39;</span> <span class="o">(</span>1001<span class="o">)</span> with group <span class="s1">&#39;edmund&#39;</span> ...
+Creating home directory <span class="s1">&#39;/home/edmund&#39;</span> ...
+Copying files from <span class="s1">&#39;/etc/skel&#39;</span> ...
+Enter new UNIX password: 
+Retype new UNIX password: 
+passwd: password updated successfully
+Changing the user information <span class="k">for </span>edmund
+Enter the new value, or press ENTER <span class="k">for </span>the default
+    Full Name <span class="o">[]</span>: 
+    Room Number <span class="o">[]</span>: 
+    Work Phone <span class="o">[]</span>: 
+    Home Phone <span class="o">[]</span>: 
+    Other <span class="o">[]</span>: 
+Is the information correct? <span class="o">[</span>Y/n<span class="o">]</span>
+</pre></div>
+
+<h2 id="toc_1">2. Generate SSH Key and Apply to Server</h2>
+<p>With SSH key login, user require a public/private key pairs to authenticate the login. SSH can use both &ldquo;RSA&rdquo; and &ldquo;DSA&rdquo; keys, however according to the <a href="https://help.ubuntu.com/community/SSH/OpenSSH/Keys#Key-Based_SSH_Logins">ubuntu guide</a>, &ldquo;RSA&rdquo; is the only recommended choice for new keys. </p>
+<p>First thing you should keep in mind, the private key should <strong>NOT</strong> allow to be accessed by anybody else(e.g. set &ldquo;700&rdquo; with chmod). We will create the RSA keys in your <strong>local</strong> machine, then copy the public key to the <strong>remote</strong> server.</p>
+<div class="highlight"><pre><span class="nv">$ </span>mkdir ~/.ssh
+<span class="nv">$ </span>chmod 700 ~/.ssh      <span class="c"># set access right only to user self</span>
+<span class="nv">$ </span>ssh-keygen -t rsa     <span class="c"># **or you could use &quot;ssh-keygen -t rsa -b 4096&quot; for more secure login, default is 2048**.</span>
+Generating public/private rsa key pair.
+Enter file in which to save the key <span class="o">(</span>/home/edmund/.ssh/id_rsa<span class="o">)</span>: 
+Enter passphrase <span class="o">(</span>empty <span class="k">for </span>no passphrase<span class="o">)</span>: 
+Enter same passphrase again: 
+Your identification has been saved in /home/edmund/.ssh/id_rsa.
+Your public key has been saved in /home/edmund/.ssh/id_rsa.pub.
+
+<span class="c"># next copy the public key to server. you can use a one-command way or manually copy the key to server.</span>
+<span class="nv">$ </span>ssh-copy-id user@machine      <span class="c"># one-command way</span>
+<span class="c"># manually way: copy the public key to server, and add it to authorized_key</span>
+<span class="nv">$ </span>scp ~/.ssh/id_rsa.pub user@machine:~/.ssh/my_rsa.pub
+<span class="nv">$ </span>ssh user@machine
+<span class="nv">$ </span><span class="nb">cd</span> ~/.ssh
+<span class="nv">$ </span>cat my_rsa.pub &gt;&gt; authorized_keys
+</pre></div>
+
+<h2 id="toc_2">3. Update SSH Daemon configuration on Server</h2>
+<p>On the remote machine, currently the password authentication is still enabled, so we need to enable the RSA Authentication and disable the Password Authentication for the better security.</p>
+<p>Open <strong>/etc/ssh/sshd_config</strong> on server, find(or add) the below items and set the values:
+<code>
+PubkeyAuthentication yes
+RSAAuthentication yes
+PasswordAuthentication no
+</code>
+Next restart ssh service: <code>$ sudo service ssh restart</code>
+Now try login in the local machine:
+<code>
+$ ssh user@machine  # Or,
+$ ssh -i id_rsa user@machine
+</code>
+If your key matches, you will directly go into the console shell, or else you will get the following error info, which means you configuration applied successfully.
+<code>
+Permission denied (publickey).
+</code>
+If you want to revoke an authorized key for some user, you can find the user&#39;s public key in <strong>&ldquo;~/.ssh/authorized_keys&rdquo;</strong> and remove it.</p>
+
+<hr/>
+
+<h4 id="toc_3"><em>Extra Bonus: below is a small trick to use the keys to encrypt/decrypt text for daily use.</em></h4>
+<div class="highlight"><pre><span class="c"># encrypt a text file, and output to a file</span>
+<span class="nv">$ </span>openssl enc -aes-256-cbc -e -in textfile.txt -out encrypted.txt -pass pass:some_password
+<span class="c"># decrypt a text file, and output to a file(else it will print to the console)</span>
+<span class="nv">$ </span>openssl enc -aes-256-cbc -d -in encrypted.txt -out textfile.txt -pass pass:some_password
+
+<span class="c"># encode in base64 (the &quot;enc&quot; option let you specify a cipher, e.g. &quot;-base64&quot; here)</span>
+<span class="nv">$ </span>openssl enc -base64 -e -in tetfile.txt
+<span class="nv">$ </span>openssl enc -base64 -e <span class="o">&lt;&lt;&lt;</span> <span class="s2">&quot;Encode this text please&quot;</span>
+<span class="nv">$ </span>openssl base64 -e <span class="o">&lt;&lt;&lt;</span> <span class="s2">&quot;Encode this text please&quot;</span>
+<span class="c"># decode in base64</span>
+<span class="nv">$ </span>openssl base64 -d <span class="o">&lt;&lt;&lt;</span> <span class="s2">&quot;RW5jb2RlIHRoaXMgdGV4dCBwbGVhc2UK&quot;</span>
+</pre></div>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[Archive Commands in Linux]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/01/archive-commands-in-linux.html"/>
