@@ -107,7 +107,33 @@ If you find running the emulators very slow, check out the [post here] (http://s
 
 ## 3. Xcode Setup
 
-(still writing...)
+(Since I had lost the log while setting up this, I won't update this part until I got a chance to try it again.)
+
+Setting up in Xcode is pretty simple. Just extract the cocos2d-x-2.x.x.zip, and open the project files at ```./samples/Cpp/HelloCpp/proj.ios/``` with Xcode. Next, you should check the compiling errors and solve it one by one.
+
+If the "cocos2dx.xcodeproj" sub-project displays as missing, you could open the . and select the "Location" for it, which should be pointed to ```./cocos2dx/proj.ios/cocos2dx/```
+
+There are usually two build scheme in the Xcode project. One is for building the cocos2d-x framework, the other is the project it self. So before you build the project, you should build the cocos2d-x framework first.
+
+
+## 4. Start a New Cross-platform Project
+
+There is one script for creating a new cocos2d-x project under the path ```./tools/project-creator/```
+
+```bash
+$ ./create_project.py
+Usage: create_project.py -project PROJECT_NAME -package PACKAGE_NAME -language PROGRAMING_LANGUAGE
+Options:
+  -project   PROJECT_NAME          Project name, for example: MyGame
+  -package   PACKAGE_NAME          Package name, for example: com.MyCompany.MyAwesomeGame
+  -language  PROGRAMING_LANGUAGE   Major programing lanauge you want to used, should be [cpp | lua | javascript]
+
+Sample 1: ./create_project.py -project MyGame -package com.MyCompany.AwesomeGame
+Sample 2: ./create_project.py -project MyGame -package com.MyCompany.AwesomeGame -language javascript
+
+```
+
+The new project will be created under ```./projects/``` under the root folder of cocos2d-x, and it is not easy if you want to put it outside this folder(for example, another git repos), because the project's dependencies uses relative paths to the cocos2d-x's components. It might differs in Xcode or in Eclipse, etc. So here we don't discuss further.
 
 
 

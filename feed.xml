@@ -3,7 +3,7 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2014-01-08T15:46:42+08:00</updated>
+    <updated>2014-02-06T18:12:24+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
         <title type="html"><![CDATA[Setup SSH Identity Key Login in Linux]]></title>
@@ -473,7 +473,7 @@ an non-existing item value: [ non-exist =</code></pre>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/11/cocos2d-x-setup.html"/>
         <published>2013-11-27T09:00:00+08:00</published>
-        <updated>2013-12-03T12:53:55+08:00</updated>
+        <updated>2014-02-06T18:12:24+08:00</updated>
         <id>http://terryoy.github.io/2013/11/cocos2d-x-setup.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#game" term="game" label="game" />
@@ -567,7 +567,24 @@ $ ./adb shell</code></pre>
 <p>If you find running the emulators very slow, check out the <a href="http://stackoverflow.com/questions/16732021/why-emulator-is-very-slow-in-android-studio">post here</a> for suggestions.</p>
 
 <h2 id="toc_6">3. Xcode Setup</h2>
-<p>(still writing&hellip;)</p>
+<p>(Since I had lost the log while setting up this, I won&#39;t update this part until I got a chance to try it again.)</p>
+<p>Setting up in Xcode is pretty simple. Just extract the cocos2d-x-2.x.x.zip, and open the project files at <code>./samples/Cpp/HelloCpp/proj.ios/</code> with Xcode. Next, you should check the compiling errors and solve it one by one.</p>
+<p>If the &ldquo;cocos2dx.xcodeproj&rdquo; sub-project displays as missing, you could open the . and select the &ldquo;Location&rdquo; for it, which should be pointed to <code>./cocos2dx/proj.ios/cocos2dx/</code></p>
+<p>There are usually two build scheme in the Xcode project. One is for building the cocos2d-x framework, the other is the project it self. So before you build the project, you should build the cocos2d-x framework first.</p>
+
+<h2 id="toc_7">4. Start a New Cross-platform Project</h2>
+<p>There is one script for creating a new cocos2d-x project under the path <code>./tools/project-creator/</code></p>
+<div class="highlight"><pre><span class="nv">$ </span>./create_project.py
+Usage: create_project.py -project PROJECT_NAME -package PACKAGE_NAME -language PROGRAMING_LANGUAGE
+Options:
+  -project   PROJECT_NAME          Project name, <span class="k">for </span>example: MyGame
+  -package   PACKAGE_NAME          Package name, <span class="k">for </span>example: com.MyCompany.MyAwesomeGame
+  -language  PROGRAMING_LANGUAGE   Major programing lanauge you want to used, should be <span class="o">[</span>cpp | lua | javascript<span class="o">]</span>
+
+Sample 1: ./create_project.py -project MyGame -package com.MyCompany.AwesomeGame
+Sample 2: ./create_project.py -project MyGame -package com.MyCompany.AwesomeGame -language javascript
+</pre></div>
+<p>The new project will be created under <code>./projects/</code> under the root folder of cocos2d-x, and it is not easy if you want to put it outside this folder(for example, another git repos), because the project&#39;s dependencies uses relative paths to the cocos2d-x&#39;s components. It might differs in Xcode or in Eclipse, etc. So here we don&#39;t discuss further.</p>
 ]]>
         </content>
     </entry><entry>
