@@ -3,9 +3,138 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2014-02-06T18:12:24+08:00</updated>
+    <updated>2014-03-06T15:36:15+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
+        <title type="html"><![CDATA[PostgesSQL 9 Administration QuickRef(1) - Exploring Database]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2014/03/postgresql-admin-quickref-part1-exploring-database.html"/>
+        <published>2014-03-06T15:27:00+08:00</published>
+        <updated>2014-03-06T15:36:15+08:00</updated>
+        <id>http://terryoy.github.io/2014/03/postgresql-admin-quickref-part1-exploring-database.html</id>
+        <category scheme="http://terryoy.github.io/tag/#postgresql" term="postgresql" label="postgresql" />
+        <category scheme="http://terryoy.github.io/tag/#database" term="database" label="database" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <p>The most cheat sheets or quick references I found are organized by knowledge domains, but I would rather like a quick reference organized by tasks. Thus I make this reference.</p>
+
+<h1 id="toc_0">Part I: Exploring Database</h1>
+
+<h3 id="toc_1">1. Basic Information</h3>
+<p>Default location of data files (in debian/ubuntu): <code>/var/lib/postgresql/9.1/main/</code>
+Data files for an instance:
+    base        -   data directory for databases 
+    global      -   database catalog tables(shared across databases)
+    pg_clog - transaction status files
+    pg_multixact    -   row-level lock status files
+    pg_subtrans -   subtransaction status files 
+    pg_tblspc       -   links to external tablespaces
+    pg_twophase -   prepared transaction status
+    pg_xlog     -   WAL(Write-Ahead Log) transaction log
+Log files: <code>/var/log/postgresql/</code></p>
+<p>PostgreSQL command line programs:</p>
+<div class="highlight"><pre><span class="c"># check psql version</span>
+<span class="nv">$ </span>psql --version
+<span class="c"># check configuration variables</span>
+<span class="nv">$ </span>pg_config
+<span class="c"># run a single command</span>
+<span class="nv">$ </span>psql -c <span class="s2">&quot;\d&quot;</span>
+</pre></div>
+<p>PSQL text client:</p>
+<div class="highlight"><pre><span class="c1">-- line comment</span>
+<span class="o">/</span> <span class="o">*</span><span class="n">multi</span><span class="o">-</span><span class="nb">line</span> <span class="k">comment</span><span class="o">*</span> <span class="o">/</span>
+<span class="c1">-- check server version</span>
+<span class="gp">postgres=#</span> <span class="k">SELECT</span> <span class="k">version</span><span class="p">();</span>
+<span class="go">-- output query result as one column per line</span>
+<span class="gp">postgres=#</span> <span class="kp">\x</span>
+</pre></div>
+
+<h3 id="toc_2">2. Server Stats</h3>
+<div class="highlight"><pre><span class="c"># list databases</span>
+<span class="nv">$ </span>psql -l
+<span class="c"># list tables in a database</span>
+<span class="nv">$ </span>psql -c <span class="s2">&quot;\d&quot;</span> -d somedb
+</pre></div>
+<div class="highlight"><pre><span class="c1">-- check server uptime</span>
+<span class="gp">postgres=#</span> <span class="k">SELECT</span> <span class="n">date_trunc</span><span class="p">(</span><span class="s1">&#39;second&#39;</span><span class="p">,</span> <span class="k">current_timestamp</span> <span class="o">-</span> <span class="n">pg_postmaster_start_time</span><span class="p">())</span> <span class="k">as</span> <span class="n">uptime</span><span class="p">;</span>
+
+<span class="go">-- list database names</span>
+<span class="gp">postgres=#</span> <span class="k">SELECT</span> <span class="n">datname</span> <span class="k">from</span> <span class="n">pg_database</span><span class="p">;</span>
+<span class="go">-- list tables in databases;</span>
+<span class="gp">postgres=#</span> <span class="k">SELECT</span> <span class="n">table_catalog</span><span class="p">,</span> <span class="n">table_schema</span><span class="p">,</span> <span class="n">table_name</span><span class="p">,</span> <span class="n">table_type</span> <span class="k">from</span> <span class="n">information_schema</span><span class="mf">.</span><span class="k">tables</span><span class="p">;</span>
+<span class="gp">postgres=#</span> <span class="kp">\dt+</span>
+
+<span class="go">-- check database size</span>
+<span class="gp">postgres=#</span> <span class="k">SELECT</span> <span class="n">pg_database_size</span><span class="p">(</span><span class="s1">&#39;somedb&#39;</span><span class="p">);</span>
+<span class="gp">postgres=#</span> <span class="k">SELECT</span> <span class="n">pg_database_size</span><span class="p">(</span><span class="n">current_database</span><span class="p">());</span>
+<span class="go">-- check table size</span>
+<span class="gp">postgres=#</span> <span class="kp">\dt+</span> <span class="ss">some_table</span>
+<span class="gp">postgres=#</span> <span class="k">SELECT</span> <span class="n">pg_relation_size</span><span class="p">(</span><span class="s1">&#39;some_table&#39;</span><span class="p">);</span>
+<span class="gp">postgres=#</span> <span class="k">SELECT</span> <span class="n">pg_total_relation_size</span><span class="p">(</span><span class="s1">&#39;some_table&#39;</span><span class="p">);</span> <span class="c1">-- including indexes and other related space</span>
+<span class="go">-- list table sizes in order</span>
+<span class="gp">postgres=#</span> <span class="k">SELECT</span> <span class="n">table_name</span><span class="p">,</span> <span class="n">pg_total_relation_size</span><span class="p">(</span><span class="n">table_name</span><span class="p">)</span> <span class="k">as</span> <span class="n">size</span>
+<span class="k">FROM</span> <span class="n">information_schema</span><span class="mf">.</span><span class="k">tables</span> <span class="k">NOT</span> <span class="k">IN</span> <span class="p">(</span><span class="s1">&#39;information_schema&#39;</span><span class="p">,</span> <span class="s1">&#39;pg_catalog&#39;</span><span class="p">)</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">size</span> <span class="k">DESC</span><span class="p">;</span>
+
+<span class="go">-- check online users/clients</span>
+<span class="gp">postgres=#</span> <span class="k">SELECT</span>  <span class="k">from</span> <span class="n">pg_stat_activity</span><span class="p">;</span>
+<span class="gp">postgres=#</span> <span class="k">SELECT</span> <span class="n">datname</span><span class="p">,</span> <span class="n">usename</span><span class="p">,</span> <span class="n">client_addr</span><span class="p">,</span> <span class="n">client_port</span> <span class="k">FROM</span> <span class="n">pg_stat_activity</span><span class="p">;</span>
+
+<span class="go">-- track user activities(like check user&#39;s pending query)</span>
+<span class="gp">postgres=#</span> <span class="k">SET</span> <span class="n">track_activities</span> <span class="o">=</span> <span class="k">on</span><span class="p">;</span>
+<span class="gp">postgres=#</span> <span class="k">SELECT</span> <span class="n">datname</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">current_query</span> 
+<span class="k">FROM</span> <span class="n">pg_stat_activity</span> 
+<span class="k">WHERE</span> <span class="n">current_query</span> <span class="o">!=</span> <span class="s1">&#39;&lt;IDLE&gt;&#39;</span><span class="p">;</span>
+<span class="gp">postgres=#</span> <span class="k">SELECT</span> <span class="k">current_timestamp</span> <span class="o">-</span> <span class="n">query_start</span> <span class="k">as</span> <span class="n">runtime</span><span class="p">,</span> <span class="n">datname</span><span class="p">,</span> <span class="n">usename</span><span class="p">,</span> <span class="n">current_query</span> 
+<span class="k">FROM</span> <span class="n">pg_stat_activity</span>
+<span class="k">WHERE</span> <span class="n">current_query</span> <span class="o">!=</span> <span class="s1">&#39;&lt;IDLE&gt;&#39;</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="mf">1</span> <span class="k">DESC</span><span class="p">;</span>
+<span class="gp">postgres=#</span> <span class="k">SELECT</span> <span class="n">datname</span><span class="p">,</span> <span class="n">usename</span><span class="p">,</span> <span class="n">current_query</span>
+<span class="k">FROM</span> <span class="n">pg_stat_activity</span>
+<span class="k">WHERE</span> <span class="n">waiting</span><span class="p">;</span>
+
+<span class="go">-- check who is blocking the queries</span>
+<span class="gp">postgres=#</span> <span class="k">SELECT</span> 
+    <span class="n">w</span><span class="mf">.</span><span class="n">current_query</span> <span class="k">as</span> <span class="n">waiting_query</span><span class="p">,</span>
+    <span class="n">w</span><span class="mf">.</span><span class="n">procpid</span> <span class="k">as</span> <span class="n">w_pid</span><span class="p">,</span>
+    <span class="n">w</span><span class="mf">.</span><span class="n">usename</span> <span class="k">as</span> <span class="n">w_user</span><span class="p">,</span>
+    <span class="n">l</span><span class="mf">.</span><span class="n">current_query</span> <span class="k">as</span> <span class="n">locking_query</span><span class="p">,</span>
+    <span class="n">l</span><span class="mf">.</span><span class="n">procpid</span> <span class="k">as</span> <span class="n">l_pid</span><span class="p">,</span>
+    <span class="n">l</span><span class="mf">.</span><span class="n">usename</span> <span class="k">as</span> <span class="n">l_user</span><span class="p">,</span>
+    <span class="n">t</span><span class="mf">.</span><span class="n">schemaname</span> <span class="o">||</span> <span class="s1">&#39;-&#39;</span> <span class="o">||</span> <span class="n">t</span><span class="mf">.</span><span class="n">relname</span> <span class="k">as</span> <span class="n">tablename</span>
+<span class="k">FROM</span> <span class="n">pg_stat_activity</span> <span class="n">w</span>
+<span class="k">JOIN</span> <span class="n">pg_locks</span> <span class="n">l1</span> <span class="k">ON</span> <span class="n">w</span><span class="mf">.</span><span class="n">procpid</span> <span class="o">=</span> <span class="n">l1</span><span class="mf">.</span><span class="n">pid</span> <span class="k">AND</span> <span class="k">NOT</span> <span class="n">l1</span><span class="mf">.</span><span class="k">granted</span>
+<span class="k">JOIN</span> <span class="n">pg_locks</span> <span class="n">l2</span> <span class="k">ON</span> <span class="n">l1</span><span class="mf">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">l2</span><span class="mf">.</span><span class="n">relation</span> <span class="k">AND</span> <span class="n">l2</span><span class="mf">.</span><span class="k">granted</span>
+<span class="k">JOIN</span> <span class="n">pg_stat_activity</span> <span class="n">l</span> <span class="k">on</span> <span class="n">l2</span><span class="mf">.</span><span class="n">pid</span> <span class="o">=</span> <span class="n">l</span><span class="mf">.</span><span class="n">procpid</span>
+<span class="k">JOIN</span> <span class="n">pg_stat_user_tables</span> <span class="n">t</span> <span class="k">ON</span> <span class="n">l1</span><span class="mf">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">t</span><span class="mf">.</span><span class="n">relid</span>
+<span class="k">WHERE</span> <span class="n">w</span><span class="mf">.</span><span class="n">waiting</span><span class="p">;</span>
+
+<span class="go">-- cancel a query</span>
+<span class="gp">postgres=#</span> <span class="k">SELECT</span> <span class="n">pg_cancel_backend</span><span class="p">(</span><span class="n">some_processid</span><span class="p">);</span>
+<span class="go">-- killing a session</span>
+<span class="gp">postgres=#</span> <span class="k">SELECT</span> <span class="n">pg_terminate_backend</span><span class="p">(</span><span class="n">some_processid</span><span class="p">);</span>
+<span class="go">-- killing &quot;idle in transaction&quot;(e.g. leaving without ending the transaction) sessions</span>
+<span class="go">-- (ps, you can schedule this script to be running every minute)</span>
+<span class="gp">postgres=#</span> <span class="k">SELECT</span> <span class="n">pg_terminate_backend</span><span class="p">(</span><span class="n">procpid</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">pg_stat_activity</span>
+<span class="k">WHERE</span> <span class="n">current_query</span> <span class="o">=</span> <span class="s1">&#39;&lt;IDLE&gt; in transaction&#39;</span>
+    <span class="k">and</span> <span class="k">current_timestamp</span> <span class="o">-</span> <span class="n">query_start</span> <span class="o">&gt;</span> <span class="s1">&#39;10 min&#39;</span><span class="p">;</span>
+
+<span class="go">-- collecting daily usage statistics</span>
+<span class="gp">postgres=#</span> <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">backup_stat_user_tables</span> <span class="k">as</span> 
+<span class="k">SELECT</span> <span class="k">current_timestamp</span> <span class="k">as</span> <span class="n">snaptime</span><span class="p">,</span>
+<span class="k">FROM</span> <span class="n">pg_stat_user_tables</span><span class="p">;</span>
+<span class="gp">postgres=#</span> <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">backup_stat_user_tablese</span>
+<span class="k">SELECT</span>
+</pre></div>
+
+<h3 id="toc_3">3. Schema and Table</h3>
+<div class="highlight"><pre><span class="c1">-- Show definition of a table(including References to this table)</span>
+<span class="gp">postgres=#</span> <span class="kp">\d+</span> <span class="ss">some_table</span>
+</pre></div>
+<p>(to be continue)</p>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[Setup SSH Identity Key Login in Linux]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/01/ssh-key-based-auth-server.html"/>
