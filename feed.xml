@@ -3,14 +3,14 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2014-03-23T23:44:16+08:00</updated>
+    <updated>2014-03-30T21:26:55+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
         <title type="html"><![CDATA[Use Ctypes to Wrap C Libraries in Python]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/03/using-ctypes-to-wrap-c-library.html"/>
         <published>2014-03-23T07:57:00+08:00</published>
-        <updated>2014-03-23T23:44:16+08:00</updated>
+        <updated>2014-03-30T21:26:55+08:00</updated>
         <id>http://terryoy.github.io/2014/03/using-ctypes-to-wrap-c-library.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
@@ -18,13 +18,14 @@
             <![CDATA[ <p>In Linux, many libraries are provided in C dll with headers. It is not easy to try with the features if you&#39;re a Python programmer, unless you know how to work with C library i Python.</p>
 <p>There is a tool to do it, which is <em><strong>ctypes</strong></em>. You can operate on data types, structs, pointers and functions with it. Now here is a brief guide on how to do it. <a href="http://stackoverflow.com/questions/1942298/wrapping-a-c-library-in-python-c-cython-or-ctypes">Here</a> is also a comparison of ctypes with other solutions.</p>
 
-<h3 id="toc_0">1. Loading The Library</h3>
+<h3 id="toc_0">1. Loading Libraries</h3>
 <div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">ctypes</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">libc</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="s">&#39;libc.so.6&#39;</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">libc</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span>
 <span class="mi">1804289383</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">libc</span><span class="o">.</span><span class="n">atoi</span><span class="p">(</span><span class="s">&quot;12345&quot;</span><span class="p">)</span>
 <span class="mi">12345</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">libtest</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="s">&#39;./test.so&#39;</span><span class="p">)</span> <span class="c"># you can also load the shared library by location, but you cannot load static library</span>
 
 <span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">ctypes.util</span> <span class="kn">import</span> <span class="n">find_library</span> <span class="c"># if you need to find the library name</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">find_library</span><span class="p">(</span><span class="s">&#39;c&#39;</span><span class="p">)</span>
@@ -123,8 +124,66 @@ The <em>byref()</em> method create a parameter object of pointer, which you can 
 <span class="mi">100</span>
 </pre></div>
 
-<h3 id="toc_3">4. Interact with C Libraries</h3>
-<p>(to be finished)</p>
+<h3 id="toc_3">4. Accessing Structure and Variables from C</h3>
+<p>We need not only passing data to C functions, but also getting some pre-defined data structure or variables in C. So let&#39;s talk about a few things you want to import from C.</p>
+<p>For <strong>enums</strong> in C, you&#39;ll need to define them again in Python. Since it&#39;s a representative of basic data types like integer, it&#39;s easy to act in the same way as in C.</p>
+<p>For <strong>Structures</strong>, you&#39;ll need to define the similar classes, derived from ctypes. Structure, and declare the <code>_fields_</code> attributes as mentioned above in Section 2. After that, you can use <strong>in_dll()</strong> method to load an object within the library. (BTW, If you don&#39;t need to access the attribute of that object, it&#39;s not necessary to set the <code>_fields_</code> attribute.)</p>
+<div class="highlight"><pre><span class="n">libaa</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="s">&#39;libaa.so.1&#39;</span><span class="p">)</span> <span class="c"># the ascii-art lib</span>
+
+<span class="k">class</span> <span class="nc">RenderSettings</span><span class="p">(</span><span class="n">Structure</span><span class="p">):</span>
+    <span class="n">_pack_</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">_fields_</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s">&#39;brightness&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;contrast&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;gamma&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_float</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;dithering_mode&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;inversion&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;random&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">),</span>
+    <span class="p">]</span>
+
+<span class="n">DEFAULT_RENDER_SETTINGS</span> <span class="o">=</span> <span class="n">RenderSettings</span><span class="o">.</span><span class="n">in_dll</span><span class="p">(</span><span class="n">libaa</span><span class="p">,</span> <span class="s">&#39;aa_defrenderparams&#39;</span><span class="p">)</span>
+</pre></div>
+<p>Sometimes the Structure object is a constant which you cannot change any value of it, it&#39;s better to have a <strong>clone()</strong> method to make a copy to chang it. The <strong>clone()</strong> method defined below can act as </p>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">Structure</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">Structure</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">clone</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)()</span>
+        <span class="n">ctypes</span><span class="o">.</span><span class="n">pointer</span><span class="p">(</span><span class="n">clone</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span>
+        <span class="k">return</span> <span class="n">clone</span>
+</pre></div>
+<p>For <strong>basic data types</strong>, it&#39;s the same way to use the in_dll() method in the simple types. (e.g. &ldquo;ctypes.c_int.in_dll(libaa, &#39;some_int&#39;)&rdquo;)</p>
+
+<h3 id="toc_4">5. Playing with Functions</h3>
+<p>In Section 1, we already talked about how to import the functions from C and use them. However there are a few things to remember. Below is an example of calling the functions. </p>
+
+<ul>
+<li>First, you should declare all the related types and structures in the function&#39;s arguments and return value. </li>
+<li>Second, basic types can be auto converted into ctypes types, but for those are not, ensure they are in ctypes form.</li>
+<li>Third, remember to use ctypes.pointer() or ctypes.byref() for passing the pointer arguments.</li>
+</ul>
+<div class="highlight"><pre><span class="c"># it&#39;s a good practice to declare the structures and the functions at first like in C </span>
+
+<span class="c"># ... </span>
+<span class="c"># declare Structures </span>
+<span class="k">class</span> <span class="nc">Context</span><span class="p">(</span><span class="n">Structure</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="n">ContextPtr</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">Context</span><span class="p">)</span>
+
+<span class="c"># ... </span>
+<span class="c"># declare functions</span>
+<span class="n">aa_init</span> <span class="o">=</span> <span class="n">libaa</span><span class="o">.</span><span class="n">aa_init</span>
+<span class="n">aa_init</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">DriverPtr</span><span class="p">,</span> <span class="n">HardwareSettingsPtr</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">]</span> <span class="c"># parameters are (pointer of struct &quot;Driver&quot;, pointer of struct HardwareSetting, and a pointer of &quot;void&quot;)</span>
+<span class="n">aa_init</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ContextPtr</span> 
+
+<span class="n">aa_fastrender</span> <span class="o">=</span> <span class="n">libaa</span><span class="o">.</span><span class="n">aa_fastrender</span>
+<span class="n">aa_fastrender</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ContextPtr</span><span class="p">]</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">]</span> 
+
+<span class="c"># calling aa_init() and aa_fastrender()</span>
+<span class="n">context</span> <span class="o">=</span> <span class="n">aa_init</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">pointer</span><span class="p">(</span><span class="n">aa_mem_d</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">pointer</span><span class="p">(</span><span class="n">settings</span><span class="p">),</span> <span class="bp">None</span><span class="p">)</span>
+<span class="c"># ...</span>
+<span class="n">aa_fastrender</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span><span class="n">height</span><span class="p">)</span>
+</pre></div>
+<p>By now, you should have the knowledge to play with C libraries. Just start playing around with those libraries you can find in /usr/lib and /usr/include. Enjoy!</p>
 ]]>
         </content>
     </entry><entry>

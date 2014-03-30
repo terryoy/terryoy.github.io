@@ -10,7 +10,7 @@ In Linux, many libraries are provided in C dll with headers. It is not easy to t
 
 There is a tool to do it, which is _**ctypes**_. You can operate on data types, structs, pointers and functions with it. Now here is a brief guide on how to do it. [Here](http://stackoverflow.com/questions/1942298/wrapping-a-c-library-in-python-c-cython-or-ctypes) is also a comparison of ctypes with other solutions.
 
-### 1. Loading The Library
+### 1. Loading Libraries
 
 ```python
 
@@ -20,6 +20,7 @@ There is a tool to do it, which is _**ctypes**_. You can operate on data types, 
 1804289383
 >>> libc.atoi("12345")
 12345
+>>> libtest = ctypes.CDLL('./test.so') # you can also load the shared library by location, but you cannot load static library
 
 >>> from ctypes.util import find_library # if you need to find the library name
 >>> find_library('c')
@@ -152,8 +153,80 @@ c_long(100)
 
 ```
 
-### 4. Interact with C Libraries
+### 4. Accessing Structure and Variables from C
 
-(to be finished)
+We need not only passing data to C functions, but also getting some pre-defined data structure or variables in C. So let's talk about a few things you want to import from C.
 
+For **enums** in C, you'll need to define them again in Python. Since it's a representative of basic data types like integer, it's easy to act in the same way as in C.
 
+For **Structures**, you'll need to define the similar classes, derived from ctypes. Structure, and declare the ```_fields_``` attributes as mentioned above in Section 2. After that, you can use **in_dll()** method to load an object within the library. (BTW, If you don't need to access the attribute of that object, it's not necessary to set the ```_fields_``` attribute.)
+
+```python
+
+libaa = ctypes.CDLL('libaa.so.1') # the ascii-art lib
+
+class RenderSettings(Structure):
+    _pack_ = 4
+    _fields_ = [
+        ('brightness', ctypes.c_int),
+        ('contrast', ctypes.c_int),
+        ('gamma', ctypes.c_float),
+        ('dithering_mode', ctypes.c_int),
+        ('inversion', ctypes.c_int),
+        ('random', ctypes.c_int),
+    ]
+
+DEFAULT_RENDER_SETTINGS = RenderSettings.in_dll(libaa, 'aa_defrenderparams')
+
+```
+
+Sometimes the Structure object is a constant which you cannot change any value of it, it's better to have a **clone()** method to make a copy to chang it. The **clone()** method defined below can act as 
+
+```python
+
+class Structure(ctypes.Structure):
+    def clone(self):
+        clone = type(self)()
+        ctypes.pointer(clone)[0] = self
+        return clone
+
+```
+
+For **basic data types**, it's the same way to use the in_dll() method in the simple types. (e.g. "ctypes.c_int.in_dll(libaa, 'some_int')")
+
+### 5. Playing with Functions
+
+In Section 1, we already talked about how to import the functions from C and use them. However there are a few things to remember. Below is an example of calling the functions. 
+
+- First, you should declare all the related types and structures in the function's arguments and return value. 
+- Second, basic types can be auto converted into ctypes types, but for those are not, ensure they are in ctypes form.
+- Third, remember to use ctypes.pointer() or ctypes.byref() for passing the pointer arguments.
+
+```python
+
+# it's a good practice to declare the structures and the functions at first like in C 
+
+# ... 
+# declare Structures 
+class Context(Structure):
+    pass
+
+ContextPtr = ctypes.POINTER(Context)
+
+# ... 
+# declare functions
+aa_init = libaa.aa_init
+aa_init.argtypes = [DriverPtr, HardwareSettingsPtr, ctypes.c_void_p] # parameters are (pointer of struct "Driver", pointer of struct HardwareSetting, and a pointer of "void")
+aa_init.restype = ContextPtr 
+
+aa_fastrender = libaa.aa_fastrender
+aa_fastrender.argtypes = [ContextPtr] + 4 * [ctypes.c_int] 
+
+# calling aa_init() and aa_fastrender()
+context = aa_init(ctypes.pointer(aa_mem_d), ctypes.pointer(settings), None)
+# ...
+aa_fastrender(context, 0,0, width,height)
+
+```
+
+By now, you should have the knowledge to play with C libraries. Just start playing around with those libraries you can find in /usr/lib and /usr/include. Enjoy!
