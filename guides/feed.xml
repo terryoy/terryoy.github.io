@@ -3,14 +3,14 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/guides/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/guides/" />
-    <updated>2014-03-30T21:26:55+08:00</updated>
+    <updated>2014-03-31T11:39:52+08:00</updated>
     <id>http://terryoy.github.io/guides/</id>
     <entry>
         <title type="html"><![CDATA[Use Ctypes to Wrap C Libraries in Python]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/03/using-ctypes-to-wrap-c-library.html"/>
         <published>2014-03-23T07:57:00+08:00</published>
-        <updated>2014-03-30T21:26:55+08:00</updated>
+        <updated>2014-03-31T11:39:52+08:00</updated>
         <id>http://terryoy.github.io/2014/03/using-ctypes-to-wrap-c-library.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
@@ -191,7 +191,7 @@ The <em>byref()</em> method create a parameter object of pointer, which you can 
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/12/matplotlib-simple-guide-1.html"/>
         <published>2013-12-31T01:00:00+08:00</published>
-        <updated>2014-01-05T14:08:37+08:00</updated>
+        <updated>2014-01-07T15:19:11+08:00</updated>
         <id>http://terryoy.github.io/2013/12/matplotlib-simple-guide-1.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <category scheme="http://terryoy.github.io/tag/#graph" term="graph" label="graph" />
@@ -336,7 +336,7 @@ The <em>byref()</em> method create a parameter object of pointer, which you can 
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/11/cocos2d-x-setup.html"/>
         <published>2013-11-27T09:00:00+08:00</published>
-        <updated>2014-03-23T07:55:34+08:00</updated>
+        <updated>2014-02-06T18:12:24+08:00</updated>
         <id>http://terryoy.github.io/2013/11/cocos2d-x-setup.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#game" term="game" label="game" />

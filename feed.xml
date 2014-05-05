@@ -3,14 +3,14 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2014-03-30T21:26:55+08:00</updated>
+    <updated>2014-03-31T11:39:52+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
         <title type="html"><![CDATA[Use Ctypes to Wrap C Libraries in Python]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/03/using-ctypes-to-wrap-c-library.html"/>
         <published>2014-03-23T07:57:00+08:00</published>
-        <updated>2014-03-30T21:26:55+08:00</updated>
+        <updated>2014-03-31T11:39:52+08:00</updated>
         <id>http://terryoy.github.io/2014/03/using-ctypes-to-wrap-c-library.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
@@ -191,7 +191,7 @@ The <em>byref()</em> method create a parameter object of pointer, which you can 
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/03/postgresql-admin-quickref-part1-exploring-database.html"/>
         <published>2014-03-06T15:27:00+08:00</published>
-        <updated>2014-03-23T07:55:34+08:00</updated>
+        <updated>2014-03-06T15:36:15+08:00</updated>
         <id>http://terryoy.github.io/2014/03/postgresql-admin-quickref-part1-exploring-database.html</id>
         <category scheme="http://terryoy.github.io/tag/#postgresql" term="postgresql" label="postgresql" />
         <category scheme="http://terryoy.github.io/tag/#database" term="database" label="database" />
@@ -320,7 +320,7 @@ Log files: <code>/var/log/postgresql/</code></p>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/01/ssh-key-based-auth-server.html"/>
         <published>2014-01-08T15:40:00+08:00</published>
-        <updated>2014-03-23T07:55:34+08:00</updated>
+        <updated>2014-01-08T15:46:42+08:00</updated>
         <id>http://terryoy.github.io/2014/01/ssh-key-based-auth-server.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
@@ -418,7 +418,7 @@ If you want to revoke an authorized key for some user, you can find the user&#39
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/01/archive-commands-in-linux.html"/>
         <published>2014-01-07T19:13:00+08:00</published>
-        <updated>2014-03-23T07:55:34+08:00</updated>
+        <updated>2014-01-07T19:19:42+08:00</updated>
         <id>http://terryoy.github.io/2014/01/archive-commands-in-linux.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
@@ -468,7 +468,7 @@ If you want to revoke an authorized key for some user, you can find the user&#39
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/12/matplotlib-simple-guide-1.html"/>
         <published>2013-12-31T01:00:00+08:00</published>
-        <updated>2014-01-05T14:08:37+08:00</updated>
+        <updated>2014-01-07T15:19:11+08:00</updated>
         <id>http://terryoy.github.io/2013/12/matplotlib-simple-guide-1.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <category scheme="http://terryoy.github.io/tag/#graph" term="graph" label="graph" />
@@ -613,7 +613,7 @@ If you want to revoke an authorized key for some user, you can find the user&#39
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/12/python_yield.html"/>
         <published>2013-12-23T23:43:00+08:00</published>
-        <updated>2013-12-24T00:24:46+08:00</updated>
+        <updated>2014-01-07T15:19:11+08:00</updated>
         <id>http://terryoy.github.io/2013/12/python_yield.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -686,7 +686,7 @@ init value:0
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/12/python_main_args.html"/>
         <published>2013-12-21T15:35:00+08:00</published>
-        <updated>2013-12-23T23:42:35+08:00</updated>
+        <updated>2013-12-21T16:03:50+08:00</updated>
         <id>http://terryoy.github.io/2013/12/python_main_args.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -783,7 +783,7 @@ an non-existing item value: [ non-exist =</code></pre>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/11/cocos2d-x-setup.html"/>
         <published>2013-11-27T09:00:00+08:00</published>
-        <updated>2014-03-23T07:55:34+08:00</updated>
+        <updated>2014-02-06T18:12:24+08:00</updated>
         <id>http://terryoy.github.io/2013/11/cocos2d-x-setup.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#game" term="game" label="game" />
@@ -902,7 +902,7 @@ Sample 2: ./create_project.py -project MyGame -package com.MyCompany.AwesomeGame
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/09/vimrc.html"/>
         <published>2013-09-23T23:16:00+08:00</published>
-        <updated>2013-10-12T20:14:12+08:00</updated>
+        <updated>2013-12-03T12:53:55+08:00</updated>
         <id>http://terryoy.github.io/2013/09/vimrc.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#vim" term="vim" label="vim" />
@@ -932,7 +932,7 @@ set expandtab</code></pre>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/09/useful_alias.html"/>
         <published>2013-09-23T00:00:00+08:00</published>
-        <updated>2013-10-12T20:19:38+08:00</updated>
+        <updated>2013-12-03T12:53:55+08:00</updated>
         <id>http://terryoy.github.io/2013/09/useful_alias.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
