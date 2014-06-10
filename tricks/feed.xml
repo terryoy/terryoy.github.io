@@ -3,14 +3,14 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/tricks/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/tricks/" />
-    <updated>2014-03-06T15:36:15+08:00</updated>
+    <updated>2014-06-10T08:07:37+08:00</updated>
     <id>http://terryoy.github.io/tricks/</id>
     <entry>
         <title type="html"><![CDATA[PostgesSQL 9 Administration QuickRef(1) - Exploring Database]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/03/postgresql-admin-quickref-part1-exploring-database.html"/>
         <published>2014-03-06T15:27:00+08:00</published>
-        <updated>2014-03-06T15:36:15+08:00</updated>
+        <updated>2014-03-23T07:55:34+08:00</updated>
         <id>http://terryoy.github.io/2014/03/postgresql-admin-quickref-part1-exploring-database.html</id>
         <category scheme="http://terryoy.github.io/tag/#postgresql" term="postgresql" label="postgresql" />
         <category scheme="http://terryoy.github.io/tag/#database" term="database" label="database" />
@@ -139,7 +139,7 @@ Log files: <code>/var/log/postgresql/</code></p>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/01/ssh-key-based-auth-server.html"/>
         <published>2014-01-08T15:40:00+08:00</published>
-        <updated>2014-01-08T15:46:42+08:00</updated>
+        <updated>2014-03-23T07:55:34+08:00</updated>
         <id>http://terryoy.github.io/2014/01/ssh-key-based-auth-server.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
@@ -237,7 +237,7 @@ If you want to revoke an authorized key for some user, you can find the user&#39
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/01/archive-commands-in-linux.html"/>
         <published>2014-01-07T19:13:00+08:00</published>
-        <updated>2014-01-07T19:19:42+08:00</updated>
+        <updated>2014-03-23T07:55:34+08:00</updated>
         <id>http://terryoy.github.io/2014/01/archive-commands-in-linux.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
@@ -287,7 +287,7 @@ If you want to revoke an authorized key for some user, you can find the user&#39
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/12/python_yield.html"/>
         <published>2013-12-23T23:43:00+08:00</published>
-        <updated>2014-01-07T15:19:11+08:00</updated>
+        <updated>2013-12-24T00:24:46+08:00</updated>
         <id>http://terryoy.github.io/2013/12/python_yield.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -360,7 +360,7 @@ init value:0
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/12/python_main_args.html"/>
         <published>2013-12-21T15:35:00+08:00</published>
-        <updated>2013-12-21T16:03:50+08:00</updated>
+        <updated>2013-12-23T23:42:35+08:00</updated>
         <id>http://terryoy.github.io/2013/12/python_main_args.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -457,7 +457,7 @@ an non-existing item value: [ non-exist =</code></pre>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/09/vimrc.html"/>
         <published>2013-09-23T23:16:00+08:00</published>
-        <updated>2013-12-03T12:53:55+08:00</updated>
+        <updated>2013-10-12T20:14:12+08:00</updated>
         <id>http://terryoy.github.io/2013/09/vimrc.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#vim" term="vim" label="vim" />
@@ -483,11 +483,11 @@ set expandtab</code></pre>
 ]]>
         </content>
     </entry><entry>
-        <title type="html"><![CDATA[Useful Aliases]]></title>
+        <title type="html"><![CDATA[Useful Aliases and Commands in Linux]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/09/useful_alias.html"/>
         <published>2013-09-23T00:00:00+08:00</published>
-        <updated>2013-12-03T12:53:55+08:00</updated>
+        <updated>2014-06-10T08:07:37+08:00</updated>
         <id>http://terryoy.github.io/2013/09/useful_alias.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
@@ -505,6 +505,24 @@ set expandtab</code></pre>
 
 <span class="c"># url shortener</span>
 <span class="nb">alias </span><span class="nv">shortenurl</span><span class="o">=</span><span class="s2">&quot;python -c \&quot;import sys, urllib as ul; print ul.urlopen(&#39;http://tinyurl.com/api-create.php?url=%s&#39; % ul.quote_plus(sys.argv[1])).readline()\&quot;&quot;</span>
+</pre></div>
+
+<h3 id="toc_0"># work with hex</h3>
+<div class="highlight"><pre><span class="c"># if you want to dump a file in hex</span>
+<span class="nv">$ </span>xxd -p file
+
+<span class="c"># A Hex number convertor, convert decimal into hex(e.g. &quot;hex 34&quot; -&gt; 22)</span>
+<span class="nb">alias </span><span class="nv">hex</span><span class="o">=</span><span class="s1">&#39;printf &quot;%x\n&quot;&#39;</span>
+</pre></div>
+
+<h3 id="toc_1"># mount a virtualbox disk on linux</h3>
+<div class="highlight"><pre><span class="c"># before you can mount anything, install virtualbox-fuse</span>
+<span class="nv">$ </span>sudo apt-get install virtualbox-fuse
+
+<span class="c"># there are &#39;disk/&#39; folder and &#39;space/&#39; folder.</span>
+<span class="c"># &#39;vdfuse -r&#39; is for read only,</span>
+<span class="nv">$ </span>vdfuse -raf <span class="nv">$1</span> disk
+<span class="nv">$ </span>mount disk/Partition1 space
 </pre></div>
 ]]>
         </content>
