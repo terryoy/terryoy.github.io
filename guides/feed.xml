@@ -3,9 +3,154 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/guides/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/guides/" />
-    <updated>2014-03-31T11:39:52+08:00</updated>
+    <updated>2014-10-22T21:18:01+08:00</updated>
     <id>http://terryoy.github.io/guides/</id>
     <entry>
+        <title type="html"><![CDATA[A Guide of Common Git Tasks]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2014/10/common-git-commands.html"/>
+        <published>2014-10-22T20:57:00+08:00</published>
+        <updated>2014-10-22T21:18:01+08:00</updated>
+        <id>http://terryoy.github.io/2014/10/common-git-commands.html</id>
+        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
+        <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <h3 id="toc_0">1. Initialize a Git project</h3>
+<p>Usually, starting a git project include&#39;s the following steps:</p>
+
+<ul>
+<li>initialize local repository</li>
+<li>add a remote repository from server</li>
+<li>set up-stream and push to remote repository</li>
+</ul>
+<div class="highlight"><pre><span class="c"># initialize a repository</span>
+<span class="nv">$ </span>git init
+
+<span class="c"># set a new remote</span>
+<span class="nv">$ </span>git remote add origin https://github.com/user/repo.git
+
+<span class="c"># verify new remote</span>
+<span class="nv">$ </span>git remote -v
+
+<span class="c"># push to remote repository</span>
+<span class="nv">$ </span>git push --set-upstream origin master
+</pre></div>
+
+<h3 id="toc_1">2. Correct mistakes on the repository</h3>
+<p>Usually there are some mistakes we will commit to git repository, so here are a few tips to correct the mistakes:</p>
+
+<ul>
+<li>Change file name/path</li>
+<li>Unstage files</li>
+<li>Remove sensitive data, or binary data in the history </li>
+</ul>
+<div class="highlight"><pre><span class="c"># change or delete files in the current version</span>
+<span class="c"># -- you should not simple use the common shell command &quot;mv&quot; and &quot;rm&quot;, </span>
+<span class="c"># -- because that will lose the tracking. You should use with git instead</span>
+<span class="nv">$ </span>git rm &lt;somefile&gt;
+<span class="nv">$ </span>git mv &lt;somefile&gt; &lt;otherfile&gt;
+
+
+<span class="c"># Unstage files</span>
+<span class="c"># -- usually when you execute &quot;git status&quot;, it will prompt you how to unstage files (e.g. &#39;(use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)&#39;)</span>
+<span class="nv">$ </span>git reset HEAD &lt;file&gt;...
+<span class="c"># -- (or, in some cases)</span>
+<span class="nv">$ </span>git rm --cached &lt;file&gt;
+
+<span class="c"># Remove sensitive data</span>
+<span class="c"># -- This one is more difficult.</span>
+</pre></div>
+]]>
+        </content>
+    </entry><entry>
+        <title type="html"><![CDATA[Linux C Learning (Part 1)]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2014/08/learning-linux-c-part-1.html"/>
+        <published>2014-08-20T23:34:00+08:00</published>
+        <updated>2014-08-21T09:52:53+08:00</updated>
+        <id>http://terryoy.github.io/2014/08/learning-linux-c-part-1.html</id>
+        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
+        <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <p>Below is some study notes for Linux C Programming from a web course. It can serve as a coding reference in the future, or a walkthrough summary of the study. As I already have the knowledge of C Programming Language, so I will not cover the language detail here, but only the development environment under Linux.</p>
+
+<h3 id="toc_0">1. <strong>gcc</strong> and <strong>gdb</strong></h3>
+<p>There are several steps for the <strong>gcc</strong> compiler to compile a source file into a executable program. It can be set to the step output with some parameter to gcc, so you can checkout their result in file.</p>
+<div class="highlight"><pre><span class="c"># Preprocessor: This is to remove comments, replace marcos(#define), and headers(#include)</span>
+<span class="nv">$ </span>gcc -E test.c -o test.i
+
+<span class="c"># (+)Compile: This compile the source code into assembly code. Different architecture has different assembly language spec</span>
+<span class="nv">$ </span>gcc -S test.c -o test.s
+
+<span class="c"># (+)Assemble: this translate assembly code into binary object. You can check the file with &quot;file test.o&quot; to see the format as a &quot;object file&quot; or a &quot;ELF LSB relocatable&quot;, and the architecture of the platform(x64, etc.)</span>
+<span class="nv">$ </span>gcc -c test.c -o test.o
+
+<span class="c"># (+)Link: This generate the final executable</span>
+<span class="nv">$ </span>gcc test.c -o <span class="nb">test</span>
+</pre></div>
+<p>There are other useful parameters of gcc for specific purpose, for example, optimization, or debugging.</p>
+
+<ul>
+<li>&ldquo;-O[level]&rdquo;, optimzation level, (0,1,2,3)</li>
+<li>&ldquo;-g&rdquo;, generate debug info, gdb needed</li>
+<li>&ldquo;-Wall&rdquo;, enable all warnings and errors</li>
+<li>&ldquo;-Werror&rdquo;, enable errors</li>
+<li>&ldquo;-D&rdquo;, define macro in command line</li>
+<li>&ldquo;-I&rdquo;, set the location of headers</li>
+<li>&ldquo;-std=C99&rdquo;, use C99 standard</li>
+</ul>
+<p>The <strong>gdb</strong> debugging tool can be used to trace the program with some useful commands:</p>
+
+<ul>
+<li>&ldquo;l&rdquo;, list source code with line numbers</li>
+<li>&ldquo;n&rdquo;, proceed next line</li>
+<li>&ldquo;b [line number]&rdquo;, set a breakpoint at the code with the line number</li>
+<li>&ldquo;c&rdquo;, continue running until finish or meets the next break point</li>
+<li>&ldquo;p [variable]&rdquo;, print the instant value of a variable</li>
+</ul>
+]]>
+        </content>
+    </entry><entry>
+        <title type="html"><![CDATA[Creating A New Database in MySql]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2014/06/create-database-mysql.html"/>
+        <published>2014-06-04T14:40:00+08:00</published>
+        <updated>2014-09-15T22:30:02+08:00</updated>
+        <id>http://terryoy.github.io/2014/06/create-database-mysql.html</id>
+        <category scheme="http://terryoy.github.io/tag/#database" term="database" label="database" />
+        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <h3 id="toc_0">1. Create the database</h3>
+<div class="highlight"><pre><span class="k">CREATE</span> <span class="k">DATABASE</span> <span class="n">mytestdb</span><span class="p">;</span>
+<span class="k">show</span> <span class="n">databases</span><span class="p">;</span>
+</pre></div>
+
+<h3 id="toc_1">2. Create a user and grant access</h3>
+<div class="highlight"><pre><span class="k">CREATE</span> <span class="k">USER</span> <span class="s1">&#39;myuser&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span> <span class="n">IDENTIFIED</span> <span class="k">BY</span> <span class="s1">&#39;my_password&#39;</span><span class="p">;</span>
+
+<span class="k">GRANT</span> <span class="k">ALL</span> <span class="k">PRIVILEGES</span> <span class="k">ON</span> <span class="n">mytestdb</span><span class="p">.</span><span class="o">*</span> <span class="k">TO</span> <span class="s1">&#39;myuser&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="p">;</span> 
+
+<span class="c1">-- or alternatively, with more powerful access</span>
+<span class="k">GRANT</span> <span class="k">ALL</span> <span class="k">PRIVILEGES</span> <span class="k">ON</span> <span class="n">mytestdb</span><span class="p">.</span><span class="o">*</span> <span class="k">TO</span> <span class="s1">&#39;admin&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span> <span class="k">WITH</span> <span class="k">GRANT</span> <span class="k">OPTION</span><span class="p">;</span>
+</pre></div>
+
+<h3 id="toc_2">3. Login with the User</h3>
+<div class="highlight"><pre>mysql -u myuser -p mytestdb
+</pre></div>
+
+<h3 id="toc_3">4. Import a SQL dump into database</h3>
+<div class="highlight"><pre><span class="n">USE</span> <span class="n">mytestdb</span><span class="p">;</span>
+<span class="k">source</span> <span class="n">db_dump</span><span class="p">.</span><span class="k">sql</span><span class="p">;</span>
+</pre></div>
+<p>Or you can use a command line:</p>
+<div class="highlight"><pre>mysql -u dbuser -p <span class="o">[</span>-h host<span class="o">]</span> dbname &lt; dbdump.sql
+</pre></div>
+<p>Exporting in command line is similar, using &ldquo;mysqldump&rdquo; command:</p>
+<div class="highlight"><pre>mysqldump -u dbuser -p dbname &gt; dbdump.sql
+</pre></div>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[Use Ctypes to Wrap C Libraries in Python]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/03/using-ctypes-to-wrap-c-library.html"/>

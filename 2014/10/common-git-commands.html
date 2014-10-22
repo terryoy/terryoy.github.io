@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Hello, World!" />
+    <meta name="application-name" content="Hello, World!" />
+    <title>A Guide of Common Git Tasks - Hello, World!</title>
+    <meta name="keywords" content="linux,programming" />
+    <meta name="description" content="" />
+    
+    <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="Hello, World!" />
+    <link rel="stylesheet" href="/static/css/styles.css?v=d5c6e" />
+    <link rel="stylesheet" href="/static/css/pygment_trac.css?v=a6c15" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div id="wrapper">   
+<header id="header" class="clear">
+    <h1>Hello, World!</h1>
+    <p>I'm <i>terryoy</i></p>
+    <p class="view"><a href="https://github.com/terryoy">View My GitHub Profile</a></p>
+</header><!-- #header -->
+<nav id="nav" role="navigation">
+    <a href="/">Home</a>
+    <a href="/guides/">Guides</a>
+    <a href="/tricks/">Tricks</a>
+    <a href="/about.html">About Me</a>
+</nav>
+
+<section><article id="main" class="hentry">
+	<h1>A Guide of Common Git Tasks</h1>
+    <p class="sub_text">2014-10-22 by <i>terryoy</i>, in <a href="/guides/">guides</a>
+    </p>
+    
+	<h3 id="toc_0">1. Initialize a Git project</h3>
+<p>Usually, starting a git project include&#39;s the following steps:</p>
+
+<ul>
+<li>initialize local repository</li>
+<li>add a remote repository from server</li>
+<li>set up-stream and push to remote repository</li>
+</ul>
+<div class="highlight"><pre><span class="c"># initialize a repository</span>
+<span class="nv">$ </span>git init
+
+<span class="c"># set a new remote</span>
+<span class="nv">$ </span>git remote add origin https://github.com/user/repo.git
+
+<span class="c"># verify new remote</span>
+<span class="nv">$ </span>git remote -v
+
+<span class="c"># push to remote repository</span>
+<span class="nv">$ </span>git push --set-upstream origin master
+</pre></div>
+
+<h3 id="toc_1">2. Correct mistakes on the repository</h3>
+<p>Usually there are some mistakes we will commit to git repository, so here are a few tips to correct the mistakes:</p>
+
+<ul>
+<li>Change file name/path</li>
+<li>Unstage files</li>
+<li>Remove sensitive data, or binary data in the history </li>
+</ul>
+<div class="highlight"><pre><span class="c"># change or delete files in the current version</span>
+<span class="c"># -- you should not simple use the common shell command &quot;mv&quot; and &quot;rm&quot;, </span>
+<span class="c"># -- because that will lose the tracking. You should use with git instead</span>
+<span class="nv">$ </span>git rm &lt;somefile&gt;
+<span class="nv">$ </span>git mv &lt;somefile&gt; &lt;otherfile&gt;
+
+
+<span class="c"># Unstage files</span>
+<span class="c"># -- usually when you execute &quot;git status&quot;, it will prompt you how to unstage files (e.g. &#39;(use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)&#39;)</span>
+<span class="nv">$ </span>git reset HEAD &lt;file&gt;...
+<span class="c"># -- (or, in some cases)</span>
+<span class="nv">$ </span>git rm --cached &lt;file&gt;
+
+<span class="c"># Remove sensitive data</span>
+<span class="c"># -- This one is more difficult.</span>
+</pre></div>
+
+    
+    
+	<p/>
+	<hr/>
+    
+    <div class="sub_text">
+        <span>Tags:
+            <a href="/tag/linux/">linux</a>,&nbsp;<a href="/tag/programming/">programming</a>
+		</span>
+    
+        
+    </div>
+    
+
+	<p/>
+	
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'terryoy';
+        var disqus_title = 'A Guide of Common Git Tasks';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+</article></section>
+
+<footer id="footer">
+    <p><small>Hosted on GitHub Pages &mdash; Theme adopted from <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+</footer><!-- #footer -->
+</div><!-- #wrapper -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-50656512-1', 'terryoy.github.io');
+ga('send', 'pageview');
+</script> <!-- google analytics -->
+
+</body>
+</html>
