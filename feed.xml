@@ -3,7 +3,7 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2014-10-22T21:18:01+08:00</updated>
+    <updated>2014-10-22T21:23:48+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
         <title type="html"><![CDATA[A Guide of Common Git Tasks]]></title>
@@ -1073,11 +1073,11 @@ set expandtab</code></pre>
 ]]>
         </content>
     </entry><entry>
-        <title type="html"><![CDATA[Useful Aliases]]></title>
+        <title type="html"><![CDATA[Useful Aliases and Commands in Linux]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/09/useful_alias.html"/>
         <published>2013-09-23T00:00:00+08:00</published>
-        <updated>2013-12-03T12:53:55+08:00</updated>
+        <updated>2014-10-22T21:23:48+08:00</updated>
         <id>http://terryoy.github.io/2013/09/useful_alias.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
@@ -1095,6 +1095,24 @@ set expandtab</code></pre>
 
 <span class="c"># url shortener</span>
 <span class="nb">alias </span><span class="nv">shortenurl</span><span class="o">=</span><span class="s2">&quot;python -c \&quot;import sys, urllib as ul; print ul.urlopen(&#39;http://tinyurl.com/api-create.php?url=%s&#39; % ul.quote_plus(sys.argv[1])).readline()\&quot;&quot;</span>
+</pre></div>
+
+<h3 id="toc_0"># work with hex</h3>
+<div class="highlight"><pre><span class="c"># if you want to dump a file in hex</span>
+<span class="nv">$ </span>xxd -p file
+
+<span class="c"># A Hex number convertor, convert decimal into hex(e.g. &quot;hex 34&quot; -&gt; 22)</span>
+<span class="nb">alias </span><span class="nv">hex</span><span class="o">=</span><span class="s1">&#39;printf &quot;%x\n&quot;&#39;</span>
+</pre></div>
+
+<h3 id="toc_1"># mount a virtualbox disk on linux</h3>
+<div class="highlight"><pre><span class="c"># before you can mount anything, install virtualbox-fuse</span>
+<span class="nv">$ </span>sudo apt-get install virtualbox-fuse
+
+<span class="c"># there are &#39;disk/&#39; folder and &#39;space/&#39; folder.</span>
+<span class="c"># &#39;vdfuse -r&#39; is for read only,</span>
+<span class="nv">$ </span>vdfuse -raf <span class="nv">$1</span> disk
+<span class="nv">$ </span>mount disk/Partition1 space
 </pre></div>
 ]]>
         </content>

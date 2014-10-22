@@ -1,4 +1,4 @@
-# Useful Aliases
+# Useful Aliases and Commands in Linux
 
 - date: 2013-09-23
 - tags: linux, shell
@@ -22,5 +22,28 @@ alias urldecode='python -c "import sys, urllib as ul; print ul.unquote_plus(sys.
   
 # url shortener
 alias shortenurl="python -c \"import sys, urllib as ul; print ul.urlopen('http://tinyurl.com/api-create.php?url=%s' % ul.quote_plus(sys.argv[1])).readline()\""
+
 ```
 
+### # work with hex
+
+```bash
+# if you want to dump a file in hex
+$ xxd -p file
+
+# A Hex number convertor, convert decimal into hex(e.g. "hex 34" -> 22)
+alias hex='printf "%x\n"'
+```
+
+### # mount a virtualbox disk on linux
+
+```bash
+# before you can mount anything, install virtualbox-fuse
+$ sudo apt-get install virtualbox-fuse
+
+# there are 'disk/' folder and 'space/' folder.
+# 'vdfuse -r' is for read only,
+$ vdfuse -raf $1 disk
+$ mount disk/Partition1 space
+
+```

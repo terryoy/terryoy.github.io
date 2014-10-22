@@ -7,7 +7,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="apple-mobile-web-app-title" content="Hello, World!" />
     <meta name="application-name" content="Hello, World!" />
-    <title>Useful Aliases - Hello, World!</title>
+    <title>Useful Aliases and Commands in Linux - Hello, World!</title>
     <meta name="keywords" content="linux,shell" />
     <meta name="description" content="" />
     
@@ -33,7 +33,7 @@
 </nav>
 
 <section><article id="main" class="hentry">
-	<h1>Useful Aliases</h1>
+	<h1>Useful Aliases and Commands in Linux</h1>
     <p class="sub_text">2013-09-23 by <i>terryoy</i>, in <a href="/tricks/">tricks</a>
     </p>
     
@@ -50,6 +50,24 @@
 
 <span class="c"># url shortener</span>
 <span class="nb">alias </span><span class="nv">shortenurl</span><span class="o">=</span><span class="s2">&quot;python -c \&quot;import sys, urllib as ul; print ul.urlopen(&#39;http://tinyurl.com/api-create.php?url=%s&#39; % ul.quote_plus(sys.argv[1])).readline()\&quot;&quot;</span>
+</pre></div>
+
+<h3 id="toc_0"># work with hex</h3>
+<div class="highlight"><pre><span class="c"># if you want to dump a file in hex</span>
+<span class="nv">$ </span>xxd -p file
+
+<span class="c"># A Hex number convertor, convert decimal into hex(e.g. &quot;hex 34&quot; -&gt; 22)</span>
+<span class="nb">alias </span><span class="nv">hex</span><span class="o">=</span><span class="s1">&#39;printf &quot;%x\n&quot;&#39;</span>
+</pre></div>
+
+<h3 id="toc_1"># mount a virtualbox disk on linux</h3>
+<div class="highlight"><pre><span class="c"># before you can mount anything, install virtualbox-fuse</span>
+<span class="nv">$ </span>sudo apt-get install virtualbox-fuse
+
+<span class="c"># there are &#39;disk/&#39; folder and &#39;space/&#39; folder.</span>
+<span class="c"># &#39;vdfuse -r&#39; is for read only,</span>
+<span class="nv">$ </span>vdfuse -raf <span class="nv">$1</span> disk
+<span class="nv">$ </span>mount disk/Partition1 space
 </pre></div>
 
     
@@ -72,7 +90,7 @@
     <div id="disqus_thread"></div>
     <script type="text/javascript">
         var disqus_shortname = 'terryoy';
-        var disqus_title = 'Useful Aliases';
+        var disqus_title = 'Useful Aliases and Commands in Linux';
         (function() {
             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
             dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
