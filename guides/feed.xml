@@ -3,14 +3,14 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/guides/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/guides/" />
-    <updated>2014-10-22T21:18:01+08:00</updated>
+    <updated>2014-10-22T21:31:13+08:00</updated>
     <id>http://terryoy.github.io/guides/</id>
     <entry>
         <title type="html"><![CDATA[A Guide of Common Git Tasks]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/10/common-git-commands.html"/>
         <published>2014-10-22T20:57:00+08:00</published>
-        <updated>2014-10-22T21:18:01+08:00</updated>
+        <updated>2014-10-22T21:31:13+08:00</updated>
         <id>http://terryoy.github.io/2014/10/common-git-commands.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
@@ -31,6 +31,9 @@
 
 <span class="c"># verify new remote</span>
 <span class="nv">$ </span>git remote -v
+
+<span class="c"># (you might need to pull origin/master first if it&#39;s not empty)</span>
+<span class="nv">$ </span>git pull origin master
 
 <span class="c"># push to remote repository</span>
 <span class="nv">$ </span>git push --set-upstream origin master

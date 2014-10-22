@@ -23,6 +23,9 @@ $ git remote add origin https://github.com/user/repo.git
 # verify new remote
 $ git remote -v
 
+# (you might need to pull origin/master first if it's not empty)
+$ git pull origin master
+
 # push to remote repository
 $ git push --set-upstream origin master
 
