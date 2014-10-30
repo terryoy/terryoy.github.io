@@ -3,14 +3,92 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/guides/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/guides/" />
-    <updated>2014-10-22T21:31:13+08:00</updated>
+    <updated>2014-10-30T11:24:40+08:00</updated>
     <id>http://terryoy.github.io/guides/</id>
     <entry>
+        <title type="html"><![CDATA[Finding Information for C/C++ Library on Linux]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2014/10/finding-information-linux-c-library.html"/>
+        <published>2014-10-30T09:38:00+08:00</published>
+        <updated>2014-10-30T11:24:40+08:00</updated>
+        <id>http://terryoy.github.io/2014/10/finding-information-linux-c-library.html</id>
+        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
+        <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <p>Developing on Linux often needs shared libraries most of the time. Below is a few references for finding the information about the libraries you are dealing with.</p>
+
+<h3 id="toc_0">1. Naming Convention</h3>
+<p>All C standard libraries on linux has the name convention <em>&ldquo;lib<strong>xxx</strong>&rdquo;</em>. If you search packages of a library, you can use the (debian) command below to look for it:</p>
+<div class="highlight"><pre><span class="nv">$ </span>apt-cache search libxxx
+</pre></div>
+
+<h3 id="toc_1">2. Library Packages</h3>
+<p>Usually, there are three packages of a library you could deal with. </p>
+
+<ul>
+<li>libxxx - this is the binary package of the shared library, usually has a &ldquo;lib<name>.so.<version>&rdquo; file on the path /usr/lib/ or /usr/local/lib. It is also needed at runtime.</li>
+<li>libxxx-dev - this is the package which enables you to compile and link the library.</li>
+<li>libxxx-dbg - this is the package which contains the debug symbols for debugging the program. where the files are usually installed at &ldquo;/usr/lib/debug/&rdquo;.</li>
+</ul>
+<p>If you want to know what files are installed on you system of a package, below are a few commands to do so:</p>
+<div class="highlight"><pre><span class="nv">$ </span>dpkg-query -L &lt;package_name&gt;
+<span class="nv">$ </span>dpkg-query -c &lt;.deb_file&gt;
+
+<span class="c"># if you want to check files without installing the package</span>
+<span class="c"># use the apt-file program(it will cache the file lists of all packages)</span>
+<span class="nv">$ </span>apt-file update
+<span class="nv">$ </span>apt-file list &lt;package_name&gt;
+</pre></div>
+
+<h3 id="toc_2">3. List Libraries on Your System</h3>
+<p>Below command can list all the share libraries and their locations, so you could whether a libray is installed and registered on which path.</p>
+<div class="highlight"><pre><span class="nv">$ </span>ldconfig -p
+
+<span class="c"># find a library(SDL) for example</span>
+<span class="nv">$ </span>ldconfig -p | grep -i sdl
+</pre></div>
+<p>For the <code>ld</code> program, it searches &ldquo;/usr/lib/&rdquo; for libraries by default, but it also include the paths defined in &ldquo;/etc/ld.so.conf&rdquo; and &ldquo;/etc/ld.so.conf.d/&rdquo;.</p>
+
+<h3 id="toc_3">4. Checking The Information of Library Files</h3>
+<p>A library usually contains two parts: static(.a) and shared(.so). You can check the both parts with the commands below:</p>
+<div class="highlight"><pre><span class="c"># listing object files in static (archive) library</span>
+<span class="nv">$ </span>ar tf /usr/lib/i386-linux-gnu/libSDL2.a
+SDL.o
+SDL_assert.o
+SDL_error.o
+SDL_hints.o
+SDL_log.o
+...
+
+<span class="c"># listing symbols in object files(.o), archive library(.a), and shared library(.so)</span>
+<span class="nv">$ </span>nm object.o
+<span class="nv">$ </span>nm lib.a
+<span class="nv">$ </span>nm -D lib.so 
+<span class="nv">$ </span>nm --dynamic lib.so
+</pre></div>
+
+<h3 id="toc_4">5. Development Reference</h3>
+<p>Usually the &ldquo;-dev&rdquo; package contains some documentation or example files under path &ldquo;/usr/share/doc/lib<name>-dev/&rdquo;. It is very useful to checkout these materials locally. For examples:</p>
+<div class="highlight"><pre><span class="c"># open the documentation home page(xdg-open is a general command to open file, you can replace it with &quot;iceaweasel&quot; etc.)</span>
+<span class="nv">$ </span>xdg-open /usr/share/doc/libusb-dev/html/index.html
+
+<span class="c"># extract the examples </span>
+<span class="nv">$ </span>tar -zxvf /usr/share/doc/libsdl2-dev/examples/examples.tar.gz
+</pre></div>
+
+<h3 id="toc_5">6. More Information</h3>
+<p>Static, Shared Dynamic and Loadable Linux Libraries <br/>
+<a href="http://www.yolinux.com/TUTORIALS/LibraryArchives-StaticAndDynamic.html">http://www.yolinux.com/TUTORIALS/LibraryArchives-StaticAndDynamic.html</a><br/>
+Program Library HOWTO <br/>
+<a href="http://tldp.org/HOWTO/Program-Library-HOWTO/index.html">http://tldp.org/HOWTO/Program-Library-HOWTO/index.html</a></p>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[A Guide of Common Git Tasks]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/10/common-git-commands.html"/>
         <published>2014-10-22T20:57:00+08:00</published>
-        <updated>2014-10-22T21:31:13+08:00</updated>
+        <updated>2014-10-30T09:35:16+08:00</updated>
         <id>http://terryoy.github.io/2014/10/common-git-commands.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
@@ -70,7 +148,7 @@
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/08/learning-linux-c-part-1.html"/>
         <published>2014-08-20T23:34:00+08:00</published>
-        <updated>2014-08-21T09:52:53+08:00</updated>
+        <updated>2014-10-30T09:35:16+08:00</updated>
         <id>http://terryoy.github.io/2014/08/learning-linux-c-part-1.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
@@ -118,7 +196,7 @@
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/06/create-database-mysql.html"/>
         <published>2014-06-04T14:40:00+08:00</published>
-        <updated>2014-09-15T22:30:02+08:00</updated>
+        <updated>2014-10-30T09:35:16+08:00</updated>
         <id>http://terryoy.github.io/2014/06/create-database-mysql.html</id>
         <category scheme="http://terryoy.github.io/tag/#database" term="database" label="database" />
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
@@ -158,7 +236,7 @@
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/03/using-ctypes-to-wrap-c-library.html"/>
         <published>2014-03-23T07:57:00+08:00</published>
-        <updated>2014-03-31T11:39:52+08:00</updated>
+        <updated>2014-03-30T21:26:55+08:00</updated>
         <id>http://terryoy.github.io/2014/03/using-ctypes-to-wrap-c-library.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
@@ -339,7 +417,7 @@ The <em>byref()</em> method create a parameter object of pointer, which you can 
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/12/matplotlib-simple-guide-1.html"/>
         <published>2013-12-31T01:00:00+08:00</published>
-        <updated>2014-01-07T15:19:11+08:00</updated>
+        <updated>2014-01-05T14:08:37+08:00</updated>
         <id>http://terryoy.github.io/2013/12/matplotlib-simple-guide-1.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <category scheme="http://terryoy.github.io/tag/#graph" term="graph" label="graph" />
@@ -484,7 +562,7 @@ The <em>byref()</em> method create a parameter object of pointer, which you can 
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/11/cocos2d-x-setup.html"/>
         <published>2013-11-27T09:00:00+08:00</published>
-        <updated>2014-02-06T18:12:24+08:00</updated>
+        <updated>2014-03-23T07:55:34+08:00</updated>
         <id>http://terryoy.github.io/2013/11/cocos2d-x-setup.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#game" term="game" label="game" />
