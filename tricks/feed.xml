@@ -3,14 +3,93 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/tricks/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/tricks/" />
-    <updated>2014-10-22T21:23:48+08:00</updated>
+    <updated>2014-10-31T19:04:33+08:00</updated>
     <id>http://terryoy.github.io/tricks/</id>
     <entry>
+        <title type="html"><![CDATA[使用Minicom和RS232串口转USB调试Linux板]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2014/10/minicom_usage.html"/>
+        <published>2014-10-31T18:39:00+08:00</published>
+        <updated>2014-10-31T19:04:33+08:00</updated>
+        <id>http://terryoy.github.io/2014/10/minicom_usage.html</id>
+        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
+        <category scheme="http://terryoy.github.io/tag/#embedded" term="embedded" label="embedded" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <p>本次使用的开发板为Micro2440SDK。</p>
+<p><img src="http://terryoy-github.u.qiniudn.com/blog/images/2014/board_overview.jpg" alt="alt"/></p>
+<p>1.RS232连接端口为COM0, 连接上之后, 接上电源, 拨开power开关(电源旁边的ON/OFF).</p>
+<p>2.在Linux下执行如下指令，则在启动程序后需要设置rs232所连接的usb端口. 否则它会连接默认的端口(如:/dev/tty8)</p>
+
+<pre><code>$ sudo minicom -s</code></pre>
+<p>3.在配置里把Serial Port设成/dev/ttyUSB0, 把Bps设成115200</p>
+<p>4.如果你想保存为default, 可以选择&quot;Save setup as dfl&quot;. 如果你想保存成另外一个配置文件, 可以选择&quot;Save setup as..&ldquo;, 然后用以下的方法选择连接配置:</p>
+
+<pre><code>$ sudo minicom mysetting</code></pre>
+<p>5.如果要在PC上通过USB下载文件到板上, 就需要用USB串口线练到USB SLAVE上.</p>
+
+<ul>
+<li><p>注意:</p>
+
+<ol>
+<li>如果你发现发任何字符在屏幕上都看不到, 请用&quot;Ctrl+A E&quot;来打开local echo.</li>
+<li>我在crunchbang下测试成功的配置是:
+serial device: /dev/ttyUSB0
+Bps/Par/Bits: 115200 8N1
+local echo: off
+hardware flow control: no
+software flow control: yes</li>
+</ol></li>
+<li><p>查看cpuinfo:</p></li>
+</ul>
+<div class="highlight"><pre><span class="o">[</span>root@FriendlyARM /<span class="o">]</span><span class="c"># cat /proc/cpuinfo </span>
+Processor       : ARM920T rev 0 <span class="o">(</span>v4l<span class="o">)</span>
+BogoMIPS        : 201.93
+Features        : swp half 
+CPU implementer : 0x41
+CPU architecture: 4T
+CPU variant     : 0x1
+CPU part        : 0x920
+CPU revision    : 0
+
+Hardware        : FriendlyARM Mini2440 development board
+Revision        : 0000
+Serial          : 0000000000000000
+</pre></div>
+
+<h1 id="toc_0">NOR 启动方式</h1>
+<p>NOR主要是BIOS模式, 可以用来做一些固件烧写, 系统更新的操作, 会出现菜单如下:</p>
+
+<pre><code>##### FriendlyARM BIOS 2.0 for 2440 #####
+[x] format NAND FLASH for Linux
+[v] Download vivi 
+[k] Download linux kernel 
+[y] Download root_yaffs image 
+[a] Absolute User Application
+[n] Download Nboot for WinCE 
+[l] Download WinCE boot-logo
+[w] Download WinCE NK.bin 
+[d] Download &amp; Run 
+[z] Download zImage into RAM 
+[g] Boot linux from RAM 
+[f] Format the nand flash 
+[b] Boot the system 
+[s] Set the boot parameters 
+[u] Backup NAND Flash to HOST through USB(upload) 
+[r] Restore NAND Flash from HOST through USB 
+[q] Goto shell of vivi 
+[i] Version: 0945-2K</code></pre>
+
+<h1 id="toc_1">NAND 启动方式</h1>
+<p>NAND的启动方式是按正常的操作系统启动方式, 有bootloader, 文件系统等.</p>
+<p>此操作系统是通过NOR启动的BIOS烧写进去NAND Flash的.</p>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[PostgesSQL 9 Administration QuickRef(1) - Exploring Database]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/03/postgresql-admin-quickref-part1-exploring-database.html"/>
         <published>2014-03-06T15:27:00+08:00</published>
-        <updated>2014-03-06T15:36:15+08:00</updated>
+        <updated>2014-03-23T07:55:34+08:00</updated>
         <id>http://terryoy.github.io/2014/03/postgresql-admin-quickref-part1-exploring-database.html</id>
         <category scheme="http://terryoy.github.io/tag/#postgresql" term="postgresql" label="postgresql" />
         <category scheme="http://terryoy.github.io/tag/#database" term="database" label="database" />
@@ -139,7 +218,7 @@ Log files: <code>/var/log/postgresql/</code></p>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/01/ssh-key-based-auth-server.html"/>
         <published>2014-01-08T15:40:00+08:00</published>
-        <updated>2014-01-08T15:46:42+08:00</updated>
+        <updated>2014-03-23T07:55:34+08:00</updated>
         <id>http://terryoy.github.io/2014/01/ssh-key-based-auth-server.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
@@ -237,7 +316,7 @@ If you want to revoke an authorized key for some user, you can find the user&#39
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/01/archive-commands-in-linux.html"/>
         <published>2014-01-07T19:13:00+08:00</published>
-        <updated>2014-01-07T19:19:42+08:00</updated>
+        <updated>2014-03-23T07:55:34+08:00</updated>
         <id>http://terryoy.github.io/2014/01/archive-commands-in-linux.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
@@ -287,7 +366,7 @@ If you want to revoke an authorized key for some user, you can find the user&#39
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/12/python_yield.html"/>
         <published>2013-12-23T23:43:00+08:00</published>
-        <updated>2014-01-07T15:19:11+08:00</updated>
+        <updated>2013-12-24T00:24:46+08:00</updated>
         <id>http://terryoy.github.io/2013/12/python_yield.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -360,7 +439,7 @@ init value:0
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/12/python_main_args.html"/>
         <published>2013-12-21T15:35:00+08:00</published>
-        <updated>2013-12-21T16:03:50+08:00</updated>
+        <updated>2013-12-23T23:42:35+08:00</updated>
         <id>http://terryoy.github.io/2013/12/python_main_args.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -457,7 +536,7 @@ an non-existing item value: [ non-exist =</code></pre>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/09/vimrc.html"/>
         <published>2013-09-23T23:16:00+08:00</published>
-        <updated>2013-12-03T12:53:55+08:00</updated>
+        <updated>2013-10-12T20:14:12+08:00</updated>
         <id>http://terryoy.github.io/2013/09/vimrc.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#vim" term="vim" label="vim" />
@@ -487,7 +566,7 @@ set expandtab</code></pre>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/09/useful_alias.html"/>
         <published>2013-09-23T00:00:00+08:00</published>
-        <updated>2014-10-22T21:23:48+08:00</updated>
+        <updated>2014-10-31T18:59:22+08:00</updated>
         <id>http://terryoy.github.io/2013/09/useful_alias.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
@@ -523,6 +602,16 @@ set expandtab</code></pre>
 <span class="c"># &#39;vdfuse -r&#39; is for read only,</span>
 <span class="nv">$ </span>vdfuse -raf <span class="nv">$1</span> disk
 <span class="nv">$ </span>mount disk/Partition1 space
+</pre></div>
+
+<h3 id="toc_2">Set keyboard repeat rate and delay</h3>
+<div class="highlight"><pre><span class="c">#Set keyboard repeat rate and delay</span>
+<span class="c"># where 220 is the delay(ms) and 40 is repeat rate(cps)</span>
+
+<span class="c"># under X</span>
+<span class="nv">$ </span>xset r rate 220 40
+<span class="c"># under command line(or put it in /etc/rc.local, ~/.bashrc, ~/.bash_profile, etc.)</span>
+<span class="nv">$ </span>sudo kbdrate -r 40 -d 220
 </pre></div>
 ]]>
         </content>

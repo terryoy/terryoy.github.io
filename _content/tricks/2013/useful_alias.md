@@ -47,3 +47,18 @@ $ vdfuse -raf $1 disk
 $ mount disk/Partition1 space
 
 ```
+
+### Set keyboard repeat rate and delay
+
+```bash
+#Set keyboard repeat rate and delay
+# where 220 is the delay(ms) and 40 is repeat rate(cps)
+
+# under X
+$ xset r rate 220 40
+# under command line(or put it in /etc/rc.local, ~/.bashrc, ~/.bash_profile, etc.)
+$ sudo kbdrate -r 40 -d 220
+
+```
+
+

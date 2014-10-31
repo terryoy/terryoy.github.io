@@ -70,6 +70,16 @@
 <span class="nv">$ </span>mount disk/Partition1 space
 </pre></div>
 
+<h3 id="toc_2">Set keyboard repeat rate and delay</h3>
+<div class="highlight"><pre><span class="c">#Set keyboard repeat rate and delay</span>
+<span class="c"># where 220 is the delay(ms) and 40 is repeat rate(cps)</span>
+
+<span class="c"># under X</span>
+<span class="nv">$ </span>xset r rate 220 40
+<span class="c"># under command line(or put it in /etc/rc.local, ~/.bashrc, ~/.bash_profile, etc.)</span>
+<span class="nv">$ </span>sudo kbdrate -r 40 -d 220
+</pre></div>
+
     
     
 	<p/>
