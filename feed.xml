@@ -3,7 +3,7 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2014-10-30T13:45:11+08:00</updated>
+    <updated>2014-11-18T15:52:39+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
         <title type="html"><![CDATA[Finding Information for C/C++ Library on Linux]]></title>
@@ -88,7 +88,7 @@ Program Library HOWTO <br/>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/10/common-git-commands.html"/>
         <published>2014-10-22T20:57:00+08:00</published>
-        <updated>2014-10-22T21:31:13+08:00</updated>
+        <updated>2014-11-18T15:52:39+08:00</updated>
         <id>http://terryoy.github.io/2014/10/common-git-commands.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
@@ -139,7 +139,8 @@ Program Library HOWTO <br/>
 <span class="nv">$ </span>git rm --cached &lt;file&gt;
 
 <span class="c"># Remove sensitive data</span>
-<span class="c"># -- This one is more difficult.</span>
+<span class="c"># -- This one is more difficult. </span>
+<span class="c"># check this link: https://help.github.com/articles/remove-sensitive-data/</span>
 </pre></div>
 ]]>
         </content>

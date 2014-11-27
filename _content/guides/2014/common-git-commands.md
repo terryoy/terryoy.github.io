@@ -57,5 +57,6 @@ $ git rm --cached <file>
 
 # Remove sensitive data
 # -- This one is more difficult. 
+# check this link: https://help.github.com/articles/remove-sensitive-data/
 
 ```
