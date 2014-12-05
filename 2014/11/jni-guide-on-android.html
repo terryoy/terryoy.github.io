@@ -168,6 +168,10 @@ Common -&gt; Display in favourites menu -&gt; External Tools</code></pre>
 <span class="n">jmethodID</span> <span class="n">isntanceMethodId</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetMethodID</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">clazz</span><span class="p">,</span> <span class="s">&quot;instanceMethod&quot;</span><span class="p">,</span> <span class="s">&quot;()Ljava/lang/String;&quot;</span><span class="p">);</span>
 <span class="n">jstring</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">CallStringMethod</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">instanceMethodId</span><span class="p">);</span>
 </pre></div>
+<p>Often you will need to checkout the method signature of the Java class, so that you can lookup the method in JNI interface. Here is a small trick to print the method signature in JNI style.</p>
+<div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd </span>bin/classes
+<span class="nv">$ </span>javap -s com.jnidemo.MyJNIClass
+</pre></div>
 
 <h3 id="toc_6">5. References</h3>
 <p>Best Practices for using Java Native Interface: <a href="http://www.ibm.com/developerworks/library/j-jni/">http://www.ibm.com/developerworks/library/j-jni/</a> <br/>

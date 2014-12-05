@@ -3,19 +3,20 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2014-12-05T11:31:46+08:00</updated>
+    <updated>2014-12-05T14:45:48+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
         <title type="html"><![CDATA[Frontend Workflow With Chrome DevTools]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/11/frontend-workflow-with-chrome-devtools.html"/>
         <published>2014-11-27T19:15:00+08:00</published>
-        <updated>2014-12-05T11:31:46+08:00</updated>
+        <updated>2014-12-05T13:09:19+08:00</updated>
         <id>http://terryoy.github.io/2014/11/frontend-workflow-with-chrome-devtools.html</id>
         <category scheme="http://terryoy.github.io/tag/#web" term="web" label="web" />
         <category scheme="http://terryoy.github.io/tag/#frontend" term="frontend" label="frontend" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
             <![CDATA[ <p>It&#39;s amazing that Chrome DevTools is specially optimized for frontend development workflow now. Some of the latest features might not be able on current&#39;s Chrome distribution, but it&#39;s available as a <a href="https://developer.chrome.com/devtools/index">Google Chrome Canary</a> release. </p>
+<p>(writing in progress&hellip;)</p>
 ]]>
         </content>
     </entry><entry>
@@ -23,7 +24,7 @@
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/11/jni-guide-on-android.html"/>
         <published>2014-11-27T16:06:00+08:00</published>
-        <updated>2014-11-28T12:20:25+08:00</updated>
+        <updated>2014-12-05T14:45:48+08:00</updated>
         <id>http://terryoy.github.io/2014/11/jni-guide-on-android.html</id>
         <category scheme="http://terryoy.github.io/tag/#cpp" term="cpp" label="cpp" />
         <category scheme="http://terryoy.github.io/tag/#android" term="android" label="android" />
@@ -158,6 +159,10 @@ Common -&gt; Display in favourites menu -&gt; External Tools</code></pre>
 <span class="c1">// calling a method</span>
 <span class="n">jmethodID</span> <span class="n">isntanceMethodId</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetMethodID</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">clazz</span><span class="p">,</span> <span class="s">&quot;instanceMethod&quot;</span><span class="p">,</span> <span class="s">&quot;()Ljava/lang/String;&quot;</span><span class="p">);</span>
 <span class="n">jstring</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">CallStringMethod</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">instanceMethodId</span><span class="p">);</span>
+</pre></div>
+<p>Often you will need to checkout the method signature of the Java class, so that you can lookup the method in JNI interface. Here is a small trick to print the method signature in JNI style.</p>
+<div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd </span>bin/classes
+<span class="nv">$ </span>javap -s com.jnidemo.MyJNIClass
 </pre></div>
 
 <h3 id="toc_6">5. References</h3>

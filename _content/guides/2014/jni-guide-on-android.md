@@ -170,8 +170,17 @@ if (0 != javaArray) { // this only creates a java array
 jmethodID isntanceMethodId = (*env)->GetMethodID(env, clazz, "instanceMethod", "()Ljava/lang/String;");
 jstring (*env)->CallStringMethod(env, instance, instanceMethodId);
 
+```
+
+Often you will need to checkout the method signature of the Java class, so that you can lookup the method in JNI interface. Here is a small trick to print the method signature in JNI style.
+
+```bash
+
+$ cd bin/classes
+$ javap -s com.jnidemo.MyJNIClass
 
 ```
+
 
 ### 5. References
 
