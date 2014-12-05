@@ -87,6 +87,23 @@
 <span class="c"># check this link: https://help.github.com/articles/remove-sensitive-data/</span>
 </pre></div>
 
+<h3 id="toc_2">3. Using Proxy to work with server</h3>
+<p>You can use openssh to create an ssh tunnel with a remote server, and then communicate with git server with this tunnel proxy.</p>
+<div class="highlight"><pre><span class="c"># Socks</span>
+ssh -D &lt;local_proxy_port&gt; &lt;remote_user&gt;@&lt;remote_server&gt; -p &lt;remote_ssh_port&gt;
+<span class="c"># HTTPS for one site:</span>
+ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt; &lt;ssh_user&gt;@&lt;ssh_server&gt; -p &lt;ssh_port&gt;
+</pre></div>
+<p>Using git with proxies:</p>
+<div class="highlight"><pre><span class="c"># proxy for https</span>
+<span class="nb">export </span><span class="nv">https_proxy</span><span class="o">=</span>&lt;http_proxy_host&gt;:&lt;http_proxy_port&gt;
+<span class="c"># socks4 proxy for http</span>
+<span class="nb">export </span><span class="nv">http_proxy</span><span class="o">=</span>socks://&lt;socks4_proxy_host&gt;:&lt;socks4_proxy_port&gt;
+<span class="c"># socks5 proxy for https</span>
+<span class="nb">export </span><span class="nv">https_proxy</span><span class="o">=</span>socks5://&lt;socks5_proxy_host&gt;:&lt;socks5_proxy_port&gt;
+</pre></div>
+<p>* If in some blocked environment that can only access HTTP/HTTPS, you can consider changing your ssh service port to 80/443.</p>
+
     
     
 	<p/>

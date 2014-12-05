@@ -3,7 +3,7 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/tricks/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/tricks/" />
-    <updated>2014-10-22T21:23:48+08:00</updated>
+    <updated>2014-11-27T15:07:12+08:00</updated>
     <id>http://terryoy.github.io/tricks/</id>
     <entry>
         <title type="html"><![CDATA[PostgesSQL 9 Administration QuickRef(1) - Exploring Database]]></title>
@@ -487,7 +487,7 @@ set expandtab</code></pre>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/09/useful_alias.html"/>
         <published>2013-09-23T00:00:00+08:00</published>
-        <updated>2014-10-22T21:23:48+08:00</updated>
+        <updated>2014-11-27T15:07:12+08:00</updated>
         <id>http://terryoy.github.io/2013/09/useful_alias.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
@@ -523,6 +523,16 @@ set expandtab</code></pre>
 <span class="c"># &#39;vdfuse -r&#39; is for read only,</span>
 <span class="nv">$ </span>vdfuse -raf <span class="nv">$1</span> disk
 <span class="nv">$ </span>mount disk/Partition1 space
+</pre></div>
+
+<h3 id="toc_2">Set keyboard repeat rate and delay</h3>
+<div class="highlight"><pre><span class="c">#Set keyboard repeat rate and delay</span>
+<span class="c"># where 220 is the delay(ms) and 40 is repeat rate(cps)</span>
+
+<span class="c"># under X</span>
+<span class="nv">$ </span>xset r rate 220 40
+<span class="c"># under command line(or put it in /etc/rc.local, ~/.bashrc, ~/.bash_profile, etc.)</span>
+<span class="nv">$ </span>sudo kbdrate -r 40 -d 220
 </pre></div>
 ]]>
         </content>

@@ -60,3 +60,35 @@ $ git rm --cached <file>
 # check this link: https://help.github.com/articles/remove-sensitive-data/
 
 ```
+
+### 3. Using Proxy to work with server
+
+You can use openssh to create an ssh tunnel with a remote server, and then communicate with git server with this tunnel proxy.
+
+```bash
+
+# Socks
+ssh -D <local_proxy_port> <remote_user>@<remote_server> -p <remote_ssh_port>
+# HTTPS for one site:
+ssh -L <local_proxy_port>:<destination_host>:<destination_port> <ssh_user>@<ssh_server> -p <ssh_port>
+
+```
+
+Using git with proxies:
+
+```bash
+
+# proxy for https
+export https_proxy=<http_proxy_host>:<http_proxy_port>
+# socks4 proxy for http
+export http_proxy=socks://<socks4_proxy_host>:<socks4_proxy_port>
+# socks5 proxy for https
+export https_proxy=socks5://<socks5_proxy_host>:<socks5_proxy_port>
+
+```
+
+\* If in some blocked environment that can only access HTTP/HTTPS, you can consider changing your ssh service port to 80/443.
+
+
+
+
