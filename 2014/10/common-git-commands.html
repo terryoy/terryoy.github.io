@@ -104,6 +104,27 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
 </pre></div>
 <p>* If in some blocked environment that can only access HTTP/HTTPS, you can consider changing your ssh service port to 80/443.</p>
 
+<h3 id="toc_3">4. Create a private Git repo on your SSH server</h3>
+<p>(reference: <a href="http://git-scm.com/book/en/v2/Git-on-the-Server-Setting-Up-the-Server">git-scm.com/book/en/v2/Git-on-the-Server-Setting-Up-the-Server</a>)</p>
+<div class="highlight"><pre><span class="c"># create a git user for remote access(optional)</span>
+<span class="nv">$ </span>sudo adduser git
+<span class="nv">$ </span><span class="nb">cd</span> /home/git/ <span class="o">&amp;&amp;</span> mkdir .ssh <span class="o">&amp;&amp;</span> chmod 700 .ssh
+<span class="nv">$ </span>touch .ssh/authorized_keys <span class="o">&amp;&amp;</span> chmod 600 .ssh/authorized_keys
+<span class="nv">$ </span>cat /tmp/id_rsa.someone.pub &gt;&gt; .ssh/authorized_keys
+
+<span class="c"># create a server repo with </span>
+<span class="nv">$ </span>mkdir -p /opt/git/somerepo.git
+<span class="nv">$ </span><span class="nb">cd</span> /opt/git/somerepo.git
+<span class="nv">$ </span>git init --bare
+
+<span class="c"># create a local git repo(on your PC) and push to server repo</span>
+<span class="nv">$ </span><span class="nb">cd </span>myproject
+<span class="nv">$ </span>git init
+<span class="nv">$ </span>git add . <span class="o">&amp;&amp;</span> git commit -m <span class="s2">&quot;initial commit&quot;</span>
+<span class="nv">$ </span>git remote add origin git@gitserver:/opt/git/somerepo.git
+<span class="nv">$ </span>git push origin master
+</pre></div>
+
     
     
 	<p/>

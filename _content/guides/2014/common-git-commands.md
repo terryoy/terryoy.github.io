@@ -89,6 +89,30 @@ export https_proxy=socks5://<socks5_proxy_host>:<socks5_proxy_port>
 
 \* If in some blocked environment that can only access HTTP/HTTPS, you can consider changing your ssh service port to 80/443.
 
+### 4. Create a private Git repo on your SSH server
 
+(reference: http://git-scm.com/book/en/v2/Git-on-the-Server-Setting-Up-the-Server)
+
+```bash
+
+# create a git user for remote access(optional)
+$ sudo adduser git
+$ cd /home/git/ && mkdir .ssh && chmod 700 .ssh
+$ touch .ssh/authorized_keys && chmod 600 .ssh/authorized_keys
+$ cat /tmp/id_rsa.someone.pub >> .ssh/authorized_keys
+
+# create a server repo with 
+$ mkdir -p /opt/git/somerepo.git
+$ cd /opt/git/somerepo.git
+$ git init --bare
+
+# create a local git repo(on your PC) and push to server repo
+$ cd myproject
+$ git init
+$ git add . && git commit -m "initial commit"
+$ git remote add origin git@gitserver:/opt/git/somerepo.git
+$ git push origin master
+
+```
 
 

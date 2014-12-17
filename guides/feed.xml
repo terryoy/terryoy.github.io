@@ -3,7 +3,7 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/guides/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/guides/" />
-    <updated>2014-12-05T14:45:48+08:00</updated>
+    <updated>2014-12-17T09:10:19+08:00</updated>
     <id>http://terryoy.github.io/guides/</id>
     <entry>
         <title type="html"><![CDATA[Frontend Workflow With Chrome DevTools]]></title>
@@ -24,7 +24,7 @@
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/11/jni-guide-on-android.html"/>
         <published>2014-11-27T16:06:00+08:00</published>
-        <updated>2014-12-05T14:45:48+08:00</updated>
+        <updated>2014-12-05T15:41:58+08:00</updated>
         <id>http://terryoy.github.io/2014/11/jni-guide-on-android.html</id>
         <category scheme="http://terryoy.github.io/tag/#cpp" term="cpp" label="cpp" />
         <category scheme="http://terryoy.github.io/tag/#android" term="android" label="android" />
@@ -158,7 +158,7 @@ Common -&gt; Display in favourites menu -&gt; External Tools</code></pre>
 
 <span class="c1">// calling a method</span>
 <span class="n">jmethodID</span> <span class="n">isntanceMethodId</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetMethodID</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">clazz</span><span class="p">,</span> <span class="s">&quot;instanceMethod&quot;</span><span class="p">,</span> <span class="s">&quot;()Ljava/lang/String;&quot;</span><span class="p">);</span>
-<span class="n">jstring</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">CallStringMethod</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">instanceMethodId</span><span class="p">);</span>
+<span class="n">jstring</span> <span class="n">stringValue</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">CallStringMethod</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">instanceMethodId</span><span class="p">);</span>
 </pre></div>
 <p>Often you will need to checkout the method signature of the Java class, so that you can lookup the method in JNI interface. Here is a small trick to print the method signature in JNI style.</p>
 <div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd </span>bin/classes
@@ -253,7 +253,7 @@ Program Library HOWTO <br/>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/10/common-git-commands.html"/>
         <published>2014-10-22T20:57:00+08:00</published>
-        <updated>2014-12-05T11:19:27+08:00</updated>
+        <updated>2014-12-17T09:10:19+08:00</updated>
         <id>http://terryoy.github.io/2014/10/common-git-commands.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
@@ -324,6 +324,27 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
 <span class="nb">export </span><span class="nv">https_proxy</span><span class="o">=</span>socks5://&lt;socks5_proxy_host&gt;:&lt;socks5_proxy_port&gt;
 </pre></div>
 <p>* If in some blocked environment that can only access HTTP/HTTPS, you can consider changing your ssh service port to 80/443.</p>
+
+<h3 id="toc_3">4. Create a private Git repo on your SSH server</h3>
+<p>(reference: <a href="http://git-scm.com/book/en/v2/Git-on-the-Server-Setting-Up-the-Server">git-scm.com/book/en/v2/Git-on-the-Server-Setting-Up-the-Server</a>)</p>
+<div class="highlight"><pre><span class="c"># create a git user for remote access(optional)</span>
+<span class="nv">$ </span>sudo adduser git
+<span class="nv">$ </span><span class="nb">cd</span> /home/git/ <span class="o">&amp;&amp;</span> mkdir .ssh <span class="o">&amp;&amp;</span> chmod 700 .ssh
+<span class="nv">$ </span>touch .ssh/authorized_keys <span class="o">&amp;&amp;</span> chmod 600 .ssh/authorized_keys
+<span class="nv">$ </span>cat /tmp/id_rsa.someone.pub &gt;&gt; .ssh/authorized_keys
+
+<span class="c"># create a server repo with </span>
+<span class="nv">$ </span>mkdir -p /opt/git/somerepo.git
+<span class="nv">$ </span><span class="nb">cd</span> /opt/git/somerepo.git
+<span class="nv">$ </span>git init --bare
+
+<span class="c"># create a local git repo(on your PC) and push to server repo</span>
+<span class="nv">$ </span><span class="nb">cd </span>myproject
+<span class="nv">$ </span>git init
+<span class="nv">$ </span>git add . <span class="o">&amp;&amp;</span> git commit -m <span class="s2">&quot;initial commit&quot;</span>
+<span class="nv">$ </span>git remote add origin git@gitserver:/opt/git/somerepo.git
+<span class="nv">$ </span>git push origin master
+</pre></div>
 ]]>
         </content>
     </entry><entry>

@@ -168,7 +168,7 @@ if (0 != javaArray) { // this only creates a java array
 
 // calling a method
 jmethodID isntanceMethodId = (*env)->GetMethodID(env, clazz, "instanceMethod", "()Ljava/lang/String;");
-jstring (*env)->CallStringMethod(env, instance, instanceMethodId);
+jstring stringValue = (*env)->CallStringMethod(env, instance, instanceMethodId);
 
 ```
 
