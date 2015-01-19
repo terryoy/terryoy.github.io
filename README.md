@@ -5,12 +5,16 @@ In convention, all the posts are written down and organized under the below path
     _content/   - for root level html pages
     _content/<year>/    - for posts
 
-To generate site content and preview locally, use the follow commands:
+To generate site content, use the follow command:
 
-```shell
-cd _liquidluck
-liquidluck build -v
-liquidluck server
+```bash
+$ ./_gen_site.sh
+```
+
+To preview the web site, use the following command:
+
+```bash
+$ ./_preview.sh
 ```
 
 Template for a Markdown post:

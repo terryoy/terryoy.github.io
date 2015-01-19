@@ -6,20 +6,6 @@
     <updated>2014-12-17T09:10:19+08:00</updated>
     <id>http://terryoy.github.io/guides/</id>
     <entry>
-        <title type="html"><![CDATA[Frontend Workflow With Chrome DevTools]]></title>
-        <author><name>terryoy</name></author>
-        <link href="http://terryoy.github.io/2014/11/frontend-workflow-with-chrome-devtools.html"/>
-        <published>2014-11-27T19:15:00+08:00</published>
-        <updated>2014-12-05T13:09:19+08:00</updated>
-        <id>http://terryoy.github.io/2014/11/frontend-workflow-with-chrome-devtools.html</id>
-        <category scheme="http://terryoy.github.io/tag/#web" term="web" label="web" />
-        <category scheme="http://terryoy.github.io/tag/#frontend" term="frontend" label="frontend" />
-        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
-            <![CDATA[ <p>It&#39;s amazing that Chrome DevTools is specially optimized for frontend development workflow now. Some of the latest features might not be able on current&#39;s Chrome distribution, but it&#39;s available as a <a href="https://developer.chrome.com/devtools/index">Google Chrome Canary</a> release. </p>
-<p>(writing in progress&hellip;)</p>
-]]>
-        </content>
-    </entry><entry>
         <title type="html"><![CDATA[A JNI Guide on Android]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/11/jni-guide-on-android.html"/>
