@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Hello, World!" />
+    <meta name="application-name" content="Hello, World!" />
+    <title>PostgesSQL 9 Administration QuickRef(2) - Managing Database - Hello, World!</title>
+    <meta name="keywords" content="postgresql,database" />
+    <meta name="description" content="" />
+    
+    <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="Hello, World!" />
+    <link rel="stylesheet" href="/static/css/styles.css?v=fc867" />
+    <link rel="stylesheet" href="/static/css/pygment_trac.css?v=a6c15" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div id="wrapper">   
+<header id="header" class="clear">
+    <h1>Hello, World!</h1>
+    <p>I'm <i>terryoy</i></p>
+    <p class="view"><a href="https://github.com/terryoy">View My GitHub Profile</a></p>
+</header><!-- #header -->
+<nav id="nav" role="navigation">
+    <a href="/">Home</a>
+    <a href="/guides/">Guides</a>
+    <a href="/tricks/">Tricks</a>
+    <a href="/about.html">About Me</a>
+</nav>
+
+<section><article id="main" class="hentry">
+	<h1>PostgesSQL 9 Administration QuickRef(2) - Managing Database</h1>
+    <p class="sub_text">2015-02-21 by <i>terryoy</i>, in <a href="/tricks/">tricks</a>
+    </p>
+    
+	<h3 id="toc_0">1. Creating a Database</h3>
+<p>It&#39;s a common task to create a database and assign an access user for it. This can be done by command line or by psql queries.</p>
+<div class="highlight"><pre><span class="c"># by command line</span>
+<span class="nv">$ </span>su postgres
+<span class="nv">$ </span>createuser -D -A -P myuser
+<span class="nv">$ </span>createdb -O myuser mydb
+
+<span class="c"># (or) a longer version for the createdb command</span>
+<span class="nv">$ </span>createdb -h localhost -p 5432 -U postgres -O myuser -E UTF8 mydb
+</pre></div>
+<div class="highlight"><pre><span class="c1">--create database by psql client </span>
+<span class="gp">postgres=#</span> <span class="k">CREATE</span> <span class="k">USER</span> <span class="n">myuser</span> <span class="k">WITH</span> <span class="k">PASSWORD</span> <span class="s1">&#39;my_password&#39;</span><span class="p">;</span>
+<span class="gp">postgres=#</span> <span class="k">CREATE</span> <span class="k">DATABASE</span> <span class="n">mydb</span> <span class="k">WITH</span> <span class="k">OWNER</span> <span class="n">myuser</span> <span class="k">ENCODING</span> <span class="s1">&#39;UTF8&#39;</span><span class="p">;</span>
+<span class="gp">postgres=#</span> <span class="k">GRANT</span> <span class="k">ALL</span> <span class="k">PRIVILEGES</span> <span class="k">ON</span> <span class="k">DATABASE</span> <span class="s-Name">&quot;mydb&quot;</span> <span class="k">to</span> <span class="n">myuser</span><span class="p">;</span>
+</pre></div>
+
+<h3 id="toc_1">2. Configuring Connection Method</h3>
+<p>Peer authentication uses system&#39;s user accounts for authentication, while MD5 authentication uses password authentication encrypted in md5.</p>
+<p>Restart Postgresql service after configuration file is changed.</p>
+<div class="highlight"><pre><span class="c"># Edit the file for the database access method</span>
+<span class="nv">$ </span>sudo vi /etc/postgresql/9.1/main/pg_hba.conf
+
+<span class="c"># Database administrative login by Unix domain socket</span>
+<span class="nb">local   </span>all             postgres                                peer
+
+<span class="c"># TYPE  DATABASE        USER            ADDRESS                 METHOD</span>
+
+<span class="c"># &quot;local&quot; is for Unix domain socket connections only</span>
+<span class="nb">local   </span>all             all                                     peer
+<span class="c"># IPv4 local connections:</span>
+host    all             all             127.0.0.1/32            md5
+<span class="c"># IPv6 local connections:</span>
+host    all             all             ::1/128                 md5
+<span class="c"># Allow replication connections from localhost, by a user with the</span>
+<span class="c"># replication privilege.</span>
+<span class="c">#local   replication     postgres                                peer</span>
+<span class="c">#host    replication     postgres        127.0.0.1/32            md5</span>
+<span class="c">#host    replication     postgres        ::1/128                 md5</span>
+
+
+<span class="nv">$ </span>sudo service postgresql restart
+</pre></div>
+
+    
+    
+	<p/>
+	<hr/>
+    
+    <div class="sub_text">
+        <span>Tags:
+            <a href="/tag/postgresql/">postgresql</a>,&nbsp;<a href="/tag/database/">database</a>
+		</span>
+    
+        
+    </div>
+    
+
+	<p/>
+	
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'terryoy';
+        var disqus_title = 'PostgesSQL 9 Administration QuickRef(2) - Managing Database';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+</article></section>
+
+<footer id="footer">
+    <p><small>Hosted on GitHub Pages &mdash;<br/> Theme adopted from <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+</footer><!-- #footer -->
+</div><!-- #wrapper -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-50656512-1', 'terryoy.github.io');
+ga('send', 'pageview');
+</script> <!-- google analytics -->
+
+</body>
+</html>

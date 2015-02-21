@@ -3,9 +3,63 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/tricks/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/tricks/" />
-    <updated>2014-11-27T15:07:12+08:00</updated>
+    <updated>2015-02-21T17:24:38+08:00</updated>
     <id>http://terryoy.github.io/tricks/</id>
     <entry>
+        <title type="html"><![CDATA[PostgesSQL 9 Administration QuickRef(2) - Managing Database]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2015/02/postgresql-admin-quickref-part2-initiating-database.html"/>
+        <published>2015-02-21T16:40:00+08:00</published>
+        <updated>2015-02-21T17:24:38+08:00</updated>
+        <id>http://terryoy.github.io/2015/02/postgresql-admin-quickref-part2-initiating-database.html</id>
+        <category scheme="http://terryoy.github.io/tag/#postgresql" term="postgresql" label="postgresql" />
+        <category scheme="http://terryoy.github.io/tag/#database" term="database" label="database" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <h3 id="toc_0">1. Creating a Database</h3>
+<p>It&#39;s a common task to create a database and assign an access user for it. This can be done by command line or by psql queries.</p>
+<div class="highlight"><pre><span class="c"># by command line</span>
+<span class="nv">$ </span>su postgres
+<span class="nv">$ </span>createuser -D -A -P myuser
+<span class="nv">$ </span>createdb -O myuser mydb
+
+<span class="c"># (or) a longer version for the createdb command</span>
+<span class="nv">$ </span>createdb -h localhost -p 5432 -U postgres -O myuser -E UTF8 mydb
+</pre></div>
+<div class="highlight"><pre><span class="c1">--create database by psql client </span>
+<span class="gp">postgres=#</span> <span class="k">CREATE</span> <span class="k">USER</span> <span class="n">myuser</span> <span class="k">WITH</span> <span class="k">PASSWORD</span> <span class="s1">&#39;my_password&#39;</span><span class="p">;</span>
+<span class="gp">postgres=#</span> <span class="k">CREATE</span> <span class="k">DATABASE</span> <span class="n">mydb</span> <span class="k">WITH</span> <span class="k">OWNER</span> <span class="n">myuser</span> <span class="k">ENCODING</span> <span class="s1">&#39;UTF8&#39;</span><span class="p">;</span>
+<span class="gp">postgres=#</span> <span class="k">GRANT</span> <span class="k">ALL</span> <span class="k">PRIVILEGES</span> <span class="k">ON</span> <span class="k">DATABASE</span> <span class="s-Name">&quot;mydb&quot;</span> <span class="k">to</span> <span class="n">myuser</span><span class="p">;</span>
+</pre></div>
+
+<h3 id="toc_1">2. Configuring Connection Method</h3>
+<p>Peer authentication uses system&#39;s user accounts for authentication, while MD5 authentication uses password authentication encrypted in md5.</p>
+<p>Restart Postgresql service after configuration file is changed.</p>
+<div class="highlight"><pre><span class="c"># Edit the file for the database access method</span>
+<span class="nv">$ </span>sudo vi /etc/postgresql/9.1/main/pg_hba.conf
+
+<span class="c"># Database administrative login by Unix domain socket</span>
+<span class="nb">local   </span>all             postgres                                peer
+
+<span class="c"># TYPE  DATABASE        USER            ADDRESS                 METHOD</span>
+
+<span class="c"># &quot;local&quot; is for Unix domain socket connections only</span>
+<span class="nb">local   </span>all             all                                     peer
+<span class="c"># IPv4 local connections:</span>
+host    all             all             127.0.0.1/32            md5
+<span class="c"># IPv6 local connections:</span>
+host    all             all             ::1/128                 md5
+<span class="c"># Allow replication connections from localhost, by a user with the</span>
+<span class="c"># replication privilege.</span>
+<span class="c">#local   replication     postgres                                peer</span>
+<span class="c">#host    replication     postgres        127.0.0.1/32            md5</span>
+<span class="c">#host    replication     postgres        ::1/128                 md5</span>
+
+
+<span class="nv">$ </span>sudo service postgresql restart
+</pre></div>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[PostgesSQL 9 Administration QuickRef(1) - Exploring Database]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/03/postgresql-admin-quickref-part1-exploring-database.html"/>
