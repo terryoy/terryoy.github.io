@@ -47,7 +47,7 @@
 <span class="c"># other formats (zip, gz, rar, 7z, ...)</span>
 <span class="nv">$ </span>zip -r archive.zip <span class="nb">test</span>-files
 <span class="nv">$ </span>star -cv <span class="nv">f</span><span class="o">=</span>output.star <span class="nb">test</span>-files
-<span class="nv">$ </span>find <span class="nb">test</span>-dir | cpio -ov &gt; output.cpio
+<span class="nv">$ </span>find <span class="nb">test</span>-dir <span class="p">|</span> cpio -ov &gt; output.cpio
 <span class="nv">$ </span>7z a archive.7z <span class="nb">test</span>-files    <span class="c"># the package name for 7z is &quot;p7zip&quot;</span>
 
 <span class="c">####  list files in the archive ####</span>
