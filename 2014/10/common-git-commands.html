@@ -108,8 +108,8 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
 <p>(reference: <a href="http://git-scm.com/book/en/v2/Git-on-the-Server-Setting-Up-the-Server">git-scm.com/book/en/v2/Git-on-the-Server-Setting-Up-the-Server</a>)</p>
 <div class="highlight"><pre><span class="c"># create a git user for remote access(optional)</span>
 <span class="nv">$ </span>sudo adduser git
-<span class="nv">$ </span><span class="nb">cd</span> /home/git/ <span class="o">&amp;&amp;</span> mkdir .ssh <span class="o">&amp;&amp;</span> chmod <span class="m">700</span> .ssh
-<span class="nv">$ </span>touch .ssh/authorized_keys <span class="o">&amp;&amp;</span> chmod <span class="m">600</span> .ssh/authorized_keys
+<span class="nv">$ </span><span class="nb">cd</span> /home/git/ <span class="o">&amp;&amp;</span> mkdir .ssh <span class="o">&amp;&amp;</span> chmod 700 .ssh
+<span class="nv">$ </span>touch .ssh/authorized_keys <span class="o">&amp;&amp;</span> chmod 600 .ssh/authorized_keys
 <span class="nv">$ </span>cat /tmp/id_rsa.someone.pub &gt;&gt; .ssh/authorized_keys
 
 <span class="c"># create a server repo with </span>

@@ -56,8 +56,8 @@ Copying files from <span class="s1">&#39;/etc/skel&#39;</span> ...
 Enter new UNIX password: 
 Retype new UNIX password: 
 passwd: password updated successfully
-Changing the user information <span class="k">for</span> edmund
-Enter the new value, or press ENTER <span class="k">for</span> the default
+Changing the user information <span class="k">for </span>edmund
+Enter the new value, or press ENTER <span class="k">for </span>the default
     Full Name <span class="o">[]</span>: 
     Room Number <span class="o">[]</span>: 
     Work Phone <span class="o">[]</span>: 
@@ -70,11 +70,11 @@ Is the information correct? <span class="o">[</span>Y/n<span class="o">]</span>
 <p>With SSH key login, user require a public/private key pairs to authenticate the login. SSH can use both &ldquo;RSA&rdquo; and &ldquo;DSA&rdquo; keys, however according to the <a href="https://help.ubuntu.com/community/SSH/OpenSSH/Keys#Key-Based_SSH_Logins">ubuntu guide</a>, &ldquo;RSA&rdquo; is the only recommended choice for new keys. </p>
 <p>First thing you should keep in mind, the private key should <strong>NOT</strong> allow to be accessed by anybody else(e.g. set &ldquo;700&rdquo; with chmod). We will create the RSA keys in your <strong>local</strong> machine, then copy the public key to the <strong>remote</strong> server.</p>
 <div class="highlight"><pre><span class="nv">$ </span>mkdir ~/.ssh
-<span class="nv">$ </span>chmod <span class="m">700</span> ~/.ssh      <span class="c"># set access right only to user self</span>
+<span class="nv">$ </span>chmod 700 ~/.ssh      <span class="c"># set access right only to user self</span>
 <span class="nv">$ </span>ssh-keygen -t rsa     <span class="c"># **or you could use &quot;ssh-keygen -t rsa -b 4096&quot; for more secure login, default is 2048**.</span>
 Generating public/private rsa key pair.
 Enter file in which to save the key <span class="o">(</span>/home/edmund/.ssh/id_rsa<span class="o">)</span>: 
-Enter passphrase <span class="o">(</span>empty <span class="k">for</span> no passphrase<span class="o">)</span>: 
+Enter passphrase <span class="o">(</span>empty <span class="k">for </span>no passphrase<span class="o">)</span>: 
 Enter same passphrase again: 
 Your identification has been saved in /home/edmund/.ssh/id_rsa.
 Your public key has been saved in /home/edmund/.ssh/id_rsa.pub.

@@ -3,14 +3,99 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/guides/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/guides/" />
-    <updated>2015-02-22T20:03:02+08:00</updated>
+    <updated>2015-06-03T17:16:18+08:00</updated>
     <id>http://terryoy.github.io/guides/</id>
     <entry>
+        <title type="html"><![CDATA[A Template for Program Readme on Github]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2015/06/program-readme-template.html"/>
+        <published>2015-06-03T16:15:00+08:00</published>
+        <updated>2015-06-03T17:16:18+08:00</updated>
+        <id>http://terryoy.github.io/2015/06/program-readme-template.html</id>
+        <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <p>When writing a Program, the developer should be clear about the purpose, to eliminate time wasted. Refering to the <a href="http://textfiles.com/programming/writprog.pro">How to Program</a>, I propose a documatation template companied with a Software Development Life Cycle to ensure this.</p>
+
+<pre><code>1. SPECIFICATION
+2. PROGRAM DESIGN
+3. CODE DESIGN
+4. CONSTRUCTION AND DESIGN</code></pre>
+<p>So, starting a project on github, I think we should follow a basic documentation structure to answer each questions, to ensure that your purpose is clear enough.</p>
+
+<h3 id="toc_0">1. Speficication</h3>
+<p>In this stage, four things matter.</p>
+
+<ul>
+<li><p>User Interface</p>
+<p>in what approach does user interact with the program?
+what input/output?
+command line? menus? how much freedom allowed?</p></li>
+<li><p>Algorithm</p>
+<p>what specific computation behind the program?
+what method do we use?</p></li>
+<li><p>Data Structures</p>
+<p>how should the data of the problem be organized?</p></li>
+<li><p>[Generality]</p>
+<p>is it used only in a small number of situations? or is it general purpose of wide variety of circumstances?
+you need fewer choices if made for a small number of situations, and more choices and more commands for large number of situations</p></li>
+<li><p>[Robustness]
+how gracefully does the program respond to bad data or bad commands?</p></li>
+</ul>
+
+<h3 id="toc_1">2. Program Design</h3>
+<p>A design of the program may be often represented by a structure chart, but it&#39;s not the most important thing. Instead, you should divied the large program into <strong>subroutines</strong>.</p>
+
+<ul>
+<li>Design Structure
+top level routines
+    sub routines</li>
+</ul>
+<p>There&#39;re a few ideas for evaluating the desgin:</p>
+
+<pre><code>1. Keep subroutines short
+2. Keep subroutines single-purpose
+3. Keep calling sequence short
+4. Communicate data through calling sequences
+5. Limit use of flag variables
+6. Make design hierarchical</code></pre>
+
+<h3 id="toc_2">[3. Setup and Testing]</h3>
+
+<h3 id="toc_3">[4. About and License]</h3>
+<p><em>(Since the original post discontinued, I have to complete the rest of the template myself.)</em></p>
+<p>Following is a template in markdown:</p>
+
+<pre><code>### 1. Specification
+
+##### User Interface
+
+##### Algorithms
+
+##### Data Structures
+
+##### [Generality]
+
+##### [Robustness]
+
+### 2. Program Design
+
+##### Design Structure
+
+##### Public Interface
+
+### 3. Setup and Testing
+
+### 4. About
+
+### 5. License</code></pre>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[A JNI Guide on Android]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/11/jni-guide-on-android.html"/>
         <published>2014-11-27T16:06:00+08:00</published>
-        <updated>2015-02-22T20:03:02+08:00</updated>
+        <updated>2014-12-05T15:41:58+08:00</updated>
         <id>http://terryoy.github.io/2014/11/jni-guide-on-android.html</id>
         <category scheme="http://terryoy.github.io/tag/#cpp" term="cpp" label="cpp" />
         <category scheme="http://terryoy.github.io/tag/#android" term="android" label="android" />
@@ -161,7 +246,7 @@ JNI Documentation: <a href="http://docs.oracle.com/javase/1.5.0/docs/guide/jni/s
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/10/finding-information-linux-c-library.html"/>
         <published>2014-10-30T09:38:00+08:00</published>
-        <updated>2015-02-22T20:03:02+08:00</updated>
+        <updated>2014-10-30T13:45:11+08:00</updated>
         <id>http://terryoy.github.io/2014/10/finding-information-linux-c-library.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
@@ -196,7 +281,7 @@ JNI Documentation: <a href="http://docs.oracle.com/javase/1.5.0/docs/guide/jni/s
 <div class="highlight"><pre><span class="nv">$ </span>ldconfig -p
 
 <span class="c"># find a library(SDL) for example</span>
-<span class="nv">$ </span>ldconfig -p <span class="p">|</span> grep -i sdl
+<span class="nv">$ </span>ldconfig -p | grep -i sdl
 </pre></div>
 <p>For the <code>ld</code> program, it searches &ldquo;/usr/lib/&rdquo; for libraries by default, but it also include the paths defined in &ldquo;/etc/ld.so.conf&rdquo; and &ldquo;/etc/ld.so.conf.d/&rdquo;.</p>
 
@@ -239,7 +324,7 @@ Program Library HOWTO <br/>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/10/common-git-commands.html"/>
         <published>2014-10-22T20:57:00+08:00</published>
-        <updated>2015-02-22T20:03:02+08:00</updated>
+        <updated>2014-12-17T09:10:19+08:00</updated>
         <id>http://terryoy.github.io/2014/10/common-git-commands.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
@@ -315,8 +400,8 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
 <p>(reference: <a href="http://git-scm.com/book/en/v2/Git-on-the-Server-Setting-Up-the-Server">git-scm.com/book/en/v2/Git-on-the-Server-Setting-Up-the-Server</a>)</p>
 <div class="highlight"><pre><span class="c"># create a git user for remote access(optional)</span>
 <span class="nv">$ </span>sudo adduser git
-<span class="nv">$ </span><span class="nb">cd</span> /home/git/ <span class="o">&amp;&amp;</span> mkdir .ssh <span class="o">&amp;&amp;</span> chmod <span class="m">700</span> .ssh
-<span class="nv">$ </span>touch .ssh/authorized_keys <span class="o">&amp;&amp;</span> chmod <span class="m">600</span> .ssh/authorized_keys
+<span class="nv">$ </span><span class="nb">cd</span> /home/git/ <span class="o">&amp;&amp;</span> mkdir .ssh <span class="o">&amp;&amp;</span> chmod 700 .ssh
+<span class="nv">$ </span>touch .ssh/authorized_keys <span class="o">&amp;&amp;</span> chmod 600 .ssh/authorized_keys
 <span class="nv">$ </span>cat /tmp/id_rsa.someone.pub &gt;&gt; .ssh/authorized_keys
 
 <span class="c"># create a server repo with </span>
@@ -338,7 +423,7 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/08/learning-linux-c-part-1.html"/>
         <published>2014-08-20T23:34:00+08:00</published>
-        <updated>2015-02-22T20:03:02+08:00</updated>
+        <updated>2014-08-21T09:52:53+08:00</updated>
         <id>http://terryoy.github.io/2014/08/learning-linux-c-part-1.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
@@ -386,7 +471,7 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/06/create-database-mysql.html"/>
         <published>2014-06-04T14:40:00+08:00</published>
-        <updated>2015-02-22T20:03:02+08:00</updated>
+        <updated>2014-09-15T22:30:02+08:00</updated>
         <id>http://terryoy.github.io/2014/06/create-database-mysql.html</id>
         <category scheme="http://terryoy.github.io/tag/#database" term="database" label="database" />
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
@@ -426,7 +511,7 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/03/using-ctypes-to-wrap-c-library.html"/>
         <published>2014-03-23T07:57:00+08:00</published>
-        <updated>2015-02-22T20:03:02+08:00</updated>
+        <updated>2014-03-31T11:39:52+08:00</updated>
         <id>http://terryoy.github.io/2014/03/using-ctypes-to-wrap-c-library.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
@@ -607,7 +692,7 @@ The <em>byref()</em> method create a parameter object of pointer, which you can 
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/12/matplotlib-simple-guide-1.html"/>
         <published>2013-12-31T01:00:00+08:00</published>
-        <updated>2015-02-22T20:03:02+08:00</updated>
+        <updated>2014-01-07T15:19:11+08:00</updated>
         <id>http://terryoy.github.io/2013/12/matplotlib-simple-guide-1.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <category scheme="http://terryoy.github.io/tag/#graph" term="graph" label="graph" />
@@ -752,7 +837,7 @@ The <em>byref()</em> method create a parameter object of pointer, which you can 
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/11/cocos2d-x-setup.html"/>
         <published>2013-11-27T09:00:00+08:00</published>
-        <updated>2015-02-22T20:03:02+08:00</updated>
+        <updated>2014-02-06T18:12:24+08:00</updated>
         <id>http://terryoy.github.io/2013/11/cocos2d-x-setup.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#game" term="game" label="game" />
@@ -856,9 +941,9 @@ $ ./adb shell</code></pre>
 <div class="highlight"><pre><span class="nv">$ </span>./create_project.py
 Usage: create_project.py -project PROJECT_NAME -package PACKAGE_NAME -language PROGRAMING_LANGUAGE
 Options:
-  -project   PROJECT_NAME          Project name, <span class="k">for</span> example: MyGame
-  -package   PACKAGE_NAME          Package name, <span class="k">for</span> example: com.MyCompany.MyAwesomeGame
-  -language  PROGRAMING_LANGUAGE   Major programing lanauge you want to used, should be <span class="o">[</span>cpp <span class="p">|</span> lua <span class="p">|</span> javascript<span class="o">]</span>
+  -project   PROJECT_NAME          Project name, <span class="k">for </span>example: MyGame
+  -package   PACKAGE_NAME          Package name, <span class="k">for </span>example: com.MyCompany.MyAwesomeGame
+  -language  PROGRAMING_LANGUAGE   Major programing lanauge you want to used, should be <span class="o">[</span>cpp | lua | javascript<span class="o">]</span>
 
 Sample 1: ./create_project.py -project MyGame -package com.MyCompany.AwesomeGame
 Sample 2: ./create_project.py -project MyGame -package com.MyCompany.AwesomeGame -language javascript

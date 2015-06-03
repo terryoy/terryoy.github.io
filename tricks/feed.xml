@@ -3,14 +3,14 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/tricks/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/tricks/" />
-    <updated>2015-02-24T18:17:46+08:00</updated>
+    <updated>2015-04-21T11:55:33+08:00</updated>
     <id>http://terryoy.github.io/tricks/</id>
     <entry>
         <title type="html"><![CDATA[Create a Root CA and Self-Sign Certificate for SSL]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/02/create-ssl-ca-root-and-self-sign.html"/>
         <published>2015-02-23T11:03:00+08:00</published>
-        <updated>2015-02-24T18:17:46+08:00</updated>
+        <updated>2015-04-21T11:55:33+08:00</updated>
         <id>http://terryoy.github.io/2015/02/create-ssl-ca-root-and-self-sign.html</id>
         <category scheme="http://terryoy.github.io/tag/#server" term="server" label="server" />
         <category scheme="http://terryoy.github.io/tag/#security" term="security" label="security" />
@@ -32,12 +32,12 @@
 <span class="c"># generate a private root key</span>
 <span class="nv">$ </span>openssl genrsa -out rootCA.key 2048
 <span class="c"># (or) generate a private root key with passphrase protection; and if you forgot the password, you need to do everything again</span>
-<span class="nv">$ </span>openssl genrsa -out rootCA.key <span class="m">2048</span> -des3
+<span class="nv">$ </span>openssl genrsa -out rootCA.key 2048 -des3
 
 
 <span class="c">## Step 2: Self-sign a certificate</span>
 
-<span class="nv">$ </span>openssl req -x509 -new -nodes -key rootCA.key -days <span class="m">3650</span> -out rootCA.pem
+<span class="nv">$ </span>openssl req -x509 -new -nodes -key rootCA.key -days 3650 -out rootCA.pem
 You are about to be asked to enter information that will be incorporated
 into your certificate request.
 What you are about to enter is what is called a Distinguished Name or a DN.
@@ -45,7 +45,7 @@ There are quite a few fields but you can leave some blank
 For some fields there will be a default value,
 If you enter <span class="s1">&#39;.&#39;</span>, the field will be left blank.
 -----
-Country Name <span class="o">(</span><span class="m">2</span> letter code<span class="o">)</span> <span class="o">[</span>AU<span class="o">]</span>:CN
+Country Name <span class="o">(</span>2 letter code<span class="o">)</span> <span class="o">[</span>AU<span class="o">]</span>:CN
 State or Province Name <span class="o">(</span>full name<span class="o">)</span> <span class="o">[</span>Some-State<span class="o">]</span>:Guangdong
 Locality Name <span class="o">(</span>eg, city<span class="o">)</span> <span class="o">[]</span>:Shenzhen
 Organization Name <span class="o">(</span>eg, company<span class="o">)</span> <span class="o">[</span>Internet Widgits Pty Ltd<span class="o">]</span>:TeaTime Production.
@@ -77,10 +77,10 @@ Common Name <span class="o">(</span>e.g. server FQDN or YOUR name<span class="o"
 <h3 id="toc_3">4. Congifuration for Nginx</h3>
 <p>Below is an example of enabling the SSL function for the service configuration.</p>
 <div class="highlight"><pre>server <span class="o">{</span>
-    listen 443<span class="p">;</span>
-    ssl on<span class="p">;</span>
-    ssl_certificate /etc/nginx/ssl/service.crt<span class="p">;</span>
-    ssl_certificate_key /etc/nginx/ssl/service.key<span class="p">;</span>
+    listen 443;
+    ssl on;
+    ssl_certificate /etc/nginx/ssl/service.crt;
+    ssl_certificate_key /etc/nginx/ssl/service.key;
 
     ...
 <span class="o">}</span>
@@ -102,7 +102,7 @@ Common Name <span class="o">(</span>e.g. server FQDN or YOUR name<span class="o"
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/02/postgresql-admin-quickref-part2-initiating-database.html"/>
         <published>2015-02-21T16:40:00+08:00</published>
-        <updated>2015-02-22T20:03:02+08:00</updated>
+        <updated>2015-02-21T17:24:38+08:00</updated>
         <id>http://terryoy.github.io/2015/02/postgresql-admin-quickref-part2-initiating-database.html</id>
         <category scheme="http://terryoy.github.io/tag/#postgresql" term="postgresql" label="postgresql" />
         <category scheme="http://terryoy.github.io/tag/#database" term="database" label="database" />
@@ -115,7 +115,7 @@ Common Name <span class="o">(</span>e.g. server FQDN or YOUR name<span class="o"
 <span class="nv">$ </span>createdb -O myuser mydb
 
 <span class="c"># (or) a longer version for the createdb command</span>
-<span class="nv">$ </span>createdb -h localhost -p <span class="m">5432</span> -U postgres -O myuser -E UTF8 mydb
+<span class="nv">$ </span>createdb -h localhost -p 5432 -U postgres -O myuser -E UTF8 mydb
 </pre></div>
 <div class="highlight"><pre><span class="c1">--create database by psql client </span>
 <span class="gp">postgres=#</span> <span class="k">CREATE</span> <span class="k">USER</span> <span class="n">myuser</span> <span class="k">WITH</span> <span class="k">PASSWORD</span> <span class="s1">&#39;my_password&#39;</span><span class="p">;</span>
@@ -156,7 +156,7 @@ host    all             all             ::1/128                 md5
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/03/postgresql-admin-quickref-part1-exploring-database.html"/>
         <published>2014-03-06T15:27:00+08:00</published>
-        <updated>2015-02-22T20:03:02+08:00</updated>
+        <updated>2014-03-06T15:36:15+08:00</updated>
         <id>http://terryoy.github.io/2014/03/postgresql-admin-quickref-part1-exploring-database.html</id>
         <category scheme="http://terryoy.github.io/tag/#postgresql" term="postgresql" label="postgresql" />
         <category scheme="http://terryoy.github.io/tag/#database" term="database" label="database" />
@@ -285,7 +285,7 @@ Log files: <code>/var/log/postgresql/</code></p>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/01/ssh-key-based-auth-server.html"/>
         <published>2014-01-08T15:40:00+08:00</published>
-        <updated>2015-02-22T20:03:02+08:00</updated>
+        <updated>2014-01-08T15:46:42+08:00</updated>
         <id>http://terryoy.github.io/2014/01/ssh-key-based-auth-server.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
@@ -309,8 +309,8 @@ Copying files from <span class="s1">&#39;/etc/skel&#39;</span> ...
 Enter new UNIX password: 
 Retype new UNIX password: 
 passwd: password updated successfully
-Changing the user information <span class="k">for</span> edmund
-Enter the new value, or press ENTER <span class="k">for</span> the default
+Changing the user information <span class="k">for </span>edmund
+Enter the new value, or press ENTER <span class="k">for </span>the default
     Full Name <span class="o">[]</span>: 
     Room Number <span class="o">[]</span>: 
     Work Phone <span class="o">[]</span>: 
@@ -323,11 +323,11 @@ Is the information correct? <span class="o">[</span>Y/n<span class="o">]</span>
 <p>With SSH key login, user require a public/private key pairs to authenticate the login. SSH can use both &ldquo;RSA&rdquo; and &ldquo;DSA&rdquo; keys, however according to the <a href="https://help.ubuntu.com/community/SSH/OpenSSH/Keys#Key-Based_SSH_Logins">ubuntu guide</a>, &ldquo;RSA&rdquo; is the only recommended choice for new keys. </p>
 <p>First thing you should keep in mind, the private key should <strong>NOT</strong> allow to be accessed by anybody else(e.g. set &ldquo;700&rdquo; with chmod). We will create the RSA keys in your <strong>local</strong> machine, then copy the public key to the <strong>remote</strong> server.</p>
 <div class="highlight"><pre><span class="nv">$ </span>mkdir ~/.ssh
-<span class="nv">$ </span>chmod <span class="m">700</span> ~/.ssh      <span class="c"># set access right only to user self</span>
+<span class="nv">$ </span>chmod 700 ~/.ssh      <span class="c"># set access right only to user self</span>
 <span class="nv">$ </span>ssh-keygen -t rsa     <span class="c"># **or you could use &quot;ssh-keygen -t rsa -b 4096&quot; for more secure login, default is 2048**.</span>
 Generating public/private rsa key pair.
 Enter file in which to save the key <span class="o">(</span>/home/edmund/.ssh/id_rsa<span class="o">)</span>: 
-Enter passphrase <span class="o">(</span>empty <span class="k">for</span> no passphrase<span class="o">)</span>: 
+Enter passphrase <span class="o">(</span>empty <span class="k">for </span>no passphrase<span class="o">)</span>: 
 Enter same passphrase again: 
 Your identification has been saved in /home/edmund/.ssh/id_rsa.
 Your public key has been saved in /home/edmund/.ssh/id_rsa.pub.
@@ -383,7 +383,7 @@ If you want to revoke an authorized key for some user, you can find the user&#39
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/01/archive-commands-in-linux.html"/>
         <published>2014-01-07T19:13:00+08:00</published>
-        <updated>2015-02-22T20:03:02+08:00</updated>
+        <updated>2014-01-07T19:19:42+08:00</updated>
         <id>http://terryoy.github.io/2014/01/archive-commands-in-linux.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
@@ -398,7 +398,7 @@ If you want to revoke an authorized key for some user, you can find the user&#39
 <span class="c"># other formats (zip, gz, rar, 7z, ...)</span>
 <span class="nv">$ </span>zip -r archive.zip <span class="nb">test</span>-files
 <span class="nv">$ </span>star -cv <span class="nv">f</span><span class="o">=</span>output.star <span class="nb">test</span>-files
-<span class="nv">$ </span>find <span class="nb">test</span>-dir <span class="p">|</span> cpio -ov &gt; output.cpio
+<span class="nv">$ </span>find <span class="nb">test</span>-dir | cpio -ov &gt; output.cpio
 <span class="nv">$ </span>7z a archive.7z <span class="nb">test</span>-files    <span class="c"># the package name for 7z is &quot;p7zip&quot;</span>
 
 <span class="c">####  list files in the archive ####</span>
@@ -433,7 +433,7 @@ If you want to revoke an authorized key for some user, you can find the user&#39
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/12/python_yield.html"/>
         <published>2013-12-23T23:43:00+08:00</published>
-        <updated>2015-02-22T20:03:02+08:00</updated>
+        <updated>2014-01-07T15:19:11+08:00</updated>
         <id>http://terryoy.github.io/2013/12/python_yield.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -506,7 +506,7 @@ init value:0
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/12/python_main_args.html"/>
         <published>2013-12-21T15:35:00+08:00</published>
-        <updated>2015-02-22T20:03:02+08:00</updated>
+        <updated>2013-12-21T16:03:50+08:00</updated>
         <id>http://terryoy.github.io/2013/12/python_main_args.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -603,7 +603,7 @@ an non-existing item value: [ non-exist =</code></pre>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/09/vimrc.html"/>
         <published>2013-09-23T23:16:00+08:00</published>
-        <updated>2015-02-22T20:03:02+08:00</updated>
+        <updated>2013-12-03T12:53:55+08:00</updated>
         <id>http://terryoy.github.io/2013/09/vimrc.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#vim" term="vim" label="vim" />
@@ -633,7 +633,7 @@ set expandtab</code></pre>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/09/useful_alias.html"/>
         <published>2013-09-23T00:00:00+08:00</published>
-        <updated>2015-02-22T20:03:02+08:00</updated>
+        <updated>2014-11-27T15:07:12+08:00</updated>
         <id>http://terryoy.github.io/2013/09/useful_alias.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
@@ -676,9 +676,9 @@ set expandtab</code></pre>
 <span class="c"># where 220 is the delay(ms) and 40 is repeat rate(cps)</span>
 
 <span class="c"># under X</span>
-<span class="nv">$ </span>xset r rate <span class="m">220</span> 40
+<span class="nv">$ </span>xset r rate 220 40
 <span class="c"># under command line(or put it in /etc/rc.local, ~/.bashrc, ~/.bash_profile, etc.)</span>
-<span class="nv">$ </span>sudo kbdrate -r <span class="m">40</span> -d 220
+<span class="nv">$ </span>sudo kbdrate -r 40 -d 220
 </pre></div>
 ]]>
         </content>

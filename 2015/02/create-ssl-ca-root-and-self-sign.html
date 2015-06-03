@@ -54,12 +54,12 @@
 <span class="c"># generate a private root key</span>
 <span class="nv">$ </span>openssl genrsa -out rootCA.key 2048
 <span class="c"># (or) generate a private root key with passphrase protection; and if you forgot the password, you need to do everything again</span>
-<span class="nv">$ </span>openssl genrsa -out rootCA.key <span class="m">2048</span> -des3
+<span class="nv">$ </span>openssl genrsa -out rootCA.key 2048 -des3
 
 
 <span class="c">## Step 2: Self-sign a certificate</span>
 
-<span class="nv">$ </span>openssl req -x509 -new -nodes -key rootCA.key -days <span class="m">3650</span> -out rootCA.pem
+<span class="nv">$ </span>openssl req -x509 -new -nodes -key rootCA.key -days 3650 -out rootCA.pem
 You are about to be asked to enter information that will be incorporated
 into your certificate request.
 What you are about to enter is what is called a Distinguished Name or a DN.
@@ -67,7 +67,7 @@ There are quite a few fields but you can leave some blank
 For some fields there will be a default value,
 If you enter <span class="s1">&#39;.&#39;</span>, the field will be left blank.
 -----
-Country Name <span class="o">(</span><span class="m">2</span> letter code<span class="o">)</span> <span class="o">[</span>AU<span class="o">]</span>:CN
+Country Name <span class="o">(</span>2 letter code<span class="o">)</span> <span class="o">[</span>AU<span class="o">]</span>:CN
 State or Province Name <span class="o">(</span>full name<span class="o">)</span> <span class="o">[</span>Some-State<span class="o">]</span>:Guangdong
 Locality Name <span class="o">(</span>eg, city<span class="o">)</span> <span class="o">[]</span>:Shenzhen
 Organization Name <span class="o">(</span>eg, company<span class="o">)</span> <span class="o">[</span>Internet Widgits Pty Ltd<span class="o">]</span>:TeaTime Production.
@@ -99,10 +99,10 @@ Common Name <span class="o">(</span>e.g. server FQDN or YOUR name<span class="o"
 <h3 id="toc_3">4. Congifuration for Nginx</h3>
 <p>Below is an example of enabling the SSL function for the service configuration.</p>
 <div class="highlight"><pre>server <span class="o">{</span>
-    listen 443<span class="p">;</span>
-    ssl on<span class="p">;</span>
-    ssl_certificate /etc/nginx/ssl/service.crt<span class="p">;</span>
-    ssl_certificate_key /etc/nginx/ssl/service.key<span class="p">;</span>
+    listen 443;
+    ssl on;
+    ssl_certificate /etc/nginx/ssl/service.crt;
+    ssl_certificate_key /etc/nginx/ssl/service.key;
 
     ...
 <span class="o">}</span>
