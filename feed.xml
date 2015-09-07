@@ -3,9 +3,39 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2015-07-02T13:25:05+08:00</updated>
+    <updated>2015-09-07T10:16:26+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
+        <title type="html"><![CDATA[Raspberry Pi Hardware GPIO with Python]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2015/09/rpi-hardware-begin-gpio-python.html"/>
+        <published>2015-09-06T20:02:00+08:00</published>
+        <updated>2015-09-07T10:16:26+08:00</updated>
+        <id>http://terryoy.github.io/2015/09/rpi-hardware-begin-gpio-python.html</id>
+        <category scheme="http://terryoy.github.io/tag/#rpi" term="rpi" label="rpi" />
+        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
+        <category scheme="http://terryoy.github.io/tag/#hardware" term="hardware" label="hardware" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <p>This article is for beginner to learn how to work with RPi.GPIO. It collects a bunch of useful information and examples of GPIO/SPI/I2C programs.</p>
+
+<h3 id="toc_0">1. Raspberry Pi Hardware Documentation</h3>
+<p>First of all, the hardware documentation for rpi is here:
+<a href="https://www.raspberrypi.org/documentation/hardware/README.md">https://www.raspberrypi.org/documentation/hardware/README.md</a></p>
+<p>GPIO Pin out: <a href="http://pi.gadgetoid.com/pinout">http://pi.gadgetoid.com/pinout</a>. Now here&#39;s a screenshot of the pinouts.</p>
+<p><img src="http://terryoy-github.u.qiniudn.com/blog/2015/rpi-gpio-pinout.png" alt="http://terryoy-github.u.qiniudn.com/blog/2015/rpi-gpio-pinout.png"/></p>
+<p>SPI: <a href="https://www.raspberrypi.org/documentation/hardware/raspberrypi/spi/README.md">https://www.raspberrypi.org/documentation/hardware/raspberrypi/spi/README.md</a></p>
+<p>Low level Peripherals: <a href="http://elinux.org/RPi_Low-level_peripherals">http://elinux.org/RPi_Low-level_peripherals</a></p>
+
+<h3 id="toc_1">2. Basic GPIO</h3>
+<p>(to be continued)</p>
+
+<h3 id="toc_2">References:</h3>
+<p>Sparkfun&#39;s tutorials:
+<a href="https://learn.sparkfun.com/tutorials/raspberry-gpio/hardware-setup">learn.sparkfun.com/tutorials/raspberry-gpio/hardware-setup</a>
+<a href="https://learn.sparkfun.com/tutorials/raspberry-gpio/python-rpigpio-example">learn.sparkfun.com/tutorials/raspberry-gpio/python-rpigpio-example</a></p>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[Linux Server Security Useful Commands]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/06/some-useful-linux-server-security-commands.html"/>
@@ -1693,60 +1723,6 @@ set expandtab</code></pre>
 
 <pre><code>colorscheme torte</code></pre>
 <p>It is the default black/white scheme.</p>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[Useful Aliases and Commands in Linux]]></title>
-        <author><name>terryoy</name></author>
-        <link href="http://terryoy.github.io/2013/09/useful_alias.html"/>
-        <published>2013-09-23T00:00:00+08:00</published>
-        <updated>2014-11-27T15:07:12+08:00</updated>
-        <id>http://terryoy.github.io/2013/09/useful_alias.html</id>
-        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
-        <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
-        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
-            <![CDATA[ <p>Below is a list of some useful aliases, which you could add to your linux shell environment.</p>
-<p>Copy and paste below content to your <strong><em>~/.bashrc</em></strong>.</p>
-
-<!--script src="https://gist.github.com/terryoy/6374725.js"></script-->
-<div class="highlight"><pre><span class="c"># open a browser and view raw html (e.g. &quot;cat some.html | viewhtml&quot;)</span>
-<span class="nb">alias </span><span class="nv">viewhtml</span><span class="o">=</span><span class="s1">&#39;firefox &quot;data:text/html;charset=utf-8;base64,$(base64 -w 0 &lt;&amp;0)&quot;&#39;</span>
-
-<span class="c"># url encode / decode</span>
-<span class="nb">alias </span><span class="nv">urlencode</span><span class="o">=</span><span class="s1">&#39;python -c &quot;import sys, urllib as ul; print ul.quote_plus(sys.argv[1])&quot;&#39;</span>
-<span class="nb">alias </span><span class="nv">urldecode</span><span class="o">=</span><span class="s1">&#39;python -c &quot;import sys, urllib as ul; print ul.unquote_plus(sys.argv[1])&quot;&#39;</span>
-
-<span class="c"># url shortener</span>
-<span class="nb">alias </span><span class="nv">shortenurl</span><span class="o">=</span><span class="s2">&quot;python -c \&quot;import sys, urllib as ul; print ul.urlopen(&#39;http://tinyurl.com/api-create.php?url=%s&#39; % ul.quote_plus(sys.argv[1])).readline()\&quot;&quot;</span>
-</pre></div>
-
-<h3 id="toc_0"># work with hex</h3>
-<div class="highlight"><pre><span class="c"># if you want to dump a file in hex</span>
-<span class="nv">$ </span>xxd -p file
-
-<span class="c"># A Hex number convertor, convert decimal into hex(e.g. &quot;hex 34&quot; -&gt; 22)</span>
-<span class="nb">alias </span><span class="nv">hex</span><span class="o">=</span><span class="s1">&#39;printf &quot;%x\n&quot;&#39;</span>
-</pre></div>
-
-<h3 id="toc_1"># mount a virtualbox disk on linux</h3>
-<div class="highlight"><pre><span class="c"># before you can mount anything, install virtualbox-fuse</span>
-<span class="nv">$ </span>sudo apt-get install virtualbox-fuse
-
-<span class="c"># there are &#39;disk/&#39; folder and &#39;space/&#39; folder.</span>
-<span class="c"># &#39;vdfuse -r&#39; is for read only,</span>
-<span class="nv">$ </span>vdfuse -raf <span class="nv">$1</span> disk
-<span class="nv">$ </span>mount disk/Partition1 space
-</pre></div>
-
-<h3 id="toc_2">Set keyboard repeat rate and delay</h3>
-<div class="highlight"><pre><span class="c">#Set keyboard repeat rate and delay</span>
-<span class="c"># where 220 is the delay(ms) and 40 is repeat rate(cps)</span>
-
-<span class="c"># under X</span>
-<span class="nv">$ </span>xset r rate 220 40
-<span class="c"># under command line(or put it in /etc/rc.local, ~/.bashrc, ~/.bash_profile, etc.)</span>
-<span class="nv">$ </span>sudo kbdrate -r 40 -d 220
-</pre></div>
 ]]>
         </content>
     </entry>

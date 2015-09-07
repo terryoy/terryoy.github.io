@@ -3,9 +3,39 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/guides/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/guides/" />
-    <updated>2015-07-02T13:25:05+08:00</updated>
+    <updated>2015-09-07T10:16:26+08:00</updated>
     <id>http://terryoy.github.io/guides/</id>
     <entry>
+        <title type="html"><![CDATA[Raspberry Pi Hardware GPIO with Python]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2015/09/rpi-hardware-begin-gpio-python.html"/>
+        <published>2015-09-06T20:02:00+08:00</published>
+        <updated>2015-09-07T10:16:26+08:00</updated>
+        <id>http://terryoy.github.io/2015/09/rpi-hardware-begin-gpio-python.html</id>
+        <category scheme="http://terryoy.github.io/tag/#rpi" term="rpi" label="rpi" />
+        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
+        <category scheme="http://terryoy.github.io/tag/#hardware" term="hardware" label="hardware" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <p>This article is for beginner to learn how to work with RPi.GPIO. It collects a bunch of useful information and examples of GPIO/SPI/I2C programs.</p>
+
+<h3 id="toc_0">1. Raspberry Pi Hardware Documentation</h3>
+<p>First of all, the hardware documentation for rpi is here:
+<a href="https://www.raspberrypi.org/documentation/hardware/README.md">https://www.raspberrypi.org/documentation/hardware/README.md</a></p>
+<p>GPIO Pin out: <a href="http://pi.gadgetoid.com/pinout">http://pi.gadgetoid.com/pinout</a>. Now here&#39;s a screenshot of the pinouts.</p>
+<p><img src="http://terryoy-github.u.qiniudn.com/blog/2015/rpi-gpio-pinout.png" alt="http://terryoy-github.u.qiniudn.com/blog/2015/rpi-gpio-pinout.png"/></p>
+<p>SPI: <a href="https://www.raspberrypi.org/documentation/hardware/raspberrypi/spi/README.md">https://www.raspberrypi.org/documentation/hardware/raspberrypi/spi/README.md</a></p>
+<p>Low level Peripherals: <a href="http://elinux.org/RPi_Low-level_peripherals">http://elinux.org/RPi_Low-level_peripherals</a></p>
+
+<h3 id="toc_1">2. Basic GPIO</h3>
+<p>(to be continued)</p>
+
+<h3 id="toc_2">References:</h3>
+<p>Sparkfun&#39;s tutorials:
+<a href="https://learn.sparkfun.com/tutorials/raspberry-gpio/hardware-setup">learn.sparkfun.com/tutorials/raspberry-gpio/hardware-setup</a>
+<a href="https://learn.sparkfun.com/tutorials/raspberry-gpio/python-rpigpio-example">learn.sparkfun.com/tutorials/raspberry-gpio/python-rpigpio-example</a></p>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[Intel Edison Get Started]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/06/edison-get-started.html"/>

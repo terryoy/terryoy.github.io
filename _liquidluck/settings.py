@@ -75,6 +75,7 @@ theme = {
         
         'navigation': [
 			{'name': 'Home', 'link': '/'},
+            {'name': 'Thoughts', 'link': '/thoughts/index.html'},
             {'name': 'Guides', 'link':'/guides/index.html'},
             {'name': 'Tricks', 'link':'/tricks/index.html'},
 			{'name': 'About Me', 'link': '/about.html'},

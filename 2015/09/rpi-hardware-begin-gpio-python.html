@@ -7,8 +7,8 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="apple-mobile-web-app-title" content="Hello, World!" />
     <meta name="application-name" content="Hello, World!" />
-    <title>Preferences for Vim - Hello, World!</title>
-    <meta name="keywords" content="linux,vim" />
+    <title>Raspberry Pi Hardware GPIO with Python - Hello, World!</title>
+    <meta name="keywords" content="rpi,linux,hardware" />
     <meta name="description" content="" />
     
     <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="Hello, World!" />
@@ -34,28 +34,27 @@
 </nav>
 
 <section><article id="main" class="hentry">
-	<h1>Preferences for Vim</h1>
-    <p class="sub_text">2013-09-23 by <i>terryoy</i>, in <a href="/tricks/">tricks</a>
+	<h1>Raspberry Pi Hardware GPIO with Python</h1>
+    <p class="sub_text">2015-09-06 by <i>terryoy</i>, in <a href="/guides/">guides</a>
     </p>
     
-	<p>These are settings that to improve usage of VI text editor for various purposes.</p>
-<p>Copy &amp; paste below lines to <strong><em>~/.vimrc</em></strong>:</p>
+	<p>This article is for beginner to learn how to work with RPi.GPIO. It collects a bunch of useful information and examples of GPIO/SPI/I2C programs.</p>
 
-<pre><code>set smartindent
-set tabstop=4
-set shiftwidth=4
-set expandtab</code></pre>
+<h3 id="toc_0">1. Raspberry Pi Hardware Documentation</h3>
+<p>First of all, the hardware documentation for rpi is here:
+<a href="https://www.raspberrypi.org/documentation/hardware/README.md">https://www.raspberrypi.org/documentation/hardware/README.md</a></p>
+<p>GPIO Pin out: <a href="http://pi.gadgetoid.com/pinout">http://pi.gadgetoid.com/pinout</a>. Now here&#39;s a screenshot of the pinouts.</p>
+<p><img src="http://terryoy-github.u.qiniudn.com/blog/2015/rpi-gpio-pinout.png" alt="http://terryoy-github.u.qiniudn.com/blog/2015/rpi-gpio-pinout.png"/></p>
+<p>SPI: <a href="https://www.raspberrypi.org/documentation/hardware/raspberrypi/spi/README.md">https://www.raspberrypi.org/documentation/hardware/raspberrypi/spi/README.md</a></p>
+<p>Low level Peripherals: <a href="http://elinux.org/RPi_Low-level_peripherals">http://elinux.org/RPi_Low-level_peripherals</a></p>
 
-<ol>
-<li>smartindent - Do smart autoindenting when starting a new line for C-like programs.</li>
-<li>tabstop - Number of spaces that a <Tab> in the file counts for.</li>
-<li>shiftwidth - Number of spaces to use for each step of (auto)indent.</li>
-<li>expandtab - Spaces are used in indents with <Tab>.</li>
-</ol>
-<p>For color scheme preferences:</p>
+<h3 id="toc_1">2. Basic GPIO</h3>
+<p>(to be continued)</p>
 
-<pre><code>colorscheme torte</code></pre>
-<p>It is the default black/white scheme.</p>
+<h3 id="toc_2">References:</h3>
+<p>Sparkfun&#39;s tutorials:
+<a href="https://learn.sparkfun.com/tutorials/raspberry-gpio/hardware-setup">learn.sparkfun.com/tutorials/raspberry-gpio/hardware-setup</a>
+<a href="https://learn.sparkfun.com/tutorials/raspberry-gpio/python-rpigpio-example">learn.sparkfun.com/tutorials/raspberry-gpio/python-rpigpio-example</a></p>
 
     
     
@@ -64,7 +63,7 @@ set expandtab</code></pre>
     
     <div class="sub_text">
         <span>Tags:
-            <a href="/tag/linux/">linux</a>,&nbsp;<a href="/tag/vim/">vim</a>
+            <a href="/tag/rpi/">rpi</a>,&nbsp;<a href="/tag/linux/">linux</a>,&nbsp;<a href="/tag/hardware/">hardware</a>
 		</span>
     
         
@@ -77,7 +76,7 @@ set expandtab</code></pre>
     <div id="disqus_thread"></div>
     <script type="text/javascript">
         var disqus_shortname = 'terryoy';
-        var disqus_title = 'Preferences for Vim';
+        var disqus_title = 'Raspberry Pi Hardware GPIO with Python';
         (function() {
             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
             dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
