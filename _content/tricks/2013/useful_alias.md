@@ -61,4 +61,13 @@ $ sudo kbdrate -r 40 -d 220
 
 ```
 
+### Merge images into a movie
+
+```bash
+# "-framerate" must be before "-i", it's an input framerate, which means how many images are used in one second
+# "-r" is the output framerate
+# "image%03d.jpg" for "image001.jpg" pattern, while "image%d.jpg" for "image1.jpg"(no zero-padding) pattern
+$ ffmpeg -framerate 4 -i image%03d.jpg -r 4 test.mp4
+
+```
 

@@ -3,7 +3,7 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/tricks/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/tricks/" />
-    <updated>2015-06-27T23:21:26+08:00</updated>
+    <updated>2015-10-20T22:42:14+08:00</updated>
     <id>http://terryoy.github.io/tricks/</id>
     <entry>
         <title type="html"><![CDATA[Linux Server Security Useful Commands]]></title>
@@ -710,7 +710,7 @@ set expandtab</code></pre>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/09/useful_alias.html"/>
         <published>2013-09-23T00:00:00+08:00</published>
-        <updated>2014-11-27T15:07:12+08:00</updated>
+        <updated>2015-10-20T22:42:14+08:00</updated>
         <id>http://terryoy.github.io/2013/09/useful_alias.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
@@ -756,6 +756,13 @@ set expandtab</code></pre>
 <span class="nv">$ </span>xset r rate 220 40
 <span class="c"># under command line(or put it in /etc/rc.local, ~/.bashrc, ~/.bash_profile, etc.)</span>
 <span class="nv">$ </span>sudo kbdrate -r 40 -d 220
+</pre></div>
+
+<h3 id="toc_3">Merge images into a movie</h3>
+<div class="highlight"><pre><span class="c"># &quot;-framerate&quot; must be before &quot;-i&quot;, it&#39;s an input framerate, which means how many images are used in one second</span>
+<span class="c"># &quot;-r&quot; is the output framerate</span>
+<span class="c"># &quot;image%03d.jpg&quot; for &quot;image001.jpg&quot; pattern, while &quot;image%d.jpg&quot; for &quot;image1.jpg&quot;(no zero-padding) pattern</span>
+<span class="nv">$ </span>ffmpeg -framerate 4 -i image%03d.jpg -r 4 test.mp4
 </pre></div>
 ]]>
         </content>
