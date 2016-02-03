@@ -3,14 +3,70 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2015-09-07T10:16:26+08:00</updated>
+    <updated>2016-02-03T16:57:01+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
+        <title type="html"><![CDATA[Multiple Arguments in Python]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2016/02/args-kwargs-python.html"/>
+        <published>2016-02-03T16:05:00+08:00</published>
+        <updated>2016-02-03T16:57:01+08:00</updated>
+        <id>http://terryoy.github.io/2016/02/args-kwargs-python.html</id>
+        <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <p>This article tells about how to use variable number of arguments in Python functions.</p>
+
+<h3 id="toc_0">1. Passing Multiple Arguments</h3>
+<p>The meaning of &ldquo;args&rdquo; and &ldquo;kwargs&rdquo; we often used as the multiple arguments are &ldquo;normal(unnamed) arguments&rdquo; and &ldquo;keyword(named) arguments&rdquo;. Try the below in python and you can see it&#39;s actually the difference of a tuple and a dictionary.</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span><span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="o">&gt;&gt;&gt;</span><span class="n">play</span><span class="p">()</span>
+<span class="p">()</span>
+<span class="p">{}</span>
+</pre></div>
+<p>You should use the order of specific arguments, unnamed arguments, and named arguments when defining a function:</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">arg_order</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</pre></div>
+
+<h3 id="toc_1">2. How to pass arguments from one function to another</h3>
+<p>Below are a list of examples to show you the result of different methods of multiple arguments:</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">a</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<span class="o">...</span>   <span class="k">print</span><span class="p">(</span><span class="s">&quot;unnamed: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">args</span><span class="p">))</span>
+<span class="o">...</span> 
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">unnamed</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">b</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="o">...</span>   <span class="k">print</span><span class="p">(</span><span class="s">&quot;named: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">kwargs</span><span class="p">))</span>
+<span class="o">...</span> 
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">named</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">c</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="o">...</span>   <span class="k">print</span><span class="p">(</span><span class="s">&quot;full:&quot;</span><span class="p">)</span>
+<span class="o">...</span>   <span class="k">print</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+<span class="o">...</span>   <span class="n">a</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+<span class="o">...</span>   <span class="n">b</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="o">...</span> 
+<span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="o">...</span>   <span class="n">c</span><span class="p">(</span><span class="mi">123</span><span class="p">,</span> <span class="mi">456</span><span class="p">,</span> <span class="mi">789</span><span class="p">,</span> <span class="n">we</span><span class="o">=</span><span class="s">&quot;we&quot;</span><span class="p">,</span> <span class="n">love</span><span class="o">=</span><span class="s">&quot;love&quot;</span><span class="p">,</span> <span class="n">it</span><span class="o">=</span><span class="s">&quot;it&quot;</span><span class="p">)</span>
+<span class="o">...</span> 
+<span class="o">&gt;&gt;&gt;</span> <span class="n">test</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span> <span class="n">we</span><span class="o">=</span><span class="s">&quot;we&quot;</span><span class="p">,</span> <span class="n">love</span><span class="o">=</span><span class="s">&quot;love&quot;</span><span class="p">,</span> <span class="n">it</span><span class="o">=</span><span class="s">&quot;it&quot;</span><span class="p">)</span>
+<span class="n">full</span><span class="p">:</span>
+<span class="mi">123</span>
+<span class="n">unnamed</span><span class="p">:</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">named</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;we&#39;</span><span class="p">:</span> <span class="s">&#39;we&#39;</span><span class="p">,</span> <span class="s">&#39;love&#39;</span><span class="p">:</span> <span class="s">&#39;love&#39;</span><span class="p">,</span> <span class="s">&#39;it&#39;</span><span class="p">:</span> <span class="s">&#39;it&#39;</span><span class="p">}</span>
+</pre></div>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[Raspberry Pi Hardware GPIO with Python]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/09/rpi-hardware-begin-gpio-python.html"/>
         <published>2015-09-06T20:02:00+08:00</published>
-        <updated>2015-09-07T10:16:26+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2015/09/rpi-hardware-begin-gpio-python.html</id>
         <category scheme="http://terryoy.github.io/tag/#rpi" term="rpi" label="rpi" />
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
@@ -40,7 +96,7 @@
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/06/some-useful-linux-server-security-commands.html"/>
         <published>2015-06-27T22:31:00+08:00</published>
-        <updated>2015-06-27T23:21:26+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2015/06/some-useful-linux-server-security-commands.html</id>
         <category scheme="http://terryoy.github.io/tag/#server" term="server" label="server" />
         <category scheme="http://terryoy.github.io/tag/#security" term="security" label="security" />
@@ -117,7 +173,7 @@ Jun 27 21:53:39 iZ940ou5p7nZ sudo: pam_unix<span class="o">(</span>sudo:session<
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/06/edison-get-started.html"/>
         <published>2015-06-03T16:15:00+08:00</published>
-        <updated>2015-07-02T13:25:05+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2015/06/edison-get-started.html</id>
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -161,7 +217,7 @@ Jun 27 21:53:39 iZ940ou5p7nZ sudo: pam_unix<span class="o">(</span>sudo:session<
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/06/program-readme-template.html"/>
         <published>2015-06-03T16:15:00+08:00</published>
-        <updated>2015-06-03T17:16:18+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2015/06/program-readme-template.html</id>
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -246,7 +302,7 @@ top level routines
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/02/create-ssl-ca-root-and-self-sign.html"/>
         <published>2015-02-23T11:03:00+08:00</published>
-        <updated>2015-04-21T11:55:33+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2015/02/create-ssl-ca-root-and-self-sign.html</id>
         <category scheme="http://terryoy.github.io/tag/#server" term="server" label="server" />
         <category scheme="http://terryoy.github.io/tag/#security" term="security" label="security" />
@@ -338,7 +394,7 @@ Common Name <span class="o">(</span>e.g. server FQDN or YOUR name<span class="o"
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/02/postgresql-admin-quickref-part2-initiating-database.html"/>
         <published>2015-02-21T16:40:00+08:00</published>
-        <updated>2015-02-21T17:24:38+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2015/02/postgresql-admin-quickref-part2-initiating-database.html</id>
         <category scheme="http://terryoy.github.io/tag/#postgresql" term="postgresql" label="postgresql" />
         <category scheme="http://terryoy.github.io/tag/#database" term="database" label="database" />
@@ -392,7 +448,7 @@ host    all             all             ::1/128                 md5
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/11/jni-guide-on-android.html"/>
         <published>2014-11-27T16:06:00+08:00</published>
-        <updated>2014-12-05T15:41:58+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2014/11/jni-guide-on-android.html</id>
         <category scheme="http://terryoy.github.io/tag/#cpp" term="cpp" label="cpp" />
         <category scheme="http://terryoy.github.io/tag/#android" term="android" label="android" />
@@ -543,7 +599,7 @@ JNI Documentation: <a href="http://docs.oracle.com/javase/1.5.0/docs/guide/jni/s
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/10/finding-information-linux-c-library.html"/>
         <published>2014-10-30T09:38:00+08:00</published>
-        <updated>2014-10-30T13:45:11+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2014/10/finding-information-linux-c-library.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
@@ -621,7 +677,7 @@ Program Library HOWTO <br/>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/10/common-git-commands.html"/>
         <published>2014-10-22T20:57:00+08:00</published>
-        <updated>2014-12-17T09:10:19+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2014/10/common-git-commands.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
@@ -720,7 +776,7 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/08/learning-linux-c-part-1.html"/>
         <published>2014-08-20T23:34:00+08:00</published>
-        <updated>2014-08-21T09:52:53+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2014/08/learning-linux-c-part-1.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
@@ -768,7 +824,7 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/06/create-database-mysql.html"/>
         <published>2014-06-04T14:40:00+08:00</published>
-        <updated>2014-09-15T22:30:02+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2014/06/create-database-mysql.html</id>
         <category scheme="http://terryoy.github.io/tag/#database" term="database" label="database" />
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
@@ -808,7 +864,7 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/03/using-ctypes-to-wrap-c-library.html"/>
         <published>2014-03-23T07:57:00+08:00</published>
-        <updated>2014-03-31T11:39:52+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2014/03/using-ctypes-to-wrap-c-library.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
@@ -989,7 +1045,7 @@ The <em>byref()</em> method create a parameter object of pointer, which you can 
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/03/postgresql-admin-quickref-part1-exploring-database.html"/>
         <published>2014-03-06T15:27:00+08:00</published>
-        <updated>2014-03-06T15:36:15+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2014/03/postgresql-admin-quickref-part1-exploring-database.html</id>
         <category scheme="http://terryoy.github.io/tag/#postgresql" term="postgresql" label="postgresql" />
         <category scheme="http://terryoy.github.io/tag/#database" term="database" label="database" />
@@ -1118,7 +1174,7 @@ Log files: <code>/var/log/postgresql/</code></p>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/01/ssh-key-based-auth-server.html"/>
         <published>2014-01-08T15:40:00+08:00</published>
-        <updated>2014-01-08T15:46:42+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2014/01/ssh-key-based-auth-server.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
@@ -1216,7 +1272,7 @@ If you want to revoke an authorized key for some user, you can find the user&#39
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/01/archive-commands-in-linux.html"/>
         <published>2014-01-07T19:13:00+08:00</published>
-        <updated>2014-01-07T19:19:42+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2014/01/archive-commands-in-linux.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
@@ -1266,7 +1322,7 @@ If you want to revoke an authorized key for some user, you can find the user&#39
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/12/matplotlib-simple-guide-1.html"/>
         <published>2013-12-31T01:00:00+08:00</published>
-        <updated>2014-01-07T15:19:11+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2013/12/matplotlib-simple-guide-1.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <category scheme="http://terryoy.github.io/tag/#graph" term="graph" label="graph" />
@@ -1411,7 +1467,7 @@ If you want to revoke an authorized key for some user, you can find the user&#39
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/12/python_yield.html"/>
         <published>2013-12-23T23:43:00+08:00</published>
-        <updated>2014-01-07T15:19:11+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2013/12/python_yield.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -1484,7 +1540,7 @@ init value:0
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/12/python_main_args.html"/>
         <published>2013-12-21T15:35:00+08:00</published>
-        <updated>2013-12-21T16:03:50+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2013/12/python_main_args.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -1581,7 +1637,7 @@ an non-existing item value: [ non-exist =</code></pre>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/11/cocos2d-x-setup.html"/>
         <published>2013-11-27T09:00:00+08:00</published>
-        <updated>2014-02-06T18:12:24+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2013/11/cocos2d-x-setup.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#game" term="game" label="game" />
@@ -1693,36 +1749,6 @@ Sample 1: ./create_project.py -project MyGame -package com.MyCompany.AwesomeGame
 Sample 2: ./create_project.py -project MyGame -package com.MyCompany.AwesomeGame -language javascript
 </pre></div>
 <p>The new project will be created under <code>./projects/</code> under the root folder of cocos2d-x, and it is not easy if you want to put it outside this folder(for example, another git repos), because the project&#39;s dependencies uses relative paths to the cocos2d-x&#39;s components. It might differs in Xcode or in Eclipse, etc. So here we don&#39;t discuss further.</p>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[Preferences for Vim]]></title>
-        <author><name>terryoy</name></author>
-        <link href="http://terryoy.github.io/2013/09/vimrc.html"/>
-        <published>2013-09-23T23:16:00+08:00</published>
-        <updated>2013-12-03T12:53:55+08:00</updated>
-        <id>http://terryoy.github.io/2013/09/vimrc.html</id>
-        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
-        <category scheme="http://terryoy.github.io/tag/#vim" term="vim" label="vim" />
-        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
-            <![CDATA[ <p>These are settings that to improve usage of VI text editor for various purposes.</p>
-<p>Copy &amp; paste below lines to <strong><em>~/.vimrc</em></strong>:</p>
-
-<pre><code>set smartindent
-set tabstop=4
-set shiftwidth=4
-set expandtab</code></pre>
-
-<ol>
-<li>smartindent - Do smart autoindenting when starting a new line for C-like programs.</li>
-<li>tabstop - Number of spaces that a <Tab> in the file counts for.</li>
-<li>shiftwidth - Number of spaces to use for each step of (auto)indent.</li>
-<li>expandtab - Spaces are used in indents with <Tab>.</li>
-</ol>
-<p>For color scheme preferences:</p>
-
-<pre><code>colorscheme torte</code></pre>
-<p>It is the default black/white scheme.</p>
 ]]>
         </content>
     </entry>

@@ -39,6 +39,8 @@
     </p>
     
 	<p>These are settings that to improve usage of VI text editor for various purposes.</p>
+
+<h3 id="toc_0">1. Whitespaces and indent</h3>
 <p>Copy &amp; paste below lines to <strong><em>~/.vimrc</em></strong>:</p>
 
 <pre><code>set smartindent
@@ -52,10 +54,21 @@ set expandtab</code></pre>
 <li>shiftwidth - Number of spaces to use for each step of (auto)indent.</li>
 <li>expandtab - Spaces are used in indents with <Tab>.</li>
 </ol>
+
+<h3 id="toc_1">2. Color scheme</h3>
 <p>For color scheme preferences:</p>
 
 <pre><code>colorscheme torte</code></pre>
 <p>It is the default black/white scheme.</p>
+
+<h3 id="toc_2">3. Markdown syntax support</h3>
+<p>For markdown syntax highlight, by default it supports only the &ldquo;.markdown&rdquo; extension but not &ldquo;.md&rdquo;.</p>
+<p>You can try this in VIM and get the correct syntax highlight:</p>
+
+<pre><code>:set syntax=markdown</code></pre>
+<p>So if you want it to support the &ldquo;.md&rdquo; file also, add this line to the ~/.vimrc:</p>
+
+<pre><code>au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown</code></pre>
 
     
     
