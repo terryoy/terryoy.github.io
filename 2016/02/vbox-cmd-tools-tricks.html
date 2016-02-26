@@ -7,8 +7,8 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="apple-mobile-web-app-title" content="Hello, World!" />
     <meta name="application-name" content="Hello, World!" />
-    <title>Shell - Hello, World!</title>
-    <meta name="keywords" content="" />
+    <title>VirtualBox Command Line Tricks - Hello, World!</title>
+    <meta name="keywords" content="shell,virtualbox" />
     <meta name="description" content="" />
     
     <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="Hello, World!" />
@@ -33,32 +33,49 @@
     <a href="/about.html">About Me</a>
 </nav>
 
-<section>
-    <div id="main" class="hentry" role="main">
+<section><article id="main" class="hentry">
+	<h1>VirtualBox Command Line Tricks</h1>
+    <p class="sub_text">2016-02-17 by <i>terryoy</i>, in <a href="/tricks/">tricks</a>
+    </p>
     
-            <section class="item">
-                <h1>2016</h1>
-                <ul>
-                    <li><a href="/2016/02/vbox-cmd-tools-tricks.html">VirtualBox Command Line Tricks</a> <time class="updated">2016-02-17</time></li>
-    </ul>
-            </section>
-            <section class="item">
-                <h1>2014</h1>
-                <ul>
-                    <li><a href="/2014/01/ssh-key-based-auth-server.html">Setup SSH Identity Key Login in Linux</a> <time class="updated">2014-01-08</time></li>
+	<p>Sometimes we need to work with VirtualBox&#39;s command line tools to make things done. Here are a collections of tasks I encountered.</p>
+
+<h3 id="toc_0">1. Converting an Linux .img format to a .vdi (VirtualBox disk)</h3>
+<div class="highlight"><pre><span class="nv">$ </span>VBoxManage convertfromraw mydisk.img mydisk.vdi --format vdi
+</pre></div>
+
+<h3 id="toc_1">2. Mount virtual disk on your ubuntu system</h3>
+<p>(&hellip;to be continued)</p>
+
     
-                    <li><a href="/2014/01/archive-commands-in-linux.html">Archive Commands in Linux</a> <time class="updated">2014-01-07</time></li>
-    </ul>
-            </section>
-            <section class="item">
-                <h1>2013</h1>
-                <ul>
-                    <li><a href="/2013/09/useful_alias.html">Useful Aliases and Commands in Linux</a> <time class="updated">2013-09-23</time></li>
     
-                </ul>
-            </section>
-    </div><!-- #main -->
-</section>
+	<p/>
+	<hr/>
+    
+    <div class="sub_text">
+        <span>Tags:
+            <a href="/tag/shell/">shell</a>,&nbsp;<a href="/tag/virtualbox/">virtualbox</a>
+		</span>
+    
+        
+    </div>
+    
+
+	<p/>
+	
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'terryoy';
+        var disqus_title = 'VirtualBox Command Line Tricks';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+</article></section>
 
 <footer id="footer">
     <p><small>Hosted on GitHub Pages &mdash;<br/> Theme adopted from <a href="https://github.com/orderedlist">orderedlist</a></small></p>

@@ -3,9 +3,62 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/tricks/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/tricks/" />
-    <updated>2016-02-03T16:57:01+08:00</updated>
+    <updated>2016-02-26T11:11:36+08:00</updated>
     <id>http://terryoy.github.io/tricks/</id>
     <entry>
+        <title type="html"><![CDATA[Ubuntu Desktop Sharing to Mac OSX]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2016/02/ubuntu-desktop-sharing-to-osx.html"/>
+        <published>2016-02-26T10:52:00+08:00</published>
+        <updated>2016-02-26T11:11:36+08:00</updated>
+        <id>http://terryoy.github.io/2016/02/ubuntu-desktop-sharing-to-osx.html</id>
+        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
+        <category scheme="http://terryoy.github.io/tag/#osx" term="osx" label="osx" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <p>I have a spare laptop rest in my house which I seldom use(I major use my macbook pro for work), but it&#39;s still good for developing projects and runs Linuxi Mint. So I want it to be available any time when I&#39;m at home so I could use it to continue my side project works. With ssh and VNC, I can setup both the command line and desktop environment online so I don&#39;t need to open the laptop, but use my macbook to access the environment. Then I have the convenience that the laptop can put anywhere in the house and clear my desktop.</p>
+<p>I found <a href="http://www.fiz-ix.com/2012/12/ubuntu-to-mac-os-x-screen-sharing-with-vinagre/">this post</a> very useful to do the trick. It uses &ldquo;vino&rdquo; with easily setup steps, and you can get &ldquo;Vinagre&rdquo; VNC client on Linux ox,  but you need some notices about the access on OSX. So I write my process here.</p>
+
+<h3 id="toc_0">1. Setup Vino(VNC for gnome)</h3>
+<p>Just reference the post. </p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get vino
+<span class="c"># the preferences is the same as &quot;Desktop Sharing&quot; preference panel in Linux Mint</span>
+<span class="nv">$ </span>vino-preferences
+</pre></div>
+<p>You can set up the items just as the post said in vino-preferences, but on Linux Mint it lacks out the &ldquo;Advanced settings&rdquo; mentioned in the post. So you need &ldquo;dconf-editor&rdquo; to manually set it.</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install dconf-editor
+<span class="nv">$ </span>dconf-editor
+</pre></div>
+<p>Find the config item in dconf-editor with path <strong>&ldquo;desktop.gnome.remote-access&rdquo;</strong>. You need to uncheck the &ldquo;require encryption&rdquo; to support OSX, otherwise the authentication is unsupported on OSX.</p>
+
+<h3 id="toc_1">2. Using Screen Sharing on Mac OSX</h3>
+<p>Turn on the &ldquo;Spotlight&rdquo; with keyboard shortcut <code>cmd+K</code>, enter &ldquo;screen sharing&rdquo; and you can find the default desktop sharing client app on Mac OSX.</p>
+<p>Type &ldquo;vnc://your_server_ip:5900&rdquo; and then you get the prompt to enter password for the access. That&#39;s it!</p>
+
+<h3 id="toc_2">3. More</h3>
+<p>The post also talked about using the <code>avahi</code> service to broadcast the desktop sharing service to OSX. It is an advanced option to try, I will update it if I have tried.</p>
+]]>
+        </content>
+    </entry><entry>
+        <title type="html"><![CDATA[VirtualBox Command Line Tricks]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2016/02/vbox-cmd-tools-tricks.html"/>
+        <published>2016-02-17T11:01:00+08:00</published>
+        <updated>2016-02-26T10:39:43+08:00</updated>
+        <id>http://terryoy.github.io/2016/02/vbox-cmd-tools-tricks.html</id>
+        <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
+        <category scheme="http://terryoy.github.io/tag/#virtualbox" term="virtualbox" label="virtualbox" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <p>Sometimes we need to work with VirtualBox&#39;s command line tools to make things done. Here are a collections of tasks I encountered.</p>
+
+<h3 id="toc_0">1. Converting an Linux .img format to a .vdi (VirtualBox disk)</h3>
+<div class="highlight"><pre><span class="nv">$ </span>VBoxManage convertfromraw mydisk.img mydisk.vdi --format vdi
+</pre></div>
+
+<h3 id="toc_1">2. Mount virtual disk on your ubuntu system</h3>
+<p>(&hellip;to be continued)</p>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[Multiple Arguments in Python]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/02/args-kwargs-python.html"/>
@@ -779,7 +832,7 @@ set expandtab</code></pre>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/09/useful_alias.html"/>
         <published>2013-09-23T00:00:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
+        <updated>2016-02-26T10:38:48+08:00</updated>
         <id>http://terryoy.github.io/2013/09/useful_alias.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
@@ -832,6 +885,11 @@ set expandtab</code></pre>
 <span class="c"># &quot;-r&quot; is the output framerate</span>
 <span class="c"># &quot;image%03d.jpg&quot; for &quot;image001.jpg&quot; pattern, while &quot;image%d.jpg&quot; for &quot;image1.jpg&quot;(no zero-padding) pattern</span>
 <span class="nv">$ </span>ffmpeg -framerate 4 -i image%03d.jpg -r 4 test.mp4
+</pre></div>
+
+<h3 id="toc_4">Check network port opens</h3>
+<div class="highlight"><pre><span class="c"># Most of the network conversations are in tcp, so it&#39;s ok to filter the port with &quot;grep tcp&quot;</span>
+<span class="nv">$ </span>sudo netstat -pl | grep tcp
 </pre></div>
 ]]>
         </content>

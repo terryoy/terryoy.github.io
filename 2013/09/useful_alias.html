@@ -88,6 +88,11 @@
 <span class="nv">$ </span>ffmpeg -framerate 4 -i image%03d.jpg -r 4 test.mp4
 </pre></div>
 
+<h3 id="toc_4">Check network port opens</h3>
+<div class="highlight"><pre><span class="c"># Most of the network conversations are in tcp, so it&#39;s ok to filter the port with &quot;grep tcp&quot;</span>
+<span class="nv">$ </span>sudo netstat -pl | grep tcp
+</pre></div>
+
     
     
 	<p/>

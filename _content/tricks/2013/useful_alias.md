@@ -71,3 +71,11 @@ $ ffmpeg -framerate 4 -i image%03d.jpg -r 4 test.mp4
 
 ```
 
+### Check network port opens
+
+```bash
+# Most of the network conversations are in tcp, so it's ok to filter the port with "grep tcp"
+$ sudo netstat -pl | grep tcp
+```
+
+
