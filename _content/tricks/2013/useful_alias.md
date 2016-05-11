@@ -78,4 +78,13 @@ $ ffmpeg -framerate 4 -i image%03d.jpg -r 4 test.mp4
 $ sudo netstat -pl | grep tcp
 ```
 
+### Check user's default shell and change it
 
+```bash
+
+# check default shell
+$ cat /etc/passwd | grep terryoy
+# change default shell(check "man chsh" for more)
+$ chsh -s /bin/bash
+
+```
