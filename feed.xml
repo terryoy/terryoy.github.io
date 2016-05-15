@@ -3,14 +3,26 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2016-04-18T09:50:50+08:00</updated>
+    <updated>2016-05-15T22:54:27+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
+        <title type="html"><![CDATA[Linux Study Journal - (1) Kick Off]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2016/05/linux-study-journal-kickoff.html"/>
+        <published>2016-05-15T21:04:00+08:00</published>
+        <updated>2016-05-15T22:54:27+08:00</updated>
+        <id>http://terryoy.github.io/2016/05/linux-study-journal-kickoff.html</id>
+        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
+        <category scheme="http://terryoy.github.io/tag/#study" term="study" label="study" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ ]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[Config your git repository to use SSH Key]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/04/git-ssh-config.html"/>
         <published>2016-04-17T16:11:00+08:00</published>
-        <updated>2016-04-18T09:50:50+08:00</updated>
+        <updated>2016-05-15T19:23:55+08:00</updated>
         <id>http://terryoy.github.io/2016/04/git-ssh-config.html</id>
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
         <category scheme="http://terryoy.github.io/tag/#virtualbox" term="virtualbox" label="virtualbox" />
@@ -43,7 +55,7 @@ Host github.com
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/02/ubuntu-desktop-sharing-to-osx.html"/>
         <published>2016-02-26T10:52:00+08:00</published>
-        <updated>2016-02-26T11:11:36+08:00</updated>
+        <updated>2016-05-15T19:23:55+08:00</updated>
         <id>http://terryoy.github.io/2016/02/ubuntu-desktop-sharing-to-osx.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#osx" term="osx" label="osx" />
@@ -76,7 +88,7 @@ Host github.com
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/02/vbox-cmd-tools-tricks.html"/>
         <published>2016-02-17T11:01:00+08:00</published>
-        <updated>2016-02-26T10:39:43+08:00</updated>
+        <updated>2016-05-15T19:23:55+08:00</updated>
         <id>http://terryoy.github.io/2016/02/vbox-cmd-tools-tricks.html</id>
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
         <category scheme="http://terryoy.github.io/tag/#virtualbox" term="virtualbox" label="virtualbox" />
@@ -96,7 +108,7 @@ Host github.com
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/02/args-kwargs-python.html"/>
         <published>2016-02-03T16:05:00+08:00</published>
-        <updated>2016-02-03T16:57:01+08:00</updated>
+        <updated>2016-05-15T19:23:55+08:00</updated>
         <id>http://terryoy.github.io/2016/02/args-kwargs-python.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -152,7 +164,7 @@ Host github.com
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/09/rpi-hardware-begin-gpio-python.html"/>
         <published>2015-09-06T20:02:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
+        <updated>2016-05-15T19:23:55+08:00</updated>
         <id>http://terryoy.github.io/2015/09/rpi-hardware-begin-gpio-python.html</id>
         <category scheme="http://terryoy.github.io/tag/#rpi" term="rpi" label="rpi" />
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
@@ -182,7 +194,7 @@ Host github.com
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/06/some-useful-linux-server-security-commands.html"/>
         <published>2015-06-27T22:31:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
+        <updated>2016-05-15T19:23:55+08:00</updated>
         <id>http://terryoy.github.io/2015/06/some-useful-linux-server-security-commands.html</id>
         <category scheme="http://terryoy.github.io/tag/#server" term="server" label="server" />
         <category scheme="http://terryoy.github.io/tag/#security" term="security" label="security" />
@@ -255,55 +267,11 @@ Jun 27 21:53:39 iZ940ou5p7nZ sudo: pam_unix<span class="o">(</span>sudo:session<
 ]]>
         </content>
     </entry><entry>
-        <title type="html"><![CDATA[Intel Edison Get Started]]></title>
-        <author><name>terryoy</name></author>
-        <link href="http://terryoy.github.io/2015/06/edison-get-started.html"/>
-        <published>2015-06-03T16:15:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
-        <id>http://terryoy.github.io/2015/06/edison-get-started.html</id>
-        <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
-        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
-            <![CDATA[ <p>This guide is about the initial steps for me starting development on Intel Edison platform.</p>
-
-<h3 id="toc_0">1. The Board and Setting Up Serial Communication</h3>
-<p>The board I use to develop with Edison is the <a href="http://www.seeedstudio.com/depot/Intel-Edison-for-Arduino-p-2149.html">Intel Edison for Arduino</a> board. So first plug the Edison module on the board; secondary, I have the 6.5V 2A DC connected to supply the power to the board (or you could power up the board with the micro-USB in the middle); third, a micro-USB wire connect to the board for serial communication.</p>
-<p>I&#39;m using minicom on Mac OSX for the serial connection, but you can also use <code>screen</code> on Mac OSX and Linux(see the reference at the end of this section).</p>
-<p>If you forgot the root password, here&#39;s the way to recover it: </p>
-
-<pre><code>* on booting, press any key to stop the process
-* on the &quot;boot&gt;&quot; command line prompt, type ```run do_ota``` to redo the flashing process.</code></pre>
-<p>Then you end up with a login using &ldquo;root&rdquo; as user name and no password.</p>
-
-<ul>
-<li><a href="https://software.intel.com/zh-cn/assembling-intel-edison-board-with-arduino-expansion-board">Reference for assembling</a></li>
-<li><a href="https://software.intel.com/zh-cn/setting-up-serial-terminal-on-system-with-linux">Reference for setting up serial on Linux</a></li>
-<li><a href="https://software.intel.com/zh-cn/setting-up-serial-terminal-on-system-with-mac-os-x">Reference for setting up serial on Mac</a></li>
-</ul>
-
-<h3 id="toc_1">2. Setting up WiFi</h3>
-<p>The next thing to do is to setup the WiFi on Edison, because a large part of the development process happens on WiFi.</p>
-<div class="highlight"><pre><span class="nv">$ </span>configure_edison --wifi
-
-<span class="c"># check the wifi status</span>
-<span class="nv">$ </span>wpa_cli status
-</pre></div>
-<p>Follow the instructions of this program to complete the scanning, choosing hotspot, and reboot with WiFi.</p>
-<p>By default, <code>ssh</code> is restricted to usb, so you need to disable the restriction by using <code>configure_edison --setup</code> to setup the device name and password. It will automatically update the file &#39;/lib/systemd/system/sshd.socket&#39; and comment out this line &ldquo;BindToDevice=usb0&rdquo;. (need reboot to take effect)</p>
-
-<ul>
-<li><a href="https://software.intel.com/zh-cn/connecting-your-intel-edison-board-using-wifi">Reference for setting up WiFi</a></li>
-</ul>
-
-<h3 id="toc_2">3. Blink the LED</h3>
-<p>(to be continued when I get the board&hellip;)</p>
-]]>
-        </content>
-    </entry><entry>
         <title type="html"><![CDATA[A Template for Program Readme on Github]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/06/program-readme-template.html"/>
         <published>2015-06-03T16:15:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
+        <updated>2016-05-15T19:23:55+08:00</updated>
         <id>http://terryoy.github.io/2015/06/program-readme-template.html</id>
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -384,11 +352,55 @@ top level routines
 ]]>
         </content>
     </entry><entry>
+        <title type="html"><![CDATA[Intel Edison Get Started]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2015/06/edison-get-started.html"/>
+        <published>2015-06-03T16:15:00+08:00</published>
+        <updated>2016-05-15T19:23:55+08:00</updated>
+        <id>http://terryoy.github.io/2015/06/edison-get-started.html</id>
+        <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <p>This guide is about the initial steps for me starting development on Intel Edison platform.</p>
+
+<h3 id="toc_0">1. The Board and Setting Up Serial Communication</h3>
+<p>The board I use to develop with Edison is the <a href="http://www.seeedstudio.com/depot/Intel-Edison-for-Arduino-p-2149.html">Intel Edison for Arduino</a> board. So first plug the Edison module on the board; secondary, I have the 6.5V 2A DC connected to supply the power to the board (or you could power up the board with the micro-USB in the middle); third, a micro-USB wire connect to the board for serial communication.</p>
+<p>I&#39;m using minicom on Mac OSX for the serial connection, but you can also use <code>screen</code> on Mac OSX and Linux(see the reference at the end of this section).</p>
+<p>If you forgot the root password, here&#39;s the way to recover it: </p>
+
+<pre><code>* on booting, press any key to stop the process
+* on the &quot;boot&gt;&quot; command line prompt, type ```run do_ota``` to redo the flashing process.</code></pre>
+<p>Then you end up with a login using &ldquo;root&rdquo; as user name and no password.</p>
+
+<ul>
+<li><a href="https://software.intel.com/zh-cn/assembling-intel-edison-board-with-arduino-expansion-board">Reference for assembling</a></li>
+<li><a href="https://software.intel.com/zh-cn/setting-up-serial-terminal-on-system-with-linux">Reference for setting up serial on Linux</a></li>
+<li><a href="https://software.intel.com/zh-cn/setting-up-serial-terminal-on-system-with-mac-os-x">Reference for setting up serial on Mac</a></li>
+</ul>
+
+<h3 id="toc_1">2. Setting up WiFi</h3>
+<p>The next thing to do is to setup the WiFi on Edison, because a large part of the development process happens on WiFi.</p>
+<div class="highlight"><pre><span class="nv">$ </span>configure_edison --wifi
+
+<span class="c"># check the wifi status</span>
+<span class="nv">$ </span>wpa_cli status
+</pre></div>
+<p>Follow the instructions of this program to complete the scanning, choosing hotspot, and reboot with WiFi.</p>
+<p>By default, <code>ssh</code> is restricted to usb, so you need to disable the restriction by using <code>configure_edison --setup</code> to setup the device name and password. It will automatically update the file &#39;/lib/systemd/system/sshd.socket&#39; and comment out this line &ldquo;BindToDevice=usb0&rdquo;. (need reboot to take effect)</p>
+
+<ul>
+<li><a href="https://software.intel.com/zh-cn/connecting-your-intel-edison-board-using-wifi">Reference for setting up WiFi</a></li>
+</ul>
+
+<h3 id="toc_2">3. Blink the LED</h3>
+<p>(to be continued when I get the board&hellip;)</p>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[Create a Root CA and Self-Sign Certificate for SSL]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/02/create-ssl-ca-root-and-self-sign.html"/>
         <published>2015-02-23T11:03:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
+        <updated>2016-05-15T19:23:55+08:00</updated>
         <id>http://terryoy.github.io/2015/02/create-ssl-ca-root-and-self-sign.html</id>
         <category scheme="http://terryoy.github.io/tag/#server" term="server" label="server" />
         <category scheme="http://terryoy.github.io/tag/#security" term="security" label="security" />
@@ -480,7 +492,7 @@ Common Name <span class="o">(</span>e.g. server FQDN or YOUR name<span class="o"
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/02/postgresql-admin-quickref-part2-initiating-database.html"/>
         <published>2015-02-21T16:40:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
+        <updated>2016-05-15T19:23:55+08:00</updated>
         <id>http://terryoy.github.io/2015/02/postgresql-admin-quickref-part2-initiating-database.html</id>
         <category scheme="http://terryoy.github.io/tag/#postgresql" term="postgresql" label="postgresql" />
         <category scheme="http://terryoy.github.io/tag/#database" term="database" label="database" />
@@ -534,7 +546,7 @@ host    all             all             ::1/128                 md5
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/11/jni-guide-on-android.html"/>
         <published>2014-11-27T16:06:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
+        <updated>2016-05-15T19:23:55+08:00</updated>
         <id>http://terryoy.github.io/2014/11/jni-guide-on-android.html</id>
         <category scheme="http://terryoy.github.io/tag/#cpp" term="cpp" label="cpp" />
         <category scheme="http://terryoy.github.io/tag/#android" term="android" label="android" />
@@ -685,7 +697,7 @@ JNI Documentation: <a href="http://docs.oracle.com/javase/1.5.0/docs/guide/jni/s
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/10/finding-information-linux-c-library.html"/>
         <published>2014-10-30T09:38:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
+        <updated>2016-05-15T19:23:55+08:00</updated>
         <id>http://terryoy.github.io/2014/10/finding-information-linux-c-library.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
@@ -763,7 +775,7 @@ Program Library HOWTO <br/>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/10/common-git-commands.html"/>
         <published>2014-10-22T20:57:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
+        <updated>2016-05-15T19:23:55+08:00</updated>
         <id>http://terryoy.github.io/2014/10/common-git-commands.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
@@ -862,7 +874,7 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/08/learning-linux-c-part-1.html"/>
         <published>2014-08-20T23:34:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
+        <updated>2016-05-15T19:23:55+08:00</updated>
         <id>http://terryoy.github.io/2014/08/learning-linux-c-part-1.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
@@ -910,7 +922,7 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/06/create-database-mysql.html"/>
         <published>2014-06-04T14:40:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
+        <updated>2016-05-15T19:23:55+08:00</updated>
         <id>http://terryoy.github.io/2014/06/create-database-mysql.html</id>
         <category scheme="http://terryoy.github.io/tag/#database" term="database" label="database" />
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
@@ -950,7 +962,7 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/03/using-ctypes-to-wrap-c-library.html"/>
         <published>2014-03-23T07:57:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
+        <updated>2016-05-15T19:23:55+08:00</updated>
         <id>http://terryoy.github.io/2014/03/using-ctypes-to-wrap-c-library.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
@@ -1131,7 +1143,7 @@ The <em>byref()</em> method create a parameter object of pointer, which you can 
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/03/postgresql-admin-quickref-part1-exploring-database.html"/>
         <published>2014-03-06T15:27:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
+        <updated>2016-05-15T19:23:55+08:00</updated>
         <id>http://terryoy.github.io/2014/03/postgresql-admin-quickref-part1-exploring-database.html</id>
         <category scheme="http://terryoy.github.io/tag/#postgresql" term="postgresql" label="postgresql" />
         <category scheme="http://terryoy.github.io/tag/#database" term="database" label="database" />
@@ -1260,7 +1272,7 @@ Log files: <code>/var/log/postgresql/</code></p>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/01/ssh-key-based-auth-server.html"/>
         <published>2014-01-08T15:40:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
+        <updated>2016-05-15T19:23:55+08:00</updated>
         <id>http://terryoy.github.io/2014/01/ssh-key-based-auth-server.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
@@ -1358,7 +1370,7 @@ If you want to revoke an authorized key for some user, you can find the user&#39
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/01/archive-commands-in-linux.html"/>
         <published>2014-01-07T19:13:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
+        <updated>2016-05-15T19:23:55+08:00</updated>
         <id>http://terryoy.github.io/2014/01/archive-commands-in-linux.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
@@ -1400,151 +1412,6 @@ If you want to revoke an authorized key for some user, you can find the user&#39
 <span class="nv">$ </span>star -xv <span class="nv">f</span><span class="o">=</span>archive.star 
 <span class="nv">$ </span>cpio -idmv &lt; archive.cpio
 <span class="nv">$ </span>unace x file.ace
-</pre></div>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[Matplotlib Example in Short (1) - The Plotting Graph]]></title>
-        <author><name>terryoy</name></author>
-        <link href="http://terryoy.github.io/2013/12/matplotlib-simple-guide-1.html"/>
-        <published>2013-12-31T01:00:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
-        <id>http://terryoy.github.io/2013/12/matplotlib-simple-guide-1.html</id>
-        <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
-        <category scheme="http://terryoy.github.io/tag/#graph" term="graph" label="graph" />
-        <category scheme="http://terryoy.github.io/tag/#matplotlib" term="matplotlib" label="matplotlib" />
-        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
-            <![CDATA[ <p>The book <a href="http://www.amazon.com/Beginning-Python-Visualization-Transformation-Professionals/dp/1430218436"><em>&ldquo;Beginning Python Visualization&rdquo;</em></a> (by Shai Vaingast) is a great book for learning data visualization with Python. Here I would like to write a short reference guide for the Matplotlib usage after studying with it.</p>
-
-<h2 id="toc_0">Why Matplotlib?</h2>
-<p>In my opinion, there are different purpose while working on visualization: 1. scientific presentation; 2. web(real time / periodic update) presentation; 3. artistic presentation. The <strong>Matplotlib</strong> library in python is mainly served for the first and the  purpose, where you can easily plot data on the graph for analyzing and crafting your visualization script, at the same time you could use with IPython Notebook or in other web development to render statistics and display on the web. </p>
-<p>If you have complicated graph or artistic requirements on the final result, you might move on to <a href="http://bokeh.pydata.org/">Bokeh</a> or <a href="">NodeBox OpenGL</a>, but matplotlib is still a handy tool for dealing with raw data in preceding scenarios.</p>
-
-<h2 id="toc_1">The Basic Plotting</h2>
-<p>Here is a basic example to show how to use the basic plotting function in Matplotlib.</p>
-<p>The graph image:</p>
-<p><img src="http://terryoy-github.u.qiniudn.com/blog/images/2013/matplotlib_sum_graph.png" alt="alt" title="Matplotlib Plotting Graph Summary example"/></p>
-<p>The source code:</p>
-<div class="highlight"><pre><span class="c"># remember in matplotlib-1.1 we import everything from **pylab** </span>
-<span class="kn">from</span> <span class="nn">pylab</span> <span class="kn">import</span> <span class="o">*</span>
-
-<span class="n">I</span> <span class="o">=</span> <span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="o">+</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
-<span class="n">hold</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">I</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="n">I</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;x = cos($</span><span class="se">\a</span><span class="s">lpha$), y = sin($</span><span class="se">\a</span><span class="s">lpha$)&#39;</span><span class="p">)</span>
-<span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">cos</span><span class="p">(</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span><span class="p">)],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">sin</span><span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">)],</span> <span class="s">&quot;k-&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s">&quot;k-&quot;</span><span class="p">)</span> 
-<span class="n">I1</span> <span class="o">=</span> <span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
-<span class="n">plot</span><span class="p">(</span><span class="mf">0.3</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">I1</span><span class="p">),</span> <span class="mf">0.3</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">I1</span><span class="p">),</span> <span class="s">&#39;b--&#39;</span><span class="p">)</span>
-<span class="n">title</span><span class="p">(</span><span class="s">&#39;Drawing a Cicle by Radius&#39;</span><span class="p">)</span>
-<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;x = cos(I), I = [0, $2\pi$]&#39;</span><span class="p">)</span>
-<span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;y = sin(I), I = [0, $2\pi$]&#39;</span><span class="p">)</span>
-<span class="n">text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#39;Top&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s">&#39;left&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s">&#39;bottom&#39;</span><span class="p">)</span>
-<span class="n">text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s">&#39;Bottom&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s">&#39;left&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s">&#39;top&#39;</span><span class="p">)</span>
-<span class="n">text</span><span class="p">(</span><span class="mf">0.4</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">8</span><span class="p">),</span> <span class="mf">0.4</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">8</span><span class="p">),</span> <span class="s">&#39;$45^\circ$&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s">&#39;left&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s">&#39;bottom&#39;</span><span class="p">)</span>
-<span class="n">xticks</span><span class="p">(</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">))</span>
-<span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">])</span>
-<span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">])</span>
-<span class="n">grid</span><span class="p">()</span>
-
-<span class="n">show</span><span class="p">()</span>
-</pre></div>
-<p>Now let&#39;s check out each commands we could use.</p>
-
-<h3 id="toc_2">1. plot(), markers, line styles, and colors</h3>
-<div class="highlight"><pre><span class="c"># plot accept vectors to draw lines</span>
-<span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>   <span class="c"># given one vector, it will take it as both X, and Y</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>     <span class="c"># arange() is a function from NumPy which could generate vectors</span>
-<span class="n">I</span> <span class="o">=</span> <span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mf">5.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>    <span class="c"># arange(begin value, end value, step)</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">I</span><span class="p">)</span>    <span class="c"># plot a &quot;y = 2x&quot; line with the vector I as X&#39;s range</span>
-
-<span class="n">plot</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">I</span><span class="p">,</span> <span class="s">&#39;ko-&#39;</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">I</span><span class="o">*</span><span class="n">I</span><span class="p">,</span> <span class="s">&#39;bD--&#39;</span><span class="p">)</span> <span class="c"># multi-plot with options in one line</span>
-
-<span class="c"># now check out the short options, which you could use in the third parameter in each plot</span>
-<span class="c"># -- Markers (check out doc for more)</span>
-<span class="c">#   &#39;o&#39;: Circle, </span>
-<span class="c">#   &#39;^&#39;: Upward-pointing triangle,</span>
-<span class="c">#   &#39;s&#39;: Sqaure,</span>
-<span class="c">#   &#39;+&#39;: Plus,</span>
-<span class="c">#   &#39;x&#39;: Cross,</span>
-<span class="c">#   &#39;D&#39;: Diamond</span>
-<span class="c">#</span>
-<span class="c"># -- Line Styles</span>
-<span class="c">#   &#39;-&#39;: Solid line,</span>
-<span class="c">#   &#39;--&#39;: Dashed line,</span>
-<span class="c">#   &#39;-.&#39;: Dash-dot line,</span>
-<span class="c">#   &#39;:&#39;: Dotted line</span>
-<span class="c">#</span>
-<span class="c"># -- Color</span>
-<span class="c">#   &#39;b&#39;: Blue,</span>
-<span class="c">#   &#39;c&#39;: Cyan,</span>
-<span class="c">#   &#39;g&#39;: Green,</span>
-<span class="c">#   &#39;k&#39;: Black,</span>
-<span class="c">#   &#39;m&#39;: Magenta,</span>
-<span class="c">#   &#39;r&#39;: Red,</span>
-<span class="c">#   &#39;w&#39;: White,</span>
-<span class="c">#   &#39;y&#39;: Yellow</span>
-
-<span class="n">plot</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">I</span><span class="o">*</span><span class="n">I</span><span class="p">,</span> <span class="s">&#39;o-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span> <span class="c"># lw/linewidth - Line Width, ms/markersize - Marker Size</span>
-</pre></div>
-
-<h3 id="toc_3">2. Axes and Grids, text, legends and titles</h3>
-<div class="highlight"><pre><span class="c"># range of axes</span>
-<span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>    <span class="c"># accept an array with [xmin, xmax, ymin, ymax]</span>
-<span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>   <span class="c"># or if you want to set Axis X or Axis Y separately</span>
-<span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> 
-<span class="n">axis</span><span class="p">()</span>  <span class="c"># check the current axes range</span>
-<span class="n">xlim</span><span class="p">()</span>
-<span class="n">ylim</span><span class="p">()</span>
-
-<span class="c"># grids and ticks</span>
-<span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>  <span class="c"># set grid display to True or False</span>
-<span class="n">xticks</span><span class="p">(</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>    <span class="c"># customize the tick locations on Axis X</span>
-<span class="n">yticks</span><span class="p">(</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>   <span class="c"># customize the tick locations on Axis Y</span>
-<span class="n">xticks</span><span class="p">(</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;Tom&#39;</span><span class="p">,</span> <span class="s">&#39;Jerry&#39;</span><span class="p">,</span> <span class="s">&#39;Sally&#39;</span><span class="p">,</span> <span class="s">&#39;Harry&#39;</span><span class="p">,</span> <span class="s">&#39;Me&#39;</span><span class="p">))</span>   <span class="c"># also customize the tick labels</span>
-
-<span class="c"># draw axes lines</span>
-<span class="n">axvline</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#39;r&#39;</span><span class="p">)</span> <span class="c"># draw a vertical axis line at x=0, with linewidth and color</span>
-<span class="n">axvline</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">)</span>    <span class="c"># draw a vertical line on x=1, with vertical ratio (0.2, 0.8) of the graph&#39;s height</span>
-<span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">xmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">xmax</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>    <span class="c"># draw a horizontal axis similar to axvline()</span>
-
-<span class="c"># enable legends</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">I</span><span class="o">*</span><span class="n">I</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&quot;y = x^2&quot;</span><span class="p">)</span>
-<span class="n">legend</span><span class="p">()</span>    <span class="c"># enable legends of existing lines</span>
-<span class="n">legend</span><span class="p">([</span><span class="s">&#39;sin(x)&#39;</span><span class="p">,</span> <span class="s">&#39;cos(x)&#39;</span><span class="p">])</span>    <span class="c"># set legend text explicitly</span>
-
-
-<span class="c"># text at any position</span>
-<span class="n">text</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#39;text positioned at (1, 1)&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s">&#39;baseline&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s">&#39;left&#39;</span><span class="p">)</span>   <span class="c"># draw text with vertical and horizontal alignment</span>
-<span class="n">text</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#39;some text&#39;</span><span class="p">,</span> <span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">))</span>  <span class="c"># draw text with a rectangle background</span>
-
-<span class="c"># title of the graph</span>
-<span class="n">title</span><span class="p">(</span><span class="s">&#39;some title&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s">&#39;baseline&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s">&#39;center&#39;</span><span class="p">)</span> <span class="c"># draw the title text of the graph</span>
-
-<span class="c"># labels of axes</span>
-<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;Time&quot;)</span>
-<span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;Money we gain&#39;</span><span class="p">)</span>
-
-<span class="c"># use (TeX-like) symbols, **you must use raw string (r&#39;text&#39;)**</span>
-<span class="n">title</span><span class="p">(</span><span class="s">r&#39;$ \alpha_i &gt; \beta_i $&#39;</span><span class="p">)</span>    <span class="c"># TeX-like symbols should be surrounded by &#39;$$&#39;</span>
-</pre></div>
-<p>For more TeX symbols, please check the <a href="http://matplotlib.org/users/mathtext.html#symbols">reference on matplolib</a>.</p>
-
-<h3 id="toc_4">3. Figure control</h3>
-<div class="highlight"><pre><span class="c"># create / specify a figure to plot</span>
-<span class="n">figure</span><span class="p">()</span>    <span class="c"># create a new figure by default</span>
-<span class="n">figure</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>   <span class="c"># switch to the figure with id 2</span>
-<span class="c"># save figure to a file (select format by extension)</span>
-<span class="n">savefig</span><span class="p">(</span><span class="s">&#39;filename.png&#39;</span><span class="p">)</span> 
-
-<span class="c"># creating subplots</span>
-<span class="c"># subplot(numRows, numCols, plotNum)</span>
-<span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>    <span class="c"># the default </span>
-<span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>    <span class="c"># split in 2 x 1 table, and draw on upper half</span>
-<span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>    <span class="c"># split in 2 x 2 table, and draw on the bottom left(it can work together with the above one, as long as the plots don&#39;t overlap)</span>
-
-<span class="c"># erasing the graph </span>
-<span class="n">cla</span><span class="p">()</span>   <span class="c"># clear axes</span>
-<span class="n">clf</span><span class="p">()</span>   <span class="c"># clear figure</span>
-<span class="n">close</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>    <span class="c"># close figure with id (if specified)</span>
 </pre></div>
 ]]>
         </content>

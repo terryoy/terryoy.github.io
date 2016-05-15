@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Hello, World!" />
+    <meta name="application-name" content="Hello, World!" />
+    <title>Linux Study Journal - (1) Kick Off - Hello, World!</title>
+    <meta name="keywords" content="linux,study" />
+    <meta name="description" content="I have an used Japanese IBM G40 PC, which has Pentium 4 (2.5GHz) processor, 512MB RAM and a 140GB hard disk (I believe the hardware spec has been changed by the used PC seller). Since the power consumption and the speed are not suitable for very modern applications, I decided to use it as an experiment machine for the minimal linux workspace. This series of blog posts will be the progress showing how I work on this machine to make it very friendly and efficient for daily used.
+
+I started to boot with the Ubuntu 16.04 LTS server image(flashed on a USB stick), the booting is a bit strange than previous versions, it shows a &quot;boot:&quot; prompt which need you to tells what to boot, but it&#39;s not difficult to find out how to boot into the installation mode.
+
+The reason using Ubuntu latest version is because I want to keep up with the development of the software packages, debian is in a very stable status, while the Ubuntu packages are active enough to try out new things. I format the whole disk and install Ubuntu only on the disk. This is the starting point.
+
+I&#39;m so exciting at the moment when I finish all the installation and reboot, because I finally get this project started! But the first problem come very quickly - <strong>when I try to lower the lid, the screen just go dark, and when I reopen it, the going hibernate process sticks in every few seconds</strong>. I think there is some problem with the led sensor, because it automatically goes into hibernate a few seconds later when I activate again. So I think it is related to the power options in system settings.
+
+This problem leads me to know about the <strong>&quot;systemd&quot;</strong> program. Searching solutions on the internet, I find out the settings in systemd will handle the power related key event. It sets how system react when user press Power key, Hibernate Key, Lid close/open, etc.
+
+```bash
+$ sudo vi /etc/systemd/logind.conf
+(
+-change 
+
+-to
+HandleLidSwitch=ignore
+)
+
+$ sudo service systemd-logind restart
+
+```
+
+This helps me to get over the hibernation problem at once. <strong>Systemd</strong> is a Linux system and service manager. There is similar programs like ubuntu&#39;s &quot;upstart&quot;, or Mac OS&#39;s &quot;launchd&quot;. You can search for more info about it.
+
+There are two other power related packages <code>acpi</code> and <code>acpid</code>. The Ubuntu document recommends that you can remove the packages if you do not have a laptop. 
+
+Although I set some Japanese keyboard layout in the installation, but it doesn&#39;t match all the keys with my Japanese IBM G40 keyboard. Apparently I need to switch the keyboard layout and do a few tests. The configuration program I used here is <code>dpkg-reconfigure</code>, which allows you to configure a package again after they&#39;re installed. The package will be &quot;keyboard-configuration&quot;.
+
+```bash
+
+$ sudo dpkg-reconfigure keyboard-configuration
+```
+
+The above one already solved the problem. I changed the keyboard model to IBM ThinkPad T60/R60/T61/R61, then it says the layout of this keyboard varies in different country, so I&#39;m able to choose the &quot;Japanese&quot; as the country of the origin layout. 
+
+Some threads mentioned about the <code>console-setup</code> as I found out it is mainly for the encoding and the font set in the console, it might be related to the problem but not at this point. I may referred back if I try to work with Chinese character in the console.
+
+```bash
+
+$ sudo dpkg-reconfigure console-setup
+<code>
+A little more on dpkg-reconfigure, if you use</code>man dpkg-recongure<code>to check its manual, you will find another related command called</code>debconf-show```. It shows you all the current configurations of the package. So before you go with &quot;dpkg-reconfigure&quot;, you can check the configuration first.
+
+<code>bash
+$ sudo debconf-show keyboard-configuration
+</code>
+It shows how many configuration items of the package and their values. Check out the man page for &quot;keyboard-configuration&quot;, &quot;console-setup&quot;, &quot;dpkg-reconfigure&quot; and &quot;debconf-show&quot; to explore more." />
+    
+    <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="Hello, World!" />
+    <link rel="stylesheet" href="/static/css/styles.css?v=fc867" />
+    <link rel="stylesheet" href="/static/css/pygment_trac.css?v=a6c15" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div id="wrapper">   
+<header id="header" class="clear">
+    <h1>Hello, World!</h1>
+    <p>I'm <i>terryoy</i></p>
+    <p class="view"><a href="https://github.com/terryoy">View My GitHub Profile</a></p>
+</header><!-- #header -->
+<nav id="nav" role="navigation">
+    <a href="/">Home</a>
+    <a href="/thoughts/">Thoughts</a>
+    <a href="/guides/">Guides</a>
+    <a href="/tricks/">Tricks</a>
+    <a href="/about.html">About Me</a>
+</nav>
+
+<section><article id="main" class="hentry">
+	<h1>Linux Study Journal - (1) Kick Off</h1>
+    <p class="sub_text">2016-05-15 by <i>terryoy</i>
+    </p>
+    
+	
+    
+    
+	<p/>
+	<hr/>
+    
+    <div class="sub_text">
+        <span>Tags:
+            <a href="/tag/linux/">linux</a>,&nbsp;<a href="/tag/study/">study</a>
+		</span>
+    
+        
+    </div>
+    
+
+	<p/>
+	
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'terryoy';
+        var disqus_title = 'Linux Study Journal - (1) Kick Off';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+</article></section>
+
+<footer id="footer">
+    <p><small>Hosted on GitHub Pages &mdash;<br/> Theme adopted from <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+</footer><!-- #footer -->
+</div><!-- #wrapper -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-50656512-1', 'terryoy.github.io');
+ga('send', 'pageview');
+</script> <!-- google analytics -->
+
+</body>
+</html>
