@@ -9,7 +9,7 @@
 
 I have an used Japanese IBM G40 PC, which has Pentium 4 (2.5GHz) processor, 512MB RAM and a 140GB hard disk (I believe the hardware spec has been changed by the used PC seller). Since the power consumption and the speed are not suitable for very modern applications, I decided to use it as an experiment machine for the minimal linux workspace. This series of blog posts will be the progress showing how I work on this machine to make it very friendly and efficient for daily used.
 
-### 1. System Setup
+### Part 1. System Setup
 
 I started to boot with the Ubuntu 16.04 LTS server image(flashed on a USB stick), the booting is a bit strange than previous versions, it shows a "boot:" prompt which need you to tells what to boot, but it's not difficult to find out how to boot into the installation mode.
 
@@ -23,18 +23,17 @@ This problem leads me to know about the **"systemd"** program. Searching solutio
 
 ```bash
 $ sudo vi /etc/systemd/logind.conf
-(
--change 
+# --in the file, change below line
 #HandleLidSwitch=suspend
--to
+# --to
 HandleLidSwitch=ignore
-)
+
 
 $ sudo service systemd-logind restart
 
 ```
 
-This helps me to get over the hibernation problem at once. **Systemd** is a Linux system and service manager. There is similar programs like ubuntu's "upstart", or Mac OS's "launchd". You can search for more info about it.
+This helps me to get over the hibernation problem at once. **Systemd** is a Linux system and service manager. There is similar programs like ubuntu's "upstart", or Mac OS's "launchd". You can search for more info about it. **The man page of systemd(init) is definitely worth reading to understand the first process of the system.**
 
 There are two other power related packages ```acpi``` and ```acpid```. The Ubuntu document recommends that you can remove the packages if you do not have a laptop. 
 
@@ -62,10 +61,76 @@ $ sudo debconf-show keyboard-configuration
 ```
 It shows how many configuration items of the package and their values. Check out the man page for "keyboard-configuration", "console-setup", "dpkg-reconfigure" and "debconf-show" to explore more.
 
-### 2. Setup a minimal desktop environment
 
+#### 1.3 Problem 3: WiFi Connection
 
+The original G40 doesn't have wireless network connection. Fortunately I have a spare USB wifi adapter, but I need to configure the WiFi manually via command line. The adapter I used is Ralink RT5370, which is already supported in the kernel, so I don't need to explicitly install a driver for it.
 
+First I could use ```lsusb``` to check that device is recognized. Then I move on to updating the configuration in ```/etc/network/interfaces```. Check out the man page of **interfaces**, and you will find the information of the keywords and syntax for configuring the network interface. For example:
 
+	* *auto*, telling ```ifup``` to get this interface up automatically
+	* *iface*, define an interface (template) using different methods(inet, inet6, etc.)
+	* *allow-*, allow the interface to be brought up by various sub-system(e.g. allow-hotplug, allow-auto, etc.)
+	* *pre-up*, *post-down*, commands to be execute before the interface is up or after it is down
+
+	
+The configuration syntax is not difficult, so I added the below lines to enable the wifi adapter at system startup:
+
+```
+auto wlan0
+iface wlan0 inet dhcp
+iface wlan0 inet6 auto
+```
+
+Next I discover that my WiFi adapter is not called "wlan0"(you can check that by command ```iwconfig```). Instead, it is called "wlx5c63bf2a8b28", no wonder why I cannot bring it up when execute ifup. So now I need to change the name for it to make it more readable using **udev**. udev is responsible for which device gets which name. By the Systemd v197 standard of "Predictable Network Interface Names", interfaces are prefixed with "en" for ethernet, "wl" for WLAN, and "WW" for WWAN. 
+
+```bash
+# you check the interface entires list first, and fine the MAC address we'll need in udev
+$ ip link
+# (or alternatively for wireless interfaces)
+$ iw dev
+
+# update udev configuration
+$ sudo vi /etc/udev/rules.d/10-network.rules
+# add below line and save
+SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="5c:63:bf:2a:8b:28", NAME="wlan0"
+
+```
+
+The **udev** program is a dynamic device management software, it supplies the system softwares with device events, manage permissions of device nodes and may create additional symlinks in the "/dev" directory, or provide names to unpredictable device names from the kernel. The man page for ```udev``` is worth reading.
+
+Reboot to test out if the device is named correctly. The devicexs can be found in ```/sys/class/net/```, with a symbolic link to the device's DEVPATH.
+
+Next step is to setup the WPA2 authentication of the WiFi with my SSID and password. We'll need ```wpasupplicant``` package for that.
+
+```bash
+$ sudo apt-get install wpasupplicant
+$ sudo vi /etc/wpa_supplicant/example.conf
+# add the following contents:
+#	ctrl_interface=/run/wpa_supplicant
+#	update_config=1
+$ sudo wpa_passphrase <SSID> <password> >> /etc/wpa_supplicant/example.conf
+
+# to test the configuration: 1. start wpa_supplicant in the background, 2. use wpa_cli to interactive with the interface
+$ wpa_supplicant -i wlan0 -c /etc/wpa_supplicant/example.conf
+# (or alternatively, add "-B" parameter to the wpa_supplicant command to make it run as a daemon in the background, then use "wpa_cli" to work interactively)
+$ wpa_cli
+>scan
+>scan_results
+# now you see the hotspot scan result, which means the configuration work
+
+# Go back to our network interface setup, we will add wpa_supplicant to it
+$ sudo vi /etc/network/interfaces
+auto wlan0
+iface wlan0 inet dhcp
+  pre-up wpa_supplicant -B -i wlan0 -c /etc/wpa_supplicant/example.conf
+# save and test the interface
+$ sudo ifdown wlan0
+$ sudo ifup wlan0
+# make sure the DHCP client can get an IP, otherwise the network auto start process in boot up might hang for 5 minutes to get the network...
+
+```
+
+Hard-coding the WiFi SSID and password in the configuration is not convenience in real environment, but so far in my experiement environment, it is OK to use it first. We will get back to the network manager later to make it more convenience to connect different WiFi network.
 
 

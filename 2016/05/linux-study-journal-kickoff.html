@@ -41,7 +41,7 @@
 	<h3 id="toc_0">0. How this series begin?</h3>
 <p>I have an used Japanese IBM G40 PC, which has Pentium 4 (2.5GHz) processor, 512MB RAM and a 140GB hard disk (I believe the hardware spec has been changed by the used PC seller). Since the power consumption and the speed are not suitable for very modern applications, I decided to use it as an experiment machine for the minimal linux workspace. This series of blog posts will be the progress showing how I work on this machine to make it very friendly and efficient for daily used.</p>
 
-<h3 id="toc_1">1. System Setup</h3>
+<h3 id="toc_1">Part 1. System Setup</h3>
 <p>I started to boot with the Ubuntu 16.04 LTS server image(flashed on a USB stick), the booting is a bit strange than previous versions, it shows a &ldquo;boot:&rdquo; prompt which need you to tells what to boot, but it&#39;s not difficult to find out how to boot into the installation mode.</p>
 <p>The reason using Ubuntu latest version is because I want to keep up with the development of the software packages, debian is in a very stable status, while the Ubuntu packages are active enough to try out new things. I format the whole disk and install Ubuntu only on the disk. This is the starting point.</p>
 
@@ -49,16 +49,15 @@
 <p>I&#39;m so exciting at the moment when I finish all the installation and reboot, because I finally get this project started! But the first problem come very quickly - <strong>when I try to lower the lid, the screen just go dark, and when I reopen it, the going hibernate process sticks in every few seconds</strong>. I think there is some problem with the led sensor, because it automatically goes into hibernate a few seconds later when I activate again. So I think it is related to the power options in system settings.</p>
 <p>This problem leads me to know about the <strong>&ldquo;systemd&rdquo;</strong> program. Searching solutions on the internet, I find out the settings in systemd will handle the power related key event. It sets how system react when user press Power key, Hibernate Key, Lid close/open, etc.</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo vi /etc/systemd/logind.conf
-<span class="o">(</span>
--change 
+<span class="c"># --in the file, change below line</span>
 <span class="c">#HandleLidSwitch=suspend</span>
--to
+<span class="c"># --to</span>
 <span class="nv">HandleLidSwitch</span><span class="o">=</span>ignore
-<span class="o">)</span>
+
 
 <span class="nv">$ </span>sudo service systemd-logind restart
 </pre></div>
-<p>This helps me to get over the hibernation problem at once. <strong>Systemd</strong> is a Linux system and service manager. There is similar programs like ubuntu&#39;s &ldquo;upstart&rdquo;, or Mac OS&#39;s &ldquo;launchd&rdquo;. You can search for more info about it.</p>
+<p>This helps me to get over the hibernation problem at once. <strong>Systemd</strong> is a Linux system and service manager. There is similar programs like ubuntu&#39;s &ldquo;upstart&rdquo;, or Mac OS&#39;s &ldquo;launchd&rdquo;. You can search for more info about it. <strong>The man page of systemd(init) is definitely worth reading to understand the first process of the system.</strong></p>
 <p>There are two other power related packages <code>acpi</code> and <code>acpid</code>. The Ubuntu document recommends that you can remove the packages if you do not have a laptop. </p>
 
 <h4 id="toc_3">1.2 Problem 2: Japanese keyboard layout</h4>
@@ -76,7 +75,59 @@
 </pre></div>
 <p>It shows how many configuration items of the package and their values. Check out the man page for &ldquo;keyboard-configuration&rdquo;, &ldquo;console-setup&rdquo;, &ldquo;dpkg-reconfigure&rdquo; and &ldquo;debconf-show&rdquo; to explore more.</p>
 
-<h3 id="toc_4">2. Setup a minimal desktop environment</h3>
+<h4 id="toc_4">1.3 Problem 3: WiFi Connection</h4>
+<p>The original G40 doesn&#39;t have wireless network connection. Fortunately I have a spare USB wifi adapter, but I need to configure the WiFi manually via command line. The adapter I used is Ralink RT5370, which is already supported in the kernel, so I don&#39;t need to explicitly install a driver for it.</p>
+<p>First I could use <code>lsusb</code> to check that device is recognized. Then I move on to updating the configuration in <code>/etc/network/interfaces</code>. Check out the man page of <strong>interfaces</strong>, and you will find the information of the keywords and syntax for configuring the network interface. For example:</p>
+
+<pre><code>* *auto*, telling ```ifup``` to get this interface up automatically
+* *iface*, define an interface (template) using different methods(inet, inet6, etc.)
+* *allow-*, allow the interface to be brought up by various sub-system(e.g. allow-hotplug, allow-auto, etc.)
+* *pre-up*, *post-down*, commands to be execute before the interface is up or after it is down</code></pre>
+<p>The configuration syntax is not difficult, so I added the below lines to enable the wifi adapter at system startup:</p>
+
+<pre><code>auto wlan0
+iface wlan0 inet dhcp
+iface wlan0 inet6 auto</code></pre>
+<p>Next I discover that my WiFi adapter is not called &ldquo;wlan0&rdquo;(you can check that by command <code>iwconfig</code>). Instead, it is called &ldquo;wlx5c63bf2a8b28&rdquo;, no wonder why I cannot bring it up when execute ifup. So now I need to change the name for it to make it more readable using <strong>udev</strong>. udev is responsible for which device gets which name. By the Systemd v197 standard of &ldquo;Predictable Network Interface Names&rdquo;, interfaces are prefixed with &ldquo;en&rdquo; for ethernet, &ldquo;wl&rdquo; for WLAN, and &ldquo;WW&rdquo; for WWAN. </p>
+<div class="highlight"><pre><span class="c"># you check the interface entires list first, and fine the MAC address we&#39;ll need in udev</span>
+<span class="nv">$ </span>ip link
+<span class="c"># (or alternatively for wireless interfaces)</span>
+<span class="nv">$ </span>iw dev
+
+<span class="c"># update udev configuration</span>
+<span class="nv">$ </span>sudo vi /etc/udev/rules.d/10-network.rules
+<span class="c"># add below line and save</span>
+<span class="nv">SUBSYSTEM</span><span class="o">==</span><span class="s2">&quot;net&quot;</span>, <span class="nv">ACTION</span><span class="o">==</span><span class="s2">&quot;add&quot;</span>, ATTR<span class="o">{</span>address<span class="o">}==</span><span class="s2">&quot;5c:63:bf:2a:8b:28&quot;</span>, <span class="nv">NAME</span><span class="o">=</span><span class="s2">&quot;wlan0&quot;</span>
+</pre></div>
+<p>The <strong>udev</strong> program is a dynamic device management software, it supplies the system softwares with device events, manage permissions of device nodes and may create additional symlinks in the &ldquo;/dev&rdquo; directory, or provide names to unpredictable device names from the kernel. The man page for <code>udev</code> is worth reading.</p>
+<p>Reboot to test out if the device is named correctly. The devicexs can be found in <code>/sys/class/net/</code>, with a symbolic link to the device&#39;s DEVPATH.</p>
+<p>Next step is to setup the WPA2 authentication of the WiFi with my SSID and password. We&#39;ll need <code>wpasupplicant</code> package for that.</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install wpasupplicant
+<span class="nv">$ </span>sudo vi /etc/wpa_supplicant/example.conf
+<span class="c"># add the following contents:</span>
+<span class="c">#   ctrl_interface=/run/wpa_supplicant</span>
+<span class="c">#   update_config=1</span>
+<span class="nv">$ </span>sudo wpa_passphrase &lt;SSID&gt; &lt;password&gt; &gt;&gt; /etc/wpa_supplicant/example.conf
+
+<span class="c"># to test the configuration: 1. start wpa_supplicant in the background, 2. use wpa_cli to interactive with the interface</span>
+<span class="nv">$ </span>wpa_supplicant -i wlan0 -c /etc/wpa_supplicant/example.conf
+<span class="c"># (or alternatively, add &quot;-B&quot; parameter to the wpa_supplicant command to make it run as a daemon in the background, then use &quot;wpa_cli&quot; to work interactively)</span>
+<span class="nv">$ </span>wpa_cli
+&gt;scan
+&gt;scan_results
+<span class="c"># now you see the hotspot scan result, which means the configuration work</span>
+
+<span class="c"># Go back to our network interface setup, we will add wpa_supplicant to it</span>
+<span class="nv">$ </span>sudo vi /etc/network/interfaces
+auto wlan0
+iface wlan0 inet dhcp
+  pre-up wpa_supplicant -B -i wlan0 -c /etc/wpa_supplicant/example.conf
+<span class="c"># save and test the interface</span>
+<span class="nv">$ </span>sudo ifdown wlan0
+<span class="nv">$ </span>sudo ifup wlan0
+<span class="c"># make sure the DHCP client can get an IP, otherwise the network auto start process in boot up might hang for 5 minutes to get the network...</span>
+</pre></div>
+<p>Hard-coding the WiFi SSID and password in the configuration is not convenience in real environment, but so far in my experiement environment, it is OK to use it first. We will get back to the network manager later to make it more convenience to connect different WiFi network.</p>
 
     
     

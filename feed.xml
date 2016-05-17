@@ -3,14 +3,14 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2016-05-15T23:00:32+08:00</updated>
+    <updated>2016-05-17T23:43:11+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
         <title type="html"><![CDATA[Linux Study Journal - (1) Kick Off]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/05/linux-study-journal-kickoff.html"/>
         <published>2016-05-15T21:04:00+08:00</published>
-        <updated>2016-05-15T23:00:32+08:00</updated>
+        <updated>2016-05-17T23:43:11+08:00</updated>
         <id>http://terryoy.github.io/2016/05/linux-study-journal-kickoff.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#study" term="study" label="study" />
@@ -18,7 +18,7 @@
             <![CDATA[ <h3 id="toc_0">0. How this series begin?</h3>
 <p>I have an used Japanese IBM G40 PC, which has Pentium 4 (2.5GHz) processor, 512MB RAM and a 140GB hard disk (I believe the hardware spec has been changed by the used PC seller). Since the power consumption and the speed are not suitable for very modern applications, I decided to use it as an experiment machine for the minimal linux workspace. This series of blog posts will be the progress showing how I work on this machine to make it very friendly and efficient for daily used.</p>
 
-<h3 id="toc_1">1. System Setup</h3>
+<h3 id="toc_1">Part 1. System Setup</h3>
 <p>I started to boot with the Ubuntu 16.04 LTS server image(flashed on a USB stick), the booting is a bit strange than previous versions, it shows a &ldquo;boot:&rdquo; prompt which need you to tells what to boot, but it&#39;s not difficult to find out how to boot into the installation mode.</p>
 <p>The reason using Ubuntu latest version is because I want to keep up with the development of the software packages, debian is in a very stable status, while the Ubuntu packages are active enough to try out new things. I format the whole disk and install Ubuntu only on the disk. This is the starting point.</p>
 
@@ -26,16 +26,15 @@
 <p>I&#39;m so exciting at the moment when I finish all the installation and reboot, because I finally get this project started! But the first problem come very quickly - <strong>when I try to lower the lid, the screen just go dark, and when I reopen it, the going hibernate process sticks in every few seconds</strong>. I think there is some problem with the led sensor, because it automatically goes into hibernate a few seconds later when I activate again. So I think it is related to the power options in system settings.</p>
 <p>This problem leads me to know about the <strong>&ldquo;systemd&rdquo;</strong> program. Searching solutions on the internet, I find out the settings in systemd will handle the power related key event. It sets how system react when user press Power key, Hibernate Key, Lid close/open, etc.</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo vi /etc/systemd/logind.conf
-<span class="o">(</span>
--change 
+<span class="c"># --in the file, change below line</span>
 <span class="c">#HandleLidSwitch=suspend</span>
--to
+<span class="c"># --to</span>
 <span class="nv">HandleLidSwitch</span><span class="o">=</span>ignore
-<span class="o">)</span>
+
 
 <span class="nv">$ </span>sudo service systemd-logind restart
 </pre></div>
-<p>This helps me to get over the hibernation problem at once. <strong>Systemd</strong> is a Linux system and service manager. There is similar programs like ubuntu&#39;s &ldquo;upstart&rdquo;, or Mac OS&#39;s &ldquo;launchd&rdquo;. You can search for more info about it.</p>
+<p>This helps me to get over the hibernation problem at once. <strong>Systemd</strong> is a Linux system and service manager. There is similar programs like ubuntu&#39;s &ldquo;upstart&rdquo;, or Mac OS&#39;s &ldquo;launchd&rdquo;. You can search for more info about it. <strong>The man page of systemd(init) is definitely worth reading to understand the first process of the system.</strong></p>
 <p>There are two other power related packages <code>acpi</code> and <code>acpid</code>. The Ubuntu document recommends that you can remove the packages if you do not have a laptop. </p>
 
 <h4 id="toc_3">1.2 Problem 2: Japanese keyboard layout</h4>
@@ -53,7 +52,93 @@
 </pre></div>
 <p>It shows how many configuration items of the package and their values. Check out the man page for &ldquo;keyboard-configuration&rdquo;, &ldquo;console-setup&rdquo;, &ldquo;dpkg-reconfigure&rdquo; and &ldquo;debconf-show&rdquo; to explore more.</p>
 
-<h3 id="toc_4">2. Setup a minimal desktop environment</h3>
+<h4 id="toc_4">1.3 Problem 3: WiFi Connection</h4>
+<p>The original G40 doesn&#39;t have wireless network connection. Fortunately I have a spare USB wifi adapter, but I need to configure the WiFi manually via command line. The adapter I used is Ralink RT5370, which is already supported in the kernel, so I don&#39;t need to explicitly install a driver for it.</p>
+<p>First I could use <code>lsusb</code> to check that device is recognized. Then I move on to updating the configuration in <code>/etc/network/interfaces</code>. Check out the man page of <strong>interfaces</strong>, and you will find the information of the keywords and syntax for configuring the network interface. For example:</p>
+
+<pre><code>* *auto*, telling ```ifup``` to get this interface up automatically
+* *iface*, define an interface (template) using different methods(inet, inet6, etc.)
+* *allow-*, allow the interface to be brought up by various sub-system(e.g. allow-hotplug, allow-auto, etc.)
+* *pre-up*, *post-down*, commands to be execute before the interface is up or after it is down</code></pre>
+<p>The configuration syntax is not difficult, so I added the below lines to enable the wifi adapter at system startup:</p>
+
+<pre><code>auto wlan0
+iface wlan0 inet dhcp
+iface wlan0 inet6 auto</code></pre>
+<p>Next I discover that my WiFi adapter is not called &ldquo;wlan0&rdquo;(you can check that by command <code>iwconfig</code>). Instead, it is called &ldquo;wlx5c63bf2a8b28&rdquo;, no wonder why I cannot bring it up when execute ifup. So now I need to change the name for it to make it more readable using <strong>udev</strong>. udev is responsible for which device gets which name. By the Systemd v197 standard of &ldquo;Predictable Network Interface Names&rdquo;, interfaces are prefixed with &ldquo;en&rdquo; for ethernet, &ldquo;wl&rdquo; for WLAN, and &ldquo;WW&rdquo; for WWAN. </p>
+<div class="highlight"><pre><span class="c"># you check the interface entires list first, and fine the MAC address we&#39;ll need in udev</span>
+<span class="nv">$ </span>ip link
+<span class="c"># (or alternatively for wireless interfaces)</span>
+<span class="nv">$ </span>iw dev
+
+<span class="c"># update udev configuration</span>
+<span class="nv">$ </span>sudo vi /etc/udev/rules.d/10-network.rules
+<span class="c"># add below line and save</span>
+<span class="nv">SUBSYSTEM</span><span class="o">==</span><span class="s2">&quot;net&quot;</span>, <span class="nv">ACTION</span><span class="o">==</span><span class="s2">&quot;add&quot;</span>, ATTR<span class="o">{</span>address<span class="o">}==</span><span class="s2">&quot;5c:63:bf:2a:8b:28&quot;</span>, <span class="nv">NAME</span><span class="o">=</span><span class="s2">&quot;wlan0&quot;</span>
+</pre></div>
+<p>The <strong>udev</strong> program is a dynamic device management software, it supplies the system softwares with device events, manage permissions of device nodes and may create additional symlinks in the &ldquo;/dev&rdquo; directory, or provide names to unpredictable device names from the kernel. The man page for <code>udev</code> is worth reading.</p>
+<p>Reboot to test out if the device is named correctly. The devicexs can be found in <code>/sys/class/net/</code>, with a symbolic link to the device&#39;s DEVPATH.</p>
+<p>Next step is to setup the WPA2 authentication of the WiFi with my SSID and password. We&#39;ll need <code>wpasupplicant</code> package for that.</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install wpasupplicant
+<span class="nv">$ </span>sudo vi /etc/wpa_supplicant/example.conf
+<span class="c"># add the following contents:</span>
+<span class="c">#   ctrl_interface=/run/wpa_supplicant</span>
+<span class="c">#   update_config=1</span>
+<span class="nv">$ </span>sudo wpa_passphrase &lt;SSID&gt; &lt;password&gt; &gt;&gt; /etc/wpa_supplicant/example.conf
+
+<span class="c"># to test the configuration: 1. start wpa_supplicant in the background, 2. use wpa_cli to interactive with the interface</span>
+<span class="nv">$ </span>wpa_supplicant -i wlan0 -c /etc/wpa_supplicant/example.conf
+<span class="c"># (or alternatively, add &quot;-B&quot; parameter to the wpa_supplicant command to make it run as a daemon in the background, then use &quot;wpa_cli&quot; to work interactively)</span>
+<span class="nv">$ </span>wpa_cli
+&gt;scan
+&gt;scan_results
+<span class="c"># now you see the hotspot scan result, which means the configuration work</span>
+
+<span class="c"># Go back to our network interface setup, we will add wpa_supplicant to it</span>
+<span class="nv">$ </span>sudo vi /etc/network/interfaces
+auto wlan0
+iface wlan0 inet dhcp
+  pre-up wpa_supplicant -B -i wlan0 -c /etc/wpa_supplicant/example.conf
+<span class="c"># save and test the interface</span>
+<span class="nv">$ </span>sudo ifdown wlan0
+<span class="nv">$ </span>sudo ifup wlan0
+<span class="c"># make sure the DHCP client can get an IP, otherwise the network auto start process in boot up might hang for 5 minutes to get the network...</span>
+</pre></div>
+<p>Hard-coding the WiFi SSID and password in the configuration is not convenience in real environment, but so far in my experiement environment, it is OK to use it first. We will get back to the network manager later to make it more convenience to connect different WiFi network.</p>
+]]>
+        </content>
+    </entry><entry>
+        <title type="html"><![CDATA[Linux Study Journal - (2) Desktop Environment]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2016/05/linux-study-journal-2-desktop.html"/>
+        <published>2016-05-15T21:04:00+08:00</published>
+        <updated>2016-05-17T20:10:41+08:00</updated>
+        <id>http://terryoy.github.io/2016/05/linux-study-journal-2-desktop.html</id>
+        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
+        <category scheme="http://terryoy.github.io/tag/#study" term="study" label="study" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <h3 id="toc_0">Part 2. Setup a minimal desktop environment</h3>
+
+<h4 id="toc_1">2.1 Xorg and Openbox</h4>
+<p>To use a desktop environment, <strong>Xorg</strong> is the package you won&#39;t miss(for more information you can also check the <a href="htts://www.x.org/">x.org</a> and <a href="https://www.freedesktop.org/">freedesktop.org</a> web-sites. I choose <strong>Openbox</strong> as the window manager, which is one of the most lightweight window manager. It is the best showcase of minimalism, yet the functions shall be simple enough for customization. The window manager is not a desktop environment, it is just simply a manager to windows, their styles and behaviors. A complete desktop environment is not necessary, or maybe it&#39;s the chance that I could design my own.</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install xorg
+<span class="c"># now you can enter the GUI environment by command &quot;startx&quot;, but you still need a window manager to do further things</span>
+<span class="nv">$ </span>sudo apt-get install openbox obconf openbox-themes
+<span class="c"># the above packages and their dependencies will allow you to build and configure an Openbox system, along with choices of themes.</span>
+</pre></div>
+<p>What&#39;s interesting about &ldquo;startx&rdquo; is that, if you try it after you install xorg and before any Window Manager, you&#39;ll get a graphical shell environment with mouse available. The font is definitly different from what you had in the normal console. It is I think the essential GUI environment possible. And if you press Ctrl+D to exit the session, you get back to your original console environment, so the <strong>xorg-session</strong> is exited.</p>
+<p>After installing the openbox package, it&#39;s not yet completed. You also need to add the a <code>~/.xinitrc</code> configuration so that it calls the openbox when you execute &ldquo;startx&rdquo;.</p>
+<div class="highlight"><pre><span class="nv">$ </span><span class="nb">echo</span> <span class="s2">&quot;exec openbox-session&quot;</span> &gt; ~/.xinitrc
+<span class="nv">$ </span>startx
+</pre></div>
+<p>Now you can see GUI environment by Openbox. Right click on the desktop and you get a start menu, you can start a terminal emulator or configure the openbox using <em>Obconf</em>.</p>
+<p>Next we try to do more about the customization.</p>
+
+<h4 id="toc_2">2.2 Openbox Configuration (menu.xml and rc.xml)</h4>
+<p>Openbox has two main configuration files:</p>
+
+<pre><code>* rc.xml, which sets keybindings, desktop names and window behavior
+* menu.xml, which contains the instructions for the right-click menu.</code></pre>
 ]]>
         </content>
     </entry><entry>
@@ -1401,56 +1486,6 @@ If you want to revoke an authorized key for some user, you can find the user&#39
 <span class="nv">$ </span>openssl base64 -e <span class="o">&lt;&lt;&lt;</span> <span class="s2">&quot;Encode this text please&quot;</span>
 <span class="c"># decode in base64</span>
 <span class="nv">$ </span>openssl base64 -d <span class="o">&lt;&lt;&lt;</span> <span class="s2">&quot;RW5jb2RlIHRoaXMgdGV4dCBwbGVhc2UK&quot;</span>
-</pre></div>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[Archive Commands in Linux]]></title>
-        <author><name>terryoy</name></author>
-        <link href="http://terryoy.github.io/2014/01/archive-commands-in-linux.html"/>
-        <published>2014-01-07T19:13:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
-        <id>http://terryoy.github.io/2014/01/archive-commands-in-linux.html</id>
-        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
-        <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
-        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
-            <![CDATA[ <p>Below is a collection of commands compressing and uncompressing various file formats.  </p>
-<div class="highlight"><pre><span class="c">#### compress ####</span>
-<span class="nv">$ </span>tar -cvf output.tar <span class="nb">test</span>-files
-<span class="nv">$ </span>gzip output.tar       <span class="c"># result file &quot;output.tar.gz&quot;</span>
-<span class="nv">$ </span>tar -cvzf output.tar.gz <span class="nb">test</span>-files        <span class="c"># combined with the two above</span>
-<span class="nv">$ </span>bzip2 output.tar      <span class="c"># result file &quot;output.tar.bz2&quot;</span>
-<span class="nv">$ </span>tar -cvjf output.tar.bz2 <span class="nb">test</span>-files
-<span class="c"># other formats (zip, gz, rar, 7z, ...)</span>
-<span class="nv">$ </span>zip -r archive.zip <span class="nb">test</span>-files
-<span class="nv">$ </span>star -cv <span class="nv">f</span><span class="o">=</span>output.star <span class="nb">test</span>-files
-<span class="nv">$ </span>find <span class="nb">test</span>-dir | cpio -ov &gt; output.cpio
-<span class="nv">$ </span>7z a archive.7z <span class="nb">test</span>-files    <span class="c"># the package name for 7z is &quot;p7zip&quot;</span>
-
-<span class="c">####  list files in the archive ####</span>
-<span class="nv">$ </span>tar -tvf file.tar
-<span class="nv">$ </span>star -tv <span class="nv">f</span><span class="o">=</span>file.tar
-<span class="nv">$ </span>unzip -l file.zip
-<span class="nv">$ </span>cpio -t &lt; file.cpio
-<span class="nv">$ </span>7z l file.7z
-
-<span class="c">#### uncompress ####</span>
-<span class="c"># tar</span>
-<span class="nv">$ </span>tar xvf file.tar
-<span class="nv">$ </span>tar xvzf file.tar.gz
-<span class="nv">$ </span>tar xvzf file.tar.tgz
-<span class="nv">$ </span>tar xvjf file.tar.bz2
-<span class="nv">$ </span>tar xvjf file.tar.tbz2
-<span class="c"># other formats </span>
-<span class="nv">$ </span>gunzip file.**gz**    
-<span class="nv">$ </span>bunzip2 file.**bz2**
-<span class="nv">$ </span>uncompress file.**Z**
-<span class="nv">$ </span>unzip file.zip
-<span class="nv">$ </span>unrar x file.rar      <span class="c"># or &quot;$ rar x file.rar&quot;</span>
-<span class="nv">$ </span>7z x file.**7z        <span class="c"># or &quot;$ 7z e file.7z**&quot;</span>
-<span class="nv">$ </span>star -xv <span class="nv">f</span><span class="o">=</span>archive.star 
-<span class="nv">$ </span>cpio -idmv &lt; archive.cpio
-<span class="nv">$ </span>unace x file.ace
 </pre></div>
 ]]>
         </content>
