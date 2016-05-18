@@ -119,11 +119,11 @@ $ wpa_cli
 >scan_results
 # now you see the hotspot scan result, which means the configuration work
 
-# Go back to our network interface setup, we will add wpa_supplicant to it
+# Go back to our network interface setup, we will add wpa_supplicant to it(the "-D" is to specify the driver to use)
 $ sudo vi /etc/network/interfaces
 auto wlan0
 iface wlan0 inet dhcp
-  pre-up wpa_supplicant -B -i wlan0 -c /etc/wpa_supplicant/example.conf
+  pre-up wpa_supplicant -B -Dwext -i wlan0 -c /etc/wpa_supplicant/example.conf
 # save and test the interface
 $ sudo ifdown wlan0
 $ sudo ifup wlan0
