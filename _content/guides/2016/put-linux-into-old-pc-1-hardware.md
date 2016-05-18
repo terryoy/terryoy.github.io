@@ -1,19 +1,19 @@
-# Linux Study Journal - (1) Kick Off
+# Put Linux into Old PC - (1) Installation and Hardware
 
 - date: 2016-05-15 21:04
 - tags: linux, study
-- categories: linux-study-journal
+- categories: guides
 -----------------------------
 
 ### 0. How this series begin?
 
-I have an used Japanese IBM G40 PC, which has Pentium 4 (2.5GHz) processor, 512MB RAM and a 140GB hard disk (I believe the hardware spec has been changed by the used PC seller). Since the power consumption and the speed are not suitable for very modern applications, I decided to use it as an experiment machine for the minimal linux workspace. This series of blog posts will be the progress showing how I work on this machine to make it very friendly and efficient for daily used.
+I bought from Taobao a used Japanese IBM G40 PC, which has Pentium 4 (2.5GHz) processor, 512MB RAM and a 140GB hard disk (I believe the hardware spec has been changed by the used PC seller). Since the power consumption and the speed are not suitable for very modern applications, I decided to use it as an experiment machine for creating a minimal linux workspace. This series of blog posts will be the progress showing how I work on this machine to make it very friendly and efficient for daily used.
 
 ### Part 1. System Setup
 
 I started to boot with the Ubuntu 16.04 LTS server image(flashed on a USB stick), the booting is a bit strange than previous versions, it shows a "boot:" prompt which need you to tells what to boot, but it's not difficult to find out how to boot into the installation mode.
 
-The reason using Ubuntu latest version is because I want to keep up with the development of the software packages, debian is in a very stable status, while the Ubuntu packages are active enough to try out new things. I format the whole disk and install Ubuntu only on the disk. This is the starting point.
+The reason using Ubuntu latest version is because I want to keep up with the development of the software packages, Debian is in a very stable status, while the Ubuntu packages are active enough to try out new things. I format the whole disk and install Ubuntu on it. This is the starting point.
 
 #### 1.1 Problem 1: hibernation on lid close
 
@@ -28,14 +28,13 @@ $ sudo vi /etc/systemd/logind.conf
 # --to
 HandleLidSwitch=ignore
 
-
 $ sudo service systemd-logind restart
 
 ```
 
 This helps me to get over the hibernation problem at once. **Systemd** is a Linux system and service manager. There is similar programs like ubuntu's "upstart", or Mac OS's "launchd". You can search for more info about it. **The man page of systemd(init) is definitely worth reading to understand the first process of the system.**
 
-There are two other power related packages ```acpi``` and ```acpid```. The Ubuntu document recommends that you can remove the packages if you do not have a laptop. 
+There are two other power related packages ```acpi``` and ```acpid```. The Ubuntu document recommends that you can remove the packages if you do not have a laptop. Might read that later.
 
 #### 1.2 Problem 2: Japanese keyboard layout
  
@@ -68,10 +67,10 @@ The original G40 doesn't have wireless network connection. Fortunately I have a 
 
 First I could use ```lsusb``` to check that device is recognized. Then I move on to updating the configuration in ```/etc/network/interfaces```. Check out the man page of **interfaces**, and you will find the information of the keywords and syntax for configuring the network interface. For example:
 
-	* *auto*, telling ```ifup``` to get this interface up automatically
-	* *iface*, define an interface (template) using different methods(inet, inet6, etc.)
-	* *allow-*, allow the interface to be brought up by various sub-system(e.g. allow-hotplug, allow-auto, etc.)
-	* *pre-up*, *post-down*, commands to be execute before the interface is up or after it is down
+*	*auto*, telling ```ifup``` to get this interface up automatically
+*	*iface*, define an interface (template) using different methods(inet, inet6, etc.)
+*	*allow-\*, allow the interface to be brought up by various sub-system(e.g. allow-hotplug, allow-auto, etc.)
+*	*pre-up*, *post-down*, commands to be execute before the interface is up or after it is down
 
 	
 The configuration syntax is not difficult, so I added the below lines to enable the wifi adapter at system startup:
@@ -133,4 +132,19 @@ $ sudo ifup wlan0
 
 Hard-coding the WiFi SSID and password in the configuration is not convenience in real environment, but so far in my experiement environment, it is OK to use it first. We will get back to the network manager later to make it more convenience to connect different WiFi network.
 
+#### Problem 1.4 WiFi Connection Revisited
 
+Last night I has successfully connect the wifi adapter to my home's network, howvever some new issues come up:
+
+*	The bandwidth is only 1Mb/s
+*	It takes a very long time to activate the interface, and sometimes hang there
+
+After checking the [Debian's document](https://www.debian.org/doc/manuals/debian-reference/ch05.en.html), the network setup using *ifupdown* approach is a bit outdate, and the modern way is to use NetworkManager(NM) or Wicd(wicd and associated packages). 
+
+(BTW, it is good to have the *debian-handbook* and *debian-reference* package installed in your local machine for any reference needed.)
+
+So first step, I try to look up a proper driver for the adapter. There is a package [rt2800usb](https://wiki.debian.org/rt2800usb) to support Ralink 802.11n usb devices on Linux.
+
+
+
+ 

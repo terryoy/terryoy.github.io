@@ -7,7 +7,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="apple-mobile-web-app-title" content="Hello, World!" />
     <meta name="application-name" content="Hello, World!" />
-    <title>Linux Study Journal - (1) Kick Off - Hello, World!</title>
+    <title>Put Linux into Old PC - (1) Installation and Hardware - Hello, World!</title>
     <meta name="keywords" content="linux,study" />
     <meta name="description" content="" />
     
@@ -34,16 +34,16 @@
 </nav>
 
 <section><article id="main" class="hentry">
-	<h1>Linux Study Journal - (1) Kick Off</h1>
+	<h1>Put Linux into Old PC - (1) Installation and Hardware</h1>
     <p class="sub_text">2016-05-15 by <i>terryoy</i>
     </p>
     
 	<h3 id="toc_0">0. How this series begin?</h3>
-<p>I have an used Japanese IBM G40 PC, which has Pentium 4 (2.5GHz) processor, 512MB RAM and a 140GB hard disk (I believe the hardware spec has been changed by the used PC seller). Since the power consumption and the speed are not suitable for very modern applications, I decided to use it as an experiment machine for the minimal linux workspace. This series of blog posts will be the progress showing how I work on this machine to make it very friendly and efficient for daily used.</p>
+<p>I bought from Taobao a used Japanese IBM G40 PC, which has Pentium 4 (2.5GHz) processor, 512MB RAM and a 140GB hard disk (I believe the hardware spec has been changed by the used PC seller). Since the power consumption and the speed are not suitable for very modern applications, I decided to use it as an experiment machine for creating a minimal linux workspace. This series of blog posts will be the progress showing how I work on this machine to make it very friendly and efficient for daily used.</p>
 
 <h3 id="toc_1">Part 1. System Setup</h3>
 <p>I started to boot with the Ubuntu 16.04 LTS server image(flashed on a USB stick), the booting is a bit strange than previous versions, it shows a &ldquo;boot:&rdquo; prompt which need you to tells what to boot, but it&#39;s not difficult to find out how to boot into the installation mode.</p>
-<p>The reason using Ubuntu latest version is because I want to keep up with the development of the software packages, debian is in a very stable status, while the Ubuntu packages are active enough to try out new things. I format the whole disk and install Ubuntu only on the disk. This is the starting point.</p>
+<p>The reason using Ubuntu latest version is because I want to keep up with the development of the software packages, Debian is in a very stable status, while the Ubuntu packages are active enough to try out new things. I format the whole disk and install Ubuntu on it. This is the starting point.</p>
 
 <h4 id="toc_2">1.1 Problem 1: hibernation on lid close</h4>
 <p>I&#39;m so exciting at the moment when I finish all the installation and reboot, because I finally get this project started! But the first problem come very quickly - <strong>when I try to lower the lid, the screen just go dark, and when I reopen it, the going hibernate process sticks in every few seconds</strong>. I think there is some problem with the led sensor, because it automatically goes into hibernate a few seconds later when I activate again. So I think it is related to the power options in system settings.</p>
@@ -54,11 +54,10 @@
 <span class="c"># --to</span>
 <span class="nv">HandleLidSwitch</span><span class="o">=</span>ignore
 
-
 <span class="nv">$ </span>sudo service systemd-logind restart
 </pre></div>
 <p>This helps me to get over the hibernation problem at once. <strong>Systemd</strong> is a Linux system and service manager. There is similar programs like ubuntu&#39;s &ldquo;upstart&rdquo;, or Mac OS&#39;s &ldquo;launchd&rdquo;. You can search for more info about it. <strong>The man page of systemd(init) is definitely worth reading to understand the first process of the system.</strong></p>
-<p>There are two other power related packages <code>acpi</code> and <code>acpid</code>. The Ubuntu document recommends that you can remove the packages if you do not have a laptop. </p>
+<p>There are two other power related packages <code>acpi</code> and <code>acpid</code>. The Ubuntu document recommends that you can remove the packages if you do not have a laptop. Might read that later.</p>
 
 <h4 id="toc_3">1.2 Problem 2: Japanese keyboard layout</h4>
 <p>Although I set some Japanese keyboard layout in the installation, but it doesn&#39;t match all the keys with my Japanese IBM G40 keyboard. Apparently I need to switch the keyboard layout and do a few tests. The configuration program I used here is <code>dpkg-reconfigure</code>, which allows you to configure a package again after they&#39;re installed. The package will be &ldquo;keyboard-configuration&rdquo;.</p>
@@ -79,10 +78,12 @@
 <p>The original G40 doesn&#39;t have wireless network connection. Fortunately I have a spare USB wifi adapter, but I need to configure the WiFi manually via command line. The adapter I used is Ralink RT5370, which is already supported in the kernel, so I don&#39;t need to explicitly install a driver for it.</p>
 <p>First I could use <code>lsusb</code> to check that device is recognized. Then I move on to updating the configuration in <code>/etc/network/interfaces</code>. Check out the man page of <strong>interfaces</strong>, and you will find the information of the keywords and syntax for configuring the network interface. For example:</p>
 
-<pre><code>* *auto*, telling ```ifup``` to get this interface up automatically
-* *iface*, define an interface (template) using different methods(inet, inet6, etc.)
-* *allow-*, allow the interface to be brought up by various sub-system(e.g. allow-hotplug, allow-auto, etc.)
-* *pre-up*, *post-down*, commands to be execute before the interface is up or after it is down</code></pre>
+<ul>
+<li>  <em>auto</em>, telling <code>ifup</code> to get this interface up automatically</li>
+<li>  <em>iface</em>, define an interface (template) using different methods(inet, inet6, etc.)</li>
+<li>  <em>allow-\</em>, allow the interface to be brought up by various sub-system(e.g. allow-hotplug, allow-auto, etc.)</li>
+<li>  <em>pre-up</em>, <em>post-down</em>, commands to be execute before the interface is up or after it is down</li>
+</ul>
 <p>The configuration syntax is not difficult, so I added the below lines to enable the wifi adapter at system startup:</p>
 
 <pre><code>auto wlan0
@@ -129,6 +130,17 @@ iface wlan0 inet dhcp
 </pre></div>
 <p>Hard-coding the WiFi SSID and password in the configuration is not convenience in real environment, but so far in my experiement environment, it is OK to use it first. We will get back to the network manager later to make it more convenience to connect different WiFi network.</p>
 
+<h4 id="toc_5">Problem 1.4 WiFi Connection Revisited</h4>
+<p>Last night I has successfully connect the wifi adapter to my home&#39;s network, howvever some new issues come up:</p>
+
+<ul>
+<li>  The bandwidth is only 1Mb/s</li>
+<li>  It takes a very long time to activate the interface, and sometimes hang there</li>
+</ul>
+<p>After checking the <a href="https://www.debian.org/doc/manuals/debian-reference/ch05.en.html">Debian&#39;s document</a>, the network setup using <em>ifupdown</em> approach is a bit outdate, and the modern way is to use NetworkManager(NM) or Wicd(wicd and associated packages). </p>
+<p>(BTW, it is good to have the <em>debian-handbook</em> and <em>debian-reference</em> package installed in your local machine for any reference needed.)</p>
+<p>So first step, I try to look up a proper driver for the adapter. There is a package <a href="https://wiki.debian.org/rt2800usb">rt2800usb</a> to support Ralink 802.11n usb devices on Linux.</p>
+
     
     
 	<p/>
@@ -149,7 +161,7 @@ iface wlan0 inet dhcp
     <div id="disqus_thread"></div>
     <script type="text/javascript">
         var disqus_shortname = 'terryoy';
-        var disqus_title = 'Linux Study Journal - (1) Kick Off';
+        var disqus_title = 'Put Linux into Old PC - (1) Installation and Hardware';
         (function() {
             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
             dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';

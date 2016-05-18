@@ -3,24 +3,58 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2016-05-17T23:43:11+08:00</updated>
+    <updated>2016-05-18T12:46:17+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
-        <title type="html"><![CDATA[Linux Study Journal - (1) Kick Off]]></title>
+        <title type="html"><![CDATA[Put Linux into Old PC - (2) Desktop Environment]]></title>
         <author><name>terryoy</name></author>
-        <link href="http://terryoy.github.io/2016/05/linux-study-journal-kickoff.html"/>
+        <link href="http://terryoy.github.io/2016/05/put-linux-into-old-pc-2-desktop.html"/>
+        <published>2016-05-18T09:47:00+08:00</published>
+        <updated>2016-05-18T12:36:01+08:00</updated>
+        <id>http://terryoy.github.io/2016/05/put-linux-into-old-pc-2-desktop.html</id>
+        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
+        <category scheme="http://terryoy.github.io/tag/#study" term="study" label="study" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <h3 id="toc_0">Part 2. Setup a minimal desktop environment</h3>
+
+<h4 id="toc_1">2.1 Xorg and Openbox</h4>
+<p>To use a desktop environment, <strong>Xorg</strong> is the package you won&#39;t miss(for more information you can also check the <a href="htts://www.x.org/">x.org</a> and <a href="https://www.freedesktop.org/">freedesktop.org</a> web-sites. I choose <strong>Openbox</strong> as the window manager, which is one of the most lightweight window manager. It is the best showcase of minimalism, yet the functions shall be simple enough for customization. The window manager is not a desktop environment, it is just simply a manager to windows, their styles and behaviors. A complete desktop environment is not necessary, or maybe it&#39;s the chance that I could design my own.</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install xorg
+<span class="c"># now you can enter the GUI environment by command &quot;startx&quot;, but you still need a window manager to do further things</span>
+<span class="nv">$ </span>sudo apt-get install openbox obconf openbox-themes
+<span class="c"># the above packages and their dependencies will allow you to build and configure an Openbox system, along with choices of themes.</span>
+</pre></div>
+<p>What&#39;s interesting about &ldquo;startx&rdquo; is that, if you try it after you install xorg and before any Window Manager, you&#39;ll get a graphical shell environment with mouse available. The font is definitly different from what you had in the normal console. It is I think the essential GUI environment possible. And if you press Ctrl+D to exit the session, you get back to your original console environment, so the <strong>xorg-session</strong> is exited.</p>
+<p>After installing the openbox package, it&#39;s not yet completed. You also need to add the a <code>~/.xinitrc</code> configuration so that it calls the openbox when you execute &ldquo;startx&rdquo;.</p>
+<div class="highlight"><pre><span class="nv">$ </span><span class="nb">echo</span> <span class="s2">&quot;exec openbox-session&quot;</span> &gt; ~/.xinitrc
+<span class="nv">$ </span>startx
+</pre></div>
+<p>Now you can see GUI environment by Openbox. Right click on the desktop and you get a start menu, you can start a terminal emulator or configure the openbox using <em>Obconf</em>.</p>
+<p>Next we try to do more about the customization.</p>
+
+<h4 id="toc_2">2.2 Openbox Configuration (menu.xml and rc.xml)</h4>
+<p>Openbox has two main configuration files:</p>
+
+<pre><code>* rc.xml, which sets keybindings, desktop names and window behavior
+* menu.xml, which contains the instructions for the right-click menu.</code></pre>
+]]>
+        </content>
+    </entry><entry>
+        <title type="html"><![CDATA[Put Linux into Old PC - (1) Installation and Hardware]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2016/05/put-linux-into-old-pc-1-hardware.html"/>
         <published>2016-05-15T21:04:00+08:00</published>
-        <updated>2016-05-17T23:43:11+08:00</updated>
-        <id>http://terryoy.github.io/2016/05/linux-study-journal-kickoff.html</id>
+        <updated>2016-05-18T12:46:17+08:00</updated>
+        <id>http://terryoy.github.io/2016/05/put-linux-into-old-pc-1-hardware.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#study" term="study" label="study" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
             <![CDATA[ <h3 id="toc_0">0. How this series begin?</h3>
-<p>I have an used Japanese IBM G40 PC, which has Pentium 4 (2.5GHz) processor, 512MB RAM and a 140GB hard disk (I believe the hardware spec has been changed by the used PC seller). Since the power consumption and the speed are not suitable for very modern applications, I decided to use it as an experiment machine for the minimal linux workspace. This series of blog posts will be the progress showing how I work on this machine to make it very friendly and efficient for daily used.</p>
+<p>I bought from Taobao a used Japanese IBM G40 PC, which has Pentium 4 (2.5GHz) processor, 512MB RAM and a 140GB hard disk (I believe the hardware spec has been changed by the used PC seller). Since the power consumption and the speed are not suitable for very modern applications, I decided to use it as an experiment machine for creating a minimal linux workspace. This series of blog posts will be the progress showing how I work on this machine to make it very friendly and efficient for daily used.</p>
 
 <h3 id="toc_1">Part 1. System Setup</h3>
 <p>I started to boot with the Ubuntu 16.04 LTS server image(flashed on a USB stick), the booting is a bit strange than previous versions, it shows a &ldquo;boot:&rdquo; prompt which need you to tells what to boot, but it&#39;s not difficult to find out how to boot into the installation mode.</p>
-<p>The reason using Ubuntu latest version is because I want to keep up with the development of the software packages, debian is in a very stable status, while the Ubuntu packages are active enough to try out new things. I format the whole disk and install Ubuntu only on the disk. This is the starting point.</p>
+<p>The reason using Ubuntu latest version is because I want to keep up with the development of the software packages, Debian is in a very stable status, while the Ubuntu packages are active enough to try out new things. I format the whole disk and install Ubuntu on it. This is the starting point.</p>
 
 <h4 id="toc_2">1.1 Problem 1: hibernation on lid close</h4>
 <p>I&#39;m so exciting at the moment when I finish all the installation and reboot, because I finally get this project started! But the first problem come very quickly - <strong>when I try to lower the lid, the screen just go dark, and when I reopen it, the going hibernate process sticks in every few seconds</strong>. I think there is some problem with the led sensor, because it automatically goes into hibernate a few seconds later when I activate again. So I think it is related to the power options in system settings.</p>
@@ -31,11 +65,10 @@
 <span class="c"># --to</span>
 <span class="nv">HandleLidSwitch</span><span class="o">=</span>ignore
 
-
 <span class="nv">$ </span>sudo service systemd-logind restart
 </pre></div>
 <p>This helps me to get over the hibernation problem at once. <strong>Systemd</strong> is a Linux system and service manager. There is similar programs like ubuntu&#39;s &ldquo;upstart&rdquo;, or Mac OS&#39;s &ldquo;launchd&rdquo;. You can search for more info about it. <strong>The man page of systemd(init) is definitely worth reading to understand the first process of the system.</strong></p>
-<p>There are two other power related packages <code>acpi</code> and <code>acpid</code>. The Ubuntu document recommends that you can remove the packages if you do not have a laptop. </p>
+<p>There are two other power related packages <code>acpi</code> and <code>acpid</code>. The Ubuntu document recommends that you can remove the packages if you do not have a laptop. Might read that later.</p>
 
 <h4 id="toc_3">1.2 Problem 2: Japanese keyboard layout</h4>
 <p>Although I set some Japanese keyboard layout in the installation, but it doesn&#39;t match all the keys with my Japanese IBM G40 keyboard. Apparently I need to switch the keyboard layout and do a few tests. The configuration program I used here is <code>dpkg-reconfigure</code>, which allows you to configure a package again after they&#39;re installed. The package will be &ldquo;keyboard-configuration&rdquo;.</p>
@@ -56,10 +89,12 @@
 <p>The original G40 doesn&#39;t have wireless network connection. Fortunately I have a spare USB wifi adapter, but I need to configure the WiFi manually via command line. The adapter I used is Ralink RT5370, which is already supported in the kernel, so I don&#39;t need to explicitly install a driver for it.</p>
 <p>First I could use <code>lsusb</code> to check that device is recognized. Then I move on to updating the configuration in <code>/etc/network/interfaces</code>. Check out the man page of <strong>interfaces</strong>, and you will find the information of the keywords and syntax for configuring the network interface. For example:</p>
 
-<pre><code>* *auto*, telling ```ifup``` to get this interface up automatically
-* *iface*, define an interface (template) using different methods(inet, inet6, etc.)
-* *allow-*, allow the interface to be brought up by various sub-system(e.g. allow-hotplug, allow-auto, etc.)
-* *pre-up*, *post-down*, commands to be execute before the interface is up or after it is down</code></pre>
+<ul>
+<li>  <em>auto</em>, telling <code>ifup</code> to get this interface up automatically</li>
+<li>  <em>iface</em>, define an interface (template) using different methods(inet, inet6, etc.)</li>
+<li>  <em>allow-\</em>, allow the interface to be brought up by various sub-system(e.g. allow-hotplug, allow-auto, etc.)</li>
+<li>  <em>pre-up</em>, <em>post-down</em>, commands to be execute before the interface is up or after it is down</li>
+</ul>
 <p>The configuration syntax is not difficult, so I added the below lines to enable the wifi adapter at system startup:</p>
 
 <pre><code>auto wlan0
@@ -105,40 +140,17 @@ iface wlan0 inet dhcp
 <span class="c"># make sure the DHCP client can get an IP, otherwise the network auto start process in boot up might hang for 5 minutes to get the network...</span>
 </pre></div>
 <p>Hard-coding the WiFi SSID and password in the configuration is not convenience in real environment, but so far in my experiement environment, it is OK to use it first. We will get back to the network manager later to make it more convenience to connect different WiFi network.</p>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[Linux Study Journal - (2) Desktop Environment]]></title>
-        <author><name>terryoy</name></author>
-        <link href="http://terryoy.github.io/2016/05/linux-study-journal-2-desktop.html"/>
-        <published>2016-05-15T21:04:00+08:00</published>
-        <updated>2016-05-17T20:10:41+08:00</updated>
-        <id>http://terryoy.github.io/2016/05/linux-study-journal-2-desktop.html</id>
-        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
-        <category scheme="http://terryoy.github.io/tag/#study" term="study" label="study" />
-        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
-            <![CDATA[ <h3 id="toc_0">Part 2. Setup a minimal desktop environment</h3>
 
-<h4 id="toc_1">2.1 Xorg and Openbox</h4>
-<p>To use a desktop environment, <strong>Xorg</strong> is the package you won&#39;t miss(for more information you can also check the <a href="htts://www.x.org/">x.org</a> and <a href="https://www.freedesktop.org/">freedesktop.org</a> web-sites. I choose <strong>Openbox</strong> as the window manager, which is one of the most lightweight window manager. It is the best showcase of minimalism, yet the functions shall be simple enough for customization. The window manager is not a desktop environment, it is just simply a manager to windows, their styles and behaviors. A complete desktop environment is not necessary, or maybe it&#39;s the chance that I could design my own.</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install xorg
-<span class="c"># now you can enter the GUI environment by command &quot;startx&quot;, but you still need a window manager to do further things</span>
-<span class="nv">$ </span>sudo apt-get install openbox obconf openbox-themes
-<span class="c"># the above packages and their dependencies will allow you to build and configure an Openbox system, along with choices of themes.</span>
-</pre></div>
-<p>What&#39;s interesting about &ldquo;startx&rdquo; is that, if you try it after you install xorg and before any Window Manager, you&#39;ll get a graphical shell environment with mouse available. The font is definitly different from what you had in the normal console. It is I think the essential GUI environment possible. And if you press Ctrl+D to exit the session, you get back to your original console environment, so the <strong>xorg-session</strong> is exited.</p>
-<p>After installing the openbox package, it&#39;s not yet completed. You also need to add the a <code>~/.xinitrc</code> configuration so that it calls the openbox when you execute &ldquo;startx&rdquo;.</p>
-<div class="highlight"><pre><span class="nv">$ </span><span class="nb">echo</span> <span class="s2">&quot;exec openbox-session&quot;</span> &gt; ~/.xinitrc
-<span class="nv">$ </span>startx
-</pre></div>
-<p>Now you can see GUI environment by Openbox. Right click on the desktop and you get a start menu, you can start a terminal emulator or configure the openbox using <em>Obconf</em>.</p>
-<p>Next we try to do more about the customization.</p>
+<h4 id="toc_5">Problem 1.4 WiFi Connection Revisited</h4>
+<p>Last night I has successfully connect the wifi adapter to my home&#39;s network, howvever some new issues come up:</p>
 
-<h4 id="toc_2">2.2 Openbox Configuration (menu.xml and rc.xml)</h4>
-<p>Openbox has two main configuration files:</p>
-
-<pre><code>* rc.xml, which sets keybindings, desktop names and window behavior
-* menu.xml, which contains the instructions for the right-click menu.</code></pre>
+<ul>
+<li>  The bandwidth is only 1Mb/s</li>
+<li>  It takes a very long time to activate the interface, and sometimes hang there</li>
+</ul>
+<p>After checking the <a href="https://www.debian.org/doc/manuals/debian-reference/ch05.en.html">Debian&#39;s document</a>, the network setup using <em>ifupdown</em> approach is a bit outdate, and the modern way is to use NetworkManager(NM) or Wicd(wicd and associated packages). </p>
+<p>(BTW, it is good to have the <em>debian-handbook</em> and <em>debian-reference</em> package installed in your local machine for any reference needed.)</p>
+<p>So first step, I try to look up a proper driver for the adapter. There is a package <a href="https://wiki.debian.org/rt2800usb">rt2800usb</a> to support Ralink 802.11n usb devices on Linux.</p>
 ]]>
         </content>
     </entry><entry>
@@ -146,7 +158,7 @@ iface wlan0 inet dhcp
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/04/git-ssh-config.html"/>
         <published>2016-04-17T16:11:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-04-18T09:50:50+08:00</updated>
         <id>http://terryoy.github.io/2016/04/git-ssh-config.html</id>
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
         <category scheme="http://terryoy.github.io/tag/#virtualbox" term="virtualbox" label="virtualbox" />
@@ -179,7 +191,7 @@ Host github.com
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/02/ubuntu-desktop-sharing-to-osx.html"/>
         <published>2016-02-26T10:52:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-02-26T11:11:36+08:00</updated>
         <id>http://terryoy.github.io/2016/02/ubuntu-desktop-sharing-to-osx.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#osx" term="osx" label="osx" />
@@ -212,7 +224,7 @@ Host github.com
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/02/vbox-cmd-tools-tricks.html"/>
         <published>2016-02-17T11:01:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-02-26T10:39:43+08:00</updated>
         <id>http://terryoy.github.io/2016/02/vbox-cmd-tools-tricks.html</id>
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
         <category scheme="http://terryoy.github.io/tag/#virtualbox" term="virtualbox" label="virtualbox" />
@@ -232,7 +244,7 @@ Host github.com
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/02/args-kwargs-python.html"/>
         <published>2016-02-03T16:05:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-02-03T16:57:01+08:00</updated>
         <id>http://terryoy.github.io/2016/02/args-kwargs-python.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -288,7 +300,7 @@ Host github.com
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/09/rpi-hardware-begin-gpio-python.html"/>
         <published>2015-09-06T20:02:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2015/09/rpi-hardware-begin-gpio-python.html</id>
         <category scheme="http://terryoy.github.io/tag/#rpi" term="rpi" label="rpi" />
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
@@ -318,7 +330,7 @@ Host github.com
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/06/some-useful-linux-server-security-commands.html"/>
         <published>2015-06-27T22:31:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2015/06/some-useful-linux-server-security-commands.html</id>
         <category scheme="http://terryoy.github.io/tag/#server" term="server" label="server" />
         <category scheme="http://terryoy.github.io/tag/#security" term="security" label="security" />
@@ -391,11 +403,55 @@ Jun 27 21:53:39 iZ940ou5p7nZ sudo: pam_unix<span class="o">(</span>sudo:session<
 ]]>
         </content>
     </entry><entry>
+        <title type="html"><![CDATA[Intel Edison Get Started]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2015/06/edison-get-started.html"/>
+        <published>2015-06-03T16:15:00+08:00</published>
+        <updated>2016-01-03T21:36:38+08:00</updated>
+        <id>http://terryoy.github.io/2015/06/edison-get-started.html</id>
+        <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <p>This guide is about the initial steps for me starting development on Intel Edison platform.</p>
+
+<h3 id="toc_0">1. The Board and Setting Up Serial Communication</h3>
+<p>The board I use to develop with Edison is the <a href="http://www.seeedstudio.com/depot/Intel-Edison-for-Arduino-p-2149.html">Intel Edison for Arduino</a> board. So first plug the Edison module on the board; secondary, I have the 6.5V 2A DC connected to supply the power to the board (or you could power up the board with the micro-USB in the middle); third, a micro-USB wire connect to the board for serial communication.</p>
+<p>I&#39;m using minicom on Mac OSX for the serial connection, but you can also use <code>screen</code> on Mac OSX and Linux(see the reference at the end of this section).</p>
+<p>If you forgot the root password, here&#39;s the way to recover it: </p>
+
+<pre><code>* on booting, press any key to stop the process
+* on the &quot;boot&gt;&quot; command line prompt, type ```run do_ota``` to redo the flashing process.</code></pre>
+<p>Then you end up with a login using &ldquo;root&rdquo; as user name and no password.</p>
+
+<ul>
+<li><a href="https://software.intel.com/zh-cn/assembling-intel-edison-board-with-arduino-expansion-board">Reference for assembling</a></li>
+<li><a href="https://software.intel.com/zh-cn/setting-up-serial-terminal-on-system-with-linux">Reference for setting up serial on Linux</a></li>
+<li><a href="https://software.intel.com/zh-cn/setting-up-serial-terminal-on-system-with-mac-os-x">Reference for setting up serial on Mac</a></li>
+</ul>
+
+<h3 id="toc_1">2. Setting up WiFi</h3>
+<p>The next thing to do is to setup the WiFi on Edison, because a large part of the development process happens on WiFi.</p>
+<div class="highlight"><pre><span class="nv">$ </span>configure_edison --wifi
+
+<span class="c"># check the wifi status</span>
+<span class="nv">$ </span>wpa_cli status
+</pre></div>
+<p>Follow the instructions of this program to complete the scanning, choosing hotspot, and reboot with WiFi.</p>
+<p>By default, <code>ssh</code> is restricted to usb, so you need to disable the restriction by using <code>configure_edison --setup</code> to setup the device name and password. It will automatically update the file &#39;/lib/systemd/system/sshd.socket&#39; and comment out this line &ldquo;BindToDevice=usb0&rdquo;. (need reboot to take effect)</p>
+
+<ul>
+<li><a href="https://software.intel.com/zh-cn/connecting-your-intel-edison-board-using-wifi">Reference for setting up WiFi</a></li>
+</ul>
+
+<h3 id="toc_2">3. Blink the LED</h3>
+<p>(to be continued when I get the board&hellip;)</p>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[A Template for Program Readme on Github]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/06/program-readme-template.html"/>
         <published>2015-06-03T16:15:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2015/06/program-readme-template.html</id>
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -476,55 +532,11 @@ top level routines
 ]]>
         </content>
     </entry><entry>
-        <title type="html"><![CDATA[Intel Edison Get Started]]></title>
-        <author><name>terryoy</name></author>
-        <link href="http://terryoy.github.io/2015/06/edison-get-started.html"/>
-        <published>2015-06-03T16:15:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
-        <id>http://terryoy.github.io/2015/06/edison-get-started.html</id>
-        <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
-        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
-            <![CDATA[ <p>This guide is about the initial steps for me starting development on Intel Edison platform.</p>
-
-<h3 id="toc_0">1. The Board and Setting Up Serial Communication</h3>
-<p>The board I use to develop with Edison is the <a href="http://www.seeedstudio.com/depot/Intel-Edison-for-Arduino-p-2149.html">Intel Edison for Arduino</a> board. So first plug the Edison module on the board; secondary, I have the 6.5V 2A DC connected to supply the power to the board (or you could power up the board with the micro-USB in the middle); third, a micro-USB wire connect to the board for serial communication.</p>
-<p>I&#39;m using minicom on Mac OSX for the serial connection, but you can also use <code>screen</code> on Mac OSX and Linux(see the reference at the end of this section).</p>
-<p>If you forgot the root password, here&#39;s the way to recover it: </p>
-
-<pre><code>* on booting, press any key to stop the process
-* on the &quot;boot&gt;&quot; command line prompt, type ```run do_ota``` to redo the flashing process.</code></pre>
-<p>Then you end up with a login using &ldquo;root&rdquo; as user name and no password.</p>
-
-<ul>
-<li><a href="https://software.intel.com/zh-cn/assembling-intel-edison-board-with-arduino-expansion-board">Reference for assembling</a></li>
-<li><a href="https://software.intel.com/zh-cn/setting-up-serial-terminal-on-system-with-linux">Reference for setting up serial on Linux</a></li>
-<li><a href="https://software.intel.com/zh-cn/setting-up-serial-terminal-on-system-with-mac-os-x">Reference for setting up serial on Mac</a></li>
-</ul>
-
-<h3 id="toc_1">2. Setting up WiFi</h3>
-<p>The next thing to do is to setup the WiFi on Edison, because a large part of the development process happens on WiFi.</p>
-<div class="highlight"><pre><span class="nv">$ </span>configure_edison --wifi
-
-<span class="c"># check the wifi status</span>
-<span class="nv">$ </span>wpa_cli status
-</pre></div>
-<p>Follow the instructions of this program to complete the scanning, choosing hotspot, and reboot with WiFi.</p>
-<p>By default, <code>ssh</code> is restricted to usb, so you need to disable the restriction by using <code>configure_edison --setup</code> to setup the device name and password. It will automatically update the file &#39;/lib/systemd/system/sshd.socket&#39; and comment out this line &ldquo;BindToDevice=usb0&rdquo;. (need reboot to take effect)</p>
-
-<ul>
-<li><a href="https://software.intel.com/zh-cn/connecting-your-intel-edison-board-using-wifi">Reference for setting up WiFi</a></li>
-</ul>
-
-<h3 id="toc_2">3. Blink the LED</h3>
-<p>(to be continued when I get the board&hellip;)</p>
-]]>
-        </content>
-    </entry><entry>
         <title type="html"><![CDATA[Create a Root CA and Self-Sign Certificate for SSL]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/02/create-ssl-ca-root-and-self-sign.html"/>
         <published>2015-02-23T11:03:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2015/02/create-ssl-ca-root-and-self-sign.html</id>
         <category scheme="http://terryoy.github.io/tag/#server" term="server" label="server" />
         <category scheme="http://terryoy.github.io/tag/#security" term="security" label="security" />
@@ -616,7 +628,7 @@ Common Name <span class="o">(</span>e.g. server FQDN or YOUR name<span class="o"
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/02/postgresql-admin-quickref-part2-initiating-database.html"/>
         <published>2015-02-21T16:40:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2015/02/postgresql-admin-quickref-part2-initiating-database.html</id>
         <category scheme="http://terryoy.github.io/tag/#postgresql" term="postgresql" label="postgresql" />
         <category scheme="http://terryoy.github.io/tag/#database" term="database" label="database" />
@@ -670,7 +682,7 @@ host    all             all             ::1/128                 md5
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/11/jni-guide-on-android.html"/>
         <published>2014-11-27T16:06:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2014/11/jni-guide-on-android.html</id>
         <category scheme="http://terryoy.github.io/tag/#cpp" term="cpp" label="cpp" />
         <category scheme="http://terryoy.github.io/tag/#android" term="android" label="android" />
@@ -821,7 +833,7 @@ JNI Documentation: <a href="http://docs.oracle.com/javase/1.5.0/docs/guide/jni/s
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/10/finding-information-linux-c-library.html"/>
         <published>2014-10-30T09:38:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2014/10/finding-information-linux-c-library.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
@@ -899,7 +911,7 @@ Program Library HOWTO <br/>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/10/common-git-commands.html"/>
         <published>2014-10-22T20:57:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2014/10/common-git-commands.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
@@ -998,7 +1010,7 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/08/learning-linux-c-part-1.html"/>
         <published>2014-08-20T23:34:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2014/08/learning-linux-c-part-1.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
@@ -1046,7 +1058,7 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/06/create-database-mysql.html"/>
         <published>2014-06-04T14:40:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2014/06/create-database-mysql.html</id>
         <category scheme="http://terryoy.github.io/tag/#database" term="database" label="database" />
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
@@ -1086,7 +1098,7 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/03/using-ctypes-to-wrap-c-library.html"/>
         <published>2014-03-23T07:57:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2014/03/using-ctypes-to-wrap-c-library.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
@@ -1267,7 +1279,7 @@ The <em>byref()</em> method create a parameter object of pointer, which you can 
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/03/postgresql-admin-quickref-part1-exploring-database.html"/>
         <published>2014-03-06T15:27:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2014/03/postgresql-admin-quickref-part1-exploring-database.html</id>
         <category scheme="http://terryoy.github.io/tag/#postgresql" term="postgresql" label="postgresql" />
         <category scheme="http://terryoy.github.io/tag/#database" term="database" label="database" />
@@ -1396,7 +1408,7 @@ Log files: <code>/var/log/postgresql/</code></p>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/01/ssh-key-based-auth-server.html"/>
         <published>2014-01-08T15:40:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2014/01/ssh-key-based-auth-server.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />

@@ -1,8 +1,8 @@
-# Linux Study Journal - (2) Desktop Environment
+# Put Linux into Old PC - (2) Desktop Environment
 
-- date: 2016-05-15 21:04
+- date: 2016-05-18 9:47
 - tags: linux, study
-- categories: linux-study-journal
+- categories: guides 
 -----------------------------
 
 ### Part 2. Setup a minimal desktop environment
