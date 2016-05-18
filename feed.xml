@@ -3,15 +3,15 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2016-05-18T10:39:17+08:00</updated>
+    <updated>2016-05-18T12:30:07+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
         <title type="html"><![CDATA[Linux Study Journal - (2) Desktop Environment]]></title>
         <author><name>terryoy</name></author>
-        <link href="http://terryoy.github.io/2016/05/linux-study-journal-2-desktop.html"/>
+        <link href="http://terryoy.github.io/2016/05/put-linux-into-old-pc-2-desktop.html"/>
         <published>2016-05-18T09:47:00+08:00</published>
         <updated>2016-05-18T09:47:39+08:00</updated>
-        <id>http://terryoy.github.io/2016/05/linux-study-journal-2-desktop.html</id>
+        <id>http://terryoy.github.io/2016/05/put-linux-into-old-pc-2-desktop.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#study" term="study" label="study" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -40,17 +40,17 @@
 ]]>
         </content>
     </entry><entry>
-        <title type="html"><![CDATA[Linux Study Journal - (1) Kick Off]]></title>
+        <title type="html"><![CDATA[Put Linux into Old PC - (1) Installation and Hardware]]></title>
         <author><name>terryoy</name></author>
-        <link href="http://terryoy.github.io/2016/05/linux-study-journal-kickoff.html"/>
+        <link href="http://terryoy.github.io/2016/05/put-linux-into-old-pc-1-hardware.html"/>
         <published>2016-05-15T21:04:00+08:00</published>
-        <updated>2016-05-18T10:39:17+08:00</updated>
-        <id>http://terryoy.github.io/2016/05/linux-study-journal-kickoff.html</id>
+        <updated>2016-05-18T12:30:07+08:00</updated>
+        <id>http://terryoy.github.io/2016/05/put-linux-into-old-pc-1-hardware.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#study" term="study" label="study" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
             <![CDATA[ <h3 id="toc_0">0. How this series begin?</h3>
-<p>I have an used Japanese IBM G40 PC, which has Pentium 4 (2.5GHz) processor, 512MB RAM and a 140GB hard disk (I believe the hardware spec has been changed by the used PC seller). Since the power consumption and the speed are not suitable for very modern applications, I decided to use it as an experiment machine for the minimal linux workspace. This series of blog posts will be the progress showing how I work on this machine to make it very friendly and efficient for daily used.</p>
+<p>I bought from Taobao a used Japanese IBM G40 PC, which has Pentium 4 (2.5GHz) processor, 512MB RAM and a 140GB hard disk (I believe the hardware spec has been changed by the used PC seller). Since the power consumption and the speed are not suitable for very modern applications, I decided to use it as an experiment machine for the minimal linux workspace. This series of blog posts will be the progress showing how I work on this machine to make it very friendly and efficient for daily used.</p>
 
 <h3 id="toc_1">Part 1. System Setup</h3>
 <p>I started to boot with the Ubuntu 16.04 LTS server image(flashed on a USB stick), the booting is a bit strange than previous versions, it shows a &ldquo;boot:&rdquo; prompt which need you to tells what to boot, but it&#39;s not difficult to find out how to boot into the installation mode.</p>

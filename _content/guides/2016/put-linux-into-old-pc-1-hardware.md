@@ -1,13 +1,13 @@
-# Linux Study Journal - (1) Kick Off
+# Put Linux into Old PC - (1) Installation and Hardware
 
 - date: 2016-05-15 21:04
 - tags: linux, study
-- categories: linux-study-journal
+- categories: guides
 -----------------------------
 
 ### 0. How this series begin?
 
-I have an used Japanese IBM G40 PC, which has Pentium 4 (2.5GHz) processor, 512MB RAM and a 140GB hard disk (I believe the hardware spec has been changed by the used PC seller). Since the power consumption and the speed are not suitable for very modern applications, I decided to use it as an experiment machine for the minimal linux workspace. This series of blog posts will be the progress showing how I work on this machine to make it very friendly and efficient for daily used.
+I bought from Taobao a used Japanese IBM G40 PC, which has Pentium 4 (2.5GHz) processor, 512MB RAM and a 140GB hard disk (I believe the hardware spec has been changed by the used PC seller). Since the power consumption and the speed are not suitable for very modern applications, I decided to use it as an experiment machine for creating a minimal linux workspace. This series of blog posts will be the progress showing how I work on this machine to make it very friendly and efficient for daily used.
 
 ### Part 1. System Setup
 
