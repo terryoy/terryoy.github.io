@@ -57,7 +57,7 @@
 <span class="nv">$ </span>sudo service systemd-logind restart
 </pre></div>
 <p>This helps me to get over the hibernation problem at once. <strong>Systemd</strong> is a Linux system and service manager. There is similar programs like ubuntu&#39;s &ldquo;upstart&rdquo;, or Mac OS&#39;s &ldquo;launchd&rdquo;. You can search for more info about it. <strong>The man page of systemd(init) is definitely worth reading to understand the first process of the system.</strong></p>
-<p>There are two other power related packages <code>acpi</code> and <code>acpid</code>. The Ubuntu document recommends that you can remove the packages if you do not have a laptop. </p>
+<p>There are two other power related packages <code>acpi</code> and <code>acpid</code>. The Ubuntu document recommends that you can remove the packages if you do not have a laptop. Might read that later.</p>
 
 <h4 id="toc_3">1.2 Problem 2: Japanese keyboard layout</h4>
 <p>Although I set some Japanese keyboard layout in the installation, but it doesn&#39;t match all the keys with my Japanese IBM G40 keyboard. Apparently I need to switch the keyboard layout and do a few tests. The configuration program I used here is <code>dpkg-reconfigure</code>, which allows you to configure a package again after they&#39;re installed. The package will be &ldquo;keyboard-configuration&rdquo;.</p>
@@ -135,7 +135,7 @@ iface wlan0 inet dhcp
 
 <ul>
 <li>  The bandwidth is only 1Mb/s</li>
-<li>  It take a very long time to activate the interface, and sometimes hang there</li>
+<li>  It takes a very long time to activate the interface, and sometimes hang there</li>
 </ul>
 <p>After checking the <a href="https://www.debian.org/doc/manuals/debian-reference/ch05.en.html">Debian&#39;s document</a>, the network setup using <em>ifupdown</em> approach is a bit outdate, and the modern way is to use NetworkManager(NM) or Wicd(wicd and associated packages). </p>
 <p>(BTW, it is good to have the <em>debian-handbook</em> and <em>debian-reference</em> package installed in your local machine for any reference needed.)</p>

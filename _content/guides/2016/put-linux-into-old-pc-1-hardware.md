@@ -34,7 +34,7 @@ $ sudo service systemd-logind restart
 
 This helps me to get over the hibernation problem at once. **Systemd** is a Linux system and service manager. There is similar programs like ubuntu's "upstart", or Mac OS's "launchd". You can search for more info about it. **The man page of systemd(init) is definitely worth reading to understand the first process of the system.**
 
-There are two other power related packages ```acpi``` and ```acpid```. The Ubuntu document recommends that you can remove the packages if you do not have a laptop. 
+There are two other power related packages ```acpi``` and ```acpid```. The Ubuntu document recommends that you can remove the packages if you do not have a laptop. Might read that later.
 
 #### 1.2 Problem 2: Japanese keyboard layout
  
@@ -137,7 +137,7 @@ Hard-coding the WiFi SSID and password in the configuration is not convenience i
 Last night I has successfully connect the wifi adapter to my home's network, howvever some new issues come up:
 
 *	The bandwidth is only 1Mb/s
-*	It take a very long time to activate the interface, and sometimes hang there
+*	It takes a very long time to activate the interface, and sometimes hang there
 
 After checking the [Debian's document](https://www.debian.org/doc/manuals/debian-reference/ch05.en.html), the network setup using *ifupdown* approach is a bit outdate, and the modern way is to use NetworkManager(NM) or Wicd(wicd and associated packages). 
 
