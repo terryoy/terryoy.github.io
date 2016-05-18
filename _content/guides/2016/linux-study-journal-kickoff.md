@@ -68,10 +68,10 @@ The original G40 doesn't have wireless network connection. Fortunately I have a 
 
 First I could use ```lsusb``` to check that device is recognized. Then I move on to updating the configuration in ```/etc/network/interfaces```. Check out the man page of **interfaces**, and you will find the information of the keywords and syntax for configuring the network interface. For example:
 
-	* *auto*, telling ```ifup``` to get this interface up automatically
-	* *iface*, define an interface (template) using different methods(inet, inet6, etc.)
-	* *allow-*, allow the interface to be brought up by various sub-system(e.g. allow-hotplug, allow-auto, etc.)
-	* *pre-up*, *post-down*, commands to be execute before the interface is up or after it is down
+*	*auto*, telling ```ifup``` to get this interface up automatically
+*	*iface*, define an interface (template) using different methods(inet, inet6, etc.)
+*	*allow-\*, allow the interface to be brought up by various sub-system(e.g. allow-hotplug, allow-auto, etc.)
+*	*pre-up*, *post-down*, commands to be execute before the interface is up or after it is down
 
 	
 The configuration syntax is not difficult, so I added the below lines to enable the wifi adapter at system startup:
@@ -133,4 +133,19 @@ $ sudo ifup wlan0
 
 Hard-coding the WiFi SSID and password in the configuration is not convenience in real environment, but so far in my experiement environment, it is OK to use it first. We will get back to the network manager later to make it more convenience to connect different WiFi network.
 
+#### Problem 1.4 WiFi Connection Revisited
 
+Last night I has successfully connect the wifi adapter to my home's network, howvever some new issues come up:
+
+*	The bandwidth is only 1Mb/s
+*	It take a very long time to activate the interface, and sometimes hang there
+
+After checking the [Debian's document](https://www.debian.org/doc/manuals/debian-reference/ch05.en.html), the network setup using *ifupdown* approach is a bit outdate, and the modern way is to use NetworkManager(NM) or Wicd(wicd and associated packages). 
+
+(BTW, it is good to have the *debian-handbook* and *debian-reference* package installed in your local machine for any reference needed.)
+
+So first step, I try to look up a proper driver for the adapter. There is a package [rt2800usb](https://wiki.debian.org/rt2800usb) to support Ralink 802.11n usb devices on Linux.
+
+
+
+ 
