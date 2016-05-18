@@ -13,7 +13,7 @@ I bought from Taobao a used Japanese IBM G40 PC, which has Pentium 4 (2.5GHz) pr
 
 I started to boot with the Ubuntu 16.04 LTS server image(flashed on a USB stick), the booting is a bit strange than previous versions, it shows a "boot:" prompt which need you to tells what to boot, but it's not difficult to find out how to boot into the installation mode.
 
-The reason using Ubuntu latest version is because I want to keep up with the development of the software packages, debian is in a very stable status, while the Ubuntu packages are active enough to try out new things. I format the whole disk and install Ubuntu only on the disk. This is the starting point.
+The reason using Ubuntu latest version is because I want to keep up with the development of the software packages, Debian is in a very stable status, while the Ubuntu packages are active enough to try out new things. I format the whole disk and install Ubuntu on it. This is the starting point.
 
 #### 1.1 Problem 1: hibernation on lid close
 
