@@ -3,14 +3,14 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2016-05-18T12:34:35+08:00</updated>
+    <updated>2016-05-18T12:37:17+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
-        <title type="html"><![CDATA[Linux Study Journal - (2) Desktop Environment]]></title>
+        <title type="html"><![CDATA[Put Linux into Old PC - (2) Desktop Environment]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/05/put-linux-into-old-pc-2-desktop.html"/>
         <published>2016-05-18T09:47:00+08:00</published>
-        <updated>2016-05-18T09:47:39+08:00</updated>
+        <updated>2016-05-18T12:36:01+08:00</updated>
         <id>http://terryoy.github.io/2016/05/put-linux-into-old-pc-2-desktop.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#study" term="study" label="study" />
@@ -44,7 +44,7 @@
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/05/put-linux-into-old-pc-1-hardware.html"/>
         <published>2016-05-15T21:04:00+08:00</published>
-        <updated>2016-05-18T12:34:35+08:00</updated>
+        <updated>2016-05-18T12:37:17+08:00</updated>
         <id>http://terryoy.github.io/2016/05/put-linux-into-old-pc-1-hardware.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#study" term="study" label="study" />
@@ -64,7 +64,6 @@
 <span class="c">#HandleLidSwitch=suspend</span>
 <span class="c"># --to</span>
 <span class="nv">HandleLidSwitch</span><span class="o">=</span>ignore
-
 
 <span class="nv">$ </span>sudo service systemd-logind restart
 </pre></div>

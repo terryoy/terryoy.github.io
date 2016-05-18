@@ -28,7 +28,6 @@ $ sudo vi /etc/systemd/logind.conf
 # --to
 HandleLidSwitch=ignore
 
-
 $ sudo service systemd-logind restart
 
 ```
