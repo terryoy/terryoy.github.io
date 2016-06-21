@@ -3,9 +3,87 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/tricks/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/tricks/" />
-    <updated>2016-05-15T19:23:55+08:00</updated>
+    <updated>2016-06-21T22:58:14+08:00</updated>
     <id>http://terryoy.github.io/tricks/</id>
     <entry>
+        <title type="html"><![CDATA[A Short Reference of Python Logging]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2016/05/short-ref-python-logging.html"/>
+        <published>2016-05-26T19:55:00+08:00</published>
+        <updated>2016-06-21T22:58:14+08:00</updated>
+        <id>http://terryoy.github.io/2016/05/short-ref-python-logging.html</id>
+        <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <p>I have for many times use the logging function, but never understand it completely. So I go through the document and make some notes, hoping it will help me use it more quickly in the future. </p>
+
+<h3 id="toc_0">1. Basic Config</h3>
+<p>If you want to use a programmable method other than a configuration file, the basicConfig() method is the general initializing method.</p>
+<p>The most basic form is default log, which you don&#39;t need basicConfig(). It is using console output with WARNING level.</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">logging</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;hello&#39;</span><span class="p">)</span> <span class="c"># no output</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">logging</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s">&#39;world&#39;</span><span class="p">)</span>
+<span class="n">world</span>
+</pre></div>
+<p>The basic config contains a list of below elements:</p>
+
+<ul>
+<li>  filename    - Using a <em>FileHandler</em> to output the log</li>
+<li>  filemode    - file open mode(&#39;r&#39;, &#39;w&#39;, &#39;a&#39;), mainly used to choose append or write a new log file</li>
+<li>  format      - A string for specifying the log output template, If you want to lookup a list of supported keywords, look for section &#39;LogRecord attributes&#39; in the python official document</li>
+<li>  datefmt     - A specified date/time format.</li>
+<li>  level       - set the <em>root</em> loglevel for the logger</li>
+<li>  stream      - Specify a stream for the StreamHandler, for example, a buffer output stream or stdout. It will be ignored if &ldquo;filename&rdquo; is present.</li>
+</ul>
+<p>The logger can be initialized only once when basicConfig() is called. Then </p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">logging</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s">&#39;program.log&#39;</span><span class="p">,</span> 
+        <span class="n">filemode</span><span class="o">=</span><span class="s">&#39;a&#39;</span><span class="p">,</span>
+        <span class="n">format</span><span class="o">=</span><span class="s">&quot;</span><span class="si">%(asctime)-15s</span><span class="s"> </span><span class="si">%(levelname)s</span><span class="s"> [</span><span class="si">%(module)s</span><span class="s">] </span><span class="si">%(message)s</span><span class="s">&quot;</span><span class="p">,</span>
+        <span class="n">datefmt</span><span class="o">=</span><span class="s">&quot;%Y-%m-</span><span class="si">%d</span><span class="s"> %H:%M:%S.</span><span class="si">%f</span><span class="s">&quot;</span><span class="p">,</span>
+        <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+</pre></div>
+
+<h3 id="toc_1">2. Configuration Object and the Modular Approach</h3>
+<p>When choosing the Modular Approach of logging, you need to deal with 4 elements:</p>
+
+<ul>
+<li>  loggers     - the interface that application modules used to log things</li>
+<li>  handlers    - send the log records (that loggers created) to the appropriate destinations</li>
+<li>  filters     - provide a finer grained facility for determining which log records should be output</li>
+<li>  formatters  - specify the layout of the log records in the final output</li>
+</ul>
+
+<h4 id="toc_2">2.1 Logger hierarchy</h4>
+<p>The loggers used by all the modules are formed in a conceptual hierarchy by the naming with a separator(&#39;.&#39;). For example: &#39;abc.text&#39;, is the descendant of logger &#39;abc&#39;, while &#39;abc&#39; can be the parent of &#39;abc.text&#39;, &#39;abc.pdf&#39;, &#39;abc.image&#39;, etc. A good convention is to use loggers in a module sense, using in each <code>.py</code> as below:</p>
+<div class="highlight"><pre><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+</pre></div>
+<p>The root of all loggers is called the &ldquo;root&rdquo; logger, which prints the logger name as &ldquo;ROOT&rdquo; in output.
+</p>
+
+<h4 id="toc_3">2.2 Useful handlers</h4>
+<p>There are some useful handlers in the section of python <em>Logging Howto</em> document. Some of them are listed as here:</p>
+
+<ul>
+<li>  StreamHandler   - to stream object (default stdin?)</li>
+<li>  FileHandler     - to a disk file</li>
+<li>  <strong>RotatingFileHandler</strong>         - from <em>BaseRotatingHandler</em>, send logs to files, rotating log file with a maximum file size.</li>
+<li>  <strong>TimedRotatingFileHandler</strong>    - from <em>BaseRotatingHandler</em>, send logs to files, rotating log file at a certain timed intervals.</li>
+<li>  SocketHandler/DatagramHandler   - send log messages to TCP/IP and UDP sockets</li>
+<li>  SMTPHandler     - Send to a designated email address</li>
+<li>  NullHandler     - Do nothing, it&#39;s used in development that supports logging with this mock</li>
+</ul>
+<p>This shows the variety of logging output scenarios, which you could look them up in the python doc.</p>
+
+<h4 id="toc_4">2.3 The propagation of loggers</h4>
+<p>Look at the flow of logging in the below diagram from <a href="https://docs.python.org/2/howto/logging.html#logging-advanced-tutorial">python&#39;s tutorial</a>,</p>
+<p><img src="https://docs.python.org/2/_images/logging_flow.png" alt="logging flow"/></p>
+<p>When a log record is send to the logger in the module, it will first check if its own filter(the filter of a logger) reject it, then pass to its handler; if propagation is set to true(by default), it will pass the log record to it&#39;s parent too, so the log record will bubble up till the root logger, and each logger will judge by their handler and filter to decide whether to output the log record. So we often setup a top level logger, and then configure a child logger only if needed.</p>
+
+<h4 id="toc_5">2.4 Configuring Logging</h4>
+<p>The most usual approaches are using <code>fileConfig()</code> and <code>dictConfig()</code>. With fileConfig() you can use a <strong>.conf</strong> file to load the settings, and with dictConfig() you can use even wider range of persistence choices, such as JSON, python file, yaml, etc.</p>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[Config your git repository to use SSH Key]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/04/git-ssh-config.html"/>

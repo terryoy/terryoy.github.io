@@ -3,9 +3,87 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2016-06-21T22:41:20+08:00</updated>
+    <updated>2016-06-21T22:58:14+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
+        <title type="html"><![CDATA[A Short Reference of Python Logging]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2016/05/short-ref-python-logging.html"/>
+        <published>2016-05-26T19:55:00+08:00</published>
+        <updated>2016-06-21T22:58:14+08:00</updated>
+        <id>http://terryoy.github.io/2016/05/short-ref-python-logging.html</id>
+        <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <p>I have for many times use the logging function, but never understand it completely. So I go through the document and make some notes, hoping it will help me use it more quickly in the future. </p>
+
+<h3 id="toc_0">1. Basic Config</h3>
+<p>If you want to use a programmable method other than a configuration file, the basicConfig() method is the general initializing method.</p>
+<p>The most basic form is default log, which you don&#39;t need basicConfig(). It is using console output with WARNING level.</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">logging</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;hello&#39;</span><span class="p">)</span> <span class="c"># no output</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">logging</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s">&#39;world&#39;</span><span class="p">)</span>
+<span class="n">world</span>
+</pre></div>
+<p>The basic config contains a list of below elements:</p>
+
+<ul>
+<li>  filename    - Using a <em>FileHandler</em> to output the log</li>
+<li>  filemode    - file open mode(&#39;r&#39;, &#39;w&#39;, &#39;a&#39;), mainly used to choose append or write a new log file</li>
+<li>  format      - A string for specifying the log output template, If you want to lookup a list of supported keywords, look for section &#39;LogRecord attributes&#39; in the python official document</li>
+<li>  datefmt     - A specified date/time format.</li>
+<li>  level       - set the <em>root</em> loglevel for the logger</li>
+<li>  stream      - Specify a stream for the StreamHandler, for example, a buffer output stream or stdout. It will be ignored if &ldquo;filename&rdquo; is present.</li>
+</ul>
+<p>The logger can be initialized only once when basicConfig() is called. Then </p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">logging</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s">&#39;program.log&#39;</span><span class="p">,</span> 
+        <span class="n">filemode</span><span class="o">=</span><span class="s">&#39;a&#39;</span><span class="p">,</span>
+        <span class="n">format</span><span class="o">=</span><span class="s">&quot;</span><span class="si">%(asctime)-15s</span><span class="s"> </span><span class="si">%(levelname)s</span><span class="s"> [</span><span class="si">%(module)s</span><span class="s">] </span><span class="si">%(message)s</span><span class="s">&quot;</span><span class="p">,</span>
+        <span class="n">datefmt</span><span class="o">=</span><span class="s">&quot;%Y-%m-</span><span class="si">%d</span><span class="s"> %H:%M:%S.</span><span class="si">%f</span><span class="s">&quot;</span><span class="p">,</span>
+        <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+</pre></div>
+
+<h3 id="toc_1">2. Configuration Object and the Modular Approach</h3>
+<p>When choosing the Modular Approach of logging, you need to deal with 4 elements:</p>
+
+<ul>
+<li>  loggers     - the interface that application modules used to log things</li>
+<li>  handlers    - send the log records (that loggers created) to the appropriate destinations</li>
+<li>  filters     - provide a finer grained facility for determining which log records should be output</li>
+<li>  formatters  - specify the layout of the log records in the final output</li>
+</ul>
+
+<h4 id="toc_2">2.1 Logger hierarchy</h4>
+<p>The loggers used by all the modules are formed in a conceptual hierarchy by the naming with a separator(&#39;.&#39;). For example: &#39;abc.text&#39;, is the descendant of logger &#39;abc&#39;, while &#39;abc&#39; can be the parent of &#39;abc.text&#39;, &#39;abc.pdf&#39;, &#39;abc.image&#39;, etc. A good convention is to use loggers in a module sense, using in each <code>.py</code> as below:</p>
+<div class="highlight"><pre><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+</pre></div>
+<p>The root of all loggers is called the &ldquo;root&rdquo; logger, which prints the logger name as &ldquo;ROOT&rdquo; in output.
+</p>
+
+<h4 id="toc_3">2.2 Useful handlers</h4>
+<p>There are some useful handlers in the section of python <em>Logging Howto</em> document. Some of them are listed as here:</p>
+
+<ul>
+<li>  StreamHandler   - to stream object (default stdin?)</li>
+<li>  FileHandler     - to a disk file</li>
+<li>  <strong>RotatingFileHandler</strong>         - from <em>BaseRotatingHandler</em>, send logs to files, rotating log file with a maximum file size.</li>
+<li>  <strong>TimedRotatingFileHandler</strong>    - from <em>BaseRotatingHandler</em>, send logs to files, rotating log file at a certain timed intervals.</li>
+<li>  SocketHandler/DatagramHandler   - send log messages to TCP/IP and UDP sockets</li>
+<li>  SMTPHandler     - Send to a designated email address</li>
+<li>  NullHandler     - Do nothing, it&#39;s used in development that supports logging with this mock</li>
+</ul>
+<p>This shows the variety of logging output scenarios, which you could look them up in the python doc.</p>
+
+<h4 id="toc_4">2.3 The propagation of loggers</h4>
+<p>Look at the flow of logging in the below diagram from <a href="https://docs.python.org/2/howto/logging.html#logging-advanced-tutorial">python&#39;s tutorial</a>,</p>
+<p><img src="https://docs.python.org/2/_images/logging_flow.png" alt="logging flow"/></p>
+<p>When a log record is send to the logger in the module, it will first check if its own filter(the filter of a logger) reject it, then pass to its handler; if propagation is set to true(by default), it will pass the log record to it&#39;s parent too, so the log record will bubble up till the root logger, and each logger will judge by their handler and filter to decide whether to output the log record. So we often setup a top level logger, and then configure a child logger only if needed.</p>
+
+<h4 id="toc_5">2.4 Configuring Logging</h4>
+<p>The most usual approaches are using <code>fileConfig()</code> and <code>dictConfig()</code>. With fileConfig() you can use a <strong>.conf</strong> file to load the settings, and with dictConfig() you can use even wider range of persistence choices, such as JSON, python file, yaml, etc.</p>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[Put Linux into Old PC - (2) Desktop Environment]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/05/put-linux-into-old-pc-2-desktop.html"/>
@@ -927,7 +1005,7 @@ Program Library HOWTO <br/>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/10/common-git-commands.html"/>
         <published>2014-10-22T20:57:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-06-21T22:58:14+08:00</updated>
         <id>http://terryoy.github.io/2014/10/common-git-commands.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
@@ -1018,6 +1096,34 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
 <span class="nv">$ </span>git add . <span class="o">&amp;&amp;</span> git commit -m <span class="s2">&quot;initial commit&quot;</span>
 <span class="nv">$ </span>git remote add origin git@gitserver:/opt/git/somerepo.git
 <span class="nv">$ </span>git push origin master
+</pre></div>
+
+<h3 id="toc_4">5. Tagging</h3>
+<div class="highlight"><pre><span class="c"># list your tags</span>
+<span class="nv">$ </span>git tag
+<span class="c"># search for tags</span>
+<span class="nv">$ </span>git tag -l <span class="s2">&quot;v1.8.*&quot;</span>
+
+<span class="c"># create a tag with annotation</span>
+<span class="nv">$ </span>git tag -a v1.0.1 -m <span class="s2">&quot;a new tag for v1.0.1&quot;</span>
+<span class="c"># create a tag for a previous commit(for example, 902acd...)</span>
+<span class="nv">$ </span>git tag -a v1.0.0 902acd
+
+<span class="c"># show tag info</span>
+<span class="nv">$ </span>git show v1.0.1
+
+<span class="c"># push a tag to remote server</span>
+<span class="nv">$ </span>git push origin v1.0.1
+<span class="c"># or push tags</span>
+<span class="nv">$ </span>git push origin --tags 
+
+<span class="c"># You can also checkout the tags like the same way you checkout branches</span>
+<span class="nv">$ </span>git checkout -b version2 v2.0.0
+</pre></div>
+
+<h3 id="toc_5">6. Amend Logs</h3>
+<div class="highlight"><pre><span class="c"># amend log for the last commit</span>
+<span class="nv">$ </span>git commit --amend
 </pre></div>
 ]]>
         </content>
@@ -1417,104 +1523,6 @@ Log files: <code>/var/log/postgresql/</code></p>
 <span class="gp">postgres=#</span> <span class="kp">\d+</span> <span class="ss">some_table</span>
 </pre></div>
 <p>(to be continue)</p>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[Setup SSH Identity Key Login in Linux]]></title>
-        <author><name>terryoy</name></author>
-        <link href="http://terryoy.github.io/2014/01/ssh-key-based-auth-server.html"/>
-        <published>2014-01-08T15:40:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
-        <id>http://terryoy.github.io/2014/01/ssh-key-based-auth-server.html</id>
-        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
-        <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
-        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
-            <![CDATA[ <p>This example is about how to create a new user and enable SSH public-key authentication in Ubuntu Server. It is necessary if your server is open to the public on internet.</p>
-
-<h2 id="toc_0">1. Create a New User on Server</h2>
-<p>In a traditional way, people use the command &ldquo;useradd&rdquo; to create user account, then together with other commands to setup the group, the home folder for the user.</p>
-<div class="highlight"><pre><span class="nv">$ </span>useradd terry
-<span class="nv">$ </span>passwd terry
-<span class="nv">$ </span>mkdir /home/terry
-<span class="nv">$ </span>chown -R terry:users /home/terry
-</pre></div>
-<p>In a debian way, there is one command which does it all: &ldquo;adduser&rdquo;.</p>
-<div class="highlight"><pre><span class="nv">$ </span>adduser edmund
-Adding user <span class="s1">&#39;edmund&#39;</span> ...
-Adding new group <span class="s1">&#39;edmund&#39;</span> <span class="o">(</span>1001<span class="o">)</span> ...
-Adding new user <span class="s1">&#39;edmund&#39;</span> <span class="o">(</span>1001<span class="o">)</span> with group <span class="s1">&#39;edmund&#39;</span> ...
-Creating home directory <span class="s1">&#39;/home/edmund&#39;</span> ...
-Copying files from <span class="s1">&#39;/etc/skel&#39;</span> ...
-Enter new UNIX password: 
-Retype new UNIX password: 
-passwd: password updated successfully
-Changing the user information <span class="k">for </span>edmund
-Enter the new value, or press ENTER <span class="k">for </span>the default
-    Full Name <span class="o">[]</span>: 
-    Room Number <span class="o">[]</span>: 
-    Work Phone <span class="o">[]</span>: 
-    Home Phone <span class="o">[]</span>: 
-    Other <span class="o">[]</span>: 
-Is the information correct? <span class="o">[</span>Y/n<span class="o">]</span>
-</pre></div>
-
-<h2 id="toc_1">2. Generate SSH Key and Apply to Server</h2>
-<p>With SSH key login, user require a public/private key pairs to authenticate the login. SSH can use both &ldquo;RSA&rdquo; and &ldquo;DSA&rdquo; keys, however according to the <a href="https://help.ubuntu.com/community/SSH/OpenSSH/Keys#Key-Based_SSH_Logins">ubuntu guide</a>, &ldquo;RSA&rdquo; is the only recommended choice for new keys. </p>
-<p>First thing you should keep in mind, the private key should <strong>NOT</strong> allow to be accessed by anybody else(e.g. set &ldquo;700&rdquo; with chmod). We will create the RSA keys in your <strong>local</strong> machine, then copy the public key to the <strong>remote</strong> server.</p>
-<div class="highlight"><pre><span class="nv">$ </span>mkdir ~/.ssh
-<span class="nv">$ </span>chmod 700 ~/.ssh      <span class="c"># set access right only to user self</span>
-<span class="nv">$ </span>ssh-keygen -t rsa     <span class="c"># **or you could use &quot;ssh-keygen -t rsa -b 4096&quot; for more secure login, default is 2048**.</span>
-Generating public/private rsa key pair.
-Enter file in which to save the key <span class="o">(</span>/home/edmund/.ssh/id_rsa<span class="o">)</span>: 
-Enter passphrase <span class="o">(</span>empty <span class="k">for </span>no passphrase<span class="o">)</span>: 
-Enter same passphrase again: 
-Your identification has been saved in /home/edmund/.ssh/id_rsa.
-Your public key has been saved in /home/edmund/.ssh/id_rsa.pub.
-
-<span class="c"># next copy the public key to server. you can use a one-command way or manually copy the key to server.</span>
-<span class="nv">$ </span>ssh-copy-id user@machine      <span class="c"># one-command way</span>
-<span class="c"># manually way: copy the public key to server, and add it to authorized_key</span>
-<span class="nv">$ </span>scp ~/.ssh/id_rsa.pub user@machine:~/.ssh/my_rsa.pub
-<span class="nv">$ </span>ssh user@machine
-<span class="nv">$ </span><span class="nb">cd</span> ~/.ssh
-<span class="nv">$ </span>cat my_rsa.pub &gt;&gt; authorized_keys
-</pre></div>
-
-<h2 id="toc_2">3. Update SSH Daemon configuration on Server</h2>
-<p>On the remote machine, currently the password authentication is still enabled, so we need to enable the RSA Authentication and disable the Password Authentication for the better security.</p>
-<p>Open <strong>/etc/ssh/sshd_config</strong> on server, find(or add) the below items and set the values:
-<code>
-PubkeyAuthentication yes
-RSAAuthentication yes
-PasswordAuthentication no
-</code>
-Next restart ssh service: <code>$ sudo service ssh restart</code>
-Now try login in the local machine:
-<code>
-$ ssh user@machine  # Or,
-$ ssh -i id_rsa user@machine
-</code>
-If your key matches, you will directly go into the console shell, or else you will get the following error info, which means you configuration applied successfully.
-<code>
-Permission denied (publickey).
-</code>
-If you want to revoke an authorized key for some user, you can find the user&#39;s public key in <strong>&ldquo;~/.ssh/authorized_keys&rdquo;</strong> and remove it.</p>
-
-<hr/>
-
-<h4 id="toc_3"><em>Extra Bonus: below is a small trick to use the keys to encrypt/decrypt text for daily use.</em></h4>
-<div class="highlight"><pre><span class="c"># encrypt a text file, and output to a file</span>
-<span class="nv">$ </span>openssl enc -aes-256-cbc -e -in textfile.txt -out encrypted.txt -pass pass:some_password
-<span class="c"># decrypt a text file, and output to a file(else it will print to the console)</span>
-<span class="nv">$ </span>openssl enc -aes-256-cbc -d -in encrypted.txt -out textfile.txt -pass pass:some_password
-
-<span class="c"># encode in base64 (the &quot;enc&quot; option let you specify a cipher, e.g. &quot;-base64&quot; here)</span>
-<span class="nv">$ </span>openssl enc -base64 -e -in tetfile.txt
-<span class="nv">$ </span>openssl enc -base64 -e <span class="o">&lt;&lt;&lt;</span> <span class="s2">&quot;Encode this text please&quot;</span>
-<span class="nv">$ </span>openssl base64 -e <span class="o">&lt;&lt;&lt;</span> <span class="s2">&quot;Encode this text please&quot;</span>
-<span class="c"># decode in base64</span>
-<span class="nv">$ </span>openssl base64 -d <span class="o">&lt;&lt;&lt;</span> <span class="s2">&quot;RW5jb2RlIHRoaXMgdGV4dCBwbGVhc2UK&quot;</span>
-</pre></div>
 ]]>
         </content>
     </entry>

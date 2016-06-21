@@ -115,4 +115,39 @@ $ git push origin master
 
 ```
 
+### 5. Tagging
+
+```bash
+# list your tags
+$ git tag
+# search for tags
+$ git tag -l "v1.8.*"
+
+# create a tag with annotation
+$ git tag -a v1.0.1 -m "a new tag for v1.0.1"
+# create a tag for a previous commit(for example, 902acd...)
+$ git tag -a v1.0.0 902acd
+
+# show tag info
+$ git show v1.0.1
+
+# push a tag to remote server
+$ git push origin v1.0.1
+# or push tags
+$ git push origin --tags 
+
+# You can also checkout the tags like the same way you checkout branches
+$ git checkout -b version2 v2.0.0
+
+```
+
+### 6. Amend Logs
+
+```bash
+# amend log for the last commit
+$ git commit --amend
+
+```
+
+
 
