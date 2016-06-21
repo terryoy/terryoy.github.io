@@ -54,4 +54,19 @@ $ sudo apt-get install surf
 
 Reference for "surf": [http://surf.suckless.org/](http://surf.suckless.org/)
 
+Next I also give a try to Chromium, the open source version of Chrome. It seems this more sophisticated version of webkit browser also works fine under linux. The performance on loading static web site is quick. So I decided to use Chromium as my default currently.
+
+But now we have a problem here, what if I want to change the default browser in OpenBox? Debian provides a program call **update-alternatives** so that you could set default program for specific purpose.
+
+```bash
+# list current default program settings
+$ update-alternatives --get-selections
+
+# update a default program
+$ sudo update-alternatives --config x-www-browser
+
+```
+
+It will prompt you an option list of possible programs, so that you can easily decide which program to use.
+
 

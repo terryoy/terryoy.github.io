@@ -69,6 +69,15 @@
 </pre></div>
 <p><strong>Surf</strong> has no tab support, no menu no any distractions. If you want to navigate to urls, hit <strong>Ctrl-g</strong> to enter a new URL.</p>
 <p>Reference for &ldquo;surf&rdquo;: <a href="http://surf.suckless.org/">http://surf.suckless.org/</a></p>
+<p>Next I also give a try to Chromium, the open source version of Chrome. It seems this more sophisticated version of webkit browser also works fine under linux. The performance on loading static web site is quick. So I decided to use Chromium as my default currently.</p>
+<p>But now we have a problem here, what if I want to change the default browser in OpenBox? Debian provides a program call <strong>update-alternatives</strong> so that you could set default program for specific purpose.</p>
+<div class="highlight"><pre><span class="c"># list current default program settings</span>
+<span class="nv">$ </span>update-alternatives --get-selections
+
+<span class="c"># update a default program</span>
+<span class="nv">$ </span>sudo update-alternatives --config x-www-browser
+</pre></div>
+<p>It will prompt you an option list of possible programs, so that you can easily decide which program to use.</p>
 
     
     
