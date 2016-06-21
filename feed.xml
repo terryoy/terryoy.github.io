@@ -3,7 +3,7 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2016-06-21T23:13:22+08:00</updated>
+    <updated>2016-06-21T23:39:19+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
         <title type="html"><![CDATA[A Short Reference of Python Logging]]></title>
@@ -88,7 +88,7 @@
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/05/put-linux-into-old-pc-2-desktop.html"/>
         <published>2016-05-18T09:47:00+08:00</published>
-        <updated>2016-06-21T23:00:17+08:00</updated>
+        <updated>2016-06-21T23:39:19+08:00</updated>
         <id>http://terryoy.github.io/2016/05/put-linux-into-old-pc-2-desktop.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#study" term="study" label="study" />
@@ -116,30 +116,14 @@
 
 <pre><code>* rc.xml, which sets keybindings, desktop names and window behavior
 * menu.xml, which contains the instructions for the right-click menu.</code></pre>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
-
-<h4 id="toc_3">2.3 A simple web browser that do the trick</h4>
-
-<h1 id="toc_4">After searching the apt-cache library for web browser, I discover there is a simple browser called <code>surf</code>, which uses WebKit/Gtk to render. I think this tool is well enough for browsing modern web sites, and also friendly to command line. So I pick it for the initial choice of a browser for me to search information online on this computer.</h1>
 <p>Reference: <a href="https://urukrama.wordpress.com/openbox-guide/">https://urukrama.wordpress.com/openbox-guide/</a></p>
 
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>63656c7800a93f1ec8c4a9a88cf5afe7ebcabfb0</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
+<h4 id="toc_3">2.3 A simple web browser that do the trick</h4>
+<p>After searching the apt-cache library for web browser, I discover there is a simple browser called <code>surf</code>, which uses WebKit/Gtk to render. I think this tool is well enough for browsing modern web sites, and also friendly to command line. So I pick it for the initial choice of a browser for me to search information online on this computer.</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install surf
 </pre></div>
+<p><strong>Surf</strong> has no tab support, no menu no any distractions. If you want to navigate to urls, hit <strong>Ctrl-g</strong> to enter a new URL.</p>
+<p>Reference for &ldquo;surf&rdquo;: <a href="http://surf.suckless.org/">http://surf.suckless.org/</a></p>
 ]]>
         </content>
     </entry><entry>

@@ -40,15 +40,18 @@ Openbox has two main configuration files:
 	* menu.xml, which contains the instructions for the right-click menu.
 
 
+Reference: [https://urukrama.wordpress.com/openbox-guide/](https://urukrama.wordpress.com/openbox-guide/)
 
-<<<<<<< HEAD
+
 #### 2.3 A simple web browser that do the trick
 
 After searching the apt-cache library for web browser, I discover there is a simple browser called ```surf```, which uses WebKit/Gtk to render. I think this tool is well enough for browsing modern web sites, and also friendly to command line. So I pick it for the initial choice of a browser for me to search information online on this computer.
-=======
-Reference: [https://urukrama.wordpress.com/openbox-guide/](https://urukrama.wordpress.com/openbox-guide/)
->>>>>>> 63656c7800a93f1ec8c4a9a88cf5afe7ebcabfb0
 
 ```bash
 $ sudo apt-get install surf
 ```
+**Surf** has no tab support, no menu no any distractions. If you want to navigate to urls, hit **Ctrl-g** to enter a new URL.
+
+Reference for "surf": [http://surf.suckless.org/](http://surf.suckless.org/)
+
+
