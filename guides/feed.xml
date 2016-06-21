@@ -3,7 +3,7 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/guides/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/guides/" />
-    <updated>2016-01-03T21:36:38+08:00</updated>
+    <updated>2016-06-21T17:53:51+08:00</updated>
     <id>http://terryoy.github.io/guides/</id>
     <entry>
         <title type="html"><![CDATA[Raspberry Pi Hardware GPIO with Python]]></title>
@@ -398,7 +398,7 @@ Program Library HOWTO <br/>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/10/common-git-commands.html"/>
         <published>2014-10-22T20:57:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
+        <updated>2016-06-21T17:53:51+08:00</updated>
         <id>http://terryoy.github.io/2014/10/common-git-commands.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
@@ -489,6 +489,34 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
 <span class="nv">$ </span>git add . <span class="o">&amp;&amp;</span> git commit -m <span class="s2">&quot;initial commit&quot;</span>
 <span class="nv">$ </span>git remote add origin git@gitserver:/opt/git/somerepo.git
 <span class="nv">$ </span>git push origin master
+</pre></div>
+
+<h3 id="toc_4">5. Tagging</h3>
+<div class="highlight"><pre><span class="c"># list your tags</span>
+<span class="nv">$ </span>git tag
+<span class="c"># search for tags</span>
+<span class="nv">$ </span>git tag -l <span class="s2">&quot;v1.8.*&quot;</span>
+
+<span class="c"># create a tag with annotation</span>
+<span class="nv">$ </span>git tag -a v1.0.1 -m <span class="s2">&quot;a new tag for v1.0.1&quot;</span>
+<span class="c"># create a tag for a previous commit(for example, 902acd...)</span>
+<span class="nv">$ </span>git tag -a v1.0.0 902acd
+
+<span class="c"># show tag info</span>
+<span class="nv">$ </span>git show v1.0.1
+
+<span class="c"># push a tag to remote server</span>
+<span class="nv">$ </span>git push origin v1.0.1
+<span class="c"># or push tags</span>
+<span class="nv">$ </span>git push origin --tags 
+
+<span class="c"># You can also checkout the tags like the same way you checkout branches</span>
+<span class="nv">$ </span>git checkout -b version2 v2.0.0
+</pre></div>
+
+<h3 id="toc_5">6. Amend Logs</h3>
+<div class="highlight"><pre><span class="c"># amend log for the last commit</span>
+<span class="nv">$ </span>git commit --amend
 </pre></div>
 ]]>
         </content>
