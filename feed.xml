@@ -3,7 +3,7 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2016-06-21T22:58:14+08:00</updated>
+    <updated>2016-06-21T23:13:22+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
         <title type="html"><![CDATA[A Short Reference of Python Logging]]></title>
@@ -88,7 +88,7 @@
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/05/put-linux-into-old-pc-2-desktop.html"/>
         <published>2016-05-18T09:47:00+08:00</published>
-        <updated>2016-05-19T00:15:02+08:00</updated>
+        <updated>2016-06-21T23:00:17+08:00</updated>
         <id>http://terryoy.github.io/2016/05/put-linux-into-old-pc-2-desktop.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#study" term="study" label="study" />
@@ -116,9 +116,28 @@
 
 <pre><code>* rc.xml, which sets keybindings, desktop names and window behavior
 * menu.xml, which contains the instructions for the right-click menu.</code></pre>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
 
 <h4 id="toc_3">2.3 A simple web browser that do the trick</h4>
-<p>After searching the apt-cache library for web browser, I discover there is a simple browser called <code>surf</code>, which uses WebKit/Gtk to render. I think this tool is well enough for browsing modern web sites, and also friendly to command line. So I pick it for the initial choice of a browser for me to search information online on this computer.</p>
+
+<h1 id="toc_4">After searching the apt-cache library for web browser, I discover there is a simple browser called <code>surf</code>, which uses WebKit/Gtk to render. I think this tool is well enough for browsing modern web sites, and also friendly to command line. So I pick it for the initial choice of a browser for me to search information online on this computer.</h1>
+<p>Reference: <a href="https://urukrama.wordpress.com/openbox-guide/">https://urukrama.wordpress.com/openbox-guide/</a></p>
+
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>63656c7800a93f1ec8c4a9a88cf5afe7ebcabfb0</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install surf
 </pre></div>
 ]]>
@@ -128,7 +147,7 @@
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/05/put-linux-into-old-pc-1-hardware.html"/>
         <published>2016-05-15T21:04:00+08:00</published>
-        <updated>2016-06-21T22:41:20+08:00</updated>
+        <updated>2016-06-21T23:13:22+08:00</updated>
         <id>http://terryoy.github.io/2016/05/put-linux-into-old-pc-1-hardware.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#study" term="study" label="study" />
@@ -241,10 +260,25 @@ iface wlan0 inet dhcp
 <span class="nv">$ </span>sudo service network-manager start
 <span class="nv">$ </span>nmcli <span class="nb">help</span>
 </pre></div>
-<p>It will ignores the interfaces(except <em>lo</em>) in /etc/network/interfaces and use its own configuration, so comment out all leaving only <em>lo</em> in /etc/network/interfaces.</p>
+<p>It will ignores the interfaces(except <em>lo</em>) in /etc/network/interfaces and use its own configuration, so comment out all leaving only <em>lo</em> in /etc/network/interfaces. Next. try a few commands for nmcli to check the network status.</p>
 <div class="highlight"><pre><span class="c"># list network devices</span>
-<span class="nv">$ </span>nmcli d
+<span class="nv">$ </span>nmcli device
+
+<span class="c"># list connections</span>
+<span class="nv">$ </span>nmcli connection
 </pre></div>
+<p>now we can try to connect the wifi with the WiFi adapter</p>
+<div class="highlight"><pre><span class="c"># list the wifi hot spots</span>
+<span class="nv">$ </span>nmcli device wifi list
+<span class="c"># or refresh the list if you don&#39;t get it</span>
+<span class="nv">$ </span>nmcli device wifi rescan
+
+<span class="c"># connect your hot spot</span>
+<span class="nv">$ </span>nmcli device wifi connect &lt;SSID|BSSID&gt; password &lt;password&gt;
+</pre></div>
+<p>It&#39;s as simple as just one command line, and yet so powerful than what I expected. The network manager auto saves the WiFi connection in its database, and it can also be activated automatically when system starts up. Save my day!</p>
+<p>Reference for <strong>nmcli</strong>: <a href="https://fedoraproject.org/wiki/Networking/CLI">https://fedoraproject.org/wiki/Networking/CLI</a></p>
+<p>After checking the connection, the bandwidth, everything goes well. So I can stop my researching for the network solution now. Next let&#39;s work on the desktop environment.</p>
 ]]>
         </content>
     </entry><entry>

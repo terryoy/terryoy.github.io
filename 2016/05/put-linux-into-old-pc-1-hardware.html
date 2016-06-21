@@ -146,10 +146,25 @@ iface wlan0 inet dhcp
 <span class="nv">$ </span>sudo service network-manager start
 <span class="nv">$ </span>nmcli <span class="nb">help</span>
 </pre></div>
-<p>It will ignores the interfaces(except <em>lo</em>) in /etc/network/interfaces and use its own configuration, so comment out all leaving only <em>lo</em> in /etc/network/interfaces.</p>
+<p>It will ignores the interfaces(except <em>lo</em>) in /etc/network/interfaces and use its own configuration, so comment out all leaving only <em>lo</em> in /etc/network/interfaces. Next. try a few commands for nmcli to check the network status.</p>
 <div class="highlight"><pre><span class="c"># list network devices</span>
-<span class="nv">$ </span>nmcli d
+<span class="nv">$ </span>nmcli device
+
+<span class="c"># list connections</span>
+<span class="nv">$ </span>nmcli connection
 </pre></div>
+<p>now we can try to connect the wifi with the WiFi adapter</p>
+<div class="highlight"><pre><span class="c"># list the wifi hot spots</span>
+<span class="nv">$ </span>nmcli device wifi list
+<span class="c"># or refresh the list if you don&#39;t get it</span>
+<span class="nv">$ </span>nmcli device wifi rescan
+
+<span class="c"># connect your hot spot</span>
+<span class="nv">$ </span>nmcli device wifi connect &lt;SSID|BSSID&gt; password &lt;password&gt;
+</pre></div>
+<p>It&#39;s as simple as just one command line, and yet so powerful than what I expected. The network manager auto saves the WiFi connection in its database, and it can also be activated automatically when system starts up. Save my day!</p>
+<p>Reference for <strong>nmcli</strong>: <a href="https://fedoraproject.org/wiki/Networking/CLI">https://fedoraproject.org/wiki/Networking/CLI</a></p>
+<p>After checking the connection, the bandwidth, everything goes well. So I can stop my researching for the network solution now. Next let&#39;s work on the desktop environment.</p>
 
     
     

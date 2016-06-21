@@ -156,11 +156,33 @@ $ nmcli help
 
 ```
 
-It will ignores the interfaces(except *lo*) in /etc/network/interfaces and use its own configuration, so comment out all leaving only *lo* in /etc/network/interfaces.
+It will ignores the interfaces(except *lo*) in /etc/network/interfaces and use its own configuration, so comment out all leaving only *lo* in /etc/network/interfaces. Next. try a few commands for nmcli to check the network status.
 
 ```bash
 # list network devices
-$ nmcli d
+$ nmcli device
+
+# list connections
+$ nmcli connection
+```
+
+now we can try to connect the wifi with the WiFi adapter
+
+```bash
+# list the wifi hot spots
+$ nmcli device wifi list
+# or refresh the list if you don't get it
+$ nmcli device wifi rescan
+
+# connect your hot spot
+$ nmcli device wifi connect <SSID|BSSID> password <password>
 
 ```
- 
+
+It's as simple as just one command line, and yet so powerful than what I expected. The network manager auto saves the WiFi connection in its database, and it can also be activated automatically when system starts up. Save my day!
+
+Reference for **nmcli**: [https://fedoraproject.org/wiki/Networking/CLI](https://fedoraproject.org/wiki/Networking/CLI)
+
+
+After checking the connection, the bandwidth, everything goes well. So I can stop my researching for the network solution now. Next let's work on the desktop environment.
+
