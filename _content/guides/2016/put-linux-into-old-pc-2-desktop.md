@@ -28,6 +28,8 @@ $ startx
 
 Now you can see GUI environment by Openbox. Right click on the desktop and you get a start menu, you can start a terminal emulator or configure the openbox using *Obconf*.
 
+If you see an error says cannot get access to ~/.Xauthority, it's possibly you ran it in root user. It doesn't need to be root user, and you should chown the file to yourself.
+
 Next we try to do more about the customization.
 
 #### 2.2 Openbox Configuration (menu.xml and rc.xml)
@@ -39,4 +41,10 @@ Openbox has two main configuration files:
 
 
 
+#### 2.3 A simple web browser that do the trick
 
+After searching the apt-cache library for web browser, I discover there is a simple browser called ```surf```, which uses WebKit/Gtk to render. I think this tool is well enough for browsing modern web sites, and also friendly to command line. So I pick it for the initial choice of a browser for me to search information online on this computer.
+
+```bash
+$ sudo apt-get install surf
+```

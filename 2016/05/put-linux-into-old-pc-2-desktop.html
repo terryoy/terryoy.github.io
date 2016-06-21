@@ -53,6 +53,7 @@
 <span class="nv">$ </span>startx
 </pre></div>
 <p>Now you can see GUI environment by Openbox. Right click on the desktop and you get a start menu, you can start a terminal emulator or configure the openbox using <em>Obconf</em>.</p>
+<p>If you see an error says cannot get access to ~/.Xauthority, it&#39;s possibly you ran it in root user. It doesn&#39;t need to be root user, and you should chown the file to yourself.</p>
 <p>Next we try to do more about the customization.</p>
 
 <h4 id="toc_2">2.2 Openbox Configuration (menu.xml and rc.xml)</h4>
@@ -60,6 +61,11 @@
 
 <pre><code>* rc.xml, which sets keybindings, desktop names and window behavior
 * menu.xml, which contains the instructions for the right-click menu.</code></pre>
+
+<h4 id="toc_3">2.3 A simple web browser that do the trick</h4>
+<p>After searching the apt-cache library for web browser, I discover there is a simple browser called <code>surf</code>, which uses WebKit/Gtk to render. I think this tool is well enough for browsing modern web sites, and also friendly to command line. So I pick it for the initial choice of a browser for me to search information online on this computer.</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install surf
+</pre></div>
 
     
     

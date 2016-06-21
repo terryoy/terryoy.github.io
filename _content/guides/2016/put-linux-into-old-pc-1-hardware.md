@@ -98,7 +98,7 @@ SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="5c:63:bf:2a:8b:28", NAME="wlan0
 
 The **udev** program is a dynamic device management software, it supplies the system softwares with device events, manage permissions of device nodes and may create additional symlinks in the "/dev" directory, or provide names to unpredictable device names from the kernel. The man page for ```udev``` is worth reading.
 
-Reboot to test out if the device is named correctly. The devicexs can be found in ```/sys/class/net/```, with a symbolic link to the device's DEVPATH.
+Reboot to test out if the device is named correctly. The device can be found in ```/sys/class/net/```, with a symbolic link to the device's DEVPATH.
 
 Next step is to setup the WPA2 authentication of the WiFi with my SSID and password. We'll need ```wpasupplicant``` package for that.
 
@@ -124,6 +124,7 @@ auto wlan0
 iface wlan0 inet dhcp
   pre-up wpa_supplicant -B -Dwext -i wlan0 -c /etc/wpa_supplicant/example.conf
 # save and test the interface
+# (PS, sometimes I forgot the "-B" parameter in the wpa_supplicant command, it will make the ifup job hang because it will run as a daemon in the foreground.)
 $ sudo ifdown wlan0
 $ sudo ifup wlan0
 # make sure the DHCP client can get an IP, otherwise the network auto start process in boot up might hang for 5 minutes to get the network...
@@ -137,14 +138,29 @@ Hard-coding the WiFi SSID and password in the configuration is not convenience i
 Last night I has successfully connect the wifi adapter to my home's network, howvever some new issues come up:
 
 *	The bandwidth is only 1Mb/s
-*	It takes a very long time to activate the interface, and sometimes hang there
+*	Not convenient to configure SSID and passphrase
 
 After checking the [Debian's document](https://www.debian.org/doc/manuals/debian-reference/ch05.en.html), the network setup using *ifupdown* approach is a bit outdate, and the modern way is to use NetworkManager(NM) or Wicd(wicd and associated packages). 
 
 (BTW, it is good to have the *debian-handbook* and *debian-reference* package installed in your local machine for any reference needed.)
 
-So first step, I try to look up a proper driver for the adapter. There is a package [rt2800usb](https://wiki.debian.org/rt2800usb) to support Ralink 802.11n usb devices on Linux.
+At first, I try to look up a proper driver for the adapter. There is a package [rt2800usb](https://wiki.debian.org/rt2800usb) to support Ralink 802.11n usb devices on Linux. However, I found out that Ubuntu has already installed the ```linux-firmware``` which includes the rt28xx driver, so I decided to check it later.
 
+Now I try to install the **network-manager** first. It is a program in two parts: a root daemon handling activation and configuration of network interfaces, and a user interface that controls it. It is provided by gnome project so the GUI is by default for gnome environment. However, it also provides a command line tool call ```nmcli``` in the package, so I will try it first.
 
+```bash
 
+$ sudo apt-get install network-manager
+$ sudo service network-manager start
+$ nmcli help
+
+```
+
+It will ignores the interfaces(except *lo*) in /etc/network/interfaces and use its own configuration, so comment out all leaving only *lo* in /etc/network/interfaces.
+
+```bash
+# list network devices
+$ nmcli d
+
+```
  
