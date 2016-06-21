@@ -146,5 +146,7 @@ After checking the [Debian's document](https://www.debian.org/doc/manuals/debian
 So first step, I try to look up a proper driver for the adapter. There is a package [rt2800usb](https://wiki.debian.org/rt2800usb) to support Ralink 802.11n usb devices on Linux.
 
 
+Reference for **nmcli**: [https://fedoraproject.org/wiki/Networking/CLI](https://fedoraproject.org/wiki/Networking/CLI)
+
 
  

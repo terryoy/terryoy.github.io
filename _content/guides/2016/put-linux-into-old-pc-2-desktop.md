@@ -39,4 +39,5 @@ Openbox has two main configuration files:
 
 
 
+Reference: [https://urukrama.wordpress.com/openbox-guide/](https://urukrama.wordpress.com/openbox-guide/)
 
