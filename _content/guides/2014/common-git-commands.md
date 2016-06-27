@@ -139,6 +139,9 @@ $ git push origin --tags
 # You can also checkout the tags like the same way you checkout branches
 $ git checkout -b version2 v2.0.0
 
+# delete a tag
+$ git tag -d "v1.0.1a"
+
 ```
 
 ### 6. Amend Logs
@@ -148,6 +151,30 @@ $ git checkout -b version2 v2.0.0
 $ git commit --amend
 
 ```
+
+### 7. Working with drafts (stashing)
+
+
+
+```bash
+# Save current uncommitted change to stash
+$ git stash
+
+# List existing stash
+$ git stash list
+
+# recover last stash
+$ git stash apply
+
+# recover previous stashes
+$ git stash apply stash@{1}
+
+# Delete stashes
+$ git stash drop stash@{0}
+
+```
+
+Reference for git stash: [https://git-scm.com/docs/git-stash](https://git-scm.com/docs/git-stash)
 
 
 

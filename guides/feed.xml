@@ -3,7 +3,7 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/guides/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/guides/" />
-    <updated>2016-06-21T17:53:51+08:00</updated>
+    <updated>2016-06-27T16:33:46+08:00</updated>
     <id>http://terryoy.github.io/guides/</id>
     <entry>
         <title type="html"><![CDATA[Raspberry Pi Hardware GPIO with Python]]></title>
@@ -398,7 +398,7 @@ Program Library HOWTO <br/>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/10/common-git-commands.html"/>
         <published>2014-10-22T20:57:00+08:00</published>
-        <updated>2016-06-21T17:53:51+08:00</updated>
+        <updated>2016-06-27T16:33:46+08:00</updated>
         <id>http://terryoy.github.io/2014/10/common-git-commands.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
@@ -512,12 +512,33 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
 
 <span class="c"># You can also checkout the tags like the same way you checkout branches</span>
 <span class="nv">$ </span>git checkout -b version2 v2.0.0
+
+<span class="c"># delete a tag</span>
+<span class="nv">$ </span>git tag -d <span class="s2">&quot;v1.0.1a&quot;</span>
 </pre></div>
 
 <h3 id="toc_5">6. Amend Logs</h3>
 <div class="highlight"><pre><span class="c"># amend log for the last commit</span>
 <span class="nv">$ </span>git commit --amend
 </pre></div>
+
+<h3 id="toc_6">7. Working with drafts (stashing)</h3>
+<div class="highlight"><pre><span class="c"># Save current uncommitted change to stash</span>
+<span class="nv">$ </span>git stash
+
+<span class="c"># List existing stash</span>
+<span class="nv">$ </span>git stash list
+
+<span class="c"># recover last stash</span>
+<span class="nv">$ </span>git stash apply
+
+<span class="c"># recover previous stashes</span>
+<span class="nv">$ </span>git stash apply stash@<span class="o">{</span>1<span class="o">}</span>
+
+<span class="c"># Delete stashes</span>
+<span class="nv">$ </span>git stash drop stash@<span class="o">{</span>0<span class="o">}</span>
+</pre></div>
+<p>Reference for git stash: <a href="https://git-scm.com/docs/git-stash">https://git-scm.com/docs/git-stash</a></p>
 ]]>
         </content>
     </entry><entry>
