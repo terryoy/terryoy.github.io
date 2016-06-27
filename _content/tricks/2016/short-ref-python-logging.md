@@ -95,8 +95,60 @@ When a log record is send to the logger in the module, it will first check if it
 
 #### 2.4 Configuring Logging
 
-The most usual approaches are using ```fileConfig()``` and ```dictConfig()```. With fileConfig() you can use a **.conf** file to load the settings, and with dictConfig() you can use even wider range of persistence choices, such as JSON, python file, yaml, etc.
+The most usual approaches are using ```fileConfig()``` and ```dictConfig()```. With fileConfig() you can use a **.conf** file to load the settings (this approach is deprecated), and with dictConfig() you can use even wider range of persistence choices, such as JSON, python file, yaml, etc.
+
+For example, I have written a small utils for command line interaction and also want to log the HTTP request details. So I defined two handlers: one for console output, another for file output so that I can review the details. The console output must be simple without unneccessary information, and the file output should contains all the time, module details for investigation. Here is my configuration using a python file. (The advantages for a python configuration is that you can also use expressions and comments.)
+
+```python
+import logging, logging.config
+
+config = {
+    "log_config": {
+        "version": 1,
+        "formatters": {
+            "brief": {
+                "format": "%(message)s",
+            },
+            "detail": {
+                "format": "%(asctime)-15s %(levelname)s [%(name)s] %(message)s",
+                "datefmt": '%Y-%m-%d %H:%M:%S',
+            },
+        },
+        "handlers": {
+            "console": {
+                "class": "logging.StreamHandler",
+                "level": "INFO",
+                "formatter": "brief",
+            },
+            "file": {
+                "class": "logging.handlers.RotatingFileHandler",
+                "filename": "dev.log",
+                "level": "DEBUG",
+                "formatter": "detail",
+            },
+        },
+        "root": {
+            "handlers": ["console", "file"],
+            "level": "DEBUG",
+        },
+        "loggers": {
+            "requests": {
+                "handlers": ["file"],
+                "level": "DEBUG",
+                "propagate": False,
+            }
+        },
+    },
+}
+
+logging.config.dictConfig(config["log_config"])
+```
+
+There are two formatters: "brief" for simply output the message body, the root loggers is default logger for all the modules I write, and also the 3rd party libraries like python ```requests```. Since all the info log should appear in both **console** and the **file**, I need to put both inthe root logger. However, to avoid the unneccssary debug log showing in console, I set the level **INFO** in the **console** handler. This enables the file logger logs everything while the console doesn't. 
+
+Next I discover that the library "requests" also have some "INFO" log which is unneccessary in console, so I will specificially make it disappear using the **loggers** config. The important thing here is to use the **propagate** feature. 
+
+The "file" logger wants the requests' debug log, so I need to set the level to DEBUG. By default, it will propagate the log record to the "root" logger which make it appear to console. So I will use ```propagate: False``` to disable the propagation. Then the log records  will stay in the "requests" logger and will be invisible to the "root" logger.
 
 
-
-
+If you're not sure what to config with, write a small example project to experiment the result.
