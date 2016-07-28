@@ -177,4 +177,26 @@ $ git stash drop stash@{0}
 Reference for git stash: [https://git-scm.com/docs/git-stash](https://git-scm.com/docs/git-stash)
 
 
+### 8. Merge a specific commit to current branch
+
+Git has a ```cherry-pick``` function that can merge a specific commit to the current branch, this save me once. :P
+
+```bash
+# merge a sequence of commits to the current branch, 
+$ git cherry-pick <commits...>
+```
+
+When you try to merge a commit, you will possibly cause some conflict. The cherry-pick function also has some features to help you.
+
+```bash
+# continue the job after you resolve the conflicts
+$ git cherry-pick --continue
+
+# forget current job in the sequence progress
+$ git cherry-pick --quit
+
+# clear all the sequence and recover to the pre-sequence state
+$ git cherry-pick --abort
+```
+
 

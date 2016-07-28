@@ -175,6 +175,22 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
 </pre></div>
 <p>Reference for git stash: <a href="https://git-scm.com/docs/git-stash">https://git-scm.com/docs/git-stash</a></p>
 
+<h3 id="toc_7">8. Merge a specific commit to current branch</h3>
+<p>Git has a <code>cherry-pick</code> function that can merge a specific commit to the current branch, this save me once. :P</p>
+<div class="highlight"><pre><span class="c"># merge a sequence of commits to the current branch, </span>
+<span class="nv">$ </span>git cherry-pick &lt;commits...&gt;
+</pre></div>
+<p>When you try to merge a commit, you will possibly cause some conflict. The cherry-pick function also has some features to help you.</p>
+<div class="highlight"><pre><span class="c"># continue the job after you resolve the conflicts</span>
+<span class="nv">$ </span>git cherry-pick --continue
+
+<span class="c"># forget current job in the sequence progress</span>
+<span class="nv">$ </span>git cherry-pick --quit
+
+<span class="c"># clear all the sequence and recover to the pre-sequence state</span>
+<span class="nv">$ </span>git cherry-pick --abort
+</pre></div>
+
     
     
 	<p/>
