@@ -199,4 +199,36 @@ $ git cherry-pick --quit
 $ git cherry-pick --abort
 ```
 
+### 9. Reverting commits
+
+There are two types of resetting the branch to a previous state: 1. delete unpublished commits locally, 2. Undo published commits with new commits.
+
+Using ```git reset``` can help resetting current state.
+
+```bash
+# delete the unpublished local commits and restore to the previous commit state
+$ git reset --hard <commit>
+
+# if you have local uncommit changes, you should save as stash first
+$ git stash
+$ git reset --hard <commit>
+$ git stash pop
+```
+
+Using ```git revert``` is to make a new commit to revert previous changes(specificly).
+
+```bash
+# cancel specific changes
+$ git revert <commit1> <commit2> ...
+
+# cancel range of commits
+$ git revert e647032...cee8902
+# cancel last two commits
+$ git revert HEAD~2...HEAD
+
+
+```
+
+[Ref to git revert](http://stackoverflow.com/questions/4114095/how-to-revert-git-repository-to-a-previous-commit).
+
 

@@ -3,7 +3,7 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/guides/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/guides/" />
-    <updated>2016-07-28T19:38:24+08:00</updated>
+    <updated>2016-08-03T17:07:19+08:00</updated>
     <id>http://terryoy.github.io/guides/</id>
     <entry>
         <title type="html"><![CDATA[Raspberry Pi Hardware GPIO with Python]]></title>
@@ -398,7 +398,7 @@ Program Library HOWTO <br/>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/10/common-git-commands.html"/>
         <published>2014-10-22T20:57:00+08:00</published>
-        <updated>2016-07-28T19:38:24+08:00</updated>
+        <updated>2016-08-03T17:07:19+08:00</updated>
         <id>http://terryoy.github.io/2014/10/common-git-commands.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
@@ -555,6 +555,28 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
 <span class="c"># clear all the sequence and recover to the pre-sequence state</span>
 <span class="nv">$ </span>git cherry-pick --abort
 </pre></div>
+
+<h3 id="toc_8">9. Reverting commits</h3>
+<p>There are two types of resetting the branch to a previous state: 1. delete unpublished commits locally, 2. Undo published commits with new commits.</p>
+<p>Using <code>git reset</code> can help resetting current state.</p>
+<div class="highlight"><pre><span class="c"># delete the unpublished local commits and restore to the previous commit state</span>
+<span class="nv">$ </span>git reset --hard &lt;commit&gt;
+
+<span class="c"># if you have local uncommit changes, you should save as stash first</span>
+<span class="nv">$ </span>git stash
+<span class="nv">$ </span>git reset --hard &lt;commit&gt;
+<span class="nv">$ </span>git stash pop
+</pre></div>
+<p>Using <code>git revert</code> is to make a new commit to revert previous changes(specificly).</p>
+<div class="highlight"><pre><span class="c"># cancel specific changes</span>
+<span class="nv">$ </span>git revert &lt;commit1&gt; &lt;commit2&gt; ...
+
+<span class="c"># cancel range of commits</span>
+<span class="nv">$ </span>git revert e647032...cee8902
+<span class="c"># cancel last two commits</span>
+<span class="nv">$ </span>git revert HEAD~2...HEAD
+</pre></div>
+<p><a href="http://stackoverflow.com/questions/4114095/how-to-revert-git-repository-to-a-previous-commit">Ref to git revert</a>.</p>
 ]]>
         </content>
     </entry><entry>
