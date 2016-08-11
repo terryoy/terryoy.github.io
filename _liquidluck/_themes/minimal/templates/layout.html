@@ -43,7 +43,7 @@
 <div id="wrapper">   
 <header id="header" class="clear">
     <h1>{{ site.name }}</h1>
-    <p>I'm <i>terryoy</i></p>
+    <p>I'm <i>{{ theme.author }}</i></p>
     <p class="view"><a href="https://github.com/terryoy">View My GitHub Profile</a></p>
 </header><!-- #header -->
 
@@ -54,7 +54,7 @@
 </nav>
 {%- endblock %}
 
-<section>
+<section class="main">
 {%- block main %}{% endblock -%}
 </section>
 
