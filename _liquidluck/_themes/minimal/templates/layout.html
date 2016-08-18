@@ -45,6 +45,11 @@
     <h1>{{ site.name }}</h1>
     <p>I'm <i>{{ theme.author }}</i></p>
     <p class="view"><a href="https://github.com/terryoy">View My GitHub Profile</a></p>
+    {% if site.feed -%}
+    <p><a class="feed" href="{{site.feed}}">RSS feed</a></p>
+    {% else %}
+    <p><a class="feed" href="{{ content_url('feed.xml') }}">RSS feed</a></p>
+    {%- endif %}
 </header><!-- #header -->
 
 {%- block nav %}
