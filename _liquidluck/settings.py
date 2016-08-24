@@ -70,14 +70,15 @@ theme = {
     # you can access theme in template with ``theme`` namespace
     # for instance: {{theme.disqus}}
     "vars": {
+        "author": "terryoy",
         "disqus": "terryoy",
         #"analytics": "UA-21475122-1",
         
         'navigation': [
 			{'name': 'Home', 'link': '/'},
-            {'name': 'Thoughts', 'link': '/thoughts/index.html'},
             {'name': 'Guides', 'link':'/guides/index.html'},
             {'name': 'Tricks', 'link':'/tricks/index.html'},
+            {'name': '*Projects', 'link': '/projects.html'},
 			{'name': 'About Me', 'link': '/about.html'},
         ]
     }

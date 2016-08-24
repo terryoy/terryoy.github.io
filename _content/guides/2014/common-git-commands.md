@@ -177,4 +177,58 @@ $ git stash drop stash@{0}
 Reference for git stash: [https://git-scm.com/docs/git-stash](https://git-scm.com/docs/git-stash)
 
 
+### 8. Merge a specific commit to current branch
+
+Git has a ```cherry-pick``` function that can merge a specific commit to the current branch, this save me once. :P
+
+```bash
+# merge a sequence of commits to the current branch, 
+$ git cherry-pick <commits...>
+```
+
+When you try to merge a commit, you will possibly cause some conflict. The cherry-pick function also has some features to help you.
+
+```bash
+# continue the job after you resolve the conflicts
+$ git cherry-pick --continue
+
+# forget current job in the sequence progress
+$ git cherry-pick --quit
+
+# clear all the sequence and recover to the pre-sequence state
+$ git cherry-pick --abort
+```
+
+### 9. Reverting commits
+
+There are two types of resetting the branch to a previous state: 1. delete unpublished commits locally, 2. Undo published commits with new commits.
+
+Using ```git reset``` can help resetting current state.
+
+```bash
+# delete the unpublished local commits and restore to the previous commit state
+$ git reset --hard <commit>
+
+# if you have local uncommit changes, you should save as stash first
+$ git stash
+$ git reset --hard <commit>
+$ git stash pop
+```
+
+Using ```git revert``` is to make a new commit to revert previous changes(specificly).
+
+```bash
+# cancel specific changes
+$ git revert <commit1> <commit2> ...
+
+# cancel range of commits
+$ git revert e647032...cee8902
+# cancel last two commits
+$ git revert HEAD~2...HEAD
+
+
+```
+
+[Ref to git revert](http://stackoverflow.com/questions/4114095/how-to-revert-git-repository-to-a-previous-commit).
+
 

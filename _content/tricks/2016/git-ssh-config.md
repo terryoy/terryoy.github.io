@@ -36,4 +36,22 @@ Usually public git hosting services use HTTPS or GIT protocol, and your private 
     * Git URL: git@bitbucket.org:<accountname>/<reponame>.git  
     * Use with alias: git@bitbucket:<accountname>/<reponame>.git
 
+### 4. No more ask of  the passphrase
+
+Initially if you use a ssh key with passphrase, you might need to enter the passphrase every time you use it. It will be kind of annoying although provide better security. However, sometimes I don't want it to be entered every time in my private trusted computer. So we need `ssh-agent` to handle that.
+
+```bash
+# install the openssh-client package if you're on Debian/Ubuntu
+$ sudo apt-get install openssh-client
+
+# the ssh-add and ssh-agent tools will be available after the installation, but you need to start ssh-agent in your .bashrc script
+$ vi ~/.bashrc
+eval $(ssh-agent)
+
+# add the ssh key to ssh-agent (the passphrase will be asked once)
+$ cd ~/.ssh
+$ ssh-add -k gitub_rsa
+
+```
+
 

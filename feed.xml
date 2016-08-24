@@ -3,7 +3,7 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2016-06-28T22:16:05+08:00</updated>
+    <updated>2016-08-25T00:59:26+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
         <title type="html"><![CDATA[Put Linux into Old PC - (3) Localize the Language Environment]]></title>
@@ -150,7 +150,7 @@
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/05/put-linux-into-old-pc-2-desktop.html"/>
         <published>2016-05-18T09:47:00+08:00</published>
-        <updated>2016-06-28T22:15:54+08:00</updated>
+        <updated>2016-06-28T22:34:57+08:00</updated>
         <id>http://terryoy.github.io/2016/05/put-linux-into-old-pc-2-desktop.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#study" term="study" label="study" />
@@ -209,7 +209,22 @@
 <p>There are also two files under <code>/etc/xdg/openbox</code>. One is <strong>autostart</strong>, you can include some initializing scripts here when an Openbox X Session is started; the other file is <strong>environment</strong>, where you can set system wide variables for the Openbox session. Both of them can be user specific by creating files with the same name under <code>~/.config/openbox/</code>.</p>
 
 <h5 id="toc_4">2.2.2 Openbox Themes</h5>
-<p>Reference for Openbox Themes: <a href="http://openbox.org/wiki/Help:Themes">http://openbox.org/wiki/Help:Themes</a></p>
+<p>You can create your own themes for better looking of the desktop environment. The file structure is like below:</p>
+
+<pre><code>ThemesDirectory  (such as /usr/share/themes, ~/.local/share/themes or ~/.themes)
+ |
+ +-&gt; ThemeName  (This is the name of the theme, such as Clearlooks)
+      |
+      +-&gt; openbox-3  (This the type of the theme - it's for Openbox 3!)
+           |
+           |-&gt; themerc  (This is the main theme file, documented in this page)
+           |
+           |-&gt; max.xbm  (These are optional xbm masks for the titlebar buttons)
+           |-&gt; close.xbm
+           ...
+           +-&gt; shade.xbm</code></pre>
+<p>I have created a theme called &ldquo;LinuxInOldPC&rdquo; under &ldquo;~/.themes/&rdquo;, with the <code>openbox-3</code> folder and the default <code>themerc</code> file inside. The content template can be copied from the wiki page at the end of this section.</p>
+<p>Wiki of Openbox Themes: <a href="http://openbox.org/wiki/Help:Themes">http://openbox.org/wiki/Help:Themes</a></p>
 
 <h5 id="toc_5">2.2.3 Key-bindings</h5>
 <p>Here is a small trick where I would love to have, to conveniently dock the active window to part of the screen.</p>
@@ -377,7 +392,7 @@ iface wlan0 inet dhcp
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/04/git-ssh-config.html"/>
         <published>2016-04-17T16:11:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-08-25T00:59:26+08:00</updated>
         <id>http://terryoy.github.io/2016/04/git-ssh-config.html</id>
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
         <category scheme="http://terryoy.github.io/tag/#virtualbox" term="virtualbox" label="virtualbox" />
@@ -403,6 +418,20 @@ Host github.com
 
 <pre><code>* Git URL: git@bitbucket.org:&lt;accountname&gt;/&lt;reponame&gt;.git  
 * Use with alias: git@bitbucket:&lt;accountname&gt;/&lt;reponame&gt;.git</code></pre>
+
+<h3 id="toc_3">4. No more ask of  the passphrase</h3>
+<p>Initially if you use a ssh key with passphrase, you might need to enter the passphrase every time you use it. It will be kind of annoying although provide better security. However, sometimes I don&#39;t want it to be entered every time in my private trusted computer. So we need <code>ssh-agent</code> to handle that.</p>
+<div class="highlight"><pre><span class="c"># install the openssh-client package if you&#39;re on Debian/Ubuntu</span>
+<span class="nv">$ </span>sudo apt-get install openssh-client
+
+<span class="c"># the ssh-add and ssh-agent tools will be available after the installation, but you need to start ssh-agent in your .bashrc script</span>
+<span class="nv">$ </span>vi ~/.bashrc
+<span class="nb">eval</span> <span class="k">$(</span>ssh-agent<span class="k">)</span>
+
+<span class="c"># add the ssh key to ssh-agent (the passphrase will be asked once)</span>
+<span class="nv">$ </span><span class="nb">cd</span> ~/.ssh
+<span class="nv">$ </span>ssh-add -k gitub_rsa
+</pre></div>
 ]]>
         </content>
     </entry><entry>
@@ -1130,7 +1159,7 @@ Program Library HOWTO <br/>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/10/common-git-commands.html"/>
         <published>2014-10-22T20:57:00+08:00</published>
-        <updated>2016-06-28T20:38:15+08:00</updated>
+        <updated>2016-08-25T00:41:46+08:00</updated>
         <id>http://terryoy.github.io/2014/10/common-git-commands.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
@@ -1271,6 +1300,44 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
 <span class="nv">$ </span>git stash drop stash@<span class="o">{</span>0<span class="o">}</span>
 </pre></div>
 <p>Reference for git stash: <a href="https://git-scm.com/docs/git-stash">https://git-scm.com/docs/git-stash</a></p>
+
+<h3 id="toc_7">8. Merge a specific commit to current branch</h3>
+<p>Git has a <code>cherry-pick</code> function that can merge a specific commit to the current branch, this save me once. :P</p>
+<div class="highlight"><pre><span class="c"># merge a sequence of commits to the current branch, </span>
+<span class="nv">$ </span>git cherry-pick &lt;commits...&gt;
+</pre></div>
+<p>When you try to merge a commit, you will possibly cause some conflict. The cherry-pick function also has some features to help you.</p>
+<div class="highlight"><pre><span class="c"># continue the job after you resolve the conflicts</span>
+<span class="nv">$ </span>git cherry-pick --continue
+
+<span class="c"># forget current job in the sequence progress</span>
+<span class="nv">$ </span>git cherry-pick --quit
+
+<span class="c"># clear all the sequence and recover to the pre-sequence state</span>
+<span class="nv">$ </span>git cherry-pick --abort
+</pre></div>
+
+<h3 id="toc_8">9. Reverting commits</h3>
+<p>There are two types of resetting the branch to a previous state: 1. delete unpublished commits locally, 2. Undo published commits with new commits.</p>
+<p>Using <code>git reset</code> can help resetting current state.</p>
+<div class="highlight"><pre><span class="c"># delete the unpublished local commits and restore to the previous commit state</span>
+<span class="nv">$ </span>git reset --hard &lt;commit&gt;
+
+<span class="c"># if you have local uncommit changes, you should save as stash first</span>
+<span class="nv">$ </span>git stash
+<span class="nv">$ </span>git reset --hard &lt;commit&gt;
+<span class="nv">$ </span>git stash pop
+</pre></div>
+<p>Using <code>git revert</code> is to make a new commit to revert previous changes(specificly).</p>
+<div class="highlight"><pre><span class="c"># cancel specific changes</span>
+<span class="nv">$ </span>git revert &lt;commit1&gt; &lt;commit2&gt; ...
+
+<span class="c"># cancel range of commits</span>
+<span class="nv">$ </span>git revert e647032...cee8902
+<span class="c"># cancel last two commits</span>
+<span class="nv">$ </span>git revert HEAD~2...HEAD
+</pre></div>
+<p><a href="http://stackoverflow.com/questions/4114095/how-to-revert-git-repository-to-a-previous-commit">Ref to git revert</a>.</p>
 ]]>
         </content>
     </entry><entry>

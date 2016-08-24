@@ -12,7 +12,7 @@
     <meta name="description" content="" />
     
     <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="Hello, World!" />
-    <link rel="stylesheet" href="/static/css/styles.css?v=fc867" />
+    <link rel="stylesheet" href="/static/css/styles.css?v=36c6a" />
     <link rel="stylesheet" href="/static/css/pygment_trac.css?v=a6c15" />
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -24,16 +24,18 @@
     <h1>Hello, World!</h1>
     <p>I'm <i>terryoy</i></p>
     <p class="view"><a href="https://github.com/terryoy">View My GitHub Profile</a></p>
+    
+    <p><a class="feed" href="/feed.xml">RSS feed</a></p>
 </header><!-- #header -->
 <nav id="nav" role="navigation">
     <a href="/">Home</a>
-    <a href="/thoughts/">Thoughts</a>
     <a href="/guides/">Guides</a>
     <a href="/tricks/">Tricks</a>
+    <a href="/projects.html">*Projects</a>
     <a href="/about.html">About Me</a>
 </nav>
 
-<section><article id="main" class="hentry">
+<section class="main"><article id="main" class="hentry">
 	<h1>Put Linux into Old PC - (2) Desktop Environment</h1>
     <p class="sub_text">2016-05-18 by <i>terryoy</i>, in <a href="/guides/">guides</a>
     </p>
@@ -92,7 +94,22 @@
 <p>There are also two files under <code>/etc/xdg/openbox</code>. One is <strong>autostart</strong>, you can include some initializing scripts here when an Openbox X Session is started; the other file is <strong>environment</strong>, where you can set system wide variables for the Openbox session. Both of them can be user specific by creating files with the same name under <code>~/.config/openbox/</code>.</p>
 
 <h5 id="toc_4">2.2.2 Openbox Themes</h5>
-<p>Reference for Openbox Themes: <a href="http://openbox.org/wiki/Help:Themes">http://openbox.org/wiki/Help:Themes</a></p>
+<p>You can create your own themes for better looking of the desktop environment. The file structure is like below:</p>
+
+<pre><code>ThemesDirectory  (such as /usr/share/themes, ~/.local/share/themes or ~/.themes)
+ |
+ +-&gt; ThemeName  (This is the name of the theme, such as Clearlooks)
+      |
+      +-&gt; openbox-3  (This the type of the theme - it's for Openbox 3!)
+           |
+           |-&gt; themerc  (This is the main theme file, documented in this page)
+           |
+           |-&gt; max.xbm  (These are optional xbm masks for the titlebar buttons)
+           |-&gt; close.xbm
+           ...
+           +-&gt; shade.xbm</code></pre>
+<p>I have created a theme called &ldquo;LinuxInOldPC&rdquo; under &ldquo;~/.themes/&rdquo;, with the <code>openbox-3</code> folder and the default <code>themerc</code> file inside. The content template can be copied from the wiki page at the end of this section.</p>
+<p>Wiki of Openbox Themes: <a href="http://openbox.org/wiki/Help:Themes">http://openbox.org/wiki/Help:Themes</a></p>
 
 <h5 id="toc_5">2.2.3 Key-bindings</h5>
 <p>Here is a small trick where I would love to have, to conveniently dock the active window to part of the screen.</p>
