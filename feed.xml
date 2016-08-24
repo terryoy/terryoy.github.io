@@ -3,14 +3,28 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2016-06-27T16:33:46+08:00</updated>
+    <updated>2016-06-28T22:16:05+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
+        <title type="html"><![CDATA[Put Linux into Old PC - (3) Localize the Language Environment]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2016/06/put-linux-into-old-pc-3-localization.html"/>
+        <published>2016-06-28T21:03:00+08:00</published>
+        <updated>2016-06-28T22:16:05+08:00</updated>
+        <id>http://terryoy.github.io/2016/06/put-linux-into-old-pc-3-localization.html</id>
+        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
+        <category scheme="http://terryoy.github.io/tag/#study" term="study" label="study" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <h3 id="toc_0">Part 3. Localize the language environment</h3>
+<p>(not started yet&hellip;stay tuned)</p>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[A Short Reference of Python Logging]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/05/short-ref-python-logging.html"/>
         <published>2016-05-26T19:55:00+08:00</published>
-        <updated>2016-06-27T10:46:42+08:00</updated>
+        <updated>2016-06-28T20:38:15+08:00</updated>
         <id>http://terryoy.github.io/2016/05/short-ref-python-logging.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -136,7 +150,7 @@
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/05/put-linux-into-old-pc-2-desktop.html"/>
         <published>2016-05-18T09:47:00+08:00</published>
-        <updated>2016-06-27T09:18:07+08:00</updated>
+        <updated>2016-06-28T22:15:54+08:00</updated>
         <id>http://terryoy.github.io/2016/05/put-linux-into-old-pc-2-desktop.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#study" term="study" label="study" />
@@ -157,16 +171,52 @@
 </pre></div>
 <p>Now you can see GUI environment by Openbox. Right click on the desktop and you get a start menu, you can start a terminal emulator or configure the openbox using <em>Obconf</em>.</p>
 <p>If you see an error says cannot get access to ~/.Xauthority, it&#39;s possibly you ran it in root user. It doesn&#39;t need to be root user, and you should chown the file to yourself.</p>
+<p>Before going to the next step, let&#39;s look for a better console terminal than the system default one(xterm), otherwise it&#39;s inconvenient to work on multiple sessions and copy&amp;paste text. The <code>lxterminal</code> is lightweight and good enough.</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install lxterminal
+</pre></div>
+<p>Then you can try it out with the right-click menu and select &ldquo;Terminal emulator&rdquo;. You can check the key-bindings in LXterminal&#39;s Preferences menu.</p>
 <p>Next we try to do more about the customization.</p>
 
 <h4 id="toc_2">2.2 Openbox Configuration (menu.xml and rc.xml)</h4>
 <p>Openbox has two main configuration files:</p>
 
-<pre><code>* rc.xml, which sets keybindings, desktop names and window behavior
-* menu.xml, which contains the instructions for the right-click menu.</code></pre>
-<p>Reference: <a href="https://urukrama.wordpress.com/openbox-guide/">https://urukrama.wordpress.com/openbox-guide/</a></p>
+<ul>
+<li>rc.xml, which sets keybindings, desktop names and window behavior</li>
+<li>menu.xml, which contains the instructions for the right-click menu.</li>
+</ul>
+<p>The configuration files can be found in <code>/etc/xdg/openbox/</code>, while you can have your user-specific version in <code>~/.config/openbox/</code>.</p>
+<p>Reference for OpenBox: <a href="http://openbox.org/wiki/Help:Configuration">http://openbox.org/wiki/Help:Configuration</a></p>
 
-<h4 id="toc_3">2.3 A simple web browser that do the trick</h4>
+<h5 id="toc_3">2.2.1 Desktop behaviors</h5>
+<p>First we look into some settings in <strong>rc.xml</strong>. Most of the configuration items you can found them in the <code>Obconf</code> program, which is right in the desktop&#39;s right-click menu.</p>
+<p>The configurations are mainly in below categories:</p>
+
+<ul>
+<li>Resistance, distances for handling window moving behavior, such as overlap and moving towards different desktops.</li>
+<li>Focus, behaviors for switching window focus with mouse.</li>
+<li>Placement, decides the position when a new window is displayed</li>
+<li>Theme, this is where you can customize the visual design of the environment. (I will cover the Theme customization in the following section.)</li>
+<li>Desktops, desktop behaviors</li>
+<li>Resize, resizing and moving windows</li>
+<li>Margins, the desktop margin settings(the boundaries where windows will not resize to&hellip;)</li>
+<li>Applications, customize settings per application. You can also configure this with an GUI app <code>ObApp</code> <em>(will cover later)</em></li>
+<li>Keyboard, keyboard shortcuts and behaviours</li>
+<li>Mouse, mouse shortcuts and behaviours</li>
+<li>Menu, right-click(system) menu behaviours. </li>
+<li>Dock, dock-apps settings, it&#39;s kind of apps that will have docking behaviours</li>
+</ul>
+<p>The other configuration files is <strong>menu.xml</strong>. It defines the system menu content and is referred by the <em>rc.xml</em>. Since the content are quite obvious, I don&#39;t need to tell more about it. Check out the <a href="http://openbox.org/wiki/Help:Menus">wiki page</a> for customizing menus, notice it can also has &ldquo;Pipe menus&rdquo; where the menu content is genereted from the pipe of the command line results, which means you can programs to hack. ;-)</p>
+<p>There are also two files under <code>/etc/xdg/openbox</code>. One is <strong>autostart</strong>, you can include some initializing scripts here when an Openbox X Session is started; the other file is <strong>environment</strong>, where you can set system wide variables for the Openbox session. Both of them can be user specific by creating files with the same name under <code>~/.config/openbox/</code>.</p>
+
+<h5 id="toc_4">2.2.2 Openbox Themes</h5>
+<p>Reference for Openbox Themes: <a href="http://openbox.org/wiki/Help:Themes">http://openbox.org/wiki/Help:Themes</a></p>
+
+<h5 id="toc_5">2.2.3 Key-bindings</h5>
+<p>Here is a small trick where I would love to have, to conveniently dock the active window to part of the screen.</p>
+<p>Reference for Windows docking: <a href="https://gist.github.com/terryoy/5486156">https://gist.github.com/terryoy/5486156</a></p>
+<p>Another OpenBox Guide: <a href="https://urukrama.wordpress.com/openbox-guide/](https://urukrama.wordpress.com/openbox-guide/)">urukrama.wordpress.com/openbox-guide/](urukrama.wordpress.com/openbox-guide/)</a></p>
+
+<h4 id="toc_6">2.3 A simple web browser that do the trick</h4>
 <p>After searching the apt-cache library for web browser, I discover there is a simple browser called <code>surf</code>, which uses WebKit/Gtk to render. I think this tool is well enough for browsing modern web sites, and also friendly to command line. So I pick it for the initial choice of a browser for me to search information online on this computer.</p>
 <div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install surf
 </pre></div>
@@ -188,7 +238,7 @@
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/05/put-linux-into-old-pc-1-hardware.html"/>
         <published>2016-05-15T21:04:00+08:00</published>
-        <updated>2016-06-27T09:18:07+08:00</updated>
+        <updated>2016-06-28T22:12:51+08:00</updated>
         <id>http://terryoy.github.io/2016/05/put-linux-into-old-pc-1-hardware.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#study" term="study" label="study" />
@@ -327,7 +377,7 @@ iface wlan0 inet dhcp
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/04/git-ssh-config.html"/>
         <published>2016-04-17T16:11:00+08:00</published>
-        <updated>2016-04-18T09:50:50+08:00</updated>
+        <updated>2016-05-15T19:23:55+08:00</updated>
         <id>http://terryoy.github.io/2016/04/git-ssh-config.html</id>
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
         <category scheme="http://terryoy.github.io/tag/#virtualbox" term="virtualbox" label="virtualbox" />
@@ -360,7 +410,7 @@ Host github.com
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/02/ubuntu-desktop-sharing-to-osx.html"/>
         <published>2016-02-26T10:52:00+08:00</published>
-        <updated>2016-02-26T11:11:36+08:00</updated>
+        <updated>2016-05-15T19:23:55+08:00</updated>
         <id>http://terryoy.github.io/2016/02/ubuntu-desktop-sharing-to-osx.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#osx" term="osx" label="osx" />
@@ -393,7 +443,7 @@ Host github.com
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/02/vbox-cmd-tools-tricks.html"/>
         <published>2016-02-17T11:01:00+08:00</published>
-        <updated>2016-02-26T10:39:43+08:00</updated>
+        <updated>2016-05-15T19:23:55+08:00</updated>
         <id>http://terryoy.github.io/2016/02/vbox-cmd-tools-tricks.html</id>
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
         <category scheme="http://terryoy.github.io/tag/#virtualbox" term="virtualbox" label="virtualbox" />
@@ -413,7 +463,7 @@ Host github.com
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/02/args-kwargs-python.html"/>
         <published>2016-02-03T16:05:00+08:00</published>
-        <updated>2016-02-03T16:57:01+08:00</updated>
+        <updated>2016-05-15T19:23:55+08:00</updated>
         <id>http://terryoy.github.io/2016/02/args-kwargs-python.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -469,7 +519,7 @@ Host github.com
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/09/rpi-hardware-begin-gpio-python.html"/>
         <published>2015-09-06T20:02:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
+        <updated>2016-05-15T19:23:55+08:00</updated>
         <id>http://terryoy.github.io/2015/09/rpi-hardware-begin-gpio-python.html</id>
         <category scheme="http://terryoy.github.io/tag/#rpi" term="rpi" label="rpi" />
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
@@ -499,7 +549,7 @@ Host github.com
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/06/some-useful-linux-server-security-commands.html"/>
         <published>2015-06-27T22:31:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
+        <updated>2016-05-15T19:23:55+08:00</updated>
         <id>http://terryoy.github.io/2015/06/some-useful-linux-server-security-commands.html</id>
         <category scheme="http://terryoy.github.io/tag/#server" term="server" label="server" />
         <category scheme="http://terryoy.github.io/tag/#security" term="security" label="security" />
@@ -572,55 +622,11 @@ Jun 27 21:53:39 iZ940ou5p7nZ sudo: pam_unix<span class="o">(</span>sudo:session<
 ]]>
         </content>
     </entry><entry>
-        <title type="html"><![CDATA[Intel Edison Get Started]]></title>
-        <author><name>terryoy</name></author>
-        <link href="http://terryoy.github.io/2015/06/edison-get-started.html"/>
-        <published>2015-06-03T16:15:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
-        <id>http://terryoy.github.io/2015/06/edison-get-started.html</id>
-        <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
-        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
-            <![CDATA[ <p>This guide is about the initial steps for me starting development on Intel Edison platform.</p>
-
-<h3 id="toc_0">1. The Board and Setting Up Serial Communication</h3>
-<p>The board I use to develop with Edison is the <a href="http://www.seeedstudio.com/depot/Intel-Edison-for-Arduino-p-2149.html">Intel Edison for Arduino</a> board. So first plug the Edison module on the board; secondary, I have the 6.5V 2A DC connected to supply the power to the board (or you could power up the board with the micro-USB in the middle); third, a micro-USB wire connect to the board for serial communication.</p>
-<p>I&#39;m using minicom on Mac OSX for the serial connection, but you can also use <code>screen</code> on Mac OSX and Linux(see the reference at the end of this section).</p>
-<p>If you forgot the root password, here&#39;s the way to recover it: </p>
-
-<pre><code>* on booting, press any key to stop the process
-* on the &quot;boot&gt;&quot; command line prompt, type ```run do_ota``` to redo the flashing process.</code></pre>
-<p>Then you end up with a login using &ldquo;root&rdquo; as user name and no password.</p>
-
-<ul>
-<li><a href="https://software.intel.com/zh-cn/assembling-intel-edison-board-with-arduino-expansion-board">Reference for assembling</a></li>
-<li><a href="https://software.intel.com/zh-cn/setting-up-serial-terminal-on-system-with-linux">Reference for setting up serial on Linux</a></li>
-<li><a href="https://software.intel.com/zh-cn/setting-up-serial-terminal-on-system-with-mac-os-x">Reference for setting up serial on Mac</a></li>
-</ul>
-
-<h3 id="toc_1">2. Setting up WiFi</h3>
-<p>The next thing to do is to setup the WiFi on Edison, because a large part of the development process happens on WiFi.</p>
-<div class="highlight"><pre><span class="nv">$ </span>configure_edison --wifi
-
-<span class="c"># check the wifi status</span>
-<span class="nv">$ </span>wpa_cli status
-</pre></div>
-<p>Follow the instructions of this program to complete the scanning, choosing hotspot, and reboot with WiFi.</p>
-<p>By default, <code>ssh</code> is restricted to usb, so you need to disable the restriction by using <code>configure_edison --setup</code> to setup the device name and password. It will automatically update the file &#39;/lib/systemd/system/sshd.socket&#39; and comment out this line &ldquo;BindToDevice=usb0&rdquo;. (need reboot to take effect)</p>
-
-<ul>
-<li><a href="https://software.intel.com/zh-cn/connecting-your-intel-edison-board-using-wifi">Reference for setting up WiFi</a></li>
-</ul>
-
-<h3 id="toc_2">3. Blink the LED</h3>
-<p>(to be continued when I get the board&hellip;)</p>
-]]>
-        </content>
-    </entry><entry>
         <title type="html"><![CDATA[A Template for Program Readme on Github]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/06/program-readme-template.html"/>
         <published>2015-06-03T16:15:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
+        <updated>2016-05-15T19:23:55+08:00</updated>
         <id>http://terryoy.github.io/2015/06/program-readme-template.html</id>
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -701,11 +707,55 @@ top level routines
 ]]>
         </content>
     </entry><entry>
+        <title type="html"><![CDATA[Intel Edison Get Started]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2015/06/edison-get-started.html"/>
+        <published>2015-06-03T16:15:00+08:00</published>
+        <updated>2016-05-15T19:23:55+08:00</updated>
+        <id>http://terryoy.github.io/2015/06/edison-get-started.html</id>
+        <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <p>This guide is about the initial steps for me starting development on Intel Edison platform.</p>
+
+<h3 id="toc_0">1. The Board and Setting Up Serial Communication</h3>
+<p>The board I use to develop with Edison is the <a href="http://www.seeedstudio.com/depot/Intel-Edison-for-Arduino-p-2149.html">Intel Edison for Arduino</a> board. So first plug the Edison module on the board; secondary, I have the 6.5V 2A DC connected to supply the power to the board (or you could power up the board with the micro-USB in the middle); third, a micro-USB wire connect to the board for serial communication.</p>
+<p>I&#39;m using minicom on Mac OSX for the serial connection, but you can also use <code>screen</code> on Mac OSX and Linux(see the reference at the end of this section).</p>
+<p>If you forgot the root password, here&#39;s the way to recover it: </p>
+
+<pre><code>* on booting, press any key to stop the process
+* on the &quot;boot&gt;&quot; command line prompt, type ```run do_ota``` to redo the flashing process.</code></pre>
+<p>Then you end up with a login using &ldquo;root&rdquo; as user name and no password.</p>
+
+<ul>
+<li><a href="https://software.intel.com/zh-cn/assembling-intel-edison-board-with-arduino-expansion-board">Reference for assembling</a></li>
+<li><a href="https://software.intel.com/zh-cn/setting-up-serial-terminal-on-system-with-linux">Reference for setting up serial on Linux</a></li>
+<li><a href="https://software.intel.com/zh-cn/setting-up-serial-terminal-on-system-with-mac-os-x">Reference for setting up serial on Mac</a></li>
+</ul>
+
+<h3 id="toc_1">2. Setting up WiFi</h3>
+<p>The next thing to do is to setup the WiFi on Edison, because a large part of the development process happens on WiFi.</p>
+<div class="highlight"><pre><span class="nv">$ </span>configure_edison --wifi
+
+<span class="c"># check the wifi status</span>
+<span class="nv">$ </span>wpa_cli status
+</pre></div>
+<p>Follow the instructions of this program to complete the scanning, choosing hotspot, and reboot with WiFi.</p>
+<p>By default, <code>ssh</code> is restricted to usb, so you need to disable the restriction by using <code>configure_edison --setup</code> to setup the device name and password. It will automatically update the file &#39;/lib/systemd/system/sshd.socket&#39; and comment out this line &ldquo;BindToDevice=usb0&rdquo;. (need reboot to take effect)</p>
+
+<ul>
+<li><a href="https://software.intel.com/zh-cn/connecting-your-intel-edison-board-using-wifi">Reference for setting up WiFi</a></li>
+</ul>
+
+<h3 id="toc_2">3. Blink the LED</h3>
+<p>(to be continued when I get the board&hellip;)</p>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[Create a Root CA and Self-Sign Certificate for SSL]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/02/create-ssl-ca-root-and-self-sign.html"/>
         <published>2015-02-23T11:03:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
+        <updated>2016-05-15T19:23:55+08:00</updated>
         <id>http://terryoy.github.io/2015/02/create-ssl-ca-root-and-self-sign.html</id>
         <category scheme="http://terryoy.github.io/tag/#server" term="server" label="server" />
         <category scheme="http://terryoy.github.io/tag/#security" term="security" label="security" />
@@ -797,7 +847,7 @@ Common Name <span class="o">(</span>e.g. server FQDN or YOUR name<span class="o"
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/02/postgresql-admin-quickref-part2-initiating-database.html"/>
         <published>2015-02-21T16:40:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
+        <updated>2016-05-15T19:23:55+08:00</updated>
         <id>http://terryoy.github.io/2015/02/postgresql-admin-quickref-part2-initiating-database.html</id>
         <category scheme="http://terryoy.github.io/tag/#postgresql" term="postgresql" label="postgresql" />
         <category scheme="http://terryoy.github.io/tag/#database" term="database" label="database" />
@@ -851,7 +901,7 @@ host    all             all             ::1/128                 md5
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/11/jni-guide-on-android.html"/>
         <published>2014-11-27T16:06:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
+        <updated>2016-05-15T19:23:55+08:00</updated>
         <id>http://terryoy.github.io/2014/11/jni-guide-on-android.html</id>
         <category scheme="http://terryoy.github.io/tag/#cpp" term="cpp" label="cpp" />
         <category scheme="http://terryoy.github.io/tag/#android" term="android" label="android" />
@@ -1002,7 +1052,7 @@ JNI Documentation: <a href="http://docs.oracle.com/javase/1.5.0/docs/guide/jni/s
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/10/finding-information-linux-c-library.html"/>
         <published>2014-10-30T09:38:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
+        <updated>2016-05-15T19:23:55+08:00</updated>
         <id>http://terryoy.github.io/2014/10/finding-information-linux-c-library.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
@@ -1080,7 +1130,7 @@ Program Library HOWTO <br/>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/10/common-git-commands.html"/>
         <published>2014-10-22T20:57:00+08:00</published>
-        <updated>2016-06-27T16:33:46+08:00</updated>
+        <updated>2016-06-28T20:38:15+08:00</updated>
         <id>http://terryoy.github.io/2014/10/common-git-commands.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
@@ -1228,7 +1278,7 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/08/learning-linux-c-part-1.html"/>
         <published>2014-08-20T23:34:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
+        <updated>2016-05-15T19:23:55+08:00</updated>
         <id>http://terryoy.github.io/2014/08/learning-linux-c-part-1.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
@@ -1276,7 +1326,7 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/06/create-database-mysql.html"/>
         <published>2014-06-04T14:40:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
+        <updated>2016-05-15T19:23:55+08:00</updated>
         <id>http://terryoy.github.io/2014/06/create-database-mysql.html</id>
         <category scheme="http://terryoy.github.io/tag/#database" term="database" label="database" />
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
@@ -1316,7 +1366,7 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/03/using-ctypes-to-wrap-c-library.html"/>
         <published>2014-03-23T07:57:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
+        <updated>2016-05-15T19:23:55+08:00</updated>
         <id>http://terryoy.github.io/2014/03/using-ctypes-to-wrap-c-library.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
@@ -1490,135 +1540,6 @@ The <em>byref()</em> method create a parameter object of pointer, which you can 
 <span class="n">aa_fastrender</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span><span class="n">height</span><span class="p">)</span>
 </pre></div>
 <p>By now, you should have the knowledge to play with C libraries. Just start playing around with those libraries you can find in /usr/lib and /usr/include. Enjoy!</p>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[PostgesSQL 9 Administration QuickRef(1) - Exploring Database]]></title>
-        <author><name>terryoy</name></author>
-        <link href="http://terryoy.github.io/2014/03/postgresql-admin-quickref-part1-exploring-database.html"/>
-        <published>2014-03-06T15:27:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
-        <id>http://terryoy.github.io/2014/03/postgresql-admin-quickref-part1-exploring-database.html</id>
-        <category scheme="http://terryoy.github.io/tag/#postgresql" term="postgresql" label="postgresql" />
-        <category scheme="http://terryoy.github.io/tag/#database" term="database" label="database" />
-        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
-            <![CDATA[ <p>The most cheat sheets or quick references I found are organized by knowledge domains, but I would rather like a quick reference organized by tasks. Thus I make this reference.</p>
-
-<h1 id="toc_0">Part I: Exploring Database</h1>
-
-<h3 id="toc_1">1. Basic Information</h3>
-<p>Default location of data files (in debian/ubuntu): <code>/var/lib/postgresql/9.1/main/</code>
-Data files for an instance:
-    base        -   data directory for databases 
-    global      -   database catalog tables(shared across databases)
-    pg_clog - transaction status files
-    pg_multixact    -   row-level lock status files
-    pg_subtrans -   subtransaction status files 
-    pg_tblspc       -   links to external tablespaces
-    pg_twophase -   prepared transaction status
-    pg_xlog     -   WAL(Write-Ahead Log) transaction log
-Log files: <code>/var/log/postgresql/</code></p>
-<p>PostgreSQL command line programs:</p>
-<div class="highlight"><pre><span class="c"># check psql version</span>
-<span class="nv">$ </span>psql --version
-<span class="c"># check configuration variables</span>
-<span class="nv">$ </span>pg_config
-<span class="c"># run a single command</span>
-<span class="nv">$ </span>psql -c <span class="s2">&quot;\d&quot;</span>
-</pre></div>
-<p>PSQL text client:</p>
-<div class="highlight"><pre><span class="c1">-- line comment</span>
-<span class="o">/</span> <span class="o">*</span><span class="n">multi</span><span class="o">-</span><span class="nb">line</span> <span class="k">comment</span><span class="o">*</span> <span class="o">/</span>
-<span class="c1">-- check server version</span>
-<span class="gp">postgres=#</span> <span class="k">SELECT</span> <span class="k">version</span><span class="p">();</span>
-<span class="go">-- output query result as one column per line</span>
-<span class="gp">postgres=#</span> <span class="kp">\x</span>
-</pre></div>
-
-<h3 id="toc_2">2. Server Stats</h3>
-<div class="highlight"><pre><span class="c"># list databases</span>
-<span class="nv">$ </span>psql -l
-<span class="c"># list tables in a database</span>
-<span class="nv">$ </span>psql -c <span class="s2">&quot;\d&quot;</span> -d somedb
-</pre></div>
-<div class="highlight"><pre><span class="c1">-- check server uptime</span>
-<span class="gp">postgres=#</span> <span class="k">SELECT</span> <span class="n">date_trunc</span><span class="p">(</span><span class="s1">&#39;second&#39;</span><span class="p">,</span> <span class="k">current_timestamp</span> <span class="o">-</span> <span class="n">pg_postmaster_start_time</span><span class="p">())</span> <span class="k">as</span> <span class="n">uptime</span><span class="p">;</span>
-
-<span class="go">-- list database names</span>
-<span class="gp">postgres=#</span> <span class="k">SELECT</span> <span class="n">datname</span> <span class="k">from</span> <span class="n">pg_database</span><span class="p">;</span>
-<span class="go">-- list tables in databases;</span>
-<span class="gp">postgres=#</span> <span class="k">SELECT</span> <span class="n">table_catalog</span><span class="p">,</span> <span class="n">table_schema</span><span class="p">,</span> <span class="n">table_name</span><span class="p">,</span> <span class="n">table_type</span> <span class="k">from</span> <span class="n">information_schema</span><span class="mf">.</span><span class="k">tables</span><span class="p">;</span>
-<span class="gp">postgres=#</span> <span class="kp">\dt+</span>
-
-<span class="go">-- check database size</span>
-<span class="gp">postgres=#</span> <span class="k">SELECT</span> <span class="n">pg_database_size</span><span class="p">(</span><span class="s1">&#39;somedb&#39;</span><span class="p">);</span>
-<span class="gp">postgres=#</span> <span class="k">SELECT</span> <span class="n">pg_database_size</span><span class="p">(</span><span class="n">current_database</span><span class="p">());</span>
-<span class="go">-- check table size</span>
-<span class="gp">postgres=#</span> <span class="kp">\dt+</span> <span class="ss">some_table</span>
-<span class="gp">postgres=#</span> <span class="k">SELECT</span> <span class="n">pg_relation_size</span><span class="p">(</span><span class="s1">&#39;some_table&#39;</span><span class="p">);</span>
-<span class="gp">postgres=#</span> <span class="k">SELECT</span> <span class="n">pg_total_relation_size</span><span class="p">(</span><span class="s1">&#39;some_table&#39;</span><span class="p">);</span> <span class="c1">-- including indexes and other related space</span>
-<span class="go">-- list table sizes in order</span>
-<span class="gp">postgres=#</span> <span class="k">SELECT</span> <span class="n">table_name</span><span class="p">,</span> <span class="n">pg_total_relation_size</span><span class="p">(</span><span class="n">table_name</span><span class="p">)</span> <span class="k">as</span> <span class="n">size</span>
-<span class="k">FROM</span> <span class="n">information_schema</span><span class="mf">.</span><span class="k">tables</span> <span class="k">NOT</span> <span class="k">IN</span> <span class="p">(</span><span class="s1">&#39;information_schema&#39;</span><span class="p">,</span> <span class="s1">&#39;pg_catalog&#39;</span><span class="p">)</span>
-<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">size</span> <span class="k">DESC</span><span class="p">;</span>
-
-<span class="go">-- check online users/clients</span>
-<span class="gp">postgres=#</span> <span class="k">SELECT</span>  <span class="k">from</span> <span class="n">pg_stat_activity</span><span class="p">;</span>
-<span class="gp">postgres=#</span> <span class="k">SELECT</span> <span class="n">datname</span><span class="p">,</span> <span class="n">usename</span><span class="p">,</span> <span class="n">client_addr</span><span class="p">,</span> <span class="n">client_port</span> <span class="k">FROM</span> <span class="n">pg_stat_activity</span><span class="p">;</span>
-
-<span class="go">-- track user activities(like check user&#39;s pending query)</span>
-<span class="gp">postgres=#</span> <span class="k">SET</span> <span class="n">track_activities</span> <span class="o">=</span> <span class="k">on</span><span class="p">;</span>
-<span class="gp">postgres=#</span> <span class="k">SELECT</span> <span class="n">datname</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">current_query</span> 
-<span class="k">FROM</span> <span class="n">pg_stat_activity</span> 
-<span class="k">WHERE</span> <span class="n">current_query</span> <span class="o">!=</span> <span class="s1">&#39;&lt;IDLE&gt;&#39;</span><span class="p">;</span>
-<span class="gp">postgres=#</span> <span class="k">SELECT</span> <span class="k">current_timestamp</span> <span class="o">-</span> <span class="n">query_start</span> <span class="k">as</span> <span class="n">runtime</span><span class="p">,</span> <span class="n">datname</span><span class="p">,</span> <span class="n">usename</span><span class="p">,</span> <span class="n">current_query</span> 
-<span class="k">FROM</span> <span class="n">pg_stat_activity</span>
-<span class="k">WHERE</span> <span class="n">current_query</span> <span class="o">!=</span> <span class="s1">&#39;&lt;IDLE&gt;&#39;</span>
-<span class="k">ORDER</span> <span class="k">BY</span> <span class="mf">1</span> <span class="k">DESC</span><span class="p">;</span>
-<span class="gp">postgres=#</span> <span class="k">SELECT</span> <span class="n">datname</span><span class="p">,</span> <span class="n">usename</span><span class="p">,</span> <span class="n">current_query</span>
-<span class="k">FROM</span> <span class="n">pg_stat_activity</span>
-<span class="k">WHERE</span> <span class="n">waiting</span><span class="p">;</span>
-
-<span class="go">-- check who is blocking the queries</span>
-<span class="gp">postgres=#</span> <span class="k">SELECT</span> 
-    <span class="n">w</span><span class="mf">.</span><span class="n">current_query</span> <span class="k">as</span> <span class="n">waiting_query</span><span class="p">,</span>
-    <span class="n">w</span><span class="mf">.</span><span class="n">procpid</span> <span class="k">as</span> <span class="n">w_pid</span><span class="p">,</span>
-    <span class="n">w</span><span class="mf">.</span><span class="n">usename</span> <span class="k">as</span> <span class="n">w_user</span><span class="p">,</span>
-    <span class="n">l</span><span class="mf">.</span><span class="n">current_query</span> <span class="k">as</span> <span class="n">locking_query</span><span class="p">,</span>
-    <span class="n">l</span><span class="mf">.</span><span class="n">procpid</span> <span class="k">as</span> <span class="n">l_pid</span><span class="p">,</span>
-    <span class="n">l</span><span class="mf">.</span><span class="n">usename</span> <span class="k">as</span> <span class="n">l_user</span><span class="p">,</span>
-    <span class="n">t</span><span class="mf">.</span><span class="n">schemaname</span> <span class="o">||</span> <span class="s1">&#39;-&#39;</span> <span class="o">||</span> <span class="n">t</span><span class="mf">.</span><span class="n">relname</span> <span class="k">as</span> <span class="n">tablename</span>
-<span class="k">FROM</span> <span class="n">pg_stat_activity</span> <span class="n">w</span>
-<span class="k">JOIN</span> <span class="n">pg_locks</span> <span class="n">l1</span> <span class="k">ON</span> <span class="n">w</span><span class="mf">.</span><span class="n">procpid</span> <span class="o">=</span> <span class="n">l1</span><span class="mf">.</span><span class="n">pid</span> <span class="k">AND</span> <span class="k">NOT</span> <span class="n">l1</span><span class="mf">.</span><span class="k">granted</span>
-<span class="k">JOIN</span> <span class="n">pg_locks</span> <span class="n">l2</span> <span class="k">ON</span> <span class="n">l1</span><span class="mf">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">l2</span><span class="mf">.</span><span class="n">relation</span> <span class="k">AND</span> <span class="n">l2</span><span class="mf">.</span><span class="k">granted</span>
-<span class="k">JOIN</span> <span class="n">pg_stat_activity</span> <span class="n">l</span> <span class="k">on</span> <span class="n">l2</span><span class="mf">.</span><span class="n">pid</span> <span class="o">=</span> <span class="n">l</span><span class="mf">.</span><span class="n">procpid</span>
-<span class="k">JOIN</span> <span class="n">pg_stat_user_tables</span> <span class="n">t</span> <span class="k">ON</span> <span class="n">l1</span><span class="mf">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">t</span><span class="mf">.</span><span class="n">relid</span>
-<span class="k">WHERE</span> <span class="n">w</span><span class="mf">.</span><span class="n">waiting</span><span class="p">;</span>
-
-<span class="go">-- cancel a query</span>
-<span class="gp">postgres=#</span> <span class="k">SELECT</span> <span class="n">pg_cancel_backend</span><span class="p">(</span><span class="n">some_processid</span><span class="p">);</span>
-<span class="go">-- killing a session</span>
-<span class="gp">postgres=#</span> <span class="k">SELECT</span> <span class="n">pg_terminate_backend</span><span class="p">(</span><span class="n">some_processid</span><span class="p">);</span>
-<span class="go">-- killing &quot;idle in transaction&quot;(e.g. leaving without ending the transaction) sessions</span>
-<span class="go">-- (ps, you can schedule this script to be running every minute)</span>
-<span class="gp">postgres=#</span> <span class="k">SELECT</span> <span class="n">pg_terminate_backend</span><span class="p">(</span><span class="n">procpid</span><span class="p">)</span>
-<span class="k">FROM</span> <span class="n">pg_stat_activity</span>
-<span class="k">WHERE</span> <span class="n">current_query</span> <span class="o">=</span> <span class="s1">&#39;&lt;IDLE&gt; in transaction&#39;</span>
-    <span class="k">and</span> <span class="k">current_timestamp</span> <span class="o">-</span> <span class="n">query_start</span> <span class="o">&gt;</span> <span class="s1">&#39;10 min&#39;</span><span class="p">;</span>
-
-<span class="go">-- collecting daily usage statistics</span>
-<span class="gp">postgres=#</span> <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">backup_stat_user_tables</span> <span class="k">as</span> 
-<span class="k">SELECT</span> <span class="k">current_timestamp</span> <span class="k">as</span> <span class="n">snaptime</span><span class="p">,</span>
-<span class="k">FROM</span> <span class="n">pg_stat_user_tables</span><span class="p">;</span>
-<span class="gp">postgres=#</span> <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">backup_stat_user_tablese</span>
-<span class="k">SELECT</span>
-</pre></div>
-
-<h3 id="toc_3">3. Schema and Table</h3>
-<div class="highlight"><pre><span class="c1">-- Show definition of a table(including References to this table)</span>
-<span class="gp">postgres=#</span> <span class="kp">\d+</span> <span class="ss">some_table</span>
-</pre></div>
-<p>(to be continue)</p>
 ]]>
         </content>
     </entry>
