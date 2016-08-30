@@ -3,20 +3,54 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2016-08-25T00:59:26+08:00</updated>
+    <updated>2016-08-31T00:01:08+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
         <title type="html"><![CDATA[Put Linux into Old PC - (3) Localize the Language Environment]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/06/put-linux-into-old-pc-3-localization.html"/>
         <published>2016-06-28T21:03:00+08:00</published>
-        <updated>2016-06-28T22:16:05+08:00</updated>
+        <updated>2016-08-31T00:01:08+08:00</updated>
         <id>http://terryoy.github.io/2016/06/put-linux-into-old-pc-3-localization.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#study" term="study" label="study" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
             <![CDATA[ <h3 id="toc_0">Part 3. Localize the language environment</h3>
-<p>(not started yet&hellip;stay tuned)</p>
+<p>It is very easy to support the multi-language environment if you&#39;re installing the normal Linux desktop. However, it takes a few steps if you want to try the manual way. To make it more challenging, I would like to add Japanese support(the second foreign language I&#39;m going to learn) together with Chinese support which is my mother language.</p>
+<p>The job to enable this multi-language environment includes three parts:</p>
+
+<ul>
+<li>Able to view the Asian characters,</li>
+<li>Able to input the Asian characters,</li>
+<li>The user interface are translated into the familiar language. (However, I might prefer an English environment just for working~)</li>
+</ul>
+
+<h4 id="toc_1">3.1 Enabling the Input Method</h4>
+<p>Now I want to enable the input method at first, because it enable me to try enter other characters. There are several approaches to support multi-language input method, such as <code>SCIM</code>, <code>ibus</code>, and <code>uim</code>. The currently recommendation is <strong>ibus</strong>. There are several popular alternatives for both Japanese and Chinese input methods. <code>Anthy</code> and <code>mozc</code> are for Japanese, and <code>pinyin</code>, <code>sunpinyin</code> and <code>google-pinyin</code> are for Chinese(let&#39;s hope that Sogou Pinyin is joining this competition~). You can choose as you prefer, but I will first install only two basic choices.</p>
+<div class="highlight"><pre><span class="c"># Install Anthy and Pinyin</span>
+<span class="nv">$ </span>sudo apt-get install ibus-anthy ibus-pinyin
+
+<span class="c"># Setup the configurations for the first time (you may need to manually add the input method in the enabled list)</span>
+<span class="c"># (for input method config)</span>
+<span class="nv">$ </span>im-config
+<span class="c"># (for ibus config)</span>
+<span class="nv">$ </span>ibus-setup
+</pre></div>
+<p>Be sure to change the method switching keyboard shortcuts to &ldquo;Ctrl+Space&rdquo;, otherwise you may not correctly enable it(by default, it uses &ldquo;Super+Space&rdquo; to switch between but I have no &ldquo;Super&rdquo; key on my keyboard).</p>
+<p>After all the steps above, the ibus input method is still not enabled at start up, which means you need to manually start the daemon by executing &ldquo;ibus-setup&rdquo;. However, no doubt that I will fix this soon.</p>
+<p>To enable things at X start up, you need to put commands in <code>~/.xprofile</code> or <code>~/.xinitrc</code>, depends on the windows manager requirements. <code>~/.xprofile</code> is often used before windows manager start up, while <code>~/.xinitrc</code> is used by &ldquo;initx&rdquo; and its frontend &ldquo;startx&rdquo; to initialize the X window manager(remember we put &ldquo;exec openbox-session&rdquo; in this file previously?). The <code>ibus-daemon</code> program starts the ibus daemon server, so if I want to start ibus when X starts, I will put it in the ~/.xinitrc file.</p>
+<div class="highlight"><pre><span class="nv">$ </span>vi ~/.xinitrc
+<span class="c"># (add at the end of the file)</span>
+ibus-daemon -drx
+</pre></div>
+<p>You can check out what the part of &ldquo;-drx&rdquo; means by <code>man ibus-daemon</code>. It&#39;s easy.</p>
+
+<h4 id="toc_2">3.2 Testing the Input method</h4>
+<p>There are a lot of applications that supports input method. Two I have tried, the browser and the terminal. Not every termimal emulator supports ibus input. Luckily, I have chosen <code>lxterminal</code> and it does the job.</p>
+
+<h3 id="toc_3">Reference</h3>
+<p>[1] Debian i18n: <a href="https://www.debian.org/doc/manuals/debian-reference/ch08.en.html">https://www.debian.org/doc/manuals/debian-reference/ch08.en.html</a>
+[2] IBus: <a href="https://wiki.archlinux.org/index.php/IBus">https://wiki.archlinux.org/index.php/IBus</a></p>
 ]]>
         </content>
     </entry><entry>
