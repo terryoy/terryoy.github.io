@@ -36,7 +36,7 @@ Be sure to change the method switching keyboard shortcuts to "Ctrl+Space", other
 
 After all the steps above, the ibus input method is still not enabled at start up, which means you need to manually start the daemon by executing "ibus-setup". However, no doubt that I will fix this soon.
 
-To enable things at X start up, you need to put commands in ```~/.xprofile``` or ```~/.xinitrc```, depends on the windows manager requirements. ```~/.xprofile``` is often used before windows manager start up, while ```~/.xinitrc``` is used by "initx" and its frontend "startx" to initialize the X window manager(remember we put "exec openbox-session" in this file previously?). The ```ibus-daemon``` program starts the ibus daemon server, so if I want to start ibus when X starts, I will put it in the ~/.xinitrc file.
+To enable things at X start up, you need to put commands in ```~/.xprofile``` or ```~/.xinitrc```, depends on the windows manager requirements. ```~/.xprofile``` is often used before windows manager start up, while ```~/.xinitrc``` is used by "initx" and its frontend "startx" to initialize the X window manager(remember we put "exec openbox-session" in this file previously?). The ```ibus-daemon``` program starts the ibus daemon server, so if I want to start ibus when X starts, I will put it in the ~/.xinitrc file. [[2]](#ref)
 
 ```bash
 $ vi ~/.xinitrc
@@ -56,6 +56,7 @@ There are a lot of applications that supports input method. Two I have tried, th
 
 
 ### Reference
+<a name="ref"></a>
+[1] Debian i18n: <https://www.debian.org/doc/manuals/debian-reference/ch08.en.html> <br/>
+[2] IBus: <https://wiki.archlinux.org/index.php/IBus>
 
-[1] Debian i18n: [https://www.debian.org/doc/manuals/debian-reference/ch08.en.html](https://www.debian.org/doc/manuals/debian-reference/ch08.en.html)
-[2] IBus: [https://wiki.archlinux.org/index.php/IBus](https://wiki.archlinux.org/index.php/IBus)

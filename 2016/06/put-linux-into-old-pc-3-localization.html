@@ -63,7 +63,7 @@
 </pre></div>
 <p>Be sure to change the method switching keyboard shortcuts to &ldquo;Ctrl+Space&rdquo;, otherwise you may not correctly enable it(by default, it uses &ldquo;Super+Space&rdquo; to switch between but I have no &ldquo;Super&rdquo; key on my keyboard).</p>
 <p>After all the steps above, the ibus input method is still not enabled at start up, which means you need to manually start the daemon by executing &ldquo;ibus-setup&rdquo;. However, no doubt that I will fix this soon.</p>
-<p>To enable things at X start up, you need to put commands in <code>~/.xprofile</code> or <code>~/.xinitrc</code>, depends on the windows manager requirements. <code>~/.xprofile</code> is often used before windows manager start up, while <code>~/.xinitrc</code> is used by &ldquo;initx&rdquo; and its frontend &ldquo;startx&rdquo; to initialize the X window manager(remember we put &ldquo;exec openbox-session&rdquo; in this file previously?). The <code>ibus-daemon</code> program starts the ibus daemon server, so if I want to start ibus when X starts, I will put it in the ~/.xinitrc file.</p>
+<p>To enable things at X start up, you need to put commands in <code>~/.xprofile</code> or <code>~/.xinitrc</code>, depends on the windows manager requirements. <code>~/.xprofile</code> is often used before windows manager start up, while <code>~/.xinitrc</code> is used by &ldquo;initx&rdquo; and its frontend &ldquo;startx&rdquo; to initialize the X window manager(remember we put &ldquo;exec openbox-session&rdquo; in this file previously?). The <code>ibus-daemon</code> program starts the ibus daemon server, so if I want to start ibus when X starts, I will put it in the ~/.xinitrc file. <a href="#ref">[2]</a></p>
 <div class="highlight"><pre><span class="nv">$ </span>vi ~/.xinitrc
 <span class="c"># (add at the end of the file)</span>
 ibus-daemon -drx
@@ -74,8 +74,9 @@ ibus-daemon -drx
 <p>There are a lot of applications that supports input method. Two I have tried, the browser and the terminal. Not every termimal emulator supports ibus input. Luckily, I have chosen <code>lxterminal</code> and it does the job.</p>
 
 <h3 id="toc_3">Reference</h3>
-<p>[1] Debian i18n: <a href="https://www.debian.org/doc/manuals/debian-reference/ch08.en.html">https://www.debian.org/doc/manuals/debian-reference/ch08.en.html</a>
-[2] IBus: <a href="https://wiki.archlinux.org/index.php/IBus">https://wiki.archlinux.org/index.php/IBus</a></p>
+<p><a name="ref"></a>
+[1] Debian i18n: <a href="https://www.debian.org/doc/manuals/debian-reference/ch08.en.html">www.debian.org/doc/manuals/debian-reference/ch08.en.html</a> <br/>
+[2] IBus: <a href="https://wiki.archlinux.org/index.php/IBus">wiki.archlinux.org/index.php/IBus</a></p>
 
     
     

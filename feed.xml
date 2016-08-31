@@ -3,14 +3,14 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2016-08-31T00:01:08+08:00</updated>
+    <updated>2016-08-31T11:11:59+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
         <title type="html"><![CDATA[Put Linux into Old PC - (3) Localize the Language Environment]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/06/put-linux-into-old-pc-3-localization.html"/>
         <published>2016-06-28T21:03:00+08:00</published>
-        <updated>2016-08-31T00:01:08+08:00</updated>
+        <updated>2016-08-31T10:59:03+08:00</updated>
         <id>http://terryoy.github.io/2016/06/put-linux-into-old-pc-3-localization.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#study" term="study" label="study" />
@@ -38,7 +38,7 @@
 </pre></div>
 <p>Be sure to change the method switching keyboard shortcuts to &ldquo;Ctrl+Space&rdquo;, otherwise you may not correctly enable it(by default, it uses &ldquo;Super+Space&rdquo; to switch between but I have no &ldquo;Super&rdquo; key on my keyboard).</p>
 <p>After all the steps above, the ibus input method is still not enabled at start up, which means you need to manually start the daemon by executing &ldquo;ibus-setup&rdquo;. However, no doubt that I will fix this soon.</p>
-<p>To enable things at X start up, you need to put commands in <code>~/.xprofile</code> or <code>~/.xinitrc</code>, depends on the windows manager requirements. <code>~/.xprofile</code> is often used before windows manager start up, while <code>~/.xinitrc</code> is used by &ldquo;initx&rdquo; and its frontend &ldquo;startx&rdquo; to initialize the X window manager(remember we put &ldquo;exec openbox-session&rdquo; in this file previously?). The <code>ibus-daemon</code> program starts the ibus daemon server, so if I want to start ibus when X starts, I will put it in the ~/.xinitrc file.</p>
+<p>To enable things at X start up, you need to put commands in <code>~/.xprofile</code> or <code>~/.xinitrc</code>, depends on the windows manager requirements. <code>~/.xprofile</code> is often used before windows manager start up, while <code>~/.xinitrc</code> is used by &ldquo;initx&rdquo; and its frontend &ldquo;startx&rdquo; to initialize the X window manager(remember we put &ldquo;exec openbox-session&rdquo; in this file previously?). The <code>ibus-daemon</code> program starts the ibus daemon server, so if I want to start ibus when X starts, I will put it in the ~/.xinitrc file. <a href="#ref">[2]</a></p>
 <div class="highlight"><pre><span class="nv">$ </span>vi ~/.xinitrc
 <span class="c"># (add at the end of the file)</span>
 ibus-daemon -drx
@@ -49,8 +49,9 @@ ibus-daemon -drx
 <p>There are a lot of applications that supports input method. Two I have tried, the browser and the terminal. Not every termimal emulator supports ibus input. Luckily, I have chosen <code>lxterminal</code> and it does the job.</p>
 
 <h3 id="toc_3">Reference</h3>
-<p>[1] Debian i18n: <a href="https://www.debian.org/doc/manuals/debian-reference/ch08.en.html">https://www.debian.org/doc/manuals/debian-reference/ch08.en.html</a>
-[2] IBus: <a href="https://wiki.archlinux.org/index.php/IBus">https://wiki.archlinux.org/index.php/IBus</a></p>
+<p><a name="ref"></a>
+[1] Debian i18n: <a href="https://www.debian.org/doc/manuals/debian-reference/ch08.en.html">www.debian.org/doc/manuals/debian-reference/ch08.en.html</a> <br/>
+[2] IBus: <a href="https://wiki.archlinux.org/index.php/IBus">wiki.archlinux.org/index.php/IBus</a></p>
 ]]>
         </content>
     </entry><entry>
@@ -58,7 +59,7 @@ ibus-daemon -drx
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/05/short-ref-python-logging.html"/>
         <published>2016-05-26T19:55:00+08:00</published>
-        <updated>2016-06-28T20:38:15+08:00</updated>
+        <updated>2016-06-27T10:46:42+08:00</updated>
         <id>http://terryoy.github.io/2016/05/short-ref-python-logging.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -184,7 +185,7 @@ ibus-daemon -drx
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/05/put-linux-into-old-pc-2-desktop.html"/>
         <published>2016-05-18T09:47:00+08:00</published>
-        <updated>2016-06-28T22:34:57+08:00</updated>
+        <updated>2016-08-31T10:42:42+08:00</updated>
         <id>http://terryoy.github.io/2016/05/put-linux-into-old-pc-2-desktop.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#study" term="study" label="study" />
@@ -287,7 +288,7 @@ ibus-daemon -drx
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/05/put-linux-into-old-pc-1-hardware.html"/>
         <published>2016-05-15T21:04:00+08:00</published>
-        <updated>2016-06-28T22:12:51+08:00</updated>
+        <updated>2016-08-31T11:11:59+08:00</updated>
         <id>http://terryoy.github.io/2016/05/put-linux-into-old-pc-1-hardware.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#study" term="study" label="study" />
@@ -328,7 +329,11 @@ ibus-daemon -drx
 </pre></div>
 <p>It shows how many configuration items of the package and their values. Check out the man page for &ldquo;keyboard-configuration&rdquo;, &ldquo;console-setup&rdquo;, &ldquo;dpkg-reconfigure&rdquo; and &ldquo;debconf-show&rdquo; to explore more.</p>
 
-<h4 id="toc_4">1.3 Problem 3: WiFi Connection</h4>
+<h5 id="toc_4">Remapping the unused keys</h5>
+<p>The Japanese keyboard on my laptop doesn&#39;t have a Win(or Super) key, but have some abandoned key for old Japanese input. So I kind of like to remap the key to be more useful, such as using one as Super key.</p>
+<p>Reference for <strong>key remapping</strong>: <a href="http://askubuntu.com/questions/24916/how-do-i-remap-certain-keys-or-devices">askubuntu.com/questions/24916/how-do-i-remap-certain-keys-or-devices</a></p>
+
+<h4 id="toc_5">1.3 Problem 3: WiFi Connection</h4>
 <p>The original G40 doesn&#39;t have wireless network connection. Fortunately I have a spare USB wifi adapter, but I need to configure the WiFi manually via command line. The adapter I used is Ralink RT5370, which is already supported in the kernel, so I don&#39;t need to explicitly install a driver for it.</p>
 <p>First I could use <code>lsusb</code> to check that device is recognized. Then I move on to updating the configuration in <code>/etc/network/interfaces</code>. Check out the man page of <strong>interfaces</strong>, and you will find the information of the keywords and syntax for configuring the network interface. For example:</p>
 
@@ -385,7 +390,7 @@ iface wlan0 inet dhcp
 </pre></div>
 <p>Hard-coding the WiFi SSID and password in the configuration is not convenience in real environment, but so far in my experiement environment, it is OK to use it first. We will get back to the network manager later to make it more convenience to connect different WiFi network.</p>
 
-<h4 id="toc_5">Problem 1.4 WiFi Connection Revisited</h4>
+<h4 id="toc_6">Problem 1.4 WiFi Connection Revisited</h4>
 <p>Last night I has successfully connect the wifi adapter to my home&#39;s network, howvever some new issues come up:</p>
 
 <ul>
@@ -426,7 +431,7 @@ iface wlan0 inet dhcp
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/04/git-ssh-config.html"/>
         <published>2016-04-17T16:11:00+08:00</published>
-        <updated>2016-08-25T00:59:26+08:00</updated>
+        <updated>2016-08-31T10:42:42+08:00</updated>
         <id>http://terryoy.github.io/2016/04/git-ssh-config.html</id>
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
         <category scheme="http://terryoy.github.io/tag/#virtualbox" term="virtualbox" label="virtualbox" />
@@ -473,7 +478,7 @@ Host github.com
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/02/ubuntu-desktop-sharing-to-osx.html"/>
         <published>2016-02-26T10:52:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-02-26T11:11:36+08:00</updated>
         <id>http://terryoy.github.io/2016/02/ubuntu-desktop-sharing-to-osx.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#osx" term="osx" label="osx" />
@@ -506,7 +511,7 @@ Host github.com
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/02/vbox-cmd-tools-tricks.html"/>
         <published>2016-02-17T11:01:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-02-26T10:39:43+08:00</updated>
         <id>http://terryoy.github.io/2016/02/vbox-cmd-tools-tricks.html</id>
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
         <category scheme="http://terryoy.github.io/tag/#virtualbox" term="virtualbox" label="virtualbox" />
@@ -526,7 +531,7 @@ Host github.com
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/02/args-kwargs-python.html"/>
         <published>2016-02-03T16:05:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-02-03T16:57:01+08:00</updated>
         <id>http://terryoy.github.io/2016/02/args-kwargs-python.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -582,7 +587,7 @@ Host github.com
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/09/rpi-hardware-begin-gpio-python.html"/>
         <published>2015-09-06T20:02:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2015/09/rpi-hardware-begin-gpio-python.html</id>
         <category scheme="http://terryoy.github.io/tag/#rpi" term="rpi" label="rpi" />
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
@@ -612,7 +617,7 @@ Host github.com
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/06/some-useful-linux-server-security-commands.html"/>
         <published>2015-06-27T22:31:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2015/06/some-useful-linux-server-security-commands.html</id>
         <category scheme="http://terryoy.github.io/tag/#server" term="server" label="server" />
         <category scheme="http://terryoy.github.io/tag/#security" term="security" label="security" />
@@ -685,11 +690,55 @@ Jun 27 21:53:39 iZ940ou5p7nZ sudo: pam_unix<span class="o">(</span>sudo:session<
 ]]>
         </content>
     </entry><entry>
+        <title type="html"><![CDATA[Intel Edison Get Started]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2015/06/edison-get-started.html"/>
+        <published>2015-06-03T16:15:00+08:00</published>
+        <updated>2016-01-03T21:36:38+08:00</updated>
+        <id>http://terryoy.github.io/2015/06/edison-get-started.html</id>
+        <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <p>This guide is about the initial steps for me starting development on Intel Edison platform.</p>
+
+<h3 id="toc_0">1. The Board and Setting Up Serial Communication</h3>
+<p>The board I use to develop with Edison is the <a href="http://www.seeedstudio.com/depot/Intel-Edison-for-Arduino-p-2149.html">Intel Edison for Arduino</a> board. So first plug the Edison module on the board; secondary, I have the 6.5V 2A DC connected to supply the power to the board (or you could power up the board with the micro-USB in the middle); third, a micro-USB wire connect to the board for serial communication.</p>
+<p>I&#39;m using minicom on Mac OSX for the serial connection, but you can also use <code>screen</code> on Mac OSX and Linux(see the reference at the end of this section).</p>
+<p>If you forgot the root password, here&#39;s the way to recover it: </p>
+
+<pre><code>* on booting, press any key to stop the process
+* on the &quot;boot&gt;&quot; command line prompt, type ```run do_ota``` to redo the flashing process.</code></pre>
+<p>Then you end up with a login using &ldquo;root&rdquo; as user name and no password.</p>
+
+<ul>
+<li><a href="https://software.intel.com/zh-cn/assembling-intel-edison-board-with-arduino-expansion-board">Reference for assembling</a></li>
+<li><a href="https://software.intel.com/zh-cn/setting-up-serial-terminal-on-system-with-linux">Reference for setting up serial on Linux</a></li>
+<li><a href="https://software.intel.com/zh-cn/setting-up-serial-terminal-on-system-with-mac-os-x">Reference for setting up serial on Mac</a></li>
+</ul>
+
+<h3 id="toc_1">2. Setting up WiFi</h3>
+<p>The next thing to do is to setup the WiFi on Edison, because a large part of the development process happens on WiFi.</p>
+<div class="highlight"><pre><span class="nv">$ </span>configure_edison --wifi
+
+<span class="c"># check the wifi status</span>
+<span class="nv">$ </span>wpa_cli status
+</pre></div>
+<p>Follow the instructions of this program to complete the scanning, choosing hotspot, and reboot with WiFi.</p>
+<p>By default, <code>ssh</code> is restricted to usb, so you need to disable the restriction by using <code>configure_edison --setup</code> to setup the device name and password. It will automatically update the file &#39;/lib/systemd/system/sshd.socket&#39; and comment out this line &ldquo;BindToDevice=usb0&rdquo;. (need reboot to take effect)</p>
+
+<ul>
+<li><a href="https://software.intel.com/zh-cn/connecting-your-intel-edison-board-using-wifi">Reference for setting up WiFi</a></li>
+</ul>
+
+<h3 id="toc_2">3. Blink the LED</h3>
+<p>(to be continued when I get the board&hellip;)</p>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[A Template for Program Readme on Github]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/06/program-readme-template.html"/>
         <published>2015-06-03T16:15:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2015/06/program-readme-template.html</id>
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -770,55 +819,11 @@ top level routines
 ]]>
         </content>
     </entry><entry>
-        <title type="html"><![CDATA[Intel Edison Get Started]]></title>
-        <author><name>terryoy</name></author>
-        <link href="http://terryoy.github.io/2015/06/edison-get-started.html"/>
-        <published>2015-06-03T16:15:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
-        <id>http://terryoy.github.io/2015/06/edison-get-started.html</id>
-        <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
-        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
-            <![CDATA[ <p>This guide is about the initial steps for me starting development on Intel Edison platform.</p>
-
-<h3 id="toc_0">1. The Board and Setting Up Serial Communication</h3>
-<p>The board I use to develop with Edison is the <a href="http://www.seeedstudio.com/depot/Intel-Edison-for-Arduino-p-2149.html">Intel Edison for Arduino</a> board. So first plug the Edison module on the board; secondary, I have the 6.5V 2A DC connected to supply the power to the board (or you could power up the board with the micro-USB in the middle); third, a micro-USB wire connect to the board for serial communication.</p>
-<p>I&#39;m using minicom on Mac OSX for the serial connection, but you can also use <code>screen</code> on Mac OSX and Linux(see the reference at the end of this section).</p>
-<p>If you forgot the root password, here&#39;s the way to recover it: </p>
-
-<pre><code>* on booting, press any key to stop the process
-* on the &quot;boot&gt;&quot; command line prompt, type ```run do_ota``` to redo the flashing process.</code></pre>
-<p>Then you end up with a login using &ldquo;root&rdquo; as user name and no password.</p>
-
-<ul>
-<li><a href="https://software.intel.com/zh-cn/assembling-intel-edison-board-with-arduino-expansion-board">Reference for assembling</a></li>
-<li><a href="https://software.intel.com/zh-cn/setting-up-serial-terminal-on-system-with-linux">Reference for setting up serial on Linux</a></li>
-<li><a href="https://software.intel.com/zh-cn/setting-up-serial-terminal-on-system-with-mac-os-x">Reference for setting up serial on Mac</a></li>
-</ul>
-
-<h3 id="toc_1">2. Setting up WiFi</h3>
-<p>The next thing to do is to setup the WiFi on Edison, because a large part of the development process happens on WiFi.</p>
-<div class="highlight"><pre><span class="nv">$ </span>configure_edison --wifi
-
-<span class="c"># check the wifi status</span>
-<span class="nv">$ </span>wpa_cli status
-</pre></div>
-<p>Follow the instructions of this program to complete the scanning, choosing hotspot, and reboot with WiFi.</p>
-<p>By default, <code>ssh</code> is restricted to usb, so you need to disable the restriction by using <code>configure_edison --setup</code> to setup the device name and password. It will automatically update the file &#39;/lib/systemd/system/sshd.socket&#39; and comment out this line &ldquo;BindToDevice=usb0&rdquo;. (need reboot to take effect)</p>
-
-<ul>
-<li><a href="https://software.intel.com/zh-cn/connecting-your-intel-edison-board-using-wifi">Reference for setting up WiFi</a></li>
-</ul>
-
-<h3 id="toc_2">3. Blink the LED</h3>
-<p>(to be continued when I get the board&hellip;)</p>
-]]>
-        </content>
-    </entry><entry>
         <title type="html"><![CDATA[Create a Root CA and Self-Sign Certificate for SSL]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/02/create-ssl-ca-root-and-self-sign.html"/>
         <published>2015-02-23T11:03:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2015/02/create-ssl-ca-root-and-self-sign.html</id>
         <category scheme="http://terryoy.github.io/tag/#server" term="server" label="server" />
         <category scheme="http://terryoy.github.io/tag/#security" term="security" label="security" />
@@ -910,7 +915,7 @@ Common Name <span class="o">(</span>e.g. server FQDN or YOUR name<span class="o"
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/02/postgresql-admin-quickref-part2-initiating-database.html"/>
         <published>2015-02-21T16:40:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2015/02/postgresql-admin-quickref-part2-initiating-database.html</id>
         <category scheme="http://terryoy.github.io/tag/#postgresql" term="postgresql" label="postgresql" />
         <category scheme="http://terryoy.github.io/tag/#database" term="database" label="database" />
@@ -964,7 +969,7 @@ host    all             all             ::1/128                 md5
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/11/jni-guide-on-android.html"/>
         <published>2014-11-27T16:06:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2014/11/jni-guide-on-android.html</id>
         <category scheme="http://terryoy.github.io/tag/#cpp" term="cpp" label="cpp" />
         <category scheme="http://terryoy.github.io/tag/#android" term="android" label="android" />
@@ -1115,7 +1120,7 @@ JNI Documentation: <a href="http://docs.oracle.com/javase/1.5.0/docs/guide/jni/s
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/10/finding-information-linux-c-library.html"/>
         <published>2014-10-30T09:38:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2014/10/finding-information-linux-c-library.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
@@ -1193,7 +1198,7 @@ Program Library HOWTO <br/>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/10/common-git-commands.html"/>
         <published>2014-10-22T20:57:00+08:00</published>
-        <updated>2016-08-25T00:41:46+08:00</updated>
+        <updated>2016-08-03T17:07:19+08:00</updated>
         <id>http://terryoy.github.io/2014/10/common-git-commands.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
@@ -1379,7 +1384,7 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/08/learning-linux-c-part-1.html"/>
         <published>2014-08-20T23:34:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2014/08/learning-linux-c-part-1.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
@@ -1427,7 +1432,7 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/06/create-database-mysql.html"/>
         <published>2014-06-04T14:40:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2014/06/create-database-mysql.html</id>
         <category scheme="http://terryoy.github.io/tag/#database" term="database" label="database" />
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
@@ -1467,7 +1472,7 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/03/using-ctypes-to-wrap-c-library.html"/>
         <published>2014-03-23T07:57:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2014/03/using-ctypes-to-wrap-c-library.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />

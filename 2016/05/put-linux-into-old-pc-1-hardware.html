@@ -76,7 +76,11 @@
 </pre></div>
 <p>It shows how many configuration items of the package and their values. Check out the man page for &ldquo;keyboard-configuration&rdquo;, &ldquo;console-setup&rdquo;, &ldquo;dpkg-reconfigure&rdquo; and &ldquo;debconf-show&rdquo; to explore more.</p>
 
-<h4 id="toc_4">1.3 Problem 3: WiFi Connection</h4>
+<h5 id="toc_4">Remapping the unused keys</h5>
+<p>The Japanese keyboard on my laptop doesn&#39;t have a Win(or Super) key, but have some abandoned key for old Japanese input. So I kind of like to remap the key to be more useful, such as using one as Super key.</p>
+<p>Reference for <strong>key remapping</strong>: <a href="http://askubuntu.com/questions/24916/how-do-i-remap-certain-keys-or-devices">askubuntu.com/questions/24916/how-do-i-remap-certain-keys-or-devices</a></p>
+
+<h4 id="toc_5">1.3 Problem 3: WiFi Connection</h4>
 <p>The original G40 doesn&#39;t have wireless network connection. Fortunately I have a spare USB wifi adapter, but I need to configure the WiFi manually via command line. The adapter I used is Ralink RT5370, which is already supported in the kernel, so I don&#39;t need to explicitly install a driver for it.</p>
 <p>First I could use <code>lsusb</code> to check that device is recognized. Then I move on to updating the configuration in <code>/etc/network/interfaces</code>. Check out the man page of <strong>interfaces</strong>, and you will find the information of the keywords and syntax for configuring the network interface. For example:</p>
 
@@ -133,7 +137,7 @@ iface wlan0 inet dhcp
 </pre></div>
 <p>Hard-coding the WiFi SSID and password in the configuration is not convenience in real environment, but so far in my experiement environment, it is OK to use it first. We will get back to the network manager later to make it more convenience to connect different WiFi network.</p>
 
-<h4 id="toc_5">Problem 1.4 WiFi Connection Revisited</h4>
+<h4 id="toc_6">Problem 1.4 WiFi Connection Revisited</h4>
 <p>Last night I has successfully connect the wifi adapter to my home&#39;s network, howvever some new issues come up:</p>
 
 <ul>

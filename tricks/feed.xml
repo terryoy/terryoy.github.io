@@ -3,14 +3,14 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/tricks/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/tricks/" />
-    <updated>2016-08-25T00:59:26+08:00</updated>
+    <updated>2016-08-31T10:42:42+08:00</updated>
     <id>http://terryoy.github.io/tricks/</id>
     <entry>
         <title type="html"><![CDATA[A Short Reference of Python Logging]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/05/short-ref-python-logging.html"/>
         <published>2016-05-26T19:55:00+08:00</published>
-        <updated>2016-06-28T20:38:15+08:00</updated>
+        <updated>2016-06-27T10:46:42+08:00</updated>
         <id>http://terryoy.github.io/2016/05/short-ref-python-logging.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -136,7 +136,7 @@
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/04/git-ssh-config.html"/>
         <published>2016-04-17T16:11:00+08:00</published>
-        <updated>2016-08-25T00:59:26+08:00</updated>
+        <updated>2016-08-31T10:42:42+08:00</updated>
         <id>http://terryoy.github.io/2016/04/git-ssh-config.html</id>
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
         <category scheme="http://terryoy.github.io/tag/#virtualbox" term="virtualbox" label="virtualbox" />
@@ -183,7 +183,7 @@ Host github.com
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/02/ubuntu-desktop-sharing-to-osx.html"/>
         <published>2016-02-26T10:52:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-02-26T11:11:36+08:00</updated>
         <id>http://terryoy.github.io/2016/02/ubuntu-desktop-sharing-to-osx.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#osx" term="osx" label="osx" />
@@ -216,7 +216,7 @@ Host github.com
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/02/vbox-cmd-tools-tricks.html"/>
         <published>2016-02-17T11:01:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-02-26T10:39:43+08:00</updated>
         <id>http://terryoy.github.io/2016/02/vbox-cmd-tools-tricks.html</id>
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
         <category scheme="http://terryoy.github.io/tag/#virtualbox" term="virtualbox" label="virtualbox" />
@@ -236,7 +236,7 @@ Host github.com
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/02/args-kwargs-python.html"/>
         <published>2016-02-03T16:05:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-02-03T16:57:01+08:00</updated>
         <id>http://terryoy.github.io/2016/02/args-kwargs-python.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -292,7 +292,7 @@ Host github.com
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/06/some-useful-linux-server-security-commands.html"/>
         <published>2015-06-27T22:31:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2015/06/some-useful-linux-server-security-commands.html</id>
         <category scheme="http://terryoy.github.io/tag/#server" term="server" label="server" />
         <category scheme="http://terryoy.github.io/tag/#security" term="security" label="security" />
@@ -369,7 +369,7 @@ Jun 27 21:53:39 iZ940ou5p7nZ sudo: pam_unix<span class="o">(</span>sudo:session<
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/02/create-ssl-ca-root-and-self-sign.html"/>
         <published>2015-02-23T11:03:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2015/02/create-ssl-ca-root-and-self-sign.html</id>
         <category scheme="http://terryoy.github.io/tag/#server" term="server" label="server" />
         <category scheme="http://terryoy.github.io/tag/#security" term="security" label="security" />
@@ -461,7 +461,7 @@ Common Name <span class="o">(</span>e.g. server FQDN or YOUR name<span class="o"
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/02/postgresql-admin-quickref-part2-initiating-database.html"/>
         <published>2015-02-21T16:40:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2015/02/postgresql-admin-quickref-part2-initiating-database.html</id>
         <category scheme="http://terryoy.github.io/tag/#postgresql" term="postgresql" label="postgresql" />
         <category scheme="http://terryoy.github.io/tag/#database" term="database" label="database" />
@@ -515,7 +515,7 @@ host    all             all             ::1/128                 md5
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/03/postgresql-admin-quickref-part1-exploring-database.html"/>
         <published>2014-03-06T15:27:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2014/03/postgresql-admin-quickref-part1-exploring-database.html</id>
         <category scheme="http://terryoy.github.io/tag/#postgresql" term="postgresql" label="postgresql" />
         <category scheme="http://terryoy.github.io/tag/#database" term="database" label="database" />
@@ -644,7 +644,7 @@ Log files: <code>/var/log/postgresql/</code></p>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/01/ssh-key-based-auth-server.html"/>
         <published>2014-01-08T15:40:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2014/01/ssh-key-based-auth-server.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
@@ -742,7 +742,7 @@ If you want to revoke an authorized key for some user, you can find the user&#39
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/01/archive-commands-in-linux.html"/>
         <published>2014-01-07T19:13:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2014/01/archive-commands-in-linux.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
@@ -792,7 +792,7 @@ If you want to revoke an authorized key for some user, you can find the user&#39
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/12/python_yield.html"/>
         <published>2013-12-23T23:43:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2013/12/python_yield.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -865,7 +865,7 @@ init value:0
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/12/python_main_args.html"/>
         <published>2013-12-21T15:35:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2013/12/python_main_args.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -962,7 +962,7 @@ an non-existing item value: [ non-exist =</code></pre>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/09/vimrc.html"/>
         <published>2013-09-23T23:16:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-02-03T16:17:16+08:00</updated>
         <id>http://terryoy.github.io/2013/09/vimrc.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#vim" term="vim" label="vim" />
@@ -1005,7 +1005,7 @@ set expandtab</code></pre>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/09/useful_alias.html"/>
         <published>2013-09-23T00:00:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-05-11T10:43:13+08:00</updated>
         <id>http://terryoy.github.io/2013/09/useful_alias.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />

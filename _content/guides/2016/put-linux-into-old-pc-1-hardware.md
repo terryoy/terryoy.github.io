@@ -60,6 +60,11 @@ $ sudo debconf-show keyboard-configuration
 ```
 It shows how many configuration items of the package and their values. Check out the man page for "keyboard-configuration", "console-setup", "dpkg-reconfigure" and "debconf-show" to explore more.
 
+##### Remapping the unused keys
+
+The Japanese keyboard on my laptop doesn't have a Win(or Super) key, but have some abandoned key for old Japanese input. So I kind of like to remap the key to be more useful, such as using one as Super key.
+
+Reference for **key remapping**: <http://askubuntu.com/questions/24916/how-do-i-remap-certain-keys-or-devices>
 
 #### 1.3 Problem 3: WiFi Connection
 
