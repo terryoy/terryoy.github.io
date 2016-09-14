@@ -60,13 +60,13 @@ $ sudo debconf-show keyboard-configuration
 ```
 It shows how many configuration items of the package and their values. Check out the man page for "keyboard-configuration", "console-setup", "dpkg-reconfigure" and "debconf-show" to explore more.
 
-##### Remapping the unused keys
+#### 1.3 Remapping the unused keys
 
 The Japanese keyboard on my laptop doesn't have a Win(or Super) key, but have some abandoned key for old Japanese input. So I kind of like to remap the key to be more useful, such as using one as Super key.
 
 Reference for **key remapping**: <http://askubuntu.com/questions/24916/how-do-i-remap-certain-keys-or-devices>
 
-#### 1.3 Problem 3: WiFi Connection
+#### 1.4 Problem 3: WiFi Connection
 
 The original G40 doesn't have wireless network connection. Fortunately I have a spare USB wifi adapter, but I need to configure the WiFi manually via command line. The adapter I used is Ralink RT5370, which is already supported in the kernel, so I don't need to explicitly install a driver for it.
 
@@ -138,7 +138,7 @@ $ sudo ifup wlan0
 
 Hard-coding the WiFi SSID and password in the configuration is not convenience in real environment, but so far in my experiement environment, it is OK to use it first. We will get back to the network manager later to make it more convenience to connect different WiFi network.
 
-#### Problem 1.4 WiFi Connection Revisited
+#### Problem 1.5 WiFi Connection Revisited
 
 Last night I has successfully connect the wifi adapter to my home's network, howvever some new issues come up:
 

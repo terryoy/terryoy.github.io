@@ -50,8 +50,32 @@ You can check out what the part of "-drx" means by ```man ibus-daemon```. It's e
 
 There are a lot of applications that supports input method. Two I have tried, the browser and the terminal. Not every termimal emulator supports ibus input. Luckily, I have chosen ```lxterminal``` and it does the job.
 
+The first and easy test is on the browser. I changed the keyboard shortcut for "switching to next input method" to Ctrl+Space, because the default one is Super+Space but my `Super` key isn't available at the time and `Ctrl` is more like my preference. 
+
+The Japanese font seems to be already available with the installation above, but the Chinese font isn't. So, by installing some extra Chinese fonts, you should be able to see most of the east asian characters.
 
 
+```bash
+
+# Chinese Font
+$ sudo apt-get install fonts-wqy-microhei fonts-wqy-zenhei
+
+```
+
+The "Typing Method" in the Japanese input method is more like a switch from Pinyin to Wubi in Chinese. My Japanese keyboard has Hiragana characters written on the keys, so I can choose "Kana" as typing method(a little bit like Wubi, typing words in characters). If you choose "Romanji" as the typing method, then you should input the characters in a phonetic way.
+
+
+#### 3.3 Localizing the UI
+
+The English UI is good enough for me in the most circumstances. But still, I want to look into the details for changing the language of applicatoin interfaces.
+
+##### Basic Locale Settings
+
+The system variable "LANG=xx_YY.ZZZZ" has defined the language settings in three ways: `language code`, `country code`, and `encoding`. (Notice the upper cases and the lower cases.) This variable affects the language interface of most of the applications. To do an experiement, try to set the variable as below, before entering the X window environment. You will see the menu of applications are changed to a different font, but the language is possibly still in English. This is because the application has no Chinese locale interface installed.
+
+```bash
+$ export LANG=zh_CN.UTF-8
+```
 
 
 
