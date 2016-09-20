@@ -3,14 +3,77 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2016-09-09T23:51:28+08:00</updated>
+    <updated>2016-09-19T23:53:53+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
+        <title type="html"><![CDATA[Frontend Workflow Toolbox Summary]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2016/09/frontend-workflow-summary.html"/>
+        <published>2016-09-18T23:45:00+08:00</published>
+        <updated>2016-09-19T23:53:53+08:00</updated>
+        <id>http://terryoy.github.io/2016/09/frontend-workflow-summary.html</id>
+        <category scheme="http://terryoy.github.io/tag/#frontend" term="frontend" label="frontend" />
+        <category scheme="http://terryoy.github.io/tag/#study" term="study" label="study" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <p>I&#39;m working my job as a frontend developer currently. So I will do some research and write about the tools I&#39;ve been using to develop Javasript frontend projects.</p>
+
+<h3 id="toc_0">1. CSS</h3>
+
+<h3 id="toc_1">2. Javascript</h3>
+
+<h4 id="toc_2">2.1 Browserify</h4>
+<p>Uses the same module system as nodejs that can compile, build, and pack javascript modules in node-flavoured CommonJS way for browser. You can manage front-end dependencies with npm, using <code>require()</code> method to import, and &ldquo;module.exports&rdquo; to export, just like the way nodejs does.</p>
+<p>When compiling, browserify will start with an entry file(e.g. &#39;./app.js&#39;), then find the whole <code>abstract syntax tree</code> of the file by static analysis, and pack all the related content into one files.</p>
+<p>In order to make node modules more compatible with browser side, browserify also provides many <a href="https://github.com/substack/browserify-handbook#builtins">builtins modules</a> such as <code>events</code>, <code>os</code>, <code>querystring</code>, etc.</p>
+<p>The best part of browserify is that providing the static analysis and compiling platform, you can also have customized transformers for files other than the standard JS. This enables compiling coffee script or other favors, and also other plugins such as code coverage, in a pipe streaming way. </p>
+<p>In bundling, browserify has two functions: </p>
+
+<ol>
+<li><code>ignore</code>, making a stub definition for some methods only available for node-specific modules</li>
+<li><code>exclude</code>, to separate files in different bundle, so don&#39;t pack the specific files</li>
+</ol>
+<p>Reference: <a href="https://github.com/substack/browserify-handbook#introduction">github.com/substack/browserify-handbook#introduction</a></p>
+
+<h4 id="toc_3">2.2 Gulp</h4>
+<p>References:</p>
+
+<ul>
+<li>Gulp:  <a href="https://github.com/gulpjs/gulp">github.com/gulpjs/gulp</a></li>
+<li>Gulp + Browserify Guide: <a href="https://www.viget.com/articles/gulp-browserify-starter-faq">www.viget.com/articles/gulp-browserify-starter-faq</a></li>
+<li>Gulp Recipes: <a href="https://github.com/gulpjs/gulp/tree/master/docs/recipes">github.com/gulpjs/gulp/tree/master/docs/recipes</a></li>
+</ul>
+
+<h4 id="toc_4">2.3 Babel</h4>
+<p>The language transfrm platform and the cutting edge of ES(ECMAScript/Javascript) standard. It can transform ES6(ES2015), ES7(ES2016) scripts to compatible ES5. So you can use it as a <code>transformer</code> in browserify and compile the files you have written in ES6, etc. The official web site says the main features about it:</p>
+
+<ul>
+<li>Babel Presets,</li>
+<li>Babel Polyfill, new globals such as Promise or new native methods. </li>
+<li>JSX and Flow support</li>
+</ul>
+<p>References:</p>
+
+<ul>
+<li>ES6: <a href="https://github.com/rse/es6-features">github.com/rse/es6-features</a></li>
+<li>Babel: <a href="http://babeljs.io/">babeljs.io/</a></li>
+<li>Babel Plugins(Presets, Stage-X, and Transform Plugins): <a href="http://babeljs.io/docs/plugins/">babeljs.io/docs/plugins/</a> </li>
+</ul>
+
+<h4 id="toc_5">2.4  Webpack</h4>
+
+<h3 id="toc_6">3. Others</h3>
+
+<h4 id="toc_7">3.1 Coffee Script</h4>
+
+<h4 id="toc_8">3,2 Type Script</h4>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[Put Linux into Old PC - (3) Localize the Language Environment]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/06/put-linux-into-old-pc-3-localization.html"/>
         <published>2016-06-28T21:03:00+08:00</published>
-        <updated>2016-09-09T23:51:28+08:00</updated>
+        <updated>2016-09-18T23:43:37+08:00</updated>
         <id>http://terryoy.github.io/2016/06/put-linux-into-old-pc-3-localization.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#study" term="study" label="study" />
@@ -73,7 +136,7 @@ ibus-daemon -drx
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/05/short-ref-python-logging.html"/>
         <published>2016-05-26T19:55:00+08:00</published>
-        <updated>2016-06-28T20:38:15+08:00</updated>
+        <updated>2016-06-27T10:46:42+08:00</updated>
         <id>http://terryoy.github.io/2016/05/short-ref-python-logging.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -199,7 +262,7 @@ ibus-daemon -drx
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/05/put-linux-into-old-pc-2-desktop.html"/>
         <published>2016-05-18T09:47:00+08:00</published>
-        <updated>2016-06-28T22:34:57+08:00</updated>
+        <updated>2016-08-31T10:42:42+08:00</updated>
         <id>http://terryoy.github.io/2016/05/put-linux-into-old-pc-2-desktop.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#study" term="study" label="study" />
@@ -302,7 +365,7 @@ ibus-daemon -drx
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/05/put-linux-into-old-pc-1-hardware.html"/>
         <published>2016-05-15T21:04:00+08:00</published>
-        <updated>2016-09-04T10:44:10+08:00</updated>
+        <updated>2016-09-18T23:43:37+08:00</updated>
         <id>http://terryoy.github.io/2016/05/put-linux-into-old-pc-1-hardware.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#study" term="study" label="study" />
@@ -445,7 +508,7 @@ iface wlan0 inet dhcp
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/04/git-ssh-config.html"/>
         <published>2016-04-17T16:11:00+08:00</published>
-        <updated>2016-08-25T00:59:26+08:00</updated>
+        <updated>2016-08-31T10:42:42+08:00</updated>
         <id>http://terryoy.github.io/2016/04/git-ssh-config.html</id>
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
         <category scheme="http://terryoy.github.io/tag/#virtualbox" term="virtualbox" label="virtualbox" />
@@ -492,7 +555,7 @@ Host github.com
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/02/ubuntu-desktop-sharing-to-osx.html"/>
         <published>2016-02-26T10:52:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-02-26T11:11:36+08:00</updated>
         <id>http://terryoy.github.io/2016/02/ubuntu-desktop-sharing-to-osx.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#osx" term="osx" label="osx" />
@@ -525,7 +588,7 @@ Host github.com
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/02/vbox-cmd-tools-tricks.html"/>
         <published>2016-02-17T11:01:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-02-26T10:39:43+08:00</updated>
         <id>http://terryoy.github.io/2016/02/vbox-cmd-tools-tricks.html</id>
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
         <category scheme="http://terryoy.github.io/tag/#virtualbox" term="virtualbox" label="virtualbox" />
@@ -545,7 +608,7 @@ Host github.com
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/02/args-kwargs-python.html"/>
         <published>2016-02-03T16:05:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-02-03T16:57:01+08:00</updated>
         <id>http://terryoy.github.io/2016/02/args-kwargs-python.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -601,7 +664,7 @@ Host github.com
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/09/rpi-hardware-begin-gpio-python.html"/>
         <published>2015-09-06T20:02:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2015/09/rpi-hardware-begin-gpio-python.html</id>
         <category scheme="http://terryoy.github.io/tag/#rpi" term="rpi" label="rpi" />
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
@@ -631,7 +694,7 @@ Host github.com
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/06/some-useful-linux-server-security-commands.html"/>
         <published>2015-06-27T22:31:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2015/06/some-useful-linux-server-security-commands.html</id>
         <category scheme="http://terryoy.github.io/tag/#server" term="server" label="server" />
         <category scheme="http://terryoy.github.io/tag/#security" term="security" label="security" />
@@ -704,11 +767,55 @@ Jun 27 21:53:39 iZ940ou5p7nZ sudo: pam_unix<span class="o">(</span>sudo:session<
 ]]>
         </content>
     </entry><entry>
+        <title type="html"><![CDATA[Intel Edison Get Started]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2015/06/edison-get-started.html"/>
+        <published>2015-06-03T16:15:00+08:00</published>
+        <updated>2016-01-03T21:36:38+08:00</updated>
+        <id>http://terryoy.github.io/2015/06/edison-get-started.html</id>
+        <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <p>This guide is about the initial steps for me starting development on Intel Edison platform.</p>
+
+<h3 id="toc_0">1. The Board and Setting Up Serial Communication</h3>
+<p>The board I use to develop with Edison is the <a href="http://www.seeedstudio.com/depot/Intel-Edison-for-Arduino-p-2149.html">Intel Edison for Arduino</a> board. So first plug the Edison module on the board; secondary, I have the 6.5V 2A DC connected to supply the power to the board (or you could power up the board with the micro-USB in the middle); third, a micro-USB wire connect to the board for serial communication.</p>
+<p>I&#39;m using minicom on Mac OSX for the serial connection, but you can also use <code>screen</code> on Mac OSX and Linux(see the reference at the end of this section).</p>
+<p>If you forgot the root password, here&#39;s the way to recover it: </p>
+
+<pre><code>* on booting, press any key to stop the process
+* on the &quot;boot&gt;&quot; command line prompt, type ```run do_ota``` to redo the flashing process.</code></pre>
+<p>Then you end up with a login using &ldquo;root&rdquo; as user name and no password.</p>
+
+<ul>
+<li><a href="https://software.intel.com/zh-cn/assembling-intel-edison-board-with-arduino-expansion-board">Reference for assembling</a></li>
+<li><a href="https://software.intel.com/zh-cn/setting-up-serial-terminal-on-system-with-linux">Reference for setting up serial on Linux</a></li>
+<li><a href="https://software.intel.com/zh-cn/setting-up-serial-terminal-on-system-with-mac-os-x">Reference for setting up serial on Mac</a></li>
+</ul>
+
+<h3 id="toc_1">2. Setting up WiFi</h3>
+<p>The next thing to do is to setup the WiFi on Edison, because a large part of the development process happens on WiFi.</p>
+<div class="highlight"><pre><span class="nv">$ </span>configure_edison --wifi
+
+<span class="c"># check the wifi status</span>
+<span class="nv">$ </span>wpa_cli status
+</pre></div>
+<p>Follow the instructions of this program to complete the scanning, choosing hotspot, and reboot with WiFi.</p>
+<p>By default, <code>ssh</code> is restricted to usb, so you need to disable the restriction by using <code>configure_edison --setup</code> to setup the device name and password. It will automatically update the file &#39;/lib/systemd/system/sshd.socket&#39; and comment out this line &ldquo;BindToDevice=usb0&rdquo;. (need reboot to take effect)</p>
+
+<ul>
+<li><a href="https://software.intel.com/zh-cn/connecting-your-intel-edison-board-using-wifi">Reference for setting up WiFi</a></li>
+</ul>
+
+<h3 id="toc_2">3. Blink the LED</h3>
+<p>(to be continued when I get the board&hellip;)</p>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[A Template for Program Readme on Github]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/06/program-readme-template.html"/>
         <published>2015-06-03T16:15:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2015/06/program-readme-template.html</id>
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -789,55 +896,11 @@ top level routines
 ]]>
         </content>
     </entry><entry>
-        <title type="html"><![CDATA[Intel Edison Get Started]]></title>
-        <author><name>terryoy</name></author>
-        <link href="http://terryoy.github.io/2015/06/edison-get-started.html"/>
-        <published>2015-06-03T16:15:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
-        <id>http://terryoy.github.io/2015/06/edison-get-started.html</id>
-        <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
-        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
-            <![CDATA[ <p>This guide is about the initial steps for me starting development on Intel Edison platform.</p>
-
-<h3 id="toc_0">1. The Board and Setting Up Serial Communication</h3>
-<p>The board I use to develop with Edison is the <a href="http://www.seeedstudio.com/depot/Intel-Edison-for-Arduino-p-2149.html">Intel Edison for Arduino</a> board. So first plug the Edison module on the board; secondary, I have the 6.5V 2A DC connected to supply the power to the board (or you could power up the board with the micro-USB in the middle); third, a micro-USB wire connect to the board for serial communication.</p>
-<p>I&#39;m using minicom on Mac OSX for the serial connection, but you can also use <code>screen</code> on Mac OSX and Linux(see the reference at the end of this section).</p>
-<p>If you forgot the root password, here&#39;s the way to recover it: </p>
-
-<pre><code>* on booting, press any key to stop the process
-* on the &quot;boot&gt;&quot; command line prompt, type ```run do_ota``` to redo the flashing process.</code></pre>
-<p>Then you end up with a login using &ldquo;root&rdquo; as user name and no password.</p>
-
-<ul>
-<li><a href="https://software.intel.com/zh-cn/assembling-intel-edison-board-with-arduino-expansion-board">Reference for assembling</a></li>
-<li><a href="https://software.intel.com/zh-cn/setting-up-serial-terminal-on-system-with-linux">Reference for setting up serial on Linux</a></li>
-<li><a href="https://software.intel.com/zh-cn/setting-up-serial-terminal-on-system-with-mac-os-x">Reference for setting up serial on Mac</a></li>
-</ul>
-
-<h3 id="toc_1">2. Setting up WiFi</h3>
-<p>The next thing to do is to setup the WiFi on Edison, because a large part of the development process happens on WiFi.</p>
-<div class="highlight"><pre><span class="nv">$ </span>configure_edison --wifi
-
-<span class="c"># check the wifi status</span>
-<span class="nv">$ </span>wpa_cli status
-</pre></div>
-<p>Follow the instructions of this program to complete the scanning, choosing hotspot, and reboot with WiFi.</p>
-<p>By default, <code>ssh</code> is restricted to usb, so you need to disable the restriction by using <code>configure_edison --setup</code> to setup the device name and password. It will automatically update the file &#39;/lib/systemd/system/sshd.socket&#39; and comment out this line &ldquo;BindToDevice=usb0&rdquo;. (need reboot to take effect)</p>
-
-<ul>
-<li><a href="https://software.intel.com/zh-cn/connecting-your-intel-edison-board-using-wifi">Reference for setting up WiFi</a></li>
-</ul>
-
-<h3 id="toc_2">3. Blink the LED</h3>
-<p>(to be continued when I get the board&hellip;)</p>
-]]>
-        </content>
-    </entry><entry>
         <title type="html"><![CDATA[Create a Root CA and Self-Sign Certificate for SSL]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/02/create-ssl-ca-root-and-self-sign.html"/>
         <published>2015-02-23T11:03:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2015/02/create-ssl-ca-root-and-self-sign.html</id>
         <category scheme="http://terryoy.github.io/tag/#server" term="server" label="server" />
         <category scheme="http://terryoy.github.io/tag/#security" term="security" label="security" />
@@ -929,7 +992,7 @@ Common Name <span class="o">(</span>e.g. server FQDN or YOUR name<span class="o"
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/02/postgresql-admin-quickref-part2-initiating-database.html"/>
         <published>2015-02-21T16:40:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2015/02/postgresql-admin-quickref-part2-initiating-database.html</id>
         <category scheme="http://terryoy.github.io/tag/#postgresql" term="postgresql" label="postgresql" />
         <category scheme="http://terryoy.github.io/tag/#database" term="database" label="database" />
@@ -983,7 +1046,7 @@ host    all             all             ::1/128                 md5
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/11/jni-guide-on-android.html"/>
         <published>2014-11-27T16:06:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2014/11/jni-guide-on-android.html</id>
         <category scheme="http://terryoy.github.io/tag/#cpp" term="cpp" label="cpp" />
         <category scheme="http://terryoy.github.io/tag/#android" term="android" label="android" />
@@ -1134,7 +1197,7 @@ JNI Documentation: <a href="http://docs.oracle.com/javase/1.5.0/docs/guide/jni/s
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/10/finding-information-linux-c-library.html"/>
         <published>2014-10-30T09:38:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2014/10/finding-information-linux-c-library.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
@@ -1212,7 +1275,7 @@ Program Library HOWTO <br/>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/10/common-git-commands.html"/>
         <published>2014-10-22T20:57:00+08:00</published>
-        <updated>2016-08-25T00:41:46+08:00</updated>
+        <updated>2016-08-03T17:07:19+08:00</updated>
         <id>http://terryoy.github.io/2014/10/common-git-commands.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
@@ -1398,7 +1461,7 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/08/learning-linux-c-part-1.html"/>
         <published>2014-08-20T23:34:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2014/08/learning-linux-c-part-1.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
@@ -1446,7 +1509,7 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/06/create-database-mysql.html"/>
         <published>2014-06-04T14:40:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
+        <updated>2016-01-03T21:36:38+08:00</updated>
         <id>http://terryoy.github.io/2014/06/create-database-mysql.html</id>
         <category scheme="http://terryoy.github.io/tag/#database" term="database" label="database" />
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
@@ -1479,187 +1542,6 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
 <p>Exporting in command line is similar, using &ldquo;mysqldump&rdquo; command:</p>
 <div class="highlight"><pre>mysqldump -u dbuser -p dbname &gt; dbdump.sql
 </pre></div>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[Use Ctypes to Wrap C Libraries in Python]]></title>
-        <author><name>terryoy</name></author>
-        <link href="http://terryoy.github.io/2014/03/using-ctypes-to-wrap-c-library.html"/>
-        <published>2014-03-23T07:57:00+08:00</published>
-        <updated>2016-05-15T19:23:55+08:00</updated>
-        <id>http://terryoy.github.io/2014/03/using-ctypes-to-wrap-c-library.html</id>
-        <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
-        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
-        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
-            <![CDATA[ <p>In Linux, many libraries are provided in C dll with headers. It is not easy to try with the features if you&#39;re a Python programmer, unless you know how to work with C library i Python.</p>
-<p>There is a tool to do it, which is <em><strong>ctypes</strong></em>. You can operate on data types, structs, pointers and functions with it. Now here is a brief guide on how to do it. <a href="http://stackoverflow.com/questions/1942298/wrapping-a-c-library-in-python-c-cython-or-ctypes">Here</a> is also a comparison of ctypes with other solutions.</p>
-
-<h3 id="toc_0">1. Loading Libraries</h3>
-<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">ctypes</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">libc</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="s">&#39;libc.so.6&#39;</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">libc</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span>
-<span class="mi">1804289383</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">libc</span><span class="o">.</span><span class="n">atoi</span><span class="p">(</span><span class="s">&quot;12345&quot;</span><span class="p">)</span>
-<span class="mi">12345</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">libtest</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="s">&#39;./test.so&#39;</span><span class="p">)</span> <span class="c"># you can also load the shared library by location, but you cannot load static library</span>
-
-<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">ctypes.util</span> <span class="kn">import</span> <span class="n">find_library</span> <span class="c"># if you need to find the library name</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">find_library</span><span class="p">(</span><span class="s">&#39;c&#39;</span><span class="p">)</span>
-<span class="s">&#39;libc.so.6&#39;</span>
-</pre></div>
-<p>The &ldquo;ctypes.CDLL()&rdquo; method will return a class that wraps a Standard C library. Alternatively, there is a &ldquo;ctypes.WinDLL()&rdquo; method that wraps a Windows stdcall library.</p>
-<p>Ctypes assumes that all methods accept &ldquo;int&rdquo; or &ldquo;char*&rdquo; as parameters and return &ldquo;int&rdquo;, in other cases it doesn&#39;t work properly. So we&#39;ll need to define some attributes for the functions to fix that.</p>
-<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">libc</span><span class="o">.</span><span class="n">atof</span><span class="p">(</span><span class="s">&quot;12345.123&quot;</span><span class="p">)</span>
-<span class="mi">531599</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">libc</span><span class="o">.</span><span class="n">atof</span><span class="o">.</span><span class="n">restype</span><span class="o">=</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">libc</span><span class="o">.</span><span class="n">atof</span><span class="p">(</span><span class="s">&quot;12345.123&quot;</span><span class="p">)</span>
-<span class="mf">12345.123</span>
-</pre></div>
-<p>So every function in the library you can have three attributes to handle that: </p>
-
-<ul>
-<li>  <strong><em>func</em>.argtypes</strong> = [ ]       - a sequence of arguments </li>
-<li>  <strong><em>func</em>.restype</strong> = xxx        - the type of return value </li>
-<li>  <strong><em>func</em>.errcheck</strong> = method(result, func, args)        - a method that manipulates the <em>result</em>(return value) of the executed <em>func</em>, and also passed with the original <em>args</em> of this execution. </li>
-</ul>
-<p><a href="http://docs.python.org/2/library/ctypes.html#fundamental-data-types">Here</a> is a list of fundamental data types that you could use in <em>argtypes</em> and <em>restype</em>.</p>
-
-<h3 id="toc_1">2. Structures and Pointers</h3>
-<p>Since we&#39;ll need to define the parameters of the C functions, we need to have a way to work with structure and pointers.</p>
-<p>With Ctypes, we can define a structure class by deriving from <em>ctype.Structure</em>.</p>
-<div class="highlight"><pre><span class="c"># in C we have this structure:</span>
-<span class="c">#</span>
-<span class="c"># struct Point {</span>
-<span class="c">#     double x, y;</span>
-<span class="c"># }</span>
-<span class="c">#</span>
-
-<span class="c"># in Python we create this class to represent a structure</span>
-<span class="k">class</span> <span class="nc">Point</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">Structure</span><span class="p">):</span>
-    <span class="n">_fields_</span> <span class="o">=</span> <span class="p">[(</span><span class="s">&#39;x&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">),</span>
-        <span class="p">(</span><span class="s">&#39;y&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">)];</span>
-</pre></div>
-<p>If you want to define an array with ctypes, you can simply use the mutiply method:</p>
-<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">int_arr</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="o">*</span><span class="mi">4</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">int_arr</span>
-<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">__main__</span><span class="o">.</span><span class="n">c_long_Array_4</span><span class="s">&#39;&gt;</span>
-</pre></div>
-<p>We could use _ctypes.POINTER() to define the pointer type of ctype types(fundamental types and structures).</p>
-<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">type_int_p</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">)</span> <span class="c"># type of a pointer</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">type_int_p</span>
-<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">__main__</span><span class="o">.</span><span class="n">LP_c_long</span><span class="s">&#39;&gt;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">type_int_pp</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">int_p</span><span class="p">)</span> <span class="c"># type of a pointer of the integer pointer</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">type_int_pp</span>
-<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">__main__</span><span class="o">.</span><span class="n">LP_LP_c_long</span><span class="s">&#39;&gt;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">type_point_p</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">Point</span><span class="p">)</span> <span class="c"># type of a pointer of the structure Point above</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">type_point_p</span>
-<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">__main__</span><span class="o">.</span><span class="n">LP_Point</span><span class="s">&#39;&gt;</span>
-</pre></div>
-
-<h3 id="toc_2">3. Initialize Variables and Pass Arguments to C</h3>
-<p>The ctypes data types all have a kind of construction method to initialize variables with values. The instance will be a ctype object with the respective value as defined in C.</p>
-<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">ival</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>    <span class="c"># integer value</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">ival</span>
-<span class="n">c_long</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">ival</span><span class="o">.</span><span class="n">value</span>      <span class="c"># you can convert it&#39;s value to a python value by the &quot;value&quot; attribute</span>
-<span class="mi">100</span>
-
-<span class="o">&gt;&gt;&gt;</span> <span class="n">dval</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">(</span><span class="mf">200.25</span><span class="p">)</span>  <span class="c"># double value</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">dval</span>
-<span class="n">c_double</span><span class="p">(</span><span class="mf">200.25</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">dval</span><span class="o">.</span><span class="n">value</span>
-<span class="mf">200.25</span>
-
-<span class="o">&gt;&gt;&gt;</span> <span class="n">sval</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_char_p</span><span class="p">(</span><span class="s">&quot;Hello, world!&quot;</span><span class="p">)</span>     <span class="c"># string value</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">sval</span>    <span class="c"># you can see the value is representing a pointer address instead of string</span>
-<span class="n">c_char_p</span><span class="p">(</span><span class="mi">3071487276</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">sval</span><span class="o">.</span><span class="n">value</span>
-<span class="s">&#39;Hello, world!&#39;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">libc</span><span class="o">.</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">sval</span><span class="p">)</span> <span class="c"># but it can be printed as string with &quot;printf&quot; in C</span>
-<span class="n">Hello</span><span class="p">,</span> <span class="n">world</span><span class="err">!</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">ret</span>     <span class="c"># (the return value of &quot;printf&quot; is the printed string length)</span>
-<span class="mi">13</span>
-
-<span class="o">&gt;&gt;&gt;</span> <span class="n">structval</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>     <span class="c"># the Point structure defined above, you can also initialize like &quot;Point(0, 10)&quot;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">structval</span>
-<span class="o">&lt;</span><span class="n">__main__</span><span class="o">.</span><span class="n">Point</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0xb74466a4</span><span class="o">&gt;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="p">(</span><span class="n">structval</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">structval</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
-<span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
-</pre></div>
-<p>When we pass objects to functions, we can pass by <em>pointer</em>. In this case we&#39;ll have two companion methods <em>byref()</em> and <em>pointer()</em> that works with pointers. Also, for a pointer object you can access it&#39;s value by the <em>contents</em> attribute.
-The <em>byref()</em> method create a parameter object of pointer, which you can only use in functions(notice the &ldquo;cparam&rdquo; object), while the <em>pointer()</em> method returns a pointer object which you can manipulate later.</p>
-<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">intc</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">byref</span><span class="p">(</span><span class="n">intc</span><span class="p">)</span>      <span class="c"># the byref() returns a parameter object that only can be used as a foreign function&#39;s parameter(notice a &quot;cparam&quot; object). </span>
-<span class="o">&lt;</span><span class="n">cparam</span> <span class="s">&#39;P&#39;</span> <span class="p">(</span><span class="mh">0xb7124a70</span><span class="p">)</span><span class="o">&gt;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">intp</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">pointer</span><span class="p">(</span><span class="n">intc</span><span class="p">)</span>     <span class="c"># the pointer() returns a pointer object that you can further work with it</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">intp</span>
-<span class="o">&lt;</span><span class="n">__main__</span><span class="o">.</span><span class="n">LP_c_long</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0xb713392c</span><span class="o">&gt;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">intp</span><span class="o">.</span><span class="n">contents</span>   <span class="c"># access the data to which the pointer points</span>
-<span class="n">c_long</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">intp</span><span class="o">.</span><span class="n">contents</span><span class="o">.</span><span class="n">value</span>
-<span class="mi">100</span>
-</pre></div>
-
-<h3 id="toc_3">4. Accessing Structure and Variables from C</h3>
-<p>We need not only passing data to C functions, but also getting some pre-defined data structure or variables in C. So let&#39;s talk about a few things you want to import from C.</p>
-<p>For <strong>enums</strong> in C, you&#39;ll need to define them again in Python. Since it&#39;s a representative of basic data types like integer, it&#39;s easy to act in the same way as in C.</p>
-<p>For <strong>Structures</strong>, you&#39;ll need to define the similar classes, derived from ctypes. Structure, and declare the <code>_fields_</code> attributes as mentioned above in Section 2. After that, you can use <strong>in_dll()</strong> method to load an object within the library. (BTW, If you don&#39;t need to access the attribute of that object, it&#39;s not necessary to set the <code>_fields_</code> attribute.)</p>
-<div class="highlight"><pre><span class="n">libaa</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="s">&#39;libaa.so.1&#39;</span><span class="p">)</span> <span class="c"># the ascii-art lib</span>
-
-<span class="k">class</span> <span class="nc">RenderSettings</span><span class="p">(</span><span class="n">Structure</span><span class="p">):</span>
-    <span class="n">_pack_</span> <span class="o">=</span> <span class="mi">4</span>
-    <span class="n">_fields_</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="p">(</span><span class="s">&#39;brightness&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">),</span>
-        <span class="p">(</span><span class="s">&#39;contrast&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">),</span>
-        <span class="p">(</span><span class="s">&#39;gamma&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_float</span><span class="p">),</span>
-        <span class="p">(</span><span class="s">&#39;dithering_mode&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">),</span>
-        <span class="p">(</span><span class="s">&#39;inversion&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">),</span>
-        <span class="p">(</span><span class="s">&#39;random&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">),</span>
-    <span class="p">]</span>
-
-<span class="n">DEFAULT_RENDER_SETTINGS</span> <span class="o">=</span> <span class="n">RenderSettings</span><span class="o">.</span><span class="n">in_dll</span><span class="p">(</span><span class="n">libaa</span><span class="p">,</span> <span class="s">&#39;aa_defrenderparams&#39;</span><span class="p">)</span>
-</pre></div>
-<p>Sometimes the Structure object is a constant which you cannot change any value of it, it&#39;s better to have a <strong>clone()</strong> method to make a copy to chang it. The <strong>clone()</strong> method defined below can act as </p>
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">Structure</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">Structure</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">clone</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)()</span>
-        <span class="n">ctypes</span><span class="o">.</span><span class="n">pointer</span><span class="p">(</span><span class="n">clone</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span>
-        <span class="k">return</span> <span class="n">clone</span>
-</pre></div>
-<p>For <strong>basic data types</strong>, it&#39;s the same way to use the in_dll() method in the simple types. (e.g. &ldquo;ctypes.c_int.in_dll(libaa, &#39;some_int&#39;)&rdquo;)</p>
-
-<h3 id="toc_4">5. Playing with Functions</h3>
-<p>In Section 1, we already talked about how to import the functions from C and use them. However there are a few things to remember. Below is an example of calling the functions. </p>
-
-<ul>
-<li>First, you should declare all the related types and structures in the function&#39;s arguments and return value. </li>
-<li>Second, basic types can be auto converted into ctypes types, but for those are not, ensure they are in ctypes form.</li>
-<li>Third, remember to use ctypes.pointer() or ctypes.byref() for passing the pointer arguments.</li>
-</ul>
-<div class="highlight"><pre><span class="c"># it&#39;s a good practice to declare the structures and the functions at first like in C </span>
-
-<span class="c"># ... </span>
-<span class="c"># declare Structures </span>
-<span class="k">class</span> <span class="nc">Context</span><span class="p">(</span><span class="n">Structure</span><span class="p">):</span>
-    <span class="k">pass</span>
-
-<span class="n">ContextPtr</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">Context</span><span class="p">)</span>
-
-<span class="c"># ... </span>
-<span class="c"># declare functions</span>
-<span class="n">aa_init</span> <span class="o">=</span> <span class="n">libaa</span><span class="o">.</span><span class="n">aa_init</span>
-<span class="n">aa_init</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">DriverPtr</span><span class="p">,</span> <span class="n">HardwareSettingsPtr</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">]</span> <span class="c"># parameters are (pointer of struct &quot;Driver&quot;, pointer of struct HardwareSetting, and a pointer of &quot;void&quot;)</span>
-<span class="n">aa_init</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ContextPtr</span> 
-
-<span class="n">aa_fastrender</span> <span class="o">=</span> <span class="n">libaa</span><span class="o">.</span><span class="n">aa_fastrender</span>
-<span class="n">aa_fastrender</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ContextPtr</span><span class="p">]</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">]</span> 
-
-<span class="c"># calling aa_init() and aa_fastrender()</span>
-<span class="n">context</span> <span class="o">=</span> <span class="n">aa_init</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">pointer</span><span class="p">(</span><span class="n">aa_mem_d</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">pointer</span><span class="p">(</span><span class="n">settings</span><span class="p">),</span> <span class="bp">None</span><span class="p">)</span>
-<span class="c"># ...</span>
-<span class="n">aa_fastrender</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span><span class="n">height</span><span class="p">)</span>
-</pre></div>
-<p>By now, you should have the knowledge to play with C libraries. Just start playing around with those libraries you can find in /usr/lib and /usr/include. Enjoy!</p>
 ]]>
         </content>
     </entry>
