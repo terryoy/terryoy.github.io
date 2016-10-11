@@ -72,3 +72,17 @@ References:
 #### 3,2 Type Script
 
 
+### 4. Vocabulary
+
+There are some terms in web front-end development that is not meaning obviously, so I collect some of them here.
+
+
+ * [**Polyfill**](https://en.wikipedia.org/wiki/Polyfill) - a polyfill is cod e that implements a feature on web browsers that do *not* support it. It is a *shim* for a browser API.
+
+ * [**Shim**](https://en.wikipedia.org/wiki/Shim_\(computing\)) - A small library that transparently intercepts API calls. This term can be  commonly used to support an old API in a newer environment, or a new API in an older environment, or running programs on a different platform than they were developed for.
+
+
+
+
+
+

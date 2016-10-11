@@ -3,14 +3,14 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/guides/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/guides/" />
-    <updated>2016-09-19T23:53:53+08:00</updated>
+    <updated>2016-10-11T10:24:48+08:00</updated>
     <id>http://terryoy.github.io/guides/</id>
     <entry>
         <title type="html"><![CDATA[Frontend Workflow Toolbox Summary]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/09/frontend-workflow-summary.html"/>
         <published>2016-09-18T23:45:00+08:00</published>
-        <updated>2016-09-19T23:53:53+08:00</updated>
+        <updated>2016-10-11T10:24:48+08:00</updated>
         <id>http://terryoy.github.io/2016/09/frontend-workflow-summary.html</id>
         <category scheme="http://terryoy.github.io/tag/#frontend" term="frontend" label="frontend" />
         <category scheme="http://terryoy.github.io/tag/#study" term="study" label="study" />
@@ -66,6 +66,14 @@
 <h4 id="toc_7">3.1 Coffee Script</h4>
 
 <h4 id="toc_8">3,2 Type Script</h4>
+
+<h3 id="toc_9">4. Vocabulary</h3>
+<p>There are some terms in web front-end development that is not meaning obviously, so I collect some of them here.</p>
+
+<ul>
+<li><p><a href="https://en.wikipedia.org/wiki/Polyfill"><strong>Polyfill</strong></a> - a polyfill is cod e that implements a feature on web browsers that do <em>not</em> support it. It is a <em>shim</em> for a browser API.</p></li>
+<li><p><a href="https://en.wikipedia.org/wiki/Shim_(computing)"><strong>Shim</strong></a> - A small library that transparently intercepts API calls. This term can be  commonly used to support an old API in a newer environment, or a new API in an older environment, or running programs on a different platform than they were developed for.</p></li>
+</ul>
 ]]>
         </content>
     </entry><entry>
