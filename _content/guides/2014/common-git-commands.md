@@ -206,7 +206,7 @@ There are two types of resetting the branch to a previous state: 1. delete unpub
 Using ```git reset``` can help resetting current state.
 
 ```bash
-# delete the unpublished local commits and restore to the previous commit state
+# delete the local commits and restore to the previous commit state
 $ git reset --hard <commit>
 
 # if you have local uncommit changes, you should save as stash first
@@ -227,6 +227,15 @@ $ git revert e647032...cee8902
 $ git revert HEAD~2...HEAD
 
 
+```
+
+<font color="red">If you've really push something wrong to github, or merging with a wrong branch which you want to recover. You could do th below things with specifc care:</font>
+
+```bash
+# (it's strongly recommended to create a backup branch first!!!)
+# **this line recover back to a specific commit, and all the later commits will be lost!!!
+$ git reset --hard commit
+$ git push --force origin <branch_name>
 ```
 
 [Ref to git revert](http://stackoverflow.com/questions/4114095/how-to-revert-git-repository-to-a-previous-commit).

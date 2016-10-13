@@ -3,14 +3,14 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/guides/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/guides/" />
-    <updated>2016-10-11T10:24:48+08:00</updated>
+    <updated>2016-10-13T20:04:14+08:00</updated>
     <id>http://terryoy.github.io/guides/</id>
     <entry>
         <title type="html"><![CDATA[Frontend Workflow Toolbox Summary]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/09/frontend-workflow-summary.html"/>
         <published>2016-09-18T23:45:00+08:00</published>
-        <updated>2016-10-11T10:24:48+08:00</updated>
+        <updated>2016-10-11T14:24:27+08:00</updated>
         <id>http://terryoy.github.io/2016/09/frontend-workflow-summary.html</id>
         <category scheme="http://terryoy.github.io/tag/#frontend" term="frontend" label="frontend" />
         <category scheme="http://terryoy.github.io/tag/#study" term="study" label="study" />
@@ -35,6 +35,7 @@
 <p>Reference: <a href="https://github.com/substack/browserify-handbook#introduction">github.com/substack/browserify-handbook#introduction</a></p>
 
 <h4 id="toc_3">2.2 Gulp</h4>
+<p>If you want to do something quick and dirty, just checkout the Gulp Recipes and copy the the code you want. The Recipes have prepare many examples of small tasks for you to reference.</p>
 <p>References:</p>
 
 <ul>
@@ -778,7 +779,7 @@ Program Library HOWTO <br/>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/10/common-git-commands.html"/>
         <published>2014-10-22T20:57:00+08:00</published>
-        <updated>2016-08-03T17:07:19+08:00</updated>
+        <updated>2016-10-13T20:04:14+08:00</updated>
         <id>http://terryoy.github.io/2014/10/common-git-commands.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
@@ -939,7 +940,7 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
 <h3 id="toc_8">9. Reverting commits</h3>
 <p>There are two types of resetting the branch to a previous state: 1. delete unpublished commits locally, 2. Undo published commits with new commits.</p>
 <p>Using <code>git reset</code> can help resetting current state.</p>
-<div class="highlight"><pre><span class="c"># delete the unpublished local commits and restore to the previous commit state</span>
+<div class="highlight"><pre><span class="c"># delete the local commits and restore to the previous commit state</span>
 <span class="nv">$ </span>git reset --hard &lt;commit&gt;
 
 <span class="c"># if you have local uncommit changes, you should save as stash first</span>
@@ -955,6 +956,12 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
 <span class="nv">$ </span>git revert e647032...cee8902
 <span class="c"># cancel last two commits</span>
 <span class="nv">$ </span>git revert HEAD~2...HEAD
+</pre></div>
+<p><font color="red">If you&#39;ve really push something wrong to github, or merging with a wrong branch which you want to recover. You could do th below things with specifc care:</font></p>
+<div class="highlight"><pre><span class="c"># (it&#39;s strongly recommended to create a backup branch first!!!)</span>
+<span class="c"># **this line recover back to a specific commit, and all the later commits will be lost!!!</span>
+<span class="nv">$ </span>git reset --hard commit
+<span class="nv">$ </span>git push --force origin &lt;branch_name&gt;
 </pre></div>
 <p><a href="http://stackoverflow.com/questions/4114095/how-to-revert-git-repository-to-a-previous-commit">Ref to git revert</a>.</p>
 ]]>

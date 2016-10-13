@@ -37,8 +37,7 @@ Reference: <https://github.com/substack/browserify-handbook#introduction>
 #### 2.2 Gulp
 
 
-
-
+If you want to do something quick and dirty, just checkout the Gulp Recipes and copy the the code you want. The Recipes have prepare many examples of small tasks for you to reference.
 
 References:
 
