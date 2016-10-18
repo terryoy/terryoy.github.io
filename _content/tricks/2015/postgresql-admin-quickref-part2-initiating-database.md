@@ -63,3 +63,46 @@ host    all             all             ::1/128                 md5
 $ sudo service postgresql restart
 
 ```
+
+### 3. MIgrating Data
+
+When migrating database, usually we use migrate files with SQL and CSV format. Since SQL scripts are probably not compatible with different database provider(e.g. postgresql vs mysql), sometimes it's easier to parse data with CSV format, while SQL files are convenient to dump and import schemas between postgresql databases.
+
+#### 3.1 Export data to CSV files
+
+Note: the `=#` prefix is the prompt of `psql` command line tools.
+
+```sql
+--Export all records from table to CSV file
+=# \copy my_table to '/path/to/table.csv' csv header;
+--OR
+=# COPY my_table TO '/path/to/table.csv' DELIMITER ',' CSV HEADER;
+
+--Export a custom mquery to csv
+=# COPY (select * from public.user) TO '/path/to/user.csv' CSV HEADER;
+
+
+```
+
+### 3.2 Export schema and data to SQL files
+
+We'll use `pg_dump` to create postgresql export files.
+
+```bash
+# sometimes you need to specify which database version to use, due to the version mismatch of pg_dump program
+$ pg_dump --cluster 9.3/main <...other stuffs>
+
+
+# export schema with "-s" or "--schema-only"
+$ pg_dump -s <db_name> > export_schhema.sql
+$ pg_dump --schema-only <db_name> > export_schema.sql
+
+
+# export data
+$ pg_dump -a <db_name> > export_data.sql
+$ pg_dump --data-only <db_name> > export_data.sql
+
+
+
+```
+

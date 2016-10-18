@@ -3,7 +3,7 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/tricks/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/tricks/" />
-    <updated>2016-08-31T10:42:42+08:00</updated>
+    <updated>2016-10-18T14:00:10+08:00</updated>
     <id>http://terryoy.github.io/tricks/</id>
     <entry>
         <title type="html"><![CDATA[A Short Reference of Python Logging]]></title>
@@ -461,7 +461,7 @@ Common Name <span class="o">(</span>e.g. server FQDN or YOUR name<span class="o"
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/02/postgresql-admin-quickref-part2-initiating-database.html"/>
         <published>2015-02-21T16:40:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
+        <updated>2016-10-18T14:00:10+08:00</updated>
         <id>http://terryoy.github.io/2015/02/postgresql-admin-quickref-part2-initiating-database.html</id>
         <category scheme="http://terryoy.github.io/tag/#postgresql" term="postgresql" label="postgresql" />
         <category scheme="http://terryoy.github.io/tag/#database" term="database" label="database" />
@@ -507,6 +507,36 @@ host    all             all             ::1/128                 md5
 
 
 <span class="nv">$ </span>sudo service postgresql restart
+</pre></div>
+
+<h3 id="toc_2">3. MIgrating Data</h3>
+<p>When migrating database, usually we use migrate files with SQL and CSV format. Since SQL scripts are probably not compatible with different database provider(e.g. postgresql vs mysql), sometimes it&#39;s easier to parse data with CSV format, while SQL files are convenient to dump and import schemas between postgresql databases.</p>
+
+<h4 id="toc_3">3.1 Export data to CSV files</h4>
+<p>Note: the <code>=#</code> prefix is the prompt of <code>psql</code> command line tools.</p>
+<div class="highlight"><pre><span class="c1">--Export all records from table to CSV file</span>
+<span class="o">=#</span> <span class="err">\</span><span class="k">copy</span> <span class="n">my_table</span> <span class="k">to</span> <span class="s1">&#39;/path/to/table.csv&#39;</span> <span class="n">csv</span> <span class="n">header</span><span class="p">;</span>
+<span class="c1">--OR</span>
+<span class="o">=#</span> <span class="k">COPY</span> <span class="n">my_table</span> <span class="k">TO</span> <span class="s1">&#39;/path/to/table.csv&#39;</span> <span class="k">DELIMITER</span> <span class="s1">&#39;,&#39;</span> <span class="n">CSV</span> <span class="n">HEADER</span><span class="p">;</span>
+
+<span class="c1">--Export a custom mquery to csv</span>
+<span class="o">=#</span> <span class="k">COPY</span> <span class="p">(</span><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="k">public</span><span class="p">.</span><span class="k">user</span><span class="p">)</span> <span class="k">TO</span> <span class="s1">&#39;/path/to/user.csv&#39;</span> <span class="n">CSV</span> <span class="n">HEADER</span><span class="p">;</span>
+</pre></div>
+
+<h3 id="toc_4">3.2 Export schema and data to SQL files</h3>
+<p>We&#39;ll use <code>pg_dump</code> to create postgresql export files.</p>
+<div class="highlight"><pre><span class="c"># sometimes you need to specify which database version to use, due to the version mismatch of pg_dump program</span>
+<span class="nv">$ </span>pg_dump --cluster 9.3/main &lt;...other stuffs&gt;
+
+
+<span class="c"># export schema with &quot;-s&quot; or &quot;--schema-only&quot;</span>
+<span class="nv">$ </span>pg_dump -s &lt;db_name&gt; &gt; export_schhema.sql
+<span class="nv">$ </span>pg_dump --schema-only &lt;db_name&gt; &gt; export_schema.sql
+
+
+<span class="c"># export data</span>
+<span class="nv">$ </span>pg_dump -a &lt;db_name&gt; &gt; export_data.sql
+<span class="nv">$ </span>pg_dump --data-only &lt;db_name&gt; &gt; export_data.sql
 </pre></div>
 ]]>
         </content>
