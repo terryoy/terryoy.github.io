@@ -3,9 +3,84 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2016-10-18T14:00:10+08:00</updated>
+    <updated>2016-10-23T01:12:02+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
+        <title type="html"><![CDATA[Working with Grub2 in Linux]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2016/10/working-with-grub2-linux.html"/>
+        <published>2016-10-21T10:21:00+08:00</published>
+        <updated>2016-10-23T01:12:02+08:00</updated>
+        <id>http://terryoy.github.io/2016/10/working-with-grub2-linux.html</id>
+        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <p><strong>Grub2</strong>(GRUB: the GRand Unified Bootloader) is the main bootloader in Debian/Ubuntu distribution. I have always wanted to know the details to change or fix the booting process. So I did a research and make a note here.</p>
+
+<h3 id="toc_0">1. Overview</h3>
+<p>Normally we should use the util <code>update-grub</code> to update the grub2 boot entries. In grub(the older, not grub2), we need to update the boot menu file <code>/boot/grub/menu.lst</code> carefully to manage the entries. In this case, it could be easy to make mistakes, or inconvenient while editing the file and get required information at the same time. </p>
+<p>In grub2 with <code>update-grub</code>, this process can be managed in updating a general setting file and a list of scripts that generate entries. These files are:</p>
+
+<ul>
+<li><code>/etc/default/grub</code>, general grub settings,</li>
+<li><code>/etc/grub.d/*</code>, this directory contains a list of executable scripts and will be processed in order. You can add the files according to the convention:
+
+<ul>
+<li>&ldquo;00_*&rdquo;: It is reserved for 00_header.</li>
+<li>&ldquo;10_*&rdquo;: Native boot entries.</li>
+<li>&ldquo;20_*&rdquo;: Third party apps (e.g. memtest86+).</li>
+</ul></li>
+</ul>
+<p>The number namespace in-between is configuratble by system installer and/or administrator. The order of other number will be reflected in the menu if you set 01_otheros, 11_otheros, etc.</p>
+<p>For example, I have below config files in <code>/etc/init.d/</code> for a ubuntu installation:</p>
+
+<pre><code>00_header
+05_debian_theme
+10_linux
+20_linux_gen
+30_os-prober
+30_uefi_firmware
+40_custom
+41_custom</code></pre>
+
+<h3 id="toc_1">2. Clean up Grub2 Menu</h3>
+<p>After a release or a kernel upgrade, you may usually find unuseful entries in the boot menu, which are mainly for previous state recovery. So here let&#39;s see how to remove the unuseful entries.</p>
+<p>First are the unnecessary kernel entries. They exist because you install more older kernel versions lying around on your machine. So you can check if there are more than one <code>linux-headers-&lt;version&gt;</code> entry and <code>linux-image-&lt;version&gt;</code> entry, then remove the unnecessary package via package manager.</p>
+<p>Second, unwanted entries in <code>/etc/init.d/</code> such as memtest86+. Disabling them is very easy, just make them not executable then it&#39;s done.</p>
+<div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd</span> /etc/init.d/
+<span class="nv">$ </span>sudo chmod -x 20_memtest86+
+</pre></div>
+<p>And the last thing is to update grub:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo update-grub
+</pre></div>
+<p>Sometimes if you just want to edit some of the boot menu item, you could lookup the <code>menuentry</code> in the file and edit the content. For example, there is a <code>30_os-prober</code> file in <code>/etc/grub.d/</code>, which checks if there are other OS exists on local drives and create boot entries for them. You can see the similar content in each OS part and using <code>cat</code> and <code>menuentry</code> to add an entry to the grub config.</p>
+
+<h2 id="toc_2">e 3. Grub2 Settings</h2>
+<p>In the general setting file <code>/etc/default/grub</code>, there are some basic settings that you could change.</p>
+
+<pre><code># (template of /etc/default/grub)
+# 1. Default boot entry, can be the index or the title of the boot item; SAVEDEFAULT option let you save every last choice as next default
+GRUB_DEFAULT=0
+GRUB_SAVEDEFAULT=true
+
+#l2. Go directly to the default boot entry unless you press 'shift' or 'esc' at startup. The &quot;QUIET&quot; option will display the count down of the hidden timeout before going to boot, which you can use a chance for a boot splash
+GRUB_HIDDEN_TIMEOUT=0
+GRUB_HIDDEN_TIMEOUT_QUIET=true
+
+# 3. Grub background, just simply set the image path(supports '.png', '.tga', '.jpg' or '.jpeg')
+GRUB_BACKGROUND='/path/to/image.jpg'</code></pre>
+<p>Ref: (run as shell cmd) <code>info -f grub -s &#39;Simple configuration&#39;</code></p>
+
+<h3 id="toc_3">4. Grub2 tools</h3>
+
+<h3 id="toc_4">Reference</h3>
+
+<h1 id="toc_5"></h1>
+<p>The GRUB manual: (run in linux shell) <code>info grub</code></p>
+<p>Clean up Grub2 entries: <a href="http://www.howtogeek.com/howto/17787/clean-up-the-new-ubuntu-grub2-boot-menu/">www.howtogeek.com/howto/17787/clean-up-the-new-ubuntu-grub2-boot-menu/</a>. (There is also a link to an article for the old <code>grub</code>)</p>
+<p>How to Configure Grub2 boot loader settings: <a href="http://www.howtogeek.com/196655/how-to-configure-the-grub2-boot-loaders-settings/">www.howtogeek.com/196655/how-to-configure-the-grub2-boot-loaders-settings/</a></p>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[Frontend Workflow Toolbox Summary]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/09/frontend-workflow-summary.html"/>
@@ -1547,46 +1622,6 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
 <li>&ldquo;c&rdquo;, continue running until finish or meets the next break point</li>
 <li>&ldquo;p [variable]&rdquo;, print the instant value of a variable</li>
 </ul>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[Creating A New Database in MySql]]></title>
-        <author><name>terryoy</name></author>
-        <link href="http://terryoy.github.io/2014/06/create-database-mysql.html"/>
-        <published>2014-06-04T14:40:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
-        <id>http://terryoy.github.io/2014/06/create-database-mysql.html</id>
-        <category scheme="http://terryoy.github.io/tag/#database" term="database" label="database" />
-        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
-        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
-            <![CDATA[ <h3 id="toc_0">1. Create the database</h3>
-<div class="highlight"><pre><span class="k">CREATE</span> <span class="k">DATABASE</span> <span class="n">mytestdb</span><span class="p">;</span>
-<span class="k">show</span> <span class="n">databases</span><span class="p">;</span>
-</pre></div>
-
-<h3 id="toc_1">2. Create a user and grant access</h3>
-<div class="highlight"><pre><span class="k">CREATE</span> <span class="k">USER</span> <span class="s1">&#39;myuser&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span> <span class="n">IDENTIFIED</span> <span class="k">BY</span> <span class="s1">&#39;my_password&#39;</span><span class="p">;</span>
-
-<span class="k">GRANT</span> <span class="k">ALL</span> <span class="k">PRIVILEGES</span> <span class="k">ON</span> <span class="n">mytestdb</span><span class="p">.</span><span class="o">*</span> <span class="k">TO</span> <span class="s1">&#39;myuser&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="p">;</span> 
-
-<span class="c1">-- or alternatively, with more powerful access</span>
-<span class="k">GRANT</span> <span class="k">ALL</span> <span class="k">PRIVILEGES</span> <span class="k">ON</span> <span class="n">mytestdb</span><span class="p">.</span><span class="o">*</span> <span class="k">TO</span> <span class="s1">&#39;admin&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span> <span class="k">WITH</span> <span class="k">GRANT</span> <span class="k">OPTION</span><span class="p">;</span>
-</pre></div>
-
-<h3 id="toc_2">3. Login with the User</h3>
-<div class="highlight"><pre>mysql -u myuser -p mytestdb
-</pre></div>
-
-<h3 id="toc_3">4. Import a SQL dump into database</h3>
-<div class="highlight"><pre><span class="n">USE</span> <span class="n">mytestdb</span><span class="p">;</span>
-<span class="k">source</span> <span class="n">db_dump</span><span class="p">.</span><span class="k">sql</span><span class="p">;</span>
-</pre></div>
-<p>Or you can use a command line:</p>
-<div class="highlight"><pre>mysql -u dbuser -p <span class="o">[</span>-h host<span class="o">]</span> dbname &lt; dbdump.sql
-</pre></div>
-<p>Exporting in command line is similar, using &ldquo;mysqldump&rdquo; command:</p>
-<div class="highlight"><pre>mysqldump -u dbuser -p dbname &gt; dbdump.sql
-</pre></div>
 ]]>
         </content>
     </entry>
