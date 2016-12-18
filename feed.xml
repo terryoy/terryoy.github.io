@@ -3,14 +3,14 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2016-10-23T01:12:02+08:00</updated>
+    <updated>2016-12-18T14:35:17+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
         <title type="html"><![CDATA[Working with Grub2 in Linux]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/10/working-with-grub2-linux.html"/>
         <published>2016-10-21T10:21:00+08:00</published>
-        <updated>2016-10-23T01:12:02+08:00</updated>
+        <updated>2016-12-17T23:57:02+08:00</updated>
         <id>http://terryoy.github.io/2016/10/working-with-grub2-linux.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -85,7 +85,7 @@ GRUB_BACKGROUND='/path/to/image.jpg'</code></pre>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/09/frontend-workflow-summary.html"/>
         <published>2016-09-18T23:45:00+08:00</published>
-        <updated>2016-10-11T14:24:27+08:00</updated>
+        <updated>2016-12-17T23:57:02+08:00</updated>
         <id>http://terryoy.github.io/2016/09/frontend-workflow-summary.html</id>
         <category scheme="http://terryoy.github.io/tag/#frontend" term="frontend" label="frontend" />
         <category scheme="http://terryoy.github.io/tag/#study" term="study" label="study" />
@@ -157,7 +157,7 @@ GRUB_BACKGROUND='/path/to/image.jpg'</code></pre>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/06/put-linux-into-old-pc-3-localization.html"/>
         <published>2016-06-28T21:03:00+08:00</published>
-        <updated>2016-09-18T23:43:37+08:00</updated>
+        <updated>2016-12-17T23:57:02+08:00</updated>
         <id>http://terryoy.github.io/2016/06/put-linux-into-old-pc-3-localization.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#study" term="study" label="study" />
@@ -220,7 +220,7 @@ ibus-daemon -drx
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/05/short-ref-python-logging.html"/>
         <published>2016-05-26T19:55:00+08:00</published>
-        <updated>2016-06-27T10:46:42+08:00</updated>
+        <updated>2016-12-17T23:57:02+08:00</updated>
         <id>http://terryoy.github.io/2016/05/short-ref-python-logging.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -346,7 +346,7 @@ ibus-daemon -drx
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/05/put-linux-into-old-pc-2-desktop.html"/>
         <published>2016-05-18T09:47:00+08:00</published>
-        <updated>2016-08-31T10:42:42+08:00</updated>
+        <updated>2016-12-17T23:57:02+08:00</updated>
         <id>http://terryoy.github.io/2016/05/put-linux-into-old-pc-2-desktop.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#study" term="study" label="study" />
@@ -449,7 +449,7 @@ ibus-daemon -drx
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/05/put-linux-into-old-pc-1-hardware.html"/>
         <published>2016-05-15T21:04:00+08:00</published>
-        <updated>2016-09-18T23:43:37+08:00</updated>
+        <updated>2016-12-17T23:57:02+08:00</updated>
         <id>http://terryoy.github.io/2016/05/put-linux-into-old-pc-1-hardware.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#study" term="study" label="study" />
@@ -592,7 +592,7 @@ iface wlan0 inet dhcp
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/04/git-ssh-config.html"/>
         <published>2016-04-17T16:11:00+08:00</published>
-        <updated>2016-08-31T10:42:42+08:00</updated>
+        <updated>2016-12-17T23:57:02+08:00</updated>
         <id>http://terryoy.github.io/2016/04/git-ssh-config.html</id>
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
         <category scheme="http://terryoy.github.io/tag/#virtualbox" term="virtualbox" label="virtualbox" />
@@ -639,7 +639,7 @@ Host github.com
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/02/ubuntu-desktop-sharing-to-osx.html"/>
         <published>2016-02-26T10:52:00+08:00</published>
-        <updated>2016-02-26T11:11:36+08:00</updated>
+        <updated>2016-04-17T16:05:43+08:00</updated>
         <id>http://terryoy.github.io/2016/02/ubuntu-desktop-sharing-to-osx.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#osx" term="osx" label="osx" />
@@ -672,7 +672,7 @@ Host github.com
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/02/vbox-cmd-tools-tricks.html"/>
         <published>2016-02-17T11:01:00+08:00</published>
-        <updated>2016-02-26T10:39:43+08:00</updated>
+        <updated>2016-12-18T14:35:17+08:00</updated>
         <id>http://terryoy.github.io/2016/02/vbox-cmd-tools-tricks.html</id>
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
         <category scheme="http://terryoy.github.io/tag/#virtualbox" term="virtualbox" label="virtualbox" />
@@ -684,6 +684,20 @@ Host github.com
 </pre></div>
 
 <h3 id="toc_1">2. Mount virtual disk on your ubuntu system</h3>
+<p>In linux, we can use a the <code>qemu-nbd</code> and <code>kpartx</code> to mount a .vdi file on a path. The <em>qemu-nbd</em> tool can create a block device to enable it to be share via NBD(Network Block Device) protocol. Then, we will use <code>kpartx</code> to create device maps from the partition tables of the device, which makes the partition of the image mountable.</p>
+<div class="highlight"><pre><span class="c"># (prerequisites] install the dependencies</span>
+<span class="nv">$ </span>sudo apt-get install qemu-utils kpartx
+
+<span class="c"># to mount the device</span>
+<span class="nv">$ </span>sudo modprob -nbd
+<span class="nv">$ </span>sudo qemu-nbd -c /dev/nbd0 &lt;vdi_file&gt;
+<span class="nv">$ </span>sudo kpartx -a /dev/nbd0
+<span class="nv">$ </span>sudo mount /dev/mapper/nbd0p1 /mnt/&lt;mount_point&gt;
+
+<span class="c"># delete the device when no longer needed</span>
+<span class="nv">$ </span>sudo umount /mnt/&lt;mount_point&gt;
+<span class="nv">$ </span>sudo qemu-nbd -d /dev/nbd0
+</pre></div>
 <p>(&hellip;to be continued)</p>
 ]]>
         </content>
@@ -692,7 +706,7 @@ Host github.com
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/02/args-kwargs-python.html"/>
         <published>2016-02-03T16:05:00+08:00</published>
-        <updated>2016-02-03T16:57:01+08:00</updated>
+        <updated>2016-04-17T16:05:43+08:00</updated>
         <id>http://terryoy.github.io/2016/02/args-kwargs-python.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -748,7 +762,7 @@ Host github.com
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/09/rpi-hardware-begin-gpio-python.html"/>
         <published>2015-09-06T20:02:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
+        <updated>2016-04-17T16:05:43+08:00</updated>
         <id>http://terryoy.github.io/2015/09/rpi-hardware-begin-gpio-python.html</id>
         <category scheme="http://terryoy.github.io/tag/#rpi" term="rpi" label="rpi" />
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
@@ -778,7 +792,7 @@ Host github.com
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/06/some-useful-linux-server-security-commands.html"/>
         <published>2015-06-27T22:31:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
+        <updated>2016-04-17T16:05:43+08:00</updated>
         <id>http://terryoy.github.io/2015/06/some-useful-linux-server-security-commands.html</id>
         <category scheme="http://terryoy.github.io/tag/#server" term="server" label="server" />
         <category scheme="http://terryoy.github.io/tag/#security" term="security" label="security" />
@@ -851,55 +865,11 @@ Jun 27 21:53:39 iZ940ou5p7nZ sudo: pam_unix<span class="o">(</span>sudo:session<
 ]]>
         </content>
     </entry><entry>
-        <title type="html"><![CDATA[Intel Edison Get Started]]></title>
-        <author><name>terryoy</name></author>
-        <link href="http://terryoy.github.io/2015/06/edison-get-started.html"/>
-        <published>2015-06-03T16:15:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
-        <id>http://terryoy.github.io/2015/06/edison-get-started.html</id>
-        <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
-        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
-            <![CDATA[ <p>This guide is about the initial steps for me starting development on Intel Edison platform.</p>
-
-<h3 id="toc_0">1. The Board and Setting Up Serial Communication</h3>
-<p>The board I use to develop with Edison is the <a href="http://www.seeedstudio.com/depot/Intel-Edison-for-Arduino-p-2149.html">Intel Edison for Arduino</a> board. So first plug the Edison module on the board; secondary, I have the 6.5V 2A DC connected to supply the power to the board (or you could power up the board with the micro-USB in the middle); third, a micro-USB wire connect to the board for serial communication.</p>
-<p>I&#39;m using minicom on Mac OSX for the serial connection, but you can also use <code>screen</code> on Mac OSX and Linux(see the reference at the end of this section).</p>
-<p>If you forgot the root password, here&#39;s the way to recover it: </p>
-
-<pre><code>* on booting, press any key to stop the process
-* on the &quot;boot&gt;&quot; command line prompt, type ```run do_ota``` to redo the flashing process.</code></pre>
-<p>Then you end up with a login using &ldquo;root&rdquo; as user name and no password.</p>
-
-<ul>
-<li><a href="https://software.intel.com/zh-cn/assembling-intel-edison-board-with-arduino-expansion-board">Reference for assembling</a></li>
-<li><a href="https://software.intel.com/zh-cn/setting-up-serial-terminal-on-system-with-linux">Reference for setting up serial on Linux</a></li>
-<li><a href="https://software.intel.com/zh-cn/setting-up-serial-terminal-on-system-with-mac-os-x">Reference for setting up serial on Mac</a></li>
-</ul>
-
-<h3 id="toc_1">2. Setting up WiFi</h3>
-<p>The next thing to do is to setup the WiFi on Edison, because a large part of the development process happens on WiFi.</p>
-<div class="highlight"><pre><span class="nv">$ </span>configure_edison --wifi
-
-<span class="c"># check the wifi status</span>
-<span class="nv">$ </span>wpa_cli status
-</pre></div>
-<p>Follow the instructions of this program to complete the scanning, choosing hotspot, and reboot with WiFi.</p>
-<p>By default, <code>ssh</code> is restricted to usb, so you need to disable the restriction by using <code>configure_edison --setup</code> to setup the device name and password. It will automatically update the file &#39;/lib/systemd/system/sshd.socket&#39; and comment out this line &ldquo;BindToDevice=usb0&rdquo;. (need reboot to take effect)</p>
-
-<ul>
-<li><a href="https://software.intel.com/zh-cn/connecting-your-intel-edison-board-using-wifi">Reference for setting up WiFi</a></li>
-</ul>
-
-<h3 id="toc_2">3. Blink the LED</h3>
-<p>(to be continued when I get the board&hellip;)</p>
-]]>
-        </content>
-    </entry><entry>
         <title type="html"><![CDATA[A Template for Program Readme on Github]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/06/program-readme-template.html"/>
         <published>2015-06-03T16:15:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
+        <updated>2016-04-17T16:05:43+08:00</updated>
         <id>http://terryoy.github.io/2015/06/program-readme-template.html</id>
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -980,11 +950,55 @@ top level routines
 ]]>
         </content>
     </entry><entry>
+        <title type="html"><![CDATA[Intel Edison Get Started]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2015/06/edison-get-started.html"/>
+        <published>2015-06-03T16:15:00+08:00</published>
+        <updated>2016-04-17T16:05:43+08:00</updated>
+        <id>http://terryoy.github.io/2015/06/edison-get-started.html</id>
+        <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <p>This guide is about the initial steps for me starting development on Intel Edison platform.</p>
+
+<h3 id="toc_0">1. The Board and Setting Up Serial Communication</h3>
+<p>The board I use to develop with Edison is the <a href="http://www.seeedstudio.com/depot/Intel-Edison-for-Arduino-p-2149.html">Intel Edison for Arduino</a> board. So first plug the Edison module on the board; secondary, I have the 6.5V 2A DC connected to supply the power to the board (or you could power up the board with the micro-USB in the middle); third, a micro-USB wire connect to the board for serial communication.</p>
+<p>I&#39;m using minicom on Mac OSX for the serial connection, but you can also use <code>screen</code> on Mac OSX and Linux(see the reference at the end of this section).</p>
+<p>If you forgot the root password, here&#39;s the way to recover it: </p>
+
+<pre><code>* on booting, press any key to stop the process
+* on the &quot;boot&gt;&quot; command line prompt, type ```run do_ota``` to redo the flashing process.</code></pre>
+<p>Then you end up with a login using &ldquo;root&rdquo; as user name and no password.</p>
+
+<ul>
+<li><a href="https://software.intel.com/zh-cn/assembling-intel-edison-board-with-arduino-expansion-board">Reference for assembling</a></li>
+<li><a href="https://software.intel.com/zh-cn/setting-up-serial-terminal-on-system-with-linux">Reference for setting up serial on Linux</a></li>
+<li><a href="https://software.intel.com/zh-cn/setting-up-serial-terminal-on-system-with-mac-os-x">Reference for setting up serial on Mac</a></li>
+</ul>
+
+<h3 id="toc_1">2. Setting up WiFi</h3>
+<p>The next thing to do is to setup the WiFi on Edison, because a large part of the development process happens on WiFi.</p>
+<div class="highlight"><pre><span class="nv">$ </span>configure_edison --wifi
+
+<span class="c"># check the wifi status</span>
+<span class="nv">$ </span>wpa_cli status
+</pre></div>
+<p>Follow the instructions of this program to complete the scanning, choosing hotspot, and reboot with WiFi.</p>
+<p>By default, <code>ssh</code> is restricted to usb, so you need to disable the restriction by using <code>configure_edison --setup</code> to setup the device name and password. It will automatically update the file &#39;/lib/systemd/system/sshd.socket&#39; and comment out this line &ldquo;BindToDevice=usb0&rdquo;. (need reboot to take effect)</p>
+
+<ul>
+<li><a href="https://software.intel.com/zh-cn/connecting-your-intel-edison-board-using-wifi">Reference for setting up WiFi</a></li>
+</ul>
+
+<h3 id="toc_2">3. Blink the LED</h3>
+<p>(to be continued when I get the board&hellip;)</p>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[Create a Root CA and Self-Sign Certificate for SSL]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/02/create-ssl-ca-root-and-self-sign.html"/>
         <published>2015-02-23T11:03:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
+        <updated>2016-04-17T16:05:43+08:00</updated>
         <id>http://terryoy.github.io/2015/02/create-ssl-ca-root-and-self-sign.html</id>
         <category scheme="http://terryoy.github.io/tag/#server" term="server" label="server" />
         <category scheme="http://terryoy.github.io/tag/#security" term="security" label="security" />
@@ -1076,7 +1090,7 @@ Common Name <span class="o">(</span>e.g. server FQDN or YOUR name<span class="o"
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/02/postgresql-admin-quickref-part2-initiating-database.html"/>
         <published>2015-02-21T16:40:00+08:00</published>
-        <updated>2016-10-18T14:00:10+08:00</updated>
+        <updated>2016-12-17T23:57:02+08:00</updated>
         <id>http://terryoy.github.io/2015/02/postgresql-admin-quickref-part2-initiating-database.html</id>
         <category scheme="http://terryoy.github.io/tag/#postgresql" term="postgresql" label="postgresql" />
         <category scheme="http://terryoy.github.io/tag/#database" term="database" label="database" />
@@ -1160,7 +1174,7 @@ host    all             all             ::1/128                 md5
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/11/jni-guide-on-android.html"/>
         <published>2014-11-27T16:06:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
+        <updated>2016-04-17T16:05:43+08:00</updated>
         <id>http://terryoy.github.io/2014/11/jni-guide-on-android.html</id>
         <category scheme="http://terryoy.github.io/tag/#cpp" term="cpp" label="cpp" />
         <category scheme="http://terryoy.github.io/tag/#android" term="android" label="android" />
@@ -1311,7 +1325,7 @@ JNI Documentation: <a href="http://docs.oracle.com/javase/1.5.0/docs/guide/jni/s
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/10/finding-information-linux-c-library.html"/>
         <published>2014-10-30T09:38:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
+        <updated>2014-11-22T17:26:56+08:00</updated>
         <id>http://terryoy.github.io/2014/10/finding-information-linux-c-library.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
@@ -1389,7 +1403,7 @@ Program Library HOWTO <br/>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/10/common-git-commands.html"/>
         <published>2014-10-22T20:57:00+08:00</published>
-        <updated>2016-10-13T20:04:14+08:00</updated>
+        <updated>2016-12-17T23:57:02+08:00</updated>
         <id>http://terryoy.github.io/2014/10/common-git-commands.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
@@ -1581,7 +1595,7 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/08/learning-linux-c-part-1.html"/>
         <published>2014-08-20T23:34:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
+        <updated>2014-11-22T17:26:56+08:00</updated>
         <id>http://terryoy.github.io/2014/08/learning-linux-c-part-1.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
