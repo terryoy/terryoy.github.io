@@ -2,7 +2,7 @@
 
 - date: 2016-10-21 10:21
 - tags: linux
-- categories: tricks
+- category: tricks
 
 -------------------
 

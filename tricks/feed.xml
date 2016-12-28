@@ -3,9 +3,182 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/tricks/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/tricks/" />
-    <updated>2016-12-28T11:11:24+08:00</updated>
+    <updated>2016-12-29T01:24:58+08:00</updated>
     <id>http://terryoy.github.io/tricks/</id>
     <entry>
+        <title type="html"><![CDATA[How I fix my Ubuntu with iRST(Intel Rapid Start Technology) Raid]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2016/12/how-i-fix-ubuntu-boot-with-irst-raid.html"/>
+        <published>2016-12-29T00:05:00+08:00</published>
+        <updated>2016-12-29T01:24:58+08:00</updated>
+        <id>http://terryoy.github.io/2016/12/how-i-fix-ubuntu-boot-with-irst-raid.html</id>
+        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <p>I have bought a Haier X3 laptop with a 500GB hard disk and a 32GB SSD with which you could use to boot and cache disk rapidly for Windows via Intel&#39;s technology. However, I&#39;m a Linux fan, so I also need to install Ubuntu on my computer.</p>
+<p>At first, the Windows 7 system was pre-installed. When I installed Ubuntu it failed at booting if the Windows 7 had enabled iRST. I cannot find any working solution to fix the Ubuntu problem at the time, so I just disabled Win 7&#39;s iRST, and then use the SSD as normal disk. Later I had a very good time with the Linux environment.</p>
+<p>Recently, I&#39;m going to refresh the whole system and make both clean again. So I give a second try to enable Windows 7&#39;s iRST and make Ubuntu boot correctly, and I succeeded after two days hard work!</p>
+<p>The root cause is that the raid management tool on Linux will assemble the partitions as RAID and then the <code>initramds</code> cannot find the partition with UUID. It fails like this:</p>
+<div class="highlight"><pre>Gave up waiting <span class="k">for </span>root device. Common problems:
+ - Boot args <span class="o">(</span>cat /proc/cmdline<span class="o">)</span>
+   - Check <span class="nv">rootdelay</span><span class="o">=</span> <span class="o">(</span>did the system <span class="nb">wait </span>long enough?<span class="o">)</span>
+   - Check <span class="nv">root</span><span class="o">=</span> <span class="o">(</span>did the system <span class="nb">wait </span><span class="k">for </span>the right device?<span class="o">)</span>
+ - Missing modules <span class="o">(</span>cat /proc/modules; ls /dev<span class="o">)</span>
+ALERT! /dev/disk/by-uuid/52152d36-9dc4-42a6-8be1-3966bf397b09 does not exist. Dropping to a shell!
+
+BusyBox v1.22.1 <span class="o">(</span>Ubuntu 1:1.22.0-15ubuntu1<span class="o">)</span> built-in shell <span class="o">(</span>ash<span class="o">)</span>
+Enter <span class="s1">&#39;help&#39;</span> <span class="k">for </span>a lost of built-in commands.
+<span class="o">(</span>initramfs<span class="o">)</span>
+</pre></div>
+<p>I have searched on the internet about it, finding that it&#39;s related to the block id that generated for the partitions are missing:</p>
+<div class="highlight"><pre><span class="o">(</span>initramfs<span class="o">)</span> blkid
+/dev/sda: <span class="nv">TYPE</span><span class="o">=</span><span class="s2">&quot;isw_raid_member&quot;</span>
+/dev/sdb: <span class="nv">TYPE</span><span class="o">=</span><span class="s2">&quot;isw_raid_member&quot;</span>
+
+<span class="o">(</span>initramfs<span class="o">)</span> ls /dev/md*
+md/  md126  md127
+</pre></div>
+<p>While the partitions of <code>/dev/sda/</code> are supposed to be recognized by UUIDs, but it is created as a software RAID device(md126), so the partitions of it cannot be accessed at boot time. I have tried to install Ubuntu via my usb disk again and again, also try to use <code>chroot</code> to update the grub record and the initramfs on the partiion, and I still don&#39;t have luck. After a long frustrating period, I suddenly come up the idea: why not just disable the raid array at boot time? </p>
+<p>After I tried the below two commands in <code>initramfs</code>, it come back to normal boot after I exit the initramfs mode!</p>
+<div class="highlight"><pre><span class="o">(</span>initramfs<span class="o">)</span> mdadm --stop --scan
+
+<span class="o">(</span>initramfs<span class="o">)</span> blockdev --rereadpt /dev/sda
+</pre></div>
+<p>The first command scan all the RAID array entries and close them. The second command re-read the partitions with UUIDs so you get the UUID entries for initramfs to boot.</p>
+<p>This time I have confident to make the solution permanent. First of all, I will need to use my Ubuntu usb boot disk to enter the shell(&#39;Go Back&#39; in the first step of the installation, then you find a choice for executing a shell) and mount the partition. (My target Ubuntu parition is /dev/sda3)</p>
+<div class="highlight"><pre><span class="nv">$ </span>mount /dev/sda3 /mnt
+<span class="nv">$ </span>mount -t proc /proc /mnt/proc
+<span class="nv">$ </span>mount -t sysfs /sys /mnt/sys
+<span class="nv">$ </span>mount -o <span class="nb">bind</span> /dev /mnt/dev
+<span class="nv">$ </span>chroot /mnt /bin/bash
+</pre></div>
+<p>This allow me to mount the partition just as I&#39;ve booted into it. Then I will update it&#39;s boot process(e.g. grub &amp; initramfs).</p>
+<div class="highlight"><pre><span class="nv">$ </span>grub-install /dev/sda
+<span class="nv">$ </span>update-grub
+
+<span class="nv">$ </span>vi /etc/initramfs-tools/script/local-top/mdadm
+mdadm --stop --scan
+blockdev --rereadpt /dev/sda
+
+<span class="nv">$ </span>chmod +x /etc/initramfs-tools/script/local-top/mdadm
+<span class="nv">$ </span>update-initramfs -u
+</pre></div>
+<p>Voilà! My Ubuntu&#39;s back!&hellip;wait, my Windows 7 has gone! It seems that GRUB has erase my Windows 7 boot entry. This doesn&#39;t stop me now. It&#39;s easy to get Windows back.</p>
+<p>I tried to run <code>update-grub</code> again, but it doesn&#39;t recognize the Windows boot entry even though os-prober is enabled. So I need to add it manually:</p>
+<div class="highlight"><pre><span class="c"># check the Windows partition UUID</span>
+<span class="nv">$ </span>blkid
+
+<span class="nv">$ </span>vi /boot/grub/grub.cfg
+<span class="c"># (look for the section of &quot;/etc/grub.d/40_custom&quot; and add the content below)</span>
+menuentry <span class="s2">&quot;Windows 7&quot;</span> <span class="o">{</span>
+    insmod ntfs
+    <span class="nb">set </span><span class="nv">root</span><span class="o">=</span><span class="s1">&#39;(hd0,1)&#39;</span>
+    search --no-floppy --fs-uuid --set 76B0EE43B0EE0987
+    chainloader +1
+<span class="o">}</span>
+</pre></div>
+<p>Then reboot. It is finally OK.</p>
+]]>
+        </content>
+    </entry><entry>
+        <title type="html"><![CDATA[Working with Grub2 in Linux]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2016/10/working-with-grub2-linux.html"/>
+        <published>2016-10-21T10:21:00+08:00</published>
+        <updated>2016-12-28T11:35:52+08:00</updated>
+        <id>http://terryoy.github.io/2016/10/working-with-grub2-linux.html</id>
+        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <p><strong>Grub2</strong>(GRUB: the GRand Unified Bootloader) is the main bootloader in Debian/Ubuntu distribution. I have always wanted to know the details to change or fix the booting process. So I did a research and make a note here.</p>
+
+<h3 id="toc_0">1. Overview</h3>
+<p>Normally we should use the util <code>update-grub</code> to update the grub2 boot entries. In grub(the older, not grub2), we need to update the boot menu file <code>/boot/grub/menu.lst</code> carefully to manage the entries. In this case, it could be easy to make mistakes, or inconvenient while editing the file and get required information at the same time. </p>
+<p>In grub2 with <code>update-grub</code>, this process can be managed in updating a general setting file and a list of scripts that generate entries. These files are:</p>
+
+<ul>
+<li><code>/etc/default/grub</code>, general grub settings,</li>
+<li><code>/etc/grub.d/*</code>, this directory contains a list of executable scripts and will be processed in order. You can add the files according to the convention:
+
+<ul>
+<li>&ldquo;00_*&rdquo;: It is reserved for 00_header.</li>
+<li>&ldquo;10_*&rdquo;: Native boot entries.</li>
+<li>&ldquo;20_*&rdquo;: Third party apps (e.g. memtest86+).</li>
+</ul></li>
+</ul>
+<p>The number namespace in-between is configuratble by system installer and/or administrator. The order of other number will be reflected in the menu if you set 01_otheros, 11_otheros, etc.</p>
+<p>For example, I have below config files in <code>/etc/init.d/</code> for a ubuntu installation:</p>
+
+<pre><code>00_header
+05_debian_theme
+10_linux
+20_linux_gen
+30_os-prober
+30_uefi_firmware
+40_custom
+41_custom</code></pre>
+
+<h3 id="toc_1">2. Clean up Grub2 Menu</h3>
+<p>After a release or a kernel upgrade, you may usually find unuseful entries in the boot menu, which are mainly for previous state recovery. So here let&#39;s see how to remove the unuseful entries.</p>
+<p>First are the unnecessary kernel entries. They exist because you install more older kernel versions lying around on your machine. So you can check if there are more than one <code>linux-headers-&lt;version&gt;</code> entry and <code>linux-image-&lt;version&gt;</code> entry, then remove the unnecessary package via package manager.</p>
+<p>Second, unwanted entries in <code>/etc/init.d/</code> such as memtest86+. Disabling them is very easy, just make them not executable then it&#39;s done.</p>
+<div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd</span> /etc/init.d/
+<span class="nv">$ </span>sudo chmod -x 20_memtest86+
+</pre></div>
+<p>And the last thing is to update grub:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo update-grub
+</pre></div>
+<p>Sometimes if you just want to edit some of the boot menu item, you could lookup the <code>menuentry</code> in the file and edit the content. For example, there is a <code>30_os-prober</code> file in <code>/etc/grub.d/</code>, which checks if there are other OS exists on local drives and create boot entries for them. You can see the similar content in each OS part and using <code>cat</code> and <code>menuentry</code> to add an entry to the grub config.</p>
+
+<h3 id="toc_2">3. Grub2 Settings</h3>
+<p>In the general setting file <code>/etc/default/grub</code>, there are some basic settings that you could change.</p>
+
+<pre><code># (template of /etc/default/grub)
+# 1. Default boot entry, can be the index or the title of the boot item; SAVEDEFAULT option let you save every last choice as next default
+GRUB_DEFAULT=0
+GRUB_SAVEDEFAULT=true
+
+# 2. Go directly to the default boot entry unless you press 'shift' or 'esc' at startup. The &quot;QUIET&quot; option will display the count down of the hidden timeout before going to boot, which you can use a chance for a boot splash
+GRUB_HIDDEN_TIMEOUT=0
+GRUB_HIDDEN_TIMEOUT_QUIET=true
+
+# 3. Grub background, just simply set the image path(supports '.png', '.tga', '.jpg' or '.jpeg')
+GRUB_BACKGROUND='/path/to/image.jpg'</code></pre>
+<p>Ref: (run as shell cmd) <code>info -f grub -s &#39;Simple configuration&#39;</code></p>
+
+<h3 id="toc_3">4. Grub2 tools</h3>
+
+<h4 id="toc_4">4.1 Grub Rescue</h4>
+<p>Many times when grub boot failed, it will run into <code>grub-rescue</code> shell environment. It is expected that you fix something(usually try to recover the damaged boot record.) and set a bootable entry for grub to continue the boot process</p>
+<p>Below is an example of a common process.</p>
+<div class="highlight"><pre><span class="c"># check available parition</span>
+grub rescue&gt; ls
+<span class="o">(</span>hd0<span class="o">)</span>,<span class="o">(</span>hd0,msdos3<span class="o">)</span>,<span class="o">(</span>hd0,msdos2<span class="o">)</span>,<span class="o">(</span>hd0,msdos1<span class="o">)</span>
+
+<span class="c"># check available grub boot record in a partition</span>
+grub rescue&gt; ls <span class="o">(</span>hd0,msdosX<span class="o">)</span>/boot/grub
+
+<span class="c"># set boot entry</span>
+grub rescue&gt; <span class="nb">set </span><span class="nv">root</span><span class="o">=(</span>hd0,msdos3<span class="o">)</span>
+grub rescue&gt; <span class="nb">set </span><span class="nv">prefix</span><span class="o">=(</span>hd0,msdos3<span class="o">)</span>/boot/grub
+grub rescue&gt; insmod /boot/grub/normal.mod
+
+<span class="c"># go to startup screen</span>
+grub rescue&gt;normal
+
+<span class="c"># (is this the alternative way?)</span>
+rescue&gt;linux /boot/vmlinuz-xxx-xxx <span class="nv">root</span><span class="o">=</span>/dev/sdax
+rescue&gt;initrd /boot/initrd.img-xxx-xxx
+rescue&gt;boot
+</pre></div>
+
+<h3 id="toc_5">Reference</h3>
+
+<h1 id="toc_6"></h1>
+<p>The GRUB manual: (run in linux shell) <code>info grub</code></p>
+<p>Clean up Grub2 entries: <a href="http://www.howtogeek.com/howto/17787/clean-up-the-new-ubuntu-grub2-boot-menu/">www.howtogeek.com/howto/17787/clean-up-the-new-ubuntu-grub2-boot-menu/</a>. (There is also a link to an article for the old <code>grub</code>)</p>
+<p>How to Configure Grub2 boot loader settings: <a href="http://www.howtogeek.com/196655/how-to-configure-the-grub2-boot-loaders-settings/">www.howtogeek.com/196655/how-to-configure-the-grub2-boot-loaders-settings/</a></p>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[A Short Reference of Python Logging]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/05/short-ref-python-logging.html"/>
