@@ -3,7 +3,7 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/tricks/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/tricks/" />
-    <updated>2016-10-18T14:00:10+08:00</updated>
+    <updated>2016-12-28T11:11:24+08:00</updated>
     <id>http://terryoy.github.io/tricks/</id>
     <entry>
         <title type="html"><![CDATA[A Short Reference of Python Logging]]></title>
@@ -216,7 +216,7 @@ Host github.com
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/02/vbox-cmd-tools-tricks.html"/>
         <published>2016-02-17T11:01:00+08:00</published>
-        <updated>2016-02-26T10:39:43+08:00</updated>
+        <updated>2016-12-28T11:11:24+08:00</updated>
         <id>http://terryoy.github.io/2016/02/vbox-cmd-tools-tricks.html</id>
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
         <category scheme="http://terryoy.github.io/tag/#virtualbox" term="virtualbox" label="virtualbox" />
@@ -228,6 +228,20 @@ Host github.com
 </pre></div>
 
 <h3 id="toc_1">2. Mount virtual disk on your ubuntu system</h3>
+<p>In linux, we can use a the <code>qemu-nbd</code> and <code>kpartx</code> to mount a .vdi file on a path. The <em>qemu-nbd</em> tool can create a block device to enable it to be share via NBD(Network Block Device) protocol. Then, we will use <code>kpartx</code> to create device maps from the partition tables of the device, which makes the partition of the image mountable.</p>
+<div class="highlight"><pre><span class="c"># (prerequisites] install the dependencies</span>
+<span class="nv">$ </span>sudo apt-get install qemu-utils kpartx
+
+<span class="c"># to mount the device</span>
+<span class="nv">$ </span>sudo modprob -nbd
+<span class="nv">$ </span>sudo qemu-nbd -c /dev/nbd0 &lt;vdi_file&gt;
+<span class="nv">$ </span>sudo kpartx -a /dev/nbd0
+<span class="nv">$ </span>sudo mount /dev/mapper/nbd0p1 /mnt/&lt;mount_point&gt;
+
+<span class="c"># delete the device when no longer needed</span>
+<span class="nv">$ </span>sudo umount /mnt/&lt;mount_point&gt;
+<span class="nv">$ </span>sudo qemu-nbd -d /dev/nbd0
+</pre></div>
 <p>(&hellip;to be continued)</p>
 ]]>
         </content>
