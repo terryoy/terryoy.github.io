@@ -3,14 +3,14 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2016-10-23T01:12:02+08:00</updated>
+    <updated>2016-12-28T11:08:23+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
         <title type="html"><![CDATA[Working with Grub2 in Linux]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/10/working-with-grub2-linux.html"/>
         <published>2016-10-21T10:21:00+08:00</published>
-        <updated>2016-10-23T01:12:02+08:00</updated>
+        <updated>2016-12-28T11:08:23+08:00</updated>
         <id>http://terryoy.github.io/2016/10/working-with-grub2-linux.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -54,7 +54,7 @@
 </pre></div>
 <p>Sometimes if you just want to edit some of the boot menu item, you could lookup the <code>menuentry</code> in the file and edit the content. For example, there is a <code>30_os-prober</code> file in <code>/etc/grub.d/</code>, which checks if there are other OS exists on local drives and create boot entries for them. You can see the similar content in each OS part and using <code>cat</code> and <code>menuentry</code> to add an entry to the grub config.</p>
 
-<h2 id="toc_2">e 3. Grub2 Settings</h2>
+<h3 id="toc_2">3. Grub2 Settings</h3>
 <p>In the general setting file <code>/etc/default/grub</code>, there are some basic settings that you could change.</p>
 
 <pre><code># (template of /etc/default/grub)
@@ -62,7 +62,7 @@
 GRUB_DEFAULT=0
 GRUB_SAVEDEFAULT=true
 
-#l2. Go directly to the default boot entry unless you press 'shift' or 'esc' at startup. The &quot;QUIET&quot; option will display the count down of the hidden timeout before going to boot, which you can use a chance for a boot splash
+# 2. Go directly to the default boot entry unless you press 'shift' or 'esc' at startup. The &quot;QUIET&quot; option will display the count down of the hidden timeout before going to boot, which you can use a chance for a boot splash
 GRUB_HIDDEN_TIMEOUT=0
 GRUB_HIDDEN_TIMEOUT_QUIET=true
 
@@ -85,7 +85,7 @@ GRUB_BACKGROUND='/path/to/image.jpg'</code></pre>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/09/frontend-workflow-summary.html"/>
         <published>2016-09-18T23:45:00+08:00</published>
-        <updated>2016-10-11T14:24:27+08:00</updated>
+        <updated>2016-11-29T10:12:04+08:00</updated>
         <id>http://terryoy.github.io/2016/09/frontend-workflow-summary.html</id>
         <category scheme="http://terryoy.github.io/tag/#frontend" term="frontend" label="frontend" />
         <category scheme="http://terryoy.github.io/tag/#study" term="study" label="study" />
@@ -117,6 +117,7 @@ GRUB_BACKGROUND='/path/to/image.jpg'</code></pre>
 <li>Gulp:  <a href="https://github.com/gulpjs/gulp">github.com/gulpjs/gulp</a></li>
 <li>Gulp + Browserify Guide: <a href="https://www.viget.com/articles/gulp-browserify-starter-faq">www.viget.com/articles/gulp-browserify-starter-faq</a></li>
 <li>Gulp Recipes: <a href="https://github.com/gulpjs/gulp/tree/master/docs/recipes">github.com/gulpjs/gulp/tree/master/docs/recipes</a></li>
+<li>Principles of Gulp Plugin: <a href="https://github.com/gulpjs/gulp/blob/master/docs/writing-a-plugin/README.md">github.com/gulpjs/gulp/blob/master/docs/writing-a-plugin/README.md</a></li>
 </ul>
 
 <h4 id="toc_4">2.3 Babel</h4>
@@ -149,6 +150,7 @@ GRUB_BACKGROUND='/path/to/image.jpg'</code></pre>
 <ul>
 <li><p><a href="https://en.wikipedia.org/wiki/Polyfill"><strong>Polyfill</strong></a> - a polyfill is cod e that implements a feature on web browsers that do <em>not</em> support it. It is a <em>shim</em> for a browser API.</p></li>
 <li><p><a href="https://en.wikipedia.org/wiki/Shim_(computing)"><strong>Shim</strong></a> - A small library that transparently intercepts API calls. This term can be  commonly used to support an old API in a newer environment, or a new API in an older environment, or running programs on a different platform than they were developed for.</p></li>
+<li><p><a href="https://en.wikipedia.org/wiki/Glob_(programming"><strong>glob</strong></a>) - A pattern that specifies a set of files with wildcard characters. It is originally a program <code>/etc/glob</code> that look for files by patterns, then it is used in a lof of libraries in many language. The original word is short for &#39;global command&#39;.</p></li>
 </ul>
 ]]>
         </content>
@@ -1389,7 +1391,7 @@ Program Library HOWTO <br/>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/10/common-git-commands.html"/>
         <published>2014-10-22T20:57:00+08:00</published>
-        <updated>2016-10-13T20:04:14+08:00</updated>
+        <updated>2016-10-31T11:09:49+08:00</updated>
         <id>http://terryoy.github.io/2014/10/common-git-commands.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
@@ -1570,7 +1572,7 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
 <p><font color="red">If you&#39;ve really push something wrong to github, or merging with a wrong branch which you want to recover. You could do th below things with specifc care:</font></p>
 <div class="highlight"><pre><span class="c"># (it&#39;s strongly recommended to create a backup branch first!!!)</span>
 <span class="c"># **this line recover back to a specific commit, and all the later commits will be lost!!!</span>
-<span class="nv">$ </span>git reset --hard commit
+<span class="nv">$ </span>git reset --hard &lt;commit&gt;
 <span class="nv">$ </span>git push --force origin &lt;branch_name&gt;
 </pre></div>
 <p><a href="http://stackoverflow.com/questions/4114095/how-to-revert-git-repository-to-a-previous-commit">Ref to git revert</a>.</p>

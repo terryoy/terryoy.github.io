@@ -234,7 +234,7 @@ $ git revert HEAD~2...HEAD
 ```bash
 # (it's strongly recommended to create a backup branch first!!!)
 # **this line recover back to a specific commit, and all the later commits will be lost!!!
-$ git reset --hard commit
+$ git reset --hard <commit>
 $ git push --force origin <branch_name>
 ```
 

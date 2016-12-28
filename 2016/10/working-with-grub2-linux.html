@@ -80,7 +80,7 @@
 </pre></div>
 <p>Sometimes if you just want to edit some of the boot menu item, you could lookup the <code>menuentry</code> in the file and edit the content. For example, there is a <code>30_os-prober</code> file in <code>/etc/grub.d/</code>, which checks if there are other OS exists on local drives and create boot entries for them. You can see the similar content in each OS part and using <code>cat</code> and <code>menuentry</code> to add an entry to the grub config.</p>
 
-<h2 id="toc_2">e 3. Grub2 Settings</h2>
+<h3 id="toc_2">3. Grub2 Settings</h3>
 <p>In the general setting file <code>/etc/default/grub</code>, there are some basic settings that you could change.</p>
 
 <pre><code># (template of /etc/default/grub)
@@ -88,7 +88,7 @@
 GRUB_DEFAULT=0
 GRUB_SAVEDEFAULT=true
 
-#l2. Go directly to the default boot entry unless you press 'shift' or 'esc' at startup. The &quot;QUIET&quot; option will display the count down of the hidden timeout before going to boot, which you can use a chance for a boot splash
+# 2. Go directly to the default boot entry unless you press 'shift' or 'esc' at startup. The &quot;QUIET&quot; option will display the count down of the hidden timeout before going to boot, which you can use a chance for a boot splash
 GRUB_HIDDEN_TIMEOUT=0
 GRUB_HIDDEN_TIMEOUT_QUIET=true
 

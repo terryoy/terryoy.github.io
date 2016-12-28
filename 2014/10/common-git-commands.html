@@ -216,7 +216,7 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
 <p><font color="red">If you&#39;ve really push something wrong to github, or merging with a wrong branch which you want to recover. You could do th below things with specifc care:</font></p>
 <div class="highlight"><pre><span class="c"># (it&#39;s strongly recommended to create a backup branch first!!!)</span>
 <span class="c"># **this line recover back to a specific commit, and all the later commits will be lost!!!</span>
-<span class="nv">$ </span>git reset --hard commit
+<span class="nv">$ </span>git reset --hard &lt;commit&gt;
 <span class="nv">$ </span>git push --force origin &lt;branch_name&gt;
 </pre></div>
 <p><a href="http://stackoverflow.com/questions/4114095/how-to-revert-git-repository-to-a-previous-commit">Ref to git revert</a>.</p>

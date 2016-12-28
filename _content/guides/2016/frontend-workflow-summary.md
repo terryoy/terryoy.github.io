@@ -44,6 +44,7 @@ References:
  - Gulp:  <https://github.com/gulpjs/gulp>
  - Gulp + Browserify Guide: <https://www.viget.com/articles/gulp-browserify-starter-faq>
  - Gulp Recipes: <https://github.com/gulpjs/gulp/tree/master/docs/recipes>
+ - Principles of Gulp Plugin: <https://github.com/gulpjs/gulp/blob/master/docs/writing-a-plugin/README.md>
 
 #### 2.3 Babel
 
@@ -80,7 +81,7 @@ There are some terms in web front-end development that is not meaning obviously,
 
  * [**Shim**](https://en.wikipedia.org/wiki/Shim_\(computing\)) - A small library that transparently intercepts API calls. This term can be  commonly used to support an old API in a newer environment, or a new API in an older environment, or running programs on a different platform than they were developed for.
 
-
+ * [**glob**](https://en.wikipedia.org/wiki/Glob_(programming)) - A pattern that specifies a set of files with wildcard characters. It is originally a program `/etc/glob` that look for files by patterns, then it is used in a lof of libraries in many language. The original word is short for 'global command'.
 
 
 
