@@ -83,6 +83,36 @@ Ref: (run as shell cmd) `info -f grub -s 'Simple configuration'`
 
 ### 4. Grub2 tools
 
+#### 4.1 Grub Rescue
+
+Many times when grub boot failed, it will run into `grub-rescue` shell environment. It is expected that you fix something(usually try to recover the damaged boot record.) and set a bootable entry for grub to continue the boot process
+
+Below is an example of a common process.
+
+```bash
+
+# check available parition
+grub rescue> ls
+(hd0),(hd0,msdos3),(hd0,msdos2),(hd0,msdos1)
+
+# check available grub boot record in a partition
+grub rescue> ls (hd0,msdosX)/boot/grub
+
+# set boot entry
+grub rescue> set root=(hd0,msdos3)
+grub rescue> set prefix=(hd0,msdos3)/boot/grub
+grub rescue> insmod /boot/grub/normal.mod
+
+# go to startup screen
+grub rescue>normal
+
+# (is this the alternative way?)
+rescue>linux /boot/vmlinuz-xxx-xxx root=/dev/sdax
+rescue>initrd /boot/initrd.img-xxx-xxx
+rescue>boot
+
+
+```
 
 
 ### Reference

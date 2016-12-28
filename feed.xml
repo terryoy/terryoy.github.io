@@ -3,14 +3,14 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2016-12-28T11:11:24+08:00</updated>
+    <updated>2016-12-28T11:33:29+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
         <title type="html"><![CDATA[Working with Grub2 in Linux]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/10/working-with-grub2-linux.html"/>
         <published>2016-10-21T10:21:00+08:00</published>
-        <updated>2016-12-28T11:08:23+08:00</updated>
+        <updated>2016-12-28T11:33:29+08:00</updated>
         <id>http://terryoy.github.io/2016/10/working-with-grub2-linux.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -72,9 +72,33 @@ GRUB_BACKGROUND='/path/to/image.jpg'</code></pre>
 
 <h3 id="toc_3">4. Grub2 tools</h3>
 
-<h3 id="toc_4">Reference</h3>
+<h4 id="toc_4">4.1 Grub Rescue</h4>
+<p>Many times when grub boot failed, it will run into <code>grub-rescue</code> shell environment. It is expected that you fix something(usually try to recover the damaged boot record.) and set a bootable entry for grub to continue the boot process</p>
+<p>Below is an example of a common process.</p>
+<div class="highlight"><pre><span class="c"># check available parition</span>
+grub rescue&gt; ls
+<span class="o">(</span>hd0<span class="o">)</span>,<span class="o">(</span>hd0,msdos3<span class="o">)</span>,<span class="o">(</span>hd0,msdos2<span class="o">)</span>,<span class="o">(</span>hd0,msdos1<span class="o">)</span>
 
-<h1 id="toc_5"></h1>
+<span class="c"># check available grub boot record in a partition</span>
+grub rescue&gt; ls <span class="o">(</span>hd0,msdosX<span class="o">)</span>/boot/grub
+
+<span class="c"># set boot entry</span>
+grub rescue&gt; <span class="nb">set </span><span class="nv">root</span><span class="o">=(</span>hd0,msdos3<span class="o">)</span>
+grub rescue&gt; <span class="nb">set </span><span class="nv">prefix</span><span class="o">=(</span>hd0,msdos3<span class="o">)</span>/boot/grub
+grub rescue&gt; insmod /boot/grub/normal.mod
+
+<span class="c"># go to startup screen</span>
+grub rescue&gt;normal
+
+<span class="c"># (is this the alternative way?)</span>
+rescue&gt;linux /boot/vmlinuz-xxx-xxx <span class="nv">root</span><span class="o">=</span>/dev/sdax
+rescue&gt;initrd /boot/initrd.img-xxx-xxx
+rescue&gt;boot
+</pre></div>
+
+<h3 id="toc_5">Reference</h3>
+
+<h1 id="toc_6"></h1>
 <p>The GRUB manual: (run in linux shell) <code>info grub</code></p>
 <p>Clean up Grub2 entries: <a href="http://www.howtogeek.com/howto/17787/clean-up-the-new-ubuntu-grub2-boot-menu/">www.howtogeek.com/howto/17787/clean-up-the-new-ubuntu-grub2-boot-menu/</a>. (There is also a link to an article for the old <code>grub</code>)</p>
 <p>How to Configure Grub2 boot loader settings: <a href="http://www.howtogeek.com/196655/how-to-configure-the-grub2-boot-loaders-settings/">www.howtogeek.com/196655/how-to-configure-the-grub2-boot-loaders-settings/</a></p>
