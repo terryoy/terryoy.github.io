@@ -319,3 +319,7 @@ footer {
     background-size: cover;
     margin-right: 3px;
 }
+
+.pagination {
+    margin-bottom: 20px;
+}
