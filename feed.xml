@@ -3,7 +3,7 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2016-12-29T01:24:58+08:00</updated>
+    <updated>2017-01-10T17:41:18+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
         <title type="html"><![CDATA[How I fix my Ubuntu with iRST(Intel Rapid Start Technology) Raid]]></title>
@@ -772,7 +772,7 @@ Host github.com
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/02/vbox-cmd-tools-tricks.html"/>
         <published>2016-02-17T11:01:00+08:00</published>
-        <updated>2016-12-28T11:11:24+08:00</updated>
+        <updated>2017-01-10T17:41:18+08:00</updated>
         <id>http://terryoy.github.io/2016/02/vbox-cmd-tools-tricks.html</id>
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
         <category scheme="http://terryoy.github.io/tag/#virtualbox" term="virtualbox" label="virtualbox" />
@@ -789,7 +789,7 @@ Host github.com
 <span class="nv">$ </span>sudo apt-get install qemu-utils kpartx
 
 <span class="c"># to mount the device</span>
-<span class="nv">$ </span>sudo modprob -nbd
+<span class="nv">$ </span>sudo modprobe -nbd
 <span class="nv">$ </span>sudo qemu-nbd -c /dev/nbd0 &lt;vdi_file&gt;
 <span class="nv">$ </span>sudo kpartx -a /dev/nbd0
 <span class="nv">$ </span>sudo mount /dev/mapper/nbd0p1 /mnt/&lt;mount_point&gt;

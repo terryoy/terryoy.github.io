@@ -52,7 +52,7 @@
 <span class="nv">$ </span>sudo apt-get install qemu-utils kpartx
 
 <span class="c"># to mount the device</span>
-<span class="nv">$ </span>sudo modprob -nbd
+<span class="nv">$ </span>sudo modprobe -nbd
 <span class="nv">$ </span>sudo qemu-nbd -c /dev/nbd0 &lt;vdi_file&gt;
 <span class="nv">$ </span>sudo kpartx -a /dev/nbd0
 <span class="nv">$ </span>sudo mount /dev/mapper/nbd0p1 /mnt/&lt;mount_point&gt;

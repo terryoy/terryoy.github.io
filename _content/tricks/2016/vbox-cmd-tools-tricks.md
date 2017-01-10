@@ -23,7 +23,7 @@ In linux, we can use a the ```qemu-nbd``` and ```kpartx``` to mount a .vdi file 
 $ sudo apt-get install qemu-utils kpartx
 
 # to mount the device
-$ sudo modprob -nbd
+$ sudo modprobe -nbd
 $ sudo qemu-nbd -c /dev/nbd0 <vdi_file>
 $ sudo kpartx -a /dev/nbd0
 $ sudo mount /dev/mapper/nbd0p1 /mnt/<mount_point>
