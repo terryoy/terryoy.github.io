@@ -147,8 +147,24 @@ $ git tag -d "v1.0.1a"
 ### 6. Amend Logs
 
 ```bash
-# amend log for the last commit
+
+# Method 1:
+# fix something after git commit
+$ git commit -m "something wrong"
+$ git add <...>
+$ git rm <...>
+
+# apply changes and update log to last commit
 $ git commit --amend
+
+# Method 2:
+# Make the last commit as unstage changes
+$ git commit -m "something wrong"
+$ git reset HEAD~1
+# ... fix things
+# Apply the changes and commit again
+$ git commit --amend
+
 
 ```
 

@@ -52,5 +52,11 @@ So if you want it to support the ".md" file also, add this line to the ~/.vimrc:
 au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 ```
 
+### 4. All kinds of tricks here
 
+#### 4.1 Set fixed width to 80 columns, and soft wrap text automatically
+
+```
+:set columns=80
+```
 

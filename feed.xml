@@ -3,7 +3,7 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2017-01-10T17:41:18+08:00</updated>
+    <updated>2017-03-10T18:44:00+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
         <title type="html"><![CDATA[How I fix my Ubuntu with iRST(Intel Rapid Start Technology) Raid]]></title>
@@ -1503,7 +1503,7 @@ Program Library HOWTO <br/>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/10/common-git-commands.html"/>
         <published>2014-10-22T20:57:00+08:00</published>
-        <updated>2016-10-31T11:09:49+08:00</updated>
+        <updated>2017-03-10T18:44:00+08:00</updated>
         <id>http://terryoy.github.io/2014/10/common-git-commands.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
@@ -1623,7 +1623,21 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
 </pre></div>
 
 <h3 id="toc_5">6. Amend Logs</h3>
-<div class="highlight"><pre><span class="c"># amend log for the last commit</span>
+<div class="highlight"><pre><span class="c"># Method 1:</span>
+<span class="c"># fix something after git commit</span>
+<span class="nv">$ </span>git commit -m <span class="s2">&quot;something wrong&quot;</span>
+<span class="nv">$ </span>git add &lt;...&gt;
+<span class="nv">$ </span>git rm &lt;...&gt;
+
+<span class="c"># apply changes and update log to last commit</span>
+<span class="nv">$ </span>git commit --amend
+
+<span class="c"># Method 2:</span>
+<span class="c"># Make the last commit as unstage changes</span>
+<span class="nv">$ </span>git commit -m <span class="s2">&quot;something wrong&quot;</span>
+<span class="nv">$ </span>git reset HEAD~1
+<span class="c"># ... fix things</span>
+<span class="c"># Apply the changes and commit again</span>
 <span class="nv">$ </span>git commit --amend
 </pre></div>
 

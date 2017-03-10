@@ -3,7 +3,7 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/tricks/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/tricks/" />
-    <updated>2017-01-10T17:41:18+08:00</updated>
+    <updated>2017-03-10T10:47:13+08:00</updated>
     <id>http://terryoy.github.io/tricks/</id>
     <entry>
         <title type="html"><![CDATA[How I fix my Ubuntu with iRST(Intel Rapid Start Technology) Raid]]></title>
@@ -1179,7 +1179,7 @@ an non-existing item value: [ non-exist =</code></pre>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/09/vimrc.html"/>
         <published>2013-09-23T23:16:00+08:00</published>
-        <updated>2016-02-03T16:17:16+08:00</updated>
+        <updated>2017-03-10T10:47:13+08:00</updated>
         <id>http://terryoy.github.io/2013/09/vimrc.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#vim" term="vim" label="vim" />
@@ -1215,6 +1215,12 @@ set expandtab</code></pre>
 <p>So if you want it to support the &ldquo;.md&rdquo; file also, add this line to the ~/.vimrc:</p>
 
 <pre><code>au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown</code></pre>
+
+<h3 id="toc_3">4. All kinds of tricks here</h3>
+
+<h4 id="toc_4">4.1 Set fixed width to 80 columns, and soft wrap text automatically</h4>
+
+<pre><code>:set columns=80</code></pre>
 ]]>
         </content>
     </entry><entry>
