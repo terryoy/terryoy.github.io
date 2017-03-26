@@ -7,8 +7,8 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="apple-mobile-web-app-title" content="Hello, World!" />
     <meta name="application-name" content="Hello, World!" />
-    <title>Archive - Hello, World!</title>
-    <meta name="keywords" content="" />
+    <title>Usage for Redis on Linux - Hello, World!</title>
+    <meta name="keywords" content="database,linux" />
     <meta name="description" content="" />
     
     <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="Hello, World!" />
@@ -35,41 +35,47 @@
     <a href="/about.html">About Me</a>
 </nav>
 
-<section class="main">
-    <div id="main" class="hentry" role="main">
+<section class="main"><article id="main" class="hentry">
+	<h1>Usage for Redis on Linux</h1>
+    <p class="sub_text">2017-03-10 by <i>terryoy</i>, in <a href="/guides/">guides</a>
+    </p>
     
-            <section class="item">
-                <h1>2013</h1>
-                <ul>
-                    <li><a href="/2013/12/python_main_args.html">Python Main Args, Config, and Exception Snippets</a> <time class="updated">2013-12-21</time></li>
-    
-                    <li><a href="/2013/11/cocos2d-x-setup.html">Cocos2d-x-2.2.0 Setup Guide (for Android and iOS)</a> <time class="updated">2013-11-27</time></li>
-    
-                    <li><a href="/2013/09/vimrc.html">Preferences for Vim</a> <time class="updated">2013-09-23</time></li>
-    
-                    <li><a href="/2013/09/useful_alias.html">Useful Aliases and Commands in Linux</a> <time class="updated">2013-09-23</time></li>
-    
-                </ul>
-            </section>
-    </div><!-- #main -->
+	<h3 id="toc_0">0. Setup</h3>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install redis-server
 
+<span class="c"># login redis</span>
+<span class="nv">$ </span>redis-cli
+</pre></div>
 
-    <nav class="pagination" role="pagination">
+    
+    
+	<p/>
+	<hr/>
+    
+    <div class="sub_text">
+        <span>Tags:
+            <a href="/tag/database/">database</a>,&nbsp;<a href="/tag/linux/">linux</a>
+		</span>
+    
         
-            <a class="prev" href="/page/1.html">« newer</a>
-        
+    </div>
+    
 
-        <span class="current">
-            2 / 2
-        </span>
-
-        
-            <!--span class="next">older »</span-->
-        
-    </nav>
-
-
-</section>
+	<p/>
+	
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'terryoy';
+        var disqus_title = 'Usage for Redis on Linux';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+</article></section>
 
 <footer id="footer">
     <p><small>Hosted on GitHub Pages &mdash;<br/> Theme adopted from <a href="https://github.com/orderedlist">orderedlist</a></small></p>

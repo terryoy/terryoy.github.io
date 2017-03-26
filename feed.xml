@@ -3,9 +3,132 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2017-03-10T18:44:00+08:00</updated>
+    <updated>2017-03-26T17:23:54+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
+        <title type="html"><![CDATA[Python Function Decorators and The Use in Django]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2017/03/python-decorators-and-use-in-django.html"/>
+        <published>2017-03-26T16:26:00+08:00</published>
+        <updated>2017-03-26T17:23:54+08:00</updated>
+        <id>http://terryoy.github.io/2017/03/python-decorators-and-use-in-django.html</id>
+        <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <h3 id="toc_0">1. Basic of functions</h3>
+
+<ul>
+<li>Functions can be assign</li>
+<li>Functions can be defined inside a function</li>
+<li>Functions can be passed as a parameter and return as a returning value</li>
+<li>Inner functions have access to the enclosing scope</li>
+</ul>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;World&#39;</span><span class="p">):</span>
+   <span class="k">print</span><span class="p">(</span><span class="s">&#39;Hello, {0}!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">)))</span>
+
+<span class="c"># assign</span>
+<span class="n">bar</span> <span class="o">=</span> <span class="n">foo</span>
+<span class="n">bar</span><span class="p">()</span>
+<span class="c"># =&gt; Hello, world!</span>
+
+
+<span class="c"># Use in parameter and return as result</span>
+<span class="k">def</span> <span class="nf">greetings</span><span class="p">(</span><span class="n">call</span><span class="p">):</span>
+    <span class="n">welcome</span> <span class="o">=</span> <span class="s">&#39;Welcome back!&#39;</span> <span class="c"># the enclosing scope to &quot;greeting_to&quot;</span>
+
+    <span class="k">def</span> <span class="nf">greeting_to</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+        <span class="n">call</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">welcome</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">greeting_to</span>
+
+<span class="n">greet</span> <span class="o">=</span> <span class="n">greetings</span><span class="p">(</span><span class="n">bar</span><span class="p">)</span> <span class="c"># set bar as a greeting function</span>
+<span class="n">greet</span><span class="p">(</span><span class="s">&#39;Terry&#39;</span><span class="p">)</span> <span class="c"># use the return function to generate greetings</span>
+<span class="c"># =&gt; Hello, Terry!</span>
+<span class="c"># =&gt; Welcome, back!</span>
+</pre></div>
+
+<h3 id="toc_1">2. Decorators</h3>
+<p>A <strong>Function Decorator</strong> is a wrapper to an existing function, in which you can do some pre-process to the parameter or post-process to the returning value of the existing funciton.</p>
+<p>The function decorator in Python must follows the below rules:</p>
+
+<ul>
+<li>It is a function that accept a function parameter(like saying <em>&ldquo;a decorator to which function&rdquo;</em>)</li>
+<li>The decorator function must define and return a function as a result, so that the client gets something act similar to the existing function(act just like a function wrapper). </li>
+<li>Do the customizing things inside the wrapper function, and call the existing function eventually</li>
+</ul>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">greeting_decorator</span><span class="p">(</span><span class="n">call</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+        <span class="n">call</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Isn&#39;t it powerful?&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+
+<span class="c"># The decorator syntax</span>
+<span class="nd">@greeting_decorator</span>
+<span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;Hello, {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+
+<span class="n">greet</span><span class="p">(</span><span class="s">&#39;Terry&#39;</span><span class="p">)</span> <span class="c"># decorated function though the function name is the same as defined</span>
+<span class="c"># =&gt; Hello, Terry </span>
+<span class="c"># =&gt; Isn&#39;t it powerful?</span>
+</pre></div>
+<p>Decorators can be chained, and can also accept extra parameters when defining the customization to the function. However, decorators that accept parameters need to add another wrapper to the simple decorator.</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">room</span><span class="p">(</span><span class="n">room_name</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">decorator_wrapper</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">&quot;Enter room: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">room_name</span><span class="p">))</span>
+            <span class="n">func</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">wrapper</span>
+    <span class="k">return</span> <span class="n">decorator_wrapper</span>
+
+<span class="k">def</span> <span class="nf">leave_on_greet</span><span class="p">(</span><span class="n">greet_func</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">greeting_wrapper</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+        <span class="n">greet_func</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Thanks, I&#39;m leaving&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">greeting_wrapper</span>
+
+
+<span class="nd">@room</span><span class="p">(</span><span class="s">&#39;Matrix&#39;</span><span class="p">)</span>
+<span class="nd">@leave_on_greet</span>
+<span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;Hello, {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+
+
+<span class="n">greet</span><span class="p">(</span><span class="s">&#39;Terry&#39;</span><span class="p">)</span>
+<span class="c"># =&gt; Enter room: Matrix</span>
+<span class="c"># =&gt; Hello, Terry</span>
+<span class="c"># =&gt; Thanks, I&#39;m leaving</span>
+</pre></div>
+
+<h3 id="toc_2">3. Example: using decorator in Django views</h3>
+<p>(to be written)</p>
+
+<h3 id="toc_3">Reference</h3>
+<p>Reference: <a href="http://thecodeship.com/patterns/guide-to-python-function-decorators/">thecodeship.com/patterns/guide-to-python-function-decorators/</a></p>
+]]>
+        </content>
+    </entry><entry>
+        <title type="html"><![CDATA[Usage for Redis on Linux]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2017/03/linux-redis-usage.html"/>
+        <published>2017-03-10T22:20:00+08:00</published>
+        <updated>2017-03-10T22:22:41+08:00</updated>
+        <id>http://terryoy.github.io/2017/03/linux-redis-usage.html</id>
+        <category scheme="http://terryoy.github.io/tag/#database" term="database" label="database" />
+        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <h3 id="toc_0">0. Setup</h3>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install redis-server
+
+<span class="c"># login redis</span>
+<span class="nv">$ </span>redis-cli
+</pre></div>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[How I fix my Ubuntu with iRST(Intel Rapid Start Technology) Raid]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/12/how-i-fix-ubuntu-boot-with-irst-raid.html"/>
@@ -1190,7 +1313,7 @@ Common Name <span class="o">(</span>e.g. server FQDN or YOUR name<span class="o"
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/02/postgresql-admin-quickref-part2-initiating-database.html"/>
         <published>2015-02-21T16:40:00+08:00</published>
-        <updated>2016-10-18T14:00:10+08:00</updated>
+        <updated>2017-03-26T17:21:53+08:00</updated>
         <id>http://terryoy.github.io/2015/02/postgresql-admin-quickref-part2-initiating-database.html</id>
         <category scheme="http://terryoy.github.io/tag/#postgresql" term="postgresql" label="postgresql" />
         <category scheme="http://terryoy.github.io/tag/#database" term="database" label="database" />
@@ -1238,7 +1361,7 @@ host    all             all             ::1/128                 md5
 <span class="nv">$ </span>sudo service postgresql restart
 </pre></div>
 
-<h3 id="toc_2">3. MIgrating Data</h3>
+<h3 id="toc_2">3. Migrating Data</h3>
 <p>When migrating database, usually we use migrate files with SQL and CSV format. Since SQL scripts are probably not compatible with different database provider(e.g. postgresql vs mysql), sometimes it&#39;s easier to parse data with CSV format, while SQL files are convenient to dump and import schemas between postgresql databases.</p>
 
 <h4 id="toc_3">3.1 Export data to CSV files</h4>
@@ -1418,290 +1541,6 @@ Common -&gt; Display in favourites menu -&gt; External Tools</code></pre>
 <h3 id="toc_6">5. References</h3>
 <p>Best Practices for using Java Native Interface: <a href="http://www.ibm.com/developerworks/library/j-jni/">http://www.ibm.com/developerworks/library/j-jni/</a> <br/>
 JNI Documentation: <a href="http://docs.oracle.com/javase/1.5.0/docs/guide/jni/spec/jniTOC.html">http://docs.oracle.com/javase/1.5.0/docs/guide/jni/spec/jniTOC.html</a> <br/></p>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[Finding Information for C/C++ Library on Linux]]></title>
-        <author><name>terryoy</name></author>
-        <link href="http://terryoy.github.io/2014/10/finding-information-linux-c-library.html"/>
-        <published>2014-10-30T09:38:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
-        <id>http://terryoy.github.io/2014/10/finding-information-linux-c-library.html</id>
-        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
-        <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
-        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
-            <![CDATA[ <p>Developing on Linux often needs shared libraries most of the time. Below is a few references for finding the information about the libraries you are dealing with.</p>
-
-<h3 id="toc_0">1. Naming Convention</h3>
-<p>All C standard libraries on linux has the name convention <em>&ldquo;lib<strong>xxx</strong>&rdquo;</em>. If you search packages of a library, you can use the (debian) command below to look for it:</p>
-<div class="highlight"><pre><span class="nv">$ </span>apt-cache search libxxx
-</pre></div>
-
-<h3 id="toc_1">2. Library Packages</h3>
-<p>Usually, there are three packages of a library you could deal with. </p>
-
-<ul>
-<li>libxxx - this is the binary package of the shared library, usually has a &ldquo;lib<name>.so.<version>&rdquo; file on the path /usr/lib/ or /usr/local/lib. It is also needed at runtime.</li>
-<li>libxxx-dev - this is the package which enables you to compile and link the library.</li>
-<li>libxxx-dbg - this is the package which contains the debug symbols for debugging the program. where the files are usually installed at &ldquo;/usr/lib/debug/&rdquo;.</li>
-</ul>
-<p>If you want to know what files are installed on you system of a package, below are a few commands to do so:</p>
-<div class="highlight"><pre><span class="nv">$ </span>dpkg-query -L &lt;package_name&gt;
-<span class="nv">$ </span>dpkg-query -c &lt;.deb_file&gt;
-
-<span class="c"># if you want to check files without installing the package</span>
-<span class="c"># use the apt-file program(it will cache the file lists of all packages)</span>
-<span class="nv">$ </span>apt-file update
-<span class="nv">$ </span>apt-file list &lt;package_name&gt;
-</pre></div>
-
-<h3 id="toc_2">3. List Libraries on Your System</h3>
-<p>Below command can list all the share libraries and their locations, so you could whether a libray is installed and registered on which path.</p>
-<div class="highlight"><pre><span class="nv">$ </span>ldconfig -p
-
-<span class="c"># find a library(SDL) for example</span>
-<span class="nv">$ </span>ldconfig -p | grep -i sdl
-</pre></div>
-<p>For the <code>ld</code> program, it searches &ldquo;/usr/lib/&rdquo; for libraries by default, but it also include the paths defined in &ldquo;/etc/ld.so.conf&rdquo; and &ldquo;/etc/ld.so.conf.d/&rdquo;.</p>
-
-<h3 id="toc_3">4. Checking The Information of Library Files</h3>
-<p>A library usually contains two parts: static(.a) and shared(.so). You can check the both parts with the commands below:</p>
-<div class="highlight"><pre><span class="c"># listing object files in static (archive) library</span>
-<span class="nv">$ </span>ar tf /usr/lib/i386-linux-gnu/libSDL2.a
-SDL.o
-SDL_assert.o
-SDL_error.o
-SDL_hints.o
-SDL_log.o
-...
-
-<span class="c"># listing symbols in object files(.o), archive library(.a), and shared library(.so)</span>
-<span class="nv">$ </span>nm object.o
-<span class="nv">$ </span>nm lib.a
-<span class="nv">$ </span>nm -D lib.so 
-<span class="nv">$ </span>nm --dynamic lib.so
-</pre></div>
-
-<h3 id="toc_4">5. Development Reference</h3>
-<p>Usually the &ldquo;-dev&rdquo; package contains some documentation or example files under path &ldquo;/usr/share/doc/lib<name>-dev/&rdquo;. It is very useful to checkout these materials locally. For examples:</p>
-<div class="highlight"><pre><span class="c"># open the documentation home page(xdg-open is a general command to open file, you can replace it with &quot;iceaweasel&quot; etc.)</span>
-<span class="nv">$ </span>xdg-open /usr/share/doc/libusb-dev/html/index.html
-
-<span class="c"># extract the examples </span>
-<span class="nv">$ </span>tar -zxvf /usr/share/doc/libsdl2-dev/examples/examples.tar.gz
-</pre></div>
-
-<h3 id="toc_5">6. More Information</h3>
-<p>Static, Shared Dynamic and Loadable Linux Libraries <br/>
-<a href="http://www.yolinux.com/TUTORIALS/LibraryArchives-StaticAndDynamic.html">http://www.yolinux.com/TUTORIALS/LibraryArchives-StaticAndDynamic.html</a><br/>
-Program Library HOWTO <br/>
-<a href="http://tldp.org/HOWTO/Program-Library-HOWTO/index.html">http://tldp.org/HOWTO/Program-Library-HOWTO/index.html</a></p>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[A Guide of Common Git Tasks]]></title>
-        <author><name>terryoy</name></author>
-        <link href="http://terryoy.github.io/2014/10/common-git-commands.html"/>
-        <published>2014-10-22T20:57:00+08:00</published>
-        <updated>2017-03-10T18:44:00+08:00</updated>
-        <id>http://terryoy.github.io/2014/10/common-git-commands.html</id>
-        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
-        <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
-        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
-            <![CDATA[ <h3 id="toc_0">1. Initialize a Git project</h3>
-<p>Usually, starting a git project include&#39;s the following steps:</p>
-
-<ul>
-<li>initialize local repository</li>
-<li>add a remote repository from server</li>
-<li>set up-stream and push to remote repository</li>
-</ul>
-<div class="highlight"><pre><span class="c"># initialize a repository</span>
-<span class="nv">$ </span>git init
-
-<span class="c"># set a new remote</span>
-<span class="nv">$ </span>git remote add origin https://github.com/user/repo.git
-
-<span class="c"># verify new remote</span>
-<span class="nv">$ </span>git remote -v
-
-<span class="c"># (you might need to pull origin/master first if it&#39;s not empty)</span>
-<span class="nv">$ </span>git pull origin master
-
-<span class="c"># push to remote repository</span>
-<span class="nv">$ </span>git push --set-upstream origin master
-</pre></div>
-
-<h3 id="toc_1">2. Correct mistakes on the repository</h3>
-<p>Usually there are some mistakes we will commit to git repository, so here are a few tips to correct the mistakes:</p>
-
-<ul>
-<li>Change file name/path</li>
-<li>Unstage files</li>
-<li>Remove sensitive data, or binary data in the history </li>
-</ul>
-<div class="highlight"><pre><span class="c"># change or delete files in the current version</span>
-<span class="c"># -- you should not simple use the common shell command &quot;mv&quot; and &quot;rm&quot;, </span>
-<span class="c"># -- because that will lose the tracking. You should use with git instead</span>
-<span class="nv">$ </span>git rm &lt;somefile&gt;
-<span class="nv">$ </span>git mv &lt;somefile&gt; &lt;otherfile&gt;
-
-
-<span class="c"># Unstage files</span>
-<span class="c"># -- usually when you execute &quot;git status&quot;, it will prompt you how to unstage files (e.g. &#39;(use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)&#39;)</span>
-<span class="nv">$ </span>git reset HEAD &lt;file&gt;...
-<span class="c"># -- (or, in some cases)</span>
-<span class="nv">$ </span>git rm --cached &lt;file&gt;
-
-<span class="c"># Remove sensitive data</span>
-<span class="c"># -- This one is more difficult. </span>
-<span class="c"># check this link: https://help.github.com/articles/remove-sensitive-data/</span>
-</pre></div>
-
-<h3 id="toc_2">3. Using Proxy to work with server</h3>
-<p>You can use openssh to create an ssh tunnel with a remote server, and then communicate with git server with this tunnel proxy.</p>
-<div class="highlight"><pre><span class="c"># Socks</span>
-ssh -D &lt;local_proxy_port&gt; &lt;remote_user&gt;@&lt;remote_server&gt; -p &lt;remote_ssh_port&gt;
-<span class="c"># HTTPS for one site:</span>
-ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt; &lt;ssh_user&gt;@&lt;ssh_server&gt; -p &lt;ssh_port&gt;
-</pre></div>
-<p>Using git with proxies:</p>
-<div class="highlight"><pre><span class="c"># proxy for https</span>
-<span class="nb">export </span><span class="nv">https_proxy</span><span class="o">=</span>&lt;http_proxy_host&gt;:&lt;http_proxy_port&gt;
-<span class="c"># socks4 proxy for http</span>
-<span class="nb">export </span><span class="nv">http_proxy</span><span class="o">=</span>socks://&lt;socks4_proxy_host&gt;:&lt;socks4_proxy_port&gt;
-<span class="c"># socks5 proxy for https</span>
-<span class="nb">export </span><span class="nv">https_proxy</span><span class="o">=</span>socks5://&lt;socks5_proxy_host&gt;:&lt;socks5_proxy_port&gt;
-</pre></div>
-<p>* If in some blocked environment that can only access HTTP/HTTPS, you can consider changing your ssh service port to 80/443.</p>
-
-<h3 id="toc_3">4. Create a private Git repo on your SSH server</h3>
-<p>(reference: <a href="http://git-scm.com/book/en/v2/Git-on-the-Server-Setting-Up-the-Server">git-scm.com/book/en/v2/Git-on-the-Server-Setting-Up-the-Server</a>)</p>
-<div class="highlight"><pre><span class="c"># create a git user for remote access(optional)</span>
-<span class="nv">$ </span>sudo adduser git
-<span class="nv">$ </span><span class="nb">cd</span> /home/git/ <span class="o">&amp;&amp;</span> mkdir .ssh <span class="o">&amp;&amp;</span> chmod 700 .ssh
-<span class="nv">$ </span>touch .ssh/authorized_keys <span class="o">&amp;&amp;</span> chmod 600 .ssh/authorized_keys
-<span class="nv">$ </span>cat /tmp/id_rsa.someone.pub &gt;&gt; .ssh/authorized_keys
-
-<span class="c"># create a server repo with </span>
-<span class="nv">$ </span>mkdir -p /opt/git/somerepo.git
-<span class="nv">$ </span><span class="nb">cd</span> /opt/git/somerepo.git
-<span class="nv">$ </span>git init --bare
-
-<span class="c"># create a local git repo(on your PC) and push to server repo</span>
-<span class="nv">$ </span><span class="nb">cd </span>myproject
-<span class="nv">$ </span>git init
-<span class="nv">$ </span>git add . <span class="o">&amp;&amp;</span> git commit -m <span class="s2">&quot;initial commit&quot;</span>
-<span class="nv">$ </span>git remote add origin git@gitserver:/opt/git/somerepo.git
-<span class="nv">$ </span>git push origin master
-</pre></div>
-
-<h3 id="toc_4">5. Tagging</h3>
-<div class="highlight"><pre><span class="c"># list your tags</span>
-<span class="nv">$ </span>git tag
-<span class="c"># search for tags</span>
-<span class="nv">$ </span>git tag -l <span class="s2">&quot;v1.8.*&quot;</span>
-
-<span class="c"># create a tag with annotation</span>
-<span class="nv">$ </span>git tag -a v1.0.1 -m <span class="s2">&quot;a new tag for v1.0.1&quot;</span>
-<span class="c"># create a tag for a previous commit(for example, 902acd...)</span>
-<span class="nv">$ </span>git tag -a v1.0.0 902acd
-
-<span class="c"># show tag info</span>
-<span class="nv">$ </span>git show v1.0.1
-
-<span class="c"># push a tag to remote server</span>
-<span class="nv">$ </span>git push origin v1.0.1
-<span class="c"># or push tags</span>
-<span class="nv">$ </span>git push origin --tags 
-
-<span class="c"># You can also checkout the tags like the same way you checkout branches</span>
-<span class="nv">$ </span>git checkout -b version2 v2.0.0
-
-<span class="c"># delete a tag</span>
-<span class="nv">$ </span>git tag -d <span class="s2">&quot;v1.0.1a&quot;</span>
-</pre></div>
-
-<h3 id="toc_5">6. Amend Logs</h3>
-<div class="highlight"><pre><span class="c"># Method 1:</span>
-<span class="c"># fix something after git commit</span>
-<span class="nv">$ </span>git commit -m <span class="s2">&quot;something wrong&quot;</span>
-<span class="nv">$ </span>git add &lt;...&gt;
-<span class="nv">$ </span>git rm &lt;...&gt;
-
-<span class="c"># apply changes and update log to last commit</span>
-<span class="nv">$ </span>git commit --amend
-
-<span class="c"># Method 2:</span>
-<span class="c"># Make the last commit as unstage changes</span>
-<span class="nv">$ </span>git commit -m <span class="s2">&quot;something wrong&quot;</span>
-<span class="nv">$ </span>git reset HEAD~1
-<span class="c"># ... fix things</span>
-<span class="c"># Apply the changes and commit again</span>
-<span class="nv">$ </span>git commit --amend
-</pre></div>
-
-<h3 id="toc_6">7. Working with drafts (stashing)</h3>
-<div class="highlight"><pre><span class="c"># Save current uncommitted change to stash</span>
-<span class="nv">$ </span>git stash
-
-<span class="c"># List existing stash</span>
-<span class="nv">$ </span>git stash list
-
-<span class="c"># recover last stash</span>
-<span class="nv">$ </span>git stash apply
-
-<span class="c"># recover previous stashes</span>
-<span class="nv">$ </span>git stash apply stash@<span class="o">{</span>1<span class="o">}</span>
-
-<span class="c"># Delete stashes</span>
-<span class="nv">$ </span>git stash drop stash@<span class="o">{</span>0<span class="o">}</span>
-</pre></div>
-<p>Reference for git stash: <a href="https://git-scm.com/docs/git-stash">https://git-scm.com/docs/git-stash</a></p>
-
-<h3 id="toc_7">8. Merge a specific commit to current branch</h3>
-<p>Git has a <code>cherry-pick</code> function that can merge a specific commit to the current branch, this save me once. :P</p>
-<div class="highlight"><pre><span class="c"># merge a sequence of commits to the current branch, </span>
-<span class="nv">$ </span>git cherry-pick &lt;commits...&gt;
-</pre></div>
-<p>When you try to merge a commit, you will possibly cause some conflict. The cherry-pick function also has some features to help you.</p>
-<div class="highlight"><pre><span class="c"># continue the job after you resolve the conflicts</span>
-<span class="nv">$ </span>git cherry-pick --continue
-
-<span class="c"># forget current job in the sequence progress</span>
-<span class="nv">$ </span>git cherry-pick --quit
-
-<span class="c"># clear all the sequence and recover to the pre-sequence state</span>
-<span class="nv">$ </span>git cherry-pick --abort
-</pre></div>
-
-<h3 id="toc_8">9. Reverting commits</h3>
-<p>There are two types of resetting the branch to a previous state: 1. delete unpublished commits locally, 2. Undo published commits with new commits.</p>
-<p>Using <code>git reset</code> can help resetting current state.</p>
-<div class="highlight"><pre><span class="c"># delete the local commits and restore to the previous commit state</span>
-<span class="nv">$ </span>git reset --hard &lt;commit&gt;
-
-<span class="c"># if you have local uncommit changes, you should save as stash first</span>
-<span class="nv">$ </span>git stash
-<span class="nv">$ </span>git reset --hard &lt;commit&gt;
-<span class="nv">$ </span>git stash pop
-</pre></div>
-<p>Using <code>git revert</code> is to make a new commit to revert previous changes(specificly).</p>
-<div class="highlight"><pre><span class="c"># cancel specific changes</span>
-<span class="nv">$ </span>git revert &lt;commit1&gt; &lt;commit2&gt; ...
-
-<span class="c"># cancel range of commits</span>
-<span class="nv">$ </span>git revert e647032...cee8902
-<span class="c"># cancel last two commits</span>
-<span class="nv">$ </span>git revert HEAD~2...HEAD
-</pre></div>
-<p><font color="red">If you&#39;ve really push something wrong to github, or merging with a wrong branch which you want to recover. You could do th below things with specifc care:</font></p>
-<div class="highlight"><pre><span class="c"># (it&#39;s strongly recommended to create a backup branch first!!!)</span>
-<span class="c"># **this line recover back to a specific commit, and all the later commits will be lost!!!</span>
-<span class="nv">$ </span>git reset --hard &lt;commit&gt;
-<span class="nv">$ </span>git push --force origin &lt;branch_name&gt;
-</pre></div>
-<p><a href="http://stackoverflow.com/questions/4114095/how-to-revert-git-repository-to-a-previous-commit">Ref to git revert</a>.</p>
 ]]>
         </content>
     </entry>

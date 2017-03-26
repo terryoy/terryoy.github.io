@@ -7,6 +7,16 @@
 ------------------------------
 
 
+### 0. Setup
+
+```bash
+
+$ sudo apt-get install mysql-server
+$ mysql -u root -p <root_password>
+
+```
+
+
 ### 1. Create the database
 
 ```sql

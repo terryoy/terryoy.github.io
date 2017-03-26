@@ -64,7 +64,7 @@ $ sudo service postgresql restart
 
 ```
 
-### 3. MIgrating Data
+### 3. Migrating Data
 
 When migrating database, usually we use migrate files with SQL and CSV format. Since SQL scripts are probably not compatible with different database provider(e.g. postgresql vs mysql), sometimes it's easier to parse data with CSV format, while SQL files are convenient to dump and import schemas between postgresql databases.
 

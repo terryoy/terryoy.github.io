@@ -3,9 +3,27 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/guides/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/guides/" />
-    <updated>2017-03-10T18:44:00+08:00</updated>
+    <updated>2017-03-10T22:22:41+08:00</updated>
     <id>http://terryoy.github.io/guides/</id>
     <entry>
+        <title type="html"><![CDATA[Usage for Redis on Linux]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2017/03/linux-redis-usage.html"/>
+        <published>2017-03-10T22:20:00+08:00</published>
+        <updated>2017-03-10T22:22:41+08:00</updated>
+        <id>http://terryoy.github.io/2017/03/linux-redis-usage.html</id>
+        <category scheme="http://terryoy.github.io/tag/#database" term="database" label="database" />
+        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <h3 id="toc_0">0. Setup</h3>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install redis-server
+
+<span class="c"># login redis</span>
+<span class="nv">$ </span>redis-cli
+</pre></div>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[Frontend Workflow Toolbox Summary]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/09/frontend-workflow-summary.html"/>
@@ -1035,17 +1053,22 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/06/create-database-mysql.html"/>
         <published>2014-06-04T14:40:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
+        <updated>2017-03-10T22:14:29+08:00</updated>
         <id>http://terryoy.github.io/2014/06/create-database-mysql.html</id>
         <category scheme="http://terryoy.github.io/tag/#database" term="database" label="database" />
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
-            <![CDATA[ <h3 id="toc_0">1. Create the database</h3>
+            <![CDATA[ <h3 id="toc_0">0. Setup</h3>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install mysql-server
+<span class="nv">$ </span>mysql -u root -p &lt;root_password&gt;
+</pre></div>
+
+<h3 id="toc_1">1. Create the database</h3>
 <div class="highlight"><pre><span class="k">CREATE</span> <span class="k">DATABASE</span> <span class="n">mytestdb</span><span class="p">;</span>
 <span class="k">show</span> <span class="n">databases</span><span class="p">;</span>
 </pre></div>
 
-<h3 id="toc_1">2. Create a user and grant access</h3>
+<h3 id="toc_2">2. Create a user and grant access</h3>
 <div class="highlight"><pre><span class="k">CREATE</span> <span class="k">USER</span> <span class="s1">&#39;myuser&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span> <span class="n">IDENTIFIED</span> <span class="k">BY</span> <span class="s1">&#39;my_password&#39;</span><span class="p">;</span>
 
 <span class="k">GRANT</span> <span class="k">ALL</span> <span class="k">PRIVILEGES</span> <span class="k">ON</span> <span class="n">mytestdb</span><span class="p">.</span><span class="o">*</span> <span class="k">TO</span> <span class="s1">&#39;myuser&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="p">;</span> 
@@ -1054,11 +1077,11 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
 <span class="k">GRANT</span> <span class="k">ALL</span> <span class="k">PRIVILEGES</span> <span class="k">ON</span> <span class="n">mytestdb</span><span class="p">.</span><span class="o">*</span> <span class="k">TO</span> <span class="s1">&#39;admin&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span> <span class="k">WITH</span> <span class="k">GRANT</span> <span class="k">OPTION</span><span class="p">;</span>
 </pre></div>
 
-<h3 id="toc_2">3. Login with the User</h3>
+<h3 id="toc_3">3. Login with the User</h3>
 <div class="highlight"><pre>mysql -u myuser -p mytestdb
 </pre></div>
 
-<h3 id="toc_3">4. Import a SQL dump into database</h3>
+<h3 id="toc_4">4. Import a SQL dump into database</h3>
 <div class="highlight"><pre><span class="n">USE</span> <span class="n">mytestdb</span><span class="p">;</span>
 <span class="k">source</span> <span class="n">db_dump</span><span class="p">.</span><span class="k">sql</span><span class="p">;</span>
 </pre></div>
