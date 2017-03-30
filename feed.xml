@@ -3,14 +3,14 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2017-03-26T17:23:54+08:00</updated>
+    <updated>2017-03-30T21:35:51+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
         <title type="html"><![CDATA[Python Function Decorators and The Use in Django]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2017/03/python-decorators-and-use-in-django.html"/>
         <published>2017-03-26T16:26:00+08:00</published>
-        <updated>2017-03-26T17:23:54+08:00</updated>
+        <updated>2017-03-30T21:35:51+08:00</updated>
         <id>http://terryoy.github.io/2017/03/python-decorators-and-use-in-django.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -104,7 +104,38 @@
 </pre></div>
 
 <h3 id="toc_2">3. Example: using decorator in Django views</h3>
-<p>(to be written)</p>
+<p>It is very common that you want to write decorators for the request in views.py. For example, Django itself provides <a href="https://docs.djangoproject.com/en/1.10/topics/http/decorators/">a list of decorators</a> that you can use in certain scenarios, such as restricting HTTP methods, or cache controls. There are also other examples that could be consider: logging requests or checking auth tokens.</p>
+<p>Here I write a very simple example that logs requests which a specified module name. We will have to use a new feature here that passes arguments between functions, because Django view methods can accept arguments defined in URL patterns.</p>
+<div class="highlight"><pre><span class="c"># a request log decorator which you can define the module</span>
+<span class="k">def</span> <span class="nf">log_request</span><span class="p">(</span><span class="n">module</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">decorator_wrapper</span><span class="p">(</span><span class="n">view_func</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">func_wrapper</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">&#39;[{0}] {1} {2} {3}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">get_host</span><span class="p">(),</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">()))</span>
+            <span class="k">return</span> <span class="n">view_func</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">func_wrapper</span>
+    <span class="k">return</span> <span class="n">decorator_wrapper</span>
+
+
+<span class="c"># use in views.py</span>
+<span class="nd">@log_request</span><span class="p">(</span><span class="n">module</span><span class="o">=</span><span class="s">&quot;Book&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">book_detail</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">book_id</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s">&#39;Book info: {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">book_id</span><span class="p">))</span>
+
+
+<span class="c"># URL patterns</span>
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">url</span><span class="p">(</span><span class="s">r&#39;^book/(?P&lt;book_id&gt;\d+/info$&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">book_detail</span><span class="p">),</span>
+    <span class="c"># ...</span>
+<span class="p">]</span>
+</pre></div>
+<p>Test in command line:</p>
+<div class="highlight"><pre><span class="c"># test in shell, and see the book id correctly returned</span>
+<span class="nv">$ </span>curl http://localhost/book/1/info
+Book info: 1
+
+<span class="c"># check the log in server console, everything is shown</span>
+<span class="o">[</span>Book<span class="o">]</span> localhost:8000 GET /v1/book/1/info
+</pre></div>
 
 <h3 id="toc_3">Reference</h3>
 <p>Reference: <a href="http://thecodeship.com/patterns/guide-to-python-function-decorators/">thecodeship.com/patterns/guide-to-python-function-decorators/</a></p>

@@ -112,9 +112,49 @@ greet('Terry')
 
 ### 3. Example: using decorator in Django views
 
-(to be written)
+It is very common that you want to write decorators for the request in views.py. For example, Django itself provides [a list of decorators](https://docs.djangoproject.com/en/1.10/topics/http/decorators/) that you can use in certain scenarios, such as restricting HTTP methods, or cache controls. There are also other examples that could be consider: logging requests or checking auth tokens.
+
+Here I write a very simple example that logs requests which a specified module name. We will have to use a new feature here that passes arguments between functions, because Django view methods can accept arguments defined in URL patterns.
 
 
+```python
+
+# a request log decorator which you can define the module
+def log_request(module=""):
+    def decorator_wrapper(view_func):
+        def func_wrapper(request, *args, **kwargs):
+            print('[{0}] {1} {2} {3}'.format(module, request.get_host(), request.method, request.get_full_path()))
+            return view_func(request, *args, **kwargs)
+        return func_wrapper
+    return decorator_wrapper
+
+
+# use in views.py
+@log_request(module="Book")
+def book_detail(request, book_id):
+    return HttpResponse('Book info: {0}'.format(book_id))
+
+
+# URL patterns
+urlpatterns = [
+    url(r'^book/(?P<book_id>\d+/info$', views.book_detail),
+    # ...
+]
+
+```
+
+Test in command line:
+
+```bash
+
+# test in shell, and see the book id correctly returned
+$ curl http://localhost/book/1/info
+Book info: 1
+
+# check the log in server console, everything is shown
+[Book] localhost:8000 GET /v1/book/1/info
+
+```
 
 ### Reference
 
