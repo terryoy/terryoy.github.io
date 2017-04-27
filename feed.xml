@@ -3,7 +3,7 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2017-03-30T21:35:51+08:00</updated>
+    <updated>2017-04-27T16:20:42+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
         <title type="html"><![CDATA[Python Function Decorators and The Use in Django]]></title>
@@ -1252,7 +1252,7 @@ top level routines
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2015/02/create-ssl-ca-root-and-self-sign.html"/>
         <published>2015-02-23T11:03:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
+        <updated>2017-04-27T16:20:42+08:00</updated>
         <id>http://terryoy.github.io/2015/02/create-ssl-ca-root-and-self-sign.html</id>
         <category scheme="http://terryoy.github.io/tag/#server" term="server" label="server" />
         <category scheme="http://terryoy.github.io/tag/#security" term="security" label="security" />
@@ -1337,6 +1337,11 @@ Common Name <span class="o">(</span>e.g. server FQDN or YOUR name<span class="o"
 <div class="highlight"><pre><span class="k">auto</span> <span class="n">path</span> <span class="o">=</span> <span class="n">FileUtils</span><span class="o">::</span><span class="n">getInstance</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">fullPathForFilename</span><span class="p">(</span><span class="s">&quot;my_cacert.pem&quot;</span><span class="p">);</span>
 <span class="n">HttpClient</span><span class="o">::</span><span class="n">getInstance</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">setSSLVerification</span><span class="p">(</span><span class="n">path</span><span class="p">);</span>
 </pre></div>
+
+<h3 id="toc_5">6. ACME Client</h3>
+<p><em>Update@2017: now you can use ACME clients and some free certificate service for personal HTTPS web sites.</em></p>
+<p>AMCE is short for Automatic Certificate Management Environment, which requires you to run a client on your server to provide checking of the ownership of your server and domain name, and provide signed certificates based on the result.</p>
+<p>Check out more information for the Free SSL/TLS Certificates: <a href="https://letsencrypt.org">letsencrypt.org</a></p>
 ]]>
         </content>
     </entry><entry>

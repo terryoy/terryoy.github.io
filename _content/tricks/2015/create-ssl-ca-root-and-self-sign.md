@@ -118,6 +118,12 @@ HttpClient::getInstance()->setSSLVerification(path);
 
 ```
 
+### 6. ACME Client
 
+_Update@2017: now you can use ACME clients and some free certificate service for personal HTTPS web sites._
+
+AMCE is short for Automatic Certificate Management Environment, which requires you to run a client on your server to provide checking of the ownership of your server and domain name, and provide signed certificates based on the result.
+
+Check out more information for the Free SSL/TLS Certificates: <https://letsencrypt.org>
 
 
