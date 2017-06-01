@@ -48,13 +48,15 @@
 <pre><code>set smartindent
 set tabstop=4
 set shiftwidth=4
-set expandtab</code></pre>
+set expandtab
+set number</code></pre>
 
 <ol>
 <li>smartindent - Do smart autoindenting when starting a new line for C-like programs.</li>
 <li>tabstop - Number of spaces that a <Tab> in the file counts for.</li>
 <li>shiftwidth - Number of spaces to use for each step of (auto)indent.</li>
 <li>expandtab - Spaces are used in indents with <Tab>.</li>
+<li>number(nu) - Show line number</li>
 </ol>
 
 <h3 id="toc_1">2. Color scheme</h3>
@@ -77,6 +79,28 @@ set expandtab</code></pre>
 <h4 id="toc_4">4.1 Set fixed width to 80 columns, and soft wrap text automatically</h4>
 
 <pre><code>:set columns=80</code></pre>
+
+<h4 id="toc_5">4.2 Set preference according to File Type</h4>
+<p>The file type plugin for Vim can help you set preferences for a specific file type.</p>
+
+<pre><code># Show detected file type
+:echo &amp;ft
+
+# List Vim's file types and syntax definitions
+:echo glob($VIMRUNTIME . '/ftplugin/*.vim')
+:echo glob($VIMRUNTIME . '/syntax/*.vim')
+
+# Check file type plugin status
+:filetype</code></pre>
+<p>If the file type detection is wrong or not recognized, you can set the file type:</p>
+
+<pre><code>:set filetype=html</code></pre>
+<p>Now if you want to add customize settings according to file type, you can edit a file under <code>~/.vim/ftplugin/&lt;filetype&gt;.vim</code> where <code>&lt;filetype&gt;</code> should be replace by the defined file type. For example:</p>
+
+<pre><code>$ vi ~/.vim/ftplugin/html.vim
+set ts=2
+set sw=2
+set expandtab</code></pre>
 
     
     

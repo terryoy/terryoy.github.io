@@ -110,7 +110,7 @@ config = {
                 "format": "%(message)s",
             },
             "detail": {
-                "format": "%(asctime)-15s %(levelname)s [%(name)s] %(message)s",
+                "format": "%(asctime)-15s %(levelname)s [%(name)s.%(funcName)s] %(message)s",
                 "datefmt": '%Y-%m-%d %H:%M:%S',
             },
         },

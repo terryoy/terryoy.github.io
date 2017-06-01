@@ -3,7 +3,7 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2017-04-27T16:20:42+08:00</updated>
+    <updated>2017-05-27T23:47:55+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
         <title type="html"><![CDATA[Python Function Decorators and The Use in Django]]></title>
@@ -474,7 +474,7 @@ ibus-daemon -drx
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/05/short-ref-python-logging.html"/>
         <published>2016-05-26T19:55:00+08:00</published>
-        <updated>2016-06-27T10:46:42+08:00</updated>
+        <updated>2017-05-27T23:47:55+08:00</updated>
         <id>http://terryoy.github.io/2016/05/short-ref-python-logging.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -556,7 +556,7 @@ ibus-daemon -drx
                 <span class="s">&quot;format&quot;</span><span class="p">:</span> <span class="s">&quot;</span><span class="si">%(message)s</span><span class="s">&quot;</span><span class="p">,</span>
             <span class="p">},</span>
             <span class="s">&quot;detail&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s">&quot;format&quot;</span><span class="p">:</span> <span class="s">&quot;</span><span class="si">%(asctime)-15s</span><span class="s"> </span><span class="si">%(levelname)s</span><span class="s"> [</span><span class="si">%(name)s</span><span class="s">] </span><span class="si">%(message)s</span><span class="s">&quot;</span><span class="p">,</span>
+                <span class="s">&quot;format&quot;</span><span class="p">:</span> <span class="s">&quot;</span><span class="si">%(asctime)-15s</span><span class="s"> </span><span class="si">%(levelname)s</span><span class="s"> [</span><span class="si">%(name)s</span><span class="s">.</span><span class="si">%(funcName)s</span><span class="s">] </span><span class="si">%(message)s</span><span class="s">&quot;</span><span class="p">,</span>
                 <span class="s">&quot;datefmt&quot;</span><span class="p">:</span> <span class="s">&#39;%Y-%m-</span><span class="si">%d</span><span class="s"> %H:%M:%S&#39;</span><span class="p">,</span>
             <span class="p">},</span>
         <span class="p">},</span>

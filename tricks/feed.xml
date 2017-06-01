@@ -3,7 +3,7 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/tricks/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/tricks/" />
-    <updated>2017-04-27T16:20:42+08:00</updated>
+    <updated>2017-05-27T23:47:55+08:00</updated>
     <id>http://terryoy.github.io/tricks/</id>
     <entry>
         <title type="html"><![CDATA[How I fix my Ubuntu with iRST(Intel Rapid Start Technology) Raid]]></title>
@@ -183,7 +183,7 @@ rescue&gt;boot
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/05/short-ref-python-logging.html"/>
         <published>2016-05-26T19:55:00+08:00</published>
-        <updated>2016-06-27T10:46:42+08:00</updated>
+        <updated>2017-05-27T23:47:55+08:00</updated>
         <id>http://terryoy.github.io/2016/05/short-ref-python-logging.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -265,7 +265,7 @@ rescue&gt;boot
                 <span class="s">&quot;format&quot;</span><span class="p">:</span> <span class="s">&quot;</span><span class="si">%(message)s</span><span class="s">&quot;</span><span class="p">,</span>
             <span class="p">},</span>
             <span class="s">&quot;detail&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s">&quot;format&quot;</span><span class="p">:</span> <span class="s">&quot;</span><span class="si">%(asctime)-15s</span><span class="s"> </span><span class="si">%(levelname)s</span><span class="s"> [</span><span class="si">%(name)s</span><span class="s">] </span><span class="si">%(message)s</span><span class="s">&quot;</span><span class="p">,</span>
+                <span class="s">&quot;format&quot;</span><span class="p">:</span> <span class="s">&quot;</span><span class="si">%(asctime)-15s</span><span class="s"> </span><span class="si">%(levelname)s</span><span class="s"> [</span><span class="si">%(name)s</span><span class="s">.</span><span class="si">%(funcName)s</span><span class="s">] </span><span class="si">%(message)s</span><span class="s">&quot;</span><span class="p">,</span>
                 <span class="s">&quot;datefmt&quot;</span><span class="p">:</span> <span class="s">&#39;%Y-%m-</span><span class="si">%d</span><span class="s"> %H:%M:%S&#39;</span><span class="p">,</span>
             <span class="p">},</span>
         <span class="p">},</span>
@@ -1184,7 +1184,7 @@ an non-existing item value: [ non-exist =</code></pre>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2013/09/vimrc.html"/>
         <published>2013-09-23T23:16:00+08:00</published>
-        <updated>2017-03-10T10:47:13+08:00</updated>
+        <updated>2017-05-05T10:52:49+08:00</updated>
         <id>http://terryoy.github.io/2013/09/vimrc.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#vim" term="vim" label="vim" />
@@ -1197,13 +1197,15 @@ an non-existing item value: [ non-exist =</code></pre>
 <pre><code>set smartindent
 set tabstop=4
 set shiftwidth=4
-set expandtab</code></pre>
+set expandtab
+set number</code></pre>
 
 <ol>
 <li>smartindent - Do smart autoindenting when starting a new line for C-like programs.</li>
 <li>tabstop - Number of spaces that a <Tab> in the file counts for.</li>
 <li>shiftwidth - Number of spaces to use for each step of (auto)indent.</li>
 <li>expandtab - Spaces are used in indents with <Tab>.</li>
+<li>number(nu) - Show line number</li>
 </ol>
 
 <h3 id="toc_1">2. Color scheme</h3>
@@ -1226,6 +1228,28 @@ set expandtab</code></pre>
 <h4 id="toc_4">4.1 Set fixed width to 80 columns, and soft wrap text automatically</h4>
 
 <pre><code>:set columns=80</code></pre>
+
+<h4 id="toc_5">4.2 Set preference according to File Type</h4>
+<p>The file type plugin for Vim can help you set preferences for a specific file type.</p>
+
+<pre><code># Show detected file type
+:echo &amp;ft
+
+# List Vim's file types and syntax definitions
+:echo glob($VIMRUNTIME . '/ftplugin/*.vim')
+:echo glob($VIMRUNTIME . '/syntax/*.vim')
+
+# Check file type plugin status
+:filetype</code></pre>
+<p>If the file type detection is wrong or not recognized, you can set the file type:</p>
+
+<pre><code>:set filetype=html</code></pre>
+<p>Now if you want to add customize settings according to file type, you can edit a file under <code>~/.vim/ftplugin/&lt;filetype&gt;.vim</code> where <code>&lt;filetype&gt;</code> should be replace by the defined file type. For example:</p>
+
+<pre><code>$ vi ~/.vim/ftplugin/html.vim
+set ts=2
+set sw=2
+set expandtab</code></pre>
 ]]>
         </content>
     </entry><entry>
