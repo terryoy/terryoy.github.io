@@ -3,14 +3,206 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2017-05-27T23:47:55+08:00</updated>
+    <updated>2017-11-06T20:37:45+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
+        <title type="html"><![CDATA[Basic Usage for Docker]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2017/11/docker-basic.html"/>
+        <published>2017-11-06T16:12:00+08:00</published>
+        <updated>2017-11-06T20:34:37+08:00</updated>
+        <id>http://terryoy.github.io/2017/11/docker-basic.html</id>
+        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <p>Just to keep some notes when started to use docker for my development projects.</p>
+
+<h3 id="toc_0">0. Get Started</h3>
+<p>For my mac, download the .dmg file from official web site. Then it will run a program with a task icon in the top bar.</p>
+<p>After the program has been initialized, you can open a terminal and try a few commands:</p>
+<div class="highlight"><pre><span class="c"># check versions</span>
+<span class="nv">$ </span>docker --version
+<span class="nv">$ </span>docker-compose --version
+<span class="nv">$ </span>docker-machien --version
+
+<span class="c"># Current images</span>
+<span class="nv">$ </span>docker images
+
+<span class="c"># Running instances</span>
+<span class="nv">$ </span>docker ps
+</pre></div>
+
+<h3 id="toc_1">1. First Instance</h3>
+<p>The docker official Hello World image is small enough, which you can try as your first instance.</p>
+<div class="highlight"><pre><span class="nv">$ </span>docker run hello-world
+</pre></div>
+<p>The image does not exist locally currently, but docker will continue to try downloading it and then run it.</p>
+<p>Then, you wil see the image locally.</p>
+<div class="highlight"><pre><span class="nv">$ </span>docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+hello-world         latest              725dcfab7d63        2 days ago          1.84kB
+</pre></div>
+<p>However, the container for this image is not visible in the list because <strong>the process has existed</strong>. You need to use a <code>-a</code> parameter to see it:</p>
+<div class="highlight"><pre><span class="nv">$ </span>docker ps -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                     PORTS               NAMES
+c32eac048fda        hello-world         <span class="s2">&quot;/hello&quot;</span>            5 minutes ago       Exited <span class="o">(</span>0<span class="o">)</span> 5 minutes ago                       cranky_shaw
+</pre></div>
+
+<h3 id="toc_2">2. Server Instance</h3>
+<p>The Hello World container doesn&#39;t do anything. If you want to try something interesting, try the <a href="https://docs.docker.com/docker-for-mac/#explore-the-application-and-run-examples">nginx image</a> instead.</p>
+<div class="highlight"><pre><span class="nv">$ </span>docker run -d -p 8001:80 --name webserver1 nginx
+</pre></div>
+<p>I choose a different port for the server, just to show how the port mapping is handled. When you check the instance with <code>docker ps</code>, you can see the image name, instance name, and the port mapping and get the meaning. When the container is up, you can access <code>http://localhost:8001/</code> to see the nginx home page.</p>
+<div class="highlight"><pre><span class="nv">$ </span>docker ps 
+CONTAINER ID        IMAGE               COMMAND                  CREATED              STATUS              PORTS                  NAMES
+6f6ba1d3f285        nginx               <span class="s2">&quot;nginx -g &#39;daemon ...&quot;</span>   About a minute ago   Up About a minute   0.0.0.0:8001-&gt;80/tcp   webserver1
+
+<span class="nv">$ </span>docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+nginx               latest              40960efd7b8f        38 hours ago        108MB
+hello-world         latest              725dcfab7d63        2 days ago          1.84kB
+</pre></div>
+<p>A good point is that you can see how much disk usage every image uses. Now you can stop the service, or remove the unused resources by commands.</p>
+<div class="highlight"><pre><span class="c"># container life cycle methods</span>
+<span class="nv">$ </span>docker stop webserver1
+<span class="nv">$ </span>docker start webserver1
+<span class="nv">$ </span>docker restart webserver1
+
+
+<span class="c"># remove a container</span>
+<span class="nv">$ </span>docker rm webserver1
+
+<span class="c"># remove an image</span>
+<span class="nv">$ </span>docker rmi hello-world
+</pre></div>
+<p>You may wonder the file size of each containers, you can checkt it by <code>docker ps -s</code>. You can see a ubuntu core only uses very small space with the minimal setup.</p>
+<div class="highlight"><pre><span class="nv">$ </span>docker ps -s
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                  NAMES               SIZE
+070a6e845653        ubuntu              <span class="s2">&quot;/bin/bash&quot;</span>              About an hour ago   Up About an hour                           ubuntu              96.7MB <span class="o">(</span>virtual 219MB<span class="o">)</span>
+0200f61f5d65        nginx               <span class="s2">&quot;nginx -g &#39;daemon ...&quot;</span>   2 hours ago         Up 2 hours          0.0.0.0:5000-&gt;80/tcp   webserver           2B <span class="o">(</span>virtual 108MB<span class="o">)</span>
+</pre></div>
+
+<h3 id="toc_3">3. Other Settings</h3>
+<p>There are some Docker preferences also mentioned in the Get Started guide, which I should make some notes here:</p>
+
+<ul>
+<li><strong>Disk Image Location</strong>. on Mac, it is stored in a file called &ldquo;Docker.qcow2&rdquo; somewhere in ~/Library, and all the containers are store within this image. You can move it somewhere else.</li>
+<li><strong>Experimental features</strong>. It is not recommended for production environment, then I wonder why it is turned on by default on Mac.</li>
+<li>*<em>Registry, Configuration, and Certificates for the Daemon *</em>, use it when you needed.</li>
+</ul>
+
+<h3 id="toc_4">4. Docker for Mac vs Docker Toolbox</h3>
+<p>Docker Toolbox is also installed by the .dmg installation. The programs include <code>docker-compose</code> and <code>docker-machine</code>.</p>
+
+<ul>
+<li>Docker for Mac is a Mac native  application, you get only one VM, and it is managed by Docker for Mac. The VM is used with a lightweight solution called HyperKit.</li>
+<li>Using Dokcker Toolbox, you can set up one or more VM and manage them.</li>
+</ul>
+
+<h3 id="toc_5">5. Docker Architecture</h3>
+<p>The Docker architecture can split into 3 parts:</p>
+
+<ul>
+<li>Docket Client, the <code>docker</code> cli tools for user to interact with docker daemon with Docker API.</li>
+<li>Docker Host, the service daemon <code>dockerd</code> listen for Docker API request and perform all kinds of management tasks about images, containers, networks, and volumns.</li>
+<li>Docker Registry, a cloud service which stores Docker images, such as Docker Hub and Docker Cloud(both are public registries).</li>
+</ul>
+
+<h4 id="toc_6">5.1 Docker Objects</h4>
+
+<ul>
+<li>Image, a read-only template with instructions for creating Docker container.</li>
+<li>Container, an instance of an image, with network, file system, etc. attached. You can create, delete, stop, resume containers.</li>
+<li>Service, allow you to scale containers across Docker daemons.</li>
+</ul>
+
+<h4 id="toc_7">5.2 The Underlying technology</h4>
+
+<ul>
+<li>Namespaces. When you run a container, Docker create a set of namespaces for the container, which provide a layer of isolation. The namespaces includes:
+
+<ul>
+<li><code>pid</code> for process</li>
+<li><code>net</code> for network interfaces</li>
+<li><code>ipc</code> for interprocess communication</li>
+<li><code>mnt</code> for file system</li>
+<li><code>uts</code> for kernel and version identifiers (Unix Timeshare System)</li>
+</ul></li>
+<li>Control Groups. A <code>cgroup</code> limits an application to a specific set of resources, and allow Docker Engine to share hardware resources to containers with optionally limits and constraints.</li>
+<li>Container Format. A combination of namespaces, control groups, and UnionFS, packed into a Wrapper. The default format is <code>libcontainer</code>.</li>
+</ul>
+<p>Refs:
+<a href="https://docs.docker.com/engine/docker-overview/#docker-architecture">Docker Architecture</a>
+<a href="https://store.docker.com/">Docker Store</a> is a market where you can distribute your images.</p>
+
+<h3 id="toc_8">6. Developing Apps with Docker</h3>
+<p>It&#39;s easy to setup Docker to deploy with your app. All you need to do is to add a <code>Dockerfile</code> in your source folder and then build the image. The official example demonstrate how a small flask app is built with Docker.</p>
+
+<h4 id="toc_9">6.1 First time image</h4>
+<p>I summarize the steps as below:</p>
+
+<ul>
+<li>Go to docker <a href="https://hub.docker.com/_/python/">hub</a> to find a target python image. It already has all kinds of  Dockerfile template for you to copy.</li>
+<li>Create a local copy of the Docker file. Make sure you understand the template and knows what to modify according to your app.</li>
+<li>Write a flask <code>app.py</code> and a <code>requirements.txt</code> as usual.</li>
+<li>Build the docker image and then run with it.</li>
+</ul>
+<div class="highlight"><pre><span class="c"># prepare the source files(...skipped here)</span>
+<span class="nv">$ </span>ls
+Dockerfile    app.py      requirements.txt
+
+<span class="c"># build the image</span>
+<span class="nv">$ </span>docker build -t slim-flask .
+
+<span class="c"># create and run the container</span>
+<span class="nv">$ </span>docker run -p 4000:80 slim-flask
+ * Running on http://0.0.0.0:80/ <span class="o">(</span>Press CTRL+C to quit<span class="o">)</span>
+</pre></div>
+<p>The result will be:</p>
+
+<ul>
+<li>Only a Dockerfile is added to your source, and others are still remain</li>
+<li>A Python docker image is downloaded, which takes the size of 156MB or 691MB depends on if you choose the &ldquo;slim&rdquo; version.</li>
+<li>A flask image for your app is genenrated, which contains the content from the original python image, the pip installed packages from requirements, and your source files. So the size is slightly bigger than the python image.</li>
+</ul>
+<div class="highlight"><pre><span class="nv">$ </span>docker images 
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+slim-flask          latest              3032f935f40c        10 seconds ago      166MB
+python              slim                a79297999298        45 hours ago        156MB
+</pre></div>
+
+<h4 id="toc_10">6.2 Create image from a container</h4>
+<p>However, sometimes you want to make configurations inside a container and want to save it as an image. You can do that:</p>
+<div class="highlight"><pre><span class="nv">$ </span>docker container commit <span class="o">[</span>options<span class="o">]</span> CONTAINER <span class="o">[</span>repository:<span class="o">[</span>TAG<span class="o">]]</span>
+
+<span class="c"># example</span>
+<span class="nv">$ </span>docker container commit ubuntu ubuntu-image
+</pre></div>
+
+<h4 id="toc_11">6.3 Publish docker image</h4>
+<p>Use it when it is needed.</p>
+<div class="highlight"><pre><span class="nv">$ </span>docker login             <span class="c"># Log in this CLI session using your Docker credentials</span>
+<span class="nv">$ </span>docker tag &lt;image&gt; username/repository:tag  <span class="c"># Tag &lt;image&gt; for upload to registry</span>
+<span class="nv">$ </span>docker push username/repository:tag            <span class="c"># Upload tagged image to registry</span>
+<span class="nv">$ </span>docker run username/repository:tag                   <span class="c"># Run image from a registry</span>
+</pre></div>
+
+<h3 id="toc_12">7. Docker mirrors</h3>
+
+<ul>
+<li>Docker(Official), <code>--registry-mirror=https://registry.docker-cn.com</code></li>
+<li>Netease, <a href="http://hub-mirror.c.163.com">hub-mirror.c.163.com</a></li>
+<li>USTC, <a href="https://docker.mirrors.ustc.edu.cn">docker.mirrors.ustc.edu.cn</a></li>
+<li>Daocloud &amp; Alicloud, need registration, and Alicloud needs an dev platform account.</li>
+</ul>
+<p><a href="https://ieevee.com/tech/2016/09/28/docker-mirror.html">source</a></p>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[Python Function Decorators and The Use in Django]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2017/03/python-decorators-and-use-in-django.html"/>
         <published>2017-03-26T16:26:00+08:00</published>
-        <updated>2017-03-30T21:35:51+08:00</updated>
+        <updated>2017-11-06T20:37:45+08:00</updated>
         <id>http://terryoy.github.io/2017/03/python-decorators-and-use-in-django.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -1426,157 +1618,6 @@ host    all             all             ::1/128                 md5
 <span class="nv">$ </span>pg_dump -a &lt;db_name&gt; &gt; export_data.sql
 <span class="nv">$ </span>pg_dump --data-only &lt;db_name&gt; &gt; export_data.sql
 </pre></div>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[A JNI Guide on Android]]></title>
-        <author><name>terryoy</name></author>
-        <link href="http://terryoy.github.io/2014/11/jni-guide-on-android.html"/>
-        <published>2014-11-27T16:06:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
-        <id>http://terryoy.github.io/2014/11/jni-guide-on-android.html</id>
-        <category scheme="http://terryoy.github.io/tag/#cpp" term="cpp" label="cpp" />
-        <category scheme="http://terryoy.github.io/tag/#android" term="android" label="android" />
-        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
-            <![CDATA[ <h3 id="toc_0">1. Begin a JNI Project</h3>
-<p>To create a JNI project in ADT, first is to setup NDK support for the workspace.  Open <em>&ldquo;Preferences&rdquo; -&gt; &ldquo;Android&rdquo; -&gt; &ldquo;NDK&rdquo;</em>, set the <em>NDK Locaiton</em> to your ndk root.</p>
-<p>After you create a new Android project, native support is not yet enabled. Right click on the project, and select <em>&ldquo;Android Tools&rdquo; -&gt; &ldquo;Add Native Support&hellip;&rdquo;</em>. It prompts a &ldquo;Library Name&rdquo; input for you to type in the native library name you want to use. On succeed, it will generate a &ldquo;jni&rdquo; folders containing a &ldquo;.cpp&rdquo; file and a &ldquo;Android.mk&rdquo; makefile.</p>
-<p><em>***a small hint on creating project: if you created an project without an initial activity (which it&#39;s possible when your only interest is in building an native app), you need to specify your MainActivity in the AndroidManifest.xml. On the &ldquo;Application&rdquo; sheet in Manifest editor, first add a &ldquo;Activity&rdquo; node, which connects to your Activity subclass; then create an &ldquo;Intent Filter&rdquo; node, and then an &ldquo;Action&rdquo; node and a &ldquo;Category&rdquo; node under the IntentFilter node. The Action node selects &ldquo;android.intent.action.MAIN&rdquo;, and the Category node selects &ldquo;android.intent.category.LAUNCHER&rdquo;.</em></p>
-
-<h3 id="toc_1">2. Information on Android.mk</h3>
-<p>The syntax of Android.mk is based on <a href="http://www.gnu.org/software/make/">GNU Make</a>. This file is only a snippet of the whole make process. The whole process also includes an Application.mk and a Android.mk provided by the NDK build system. </p>
-<div class="highlight"><pre><span class="c"># my-dir is a macro defined by Android, which provides the path for where the make file is.</span>
-<span class="nv">LOCAL_PATH</span> <span class="o">:=</span> <span class="k">$(</span>call my-dir<span class="k">)</span>
-
-<span class="c"># CLEAR_VARS clears all the &quot;LOCAL_*&quot; variables except &quot;LOCAL_PATH&quot;</span>
-<span class="cp">include $(CLEAR_VARS)</span>
-
-<span class="nv">LOCAL_MODULE</span>    <span class="o">:=</span> jnidemo <span class="c"># provide the lib name (e.g. libjnidemo.so), and also the name to load in Java Class</span>
-<span class="nv">LOCAL_SRC_FILES</span> <span class="o">:=</span> jnidemo.cpp <span class="c"># a source file list to compile and build into the library</span>
-
-<span class="c">#LOCAL_SHARE_LIBRARIES := avilib # (optional 1): if you depends on other libraries, you can load it here</span>
-
-<span class="c"># build the library</span>
-<span class="cp">include $(BUILD_SHARED_LIBRARY)</span>
-
-<span class="c">#$(call import-module,transcode/avilib) # (optional 2): put the 3rd party library outside project folder, under NDK_MODULE_PATH and import it using this line</span>
-</pre></div>
-<p><em>* If you have more than one library to build, just duplicate the part from &ldquo;include $(CLEAR_VARS)&rdquo; to &ldquo;include $(BUILD_SHARED_LIBRARY)&rdquo;.</em></p>
-<p><em>* NDK build also supports executable build, only by replacing &ldquo;include $(BUILD_SHARED_LIBRARY)&rdquo; with &ldquo;include $(BUILD_EXECUTABLE)&rdquo;, the output will also be in libs/<arch> folder, but will not be packed into an .apk file.</em></p>
-<p>_* If you need to trigger build under command line, go to the project root folder, and type <code>ndk-build</code> to build.</p>
-
-<h3 id="toc_2">3. Import JNI library in Java Class</h3>
-<p>Use the code below to load a library in the Java class.</p>
-<div class="highlight"><pre><span class="kd">static</span> <span class="o">{</span>
-    <span class="n">System</span><span class="o">.</span><span class="na">loadLibrary</span><span class="o">(</span><span class="s">&quot;jnidemo&quot;</span><span class="o">);</span>
-    <span class="c1">// System.load(&quot;c:/path/to/library.so&quot;); // this is not recommended since it would be platform dependent</span>
-<span class="o">}</span>
-</pre></div>
-
-<h3 id="toc_3">4. Working With Native Functions</h3>
-<p>There are two sides of the JNI interface: Java calling C/C++, and C/C++ calling Java. In Java, you can call a native funciton implmeneted by a C/C++ shared library; and in C/C++, you might also need to trigger Java methods inside C/C++ code. So let&#39;s talk about both respectively.</p>
-
-<h4 id="toc_4">4.1 Java Calling C/C++</h4>
-<p>In a Java class, you can define a native method which will be implmemented by C/C++ code. In this case, you can call native C/C++ functions from Java.</p>
-<div class="highlight"><pre><span class="n">Class</span> <span class="n">A</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">native</span> <span class="n">String</span> <span class="nf">stringFromJNI</span><span class="o">();</span> <span class="c1">// native method</span>
-
-    <span class="kd">static</span> <span class="o">{</span> <span class="c1">// load the shared library that contains the native method</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">loadLibrary</span><span class="o">(</span><span class="s">&quot;jnidemo&quot;</span><span class="o">);</span>
-    <span class="o">}</span> 
-<span class="o">}</span>
-</pre></div>
-<p>You can use <code>javah -classpath bin/classes com.teatime.jnidemo.A</code> to generate the C/C++ header for the java native methods. It will create a &ldquo;com_teatime_jnidemo_A.h&rdquo; file as below: </p>
-<div class="highlight"><pre><span class="cm">/* DO NOT EDIT THIS FILE - it is machine generated */</span>
-<span class="cp">#include &lt;jni.h&gt;</span>
-<span class="cm">/* Header for class com_teatime_jnidemo_A */</span>
-
-<span class="cp">#ifndef _Included_com_teatime_jnidemo_A</span>
-<span class="cp">#define _Included_com_teatime_jnidemo_A</span>
-<span class="cp">#ifdef __cplusplus</span>
-<span class="k">extern</span> <span class="s">&quot;C&quot;</span> <span class="p">{</span>
-<span class="cp">#endif</span>
-<span class="cm">/*</span>
-<span class="cm"> * Class:     com_teatime_jnidemo_A</span>
-<span class="cm"> * Method:    stringFromJNI</span>
-<span class="cm"> * Signature: ()Ljava/lang/String;</span>
-<span class="cm"> */</span>
-<span class="n">JNIEXPORT</span> <span class="n">jstring</span> <span class="n">JNICALL</span> <span class="n">Java_com_teatime_jnidemo_A_stringFromJNI</span>
-  <span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="p">,</span> <span class="n">jobject</span><span class="p">);</span>
-
-<span class="cp">#ifdef __cplusplus</span>
-<span class="p">}</span>
-<span class="cp">#endif</span>
-<span class="cp">#endif</span>
-</pre></div>
-<p>Here you can see the Java method signature is converted to something have similar meaning: &ldquo;jstring&rdquo; means the Java String class, &ldquo;jobject&rdquo; is for the object instance which calls  this method. </p>
-
-<hr/>
-<p>However, you don&#39;t really want to type this command to generate every file you make, so a more convenient way is to setup a &ldquo;Run -&gt; External Tools -&gt; External Tools Configurations&rdquo; to trigger it inside Eclipse IDE. The configuration will be like below: (note that the path segment is joined by &ldquo;:&rdquo; on mac/linux and &ldquo;;&rdquo; on windows)</p>
-
-<pre><code>Name: Generate C/C++ Header File
-Location: ${system_path:javah}
-Working Directory: ${project_loc}/jni
-Arguments: -classpath &quot;${project_classpath}:${env_var:ANDROID_SDK_HOME}/platforms/android-15/android.jar&quot; ${java_type_name}
-Refresh -&gt; Refresh Resources upon completions; The project containing the selected resource
-Common -&gt; Display in favourites menu -&gt; External Tools</code></pre>
-
-<hr/>
-<p>There are type mappings betwine Java and C as below. For more information you could check out the JNI document <a href="http://docs.oracle.com/javase/1.5.0/docs/guide/jni/spec/types.html">here</a>.</p>
-<p><img src="http://terryoy-github.u.qiniudn.com/blog/2014/jni_primitive_types.png" alt="Primitive Types"/>
-<img src="http://terryoy-github.u.qiniudn.com/blog/2014/jni_reference_types.gif" alt="Reference Types"/></p>
-
-<h4 id="toc_5">4.2 C/C++ Calling Java</h4>
-<p>In C/C++, you need to include <code>jni.h</code> and use <code>JNIEnv</code> to work with the Java methods in JVM. The JNIEnv object is to keep everything consistent inside JVM. </p>
-
-<blockquote>
-<p>typedef const struct JNINativeInterface *JNIEnv; </p>
-</blockquote>
-<p>There&#39;s a list of functions for JNIEnv object you can check out <a href="http://docs.oracle.com/javase/1.5.0/docs/guide/jni/spec/functions.html#wp23720">here</a></p>
-<p>For primitive types, you can  use directly convert to the c types directly. For  Here are some examples:</p>
-<div class="highlight"><pre><span class="c1">// primitive types</span>
-<span class="kt">int</span> <span class="n">cvalue</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
-<span class="n">jint</span> <span class="n">value</span> <span class="o">=</span> <span class="n">cvalue</span><span class="p">;</span>
-
-<span class="c1">// create Java string</span>
-<span class="n">jstring</span> <span class="n">javaString</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">NewStringUTF</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="s">&quot;Hello World!&quot;</span><span class="p">);</span>
-<span class="c1">// convert Java string to C string</span>
-<span class="k">const</span> <span class="n">jbyte</span> <span class="o">*</span><span class="n">str</span><span class="p">;</span>
-<span class="n">jboolean</span> <span class="n">isCopy</span><span class="p">;</span>
-<span class="n">str</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetStringUTFChars</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">javaString</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">isCopy</span><span class="p">);</span> <span class="c1">// isCopy tells the function to get a copy or return the original string</span>
-<span class="c1">// release string after GetStringChars/GetStringUTFChars</span>
-<span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">ReleaseStringUTFChars</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">javaString</span><span class="p">,</span> <span class="n">str</span><span class="p">);</span>
-
-<span class="c1">// operating array</span>
-<span class="n">jintArray</span> <span class="n">javaArray</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">NewIntArray</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
-<span class="k">if</span> <span class="p">(</span><span class="mi">0</span> <span class="o">!=</span> <span class="n">javaArray</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// this only creates a java array</span>
-    <span class="c1">// approach 1: you can ask for a C array pointer to operate on it</span>
-    <span class="n">jint</span><span class="o">*</span> <span class="n">nativeDirectArray</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetIntArrayElements</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">javaArray</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">isCopy</span><span class="p">);</span> <span class="c1">// isCopy tells the function to get a copy or the original</span>
-    <span class="c1">// ... do something</span>
-    <span class="c1">// release the pointer ref, otherwise will cause memory leak</span>
-    <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">ReleaseIntArrayElements</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">javaArray</span><span class="p">,</span> <span class="n">nativeDirectArray</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// last param can be: 0, JNI_COMMIT, JNI_ABORT</span>
-    <span class="c1">// 0: apply the content and release the native array</span>
-    <span class="c1">// JNI_COMMIT: apply the content, don&#39;t release the native array</span>
-    <span class="c1">// JNI_ABORT: don&#39;t apply the content, but release the array</span>
-
-    <span class="c1">// aproach 2: work with a local array, and submit changes when needed</span>
-    <span class="n">jint</span> <span class="n">nativeArray</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
-    <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetIntArrayRegion</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">javaArray</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">nativeArray</span><span class="p">);</span> <span class="c1">// copy the content to nativeArray</span>
-    <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">setIntArrayRegion</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">javaArray</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">nativeArray</span><span class="p">);</span> <span class="c1">// apply the changes back to the original array</span>
-<span class="p">}</span>
-
-<span class="c1">// calling a method</span>
-<span class="n">jmethodID</span> <span class="n">isntanceMethodId</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetMethodID</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">clazz</span><span class="p">,</span> <span class="s">&quot;instanceMethod&quot;</span><span class="p">,</span> <span class="s">&quot;()Ljava/lang/String;&quot;</span><span class="p">);</span>
-<span class="n">jstring</span> <span class="n">stringValue</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">CallStringMethod</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">instanceMethodId</span><span class="p">);</span>
-</pre></div>
-<p>Often you will need to checkout the method signature of the Java class, so that you can lookup the method in JNI interface. Here is a small trick to print the method signature in JNI style.</p>
-<div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd </span>bin/classes
-<span class="nv">$ </span>javap -s com.jnidemo.MyJNIClass
-</pre></div>
-
-<h3 id="toc_6">5. References</h3>
-<p>Best Practices for using Java Native Interface: <a href="http://www.ibm.com/developerworks/library/j-jni/">http://www.ibm.com/developerworks/library/j-jni/</a> <br/>
-JNI Documentation: <a href="http://docs.oracle.com/javase/1.5.0/docs/guide/jni/spec/jniTOC.html">http://docs.oracle.com/javase/1.5.0/docs/guide/jni/spec/jniTOC.html</a> <br/></p>
 ]]>
         </content>
     </entry>

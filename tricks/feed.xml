@@ -3,9 +3,145 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/tricks/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/tricks/" />
-    <updated>2017-05-27T23:47:55+08:00</updated>
+    <updated>2017-11-06T20:37:45+08:00</updated>
     <id>http://terryoy.github.io/tricks/</id>
     <entry>
+        <title type="html"><![CDATA[Python Function Decorators and The Use in Django]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2017/03/python-decorators-and-use-in-django.html"/>
+        <published>2017-03-26T16:26:00+08:00</published>
+        <updated>2017-11-06T20:37:45+08:00</updated>
+        <id>http://terryoy.github.io/2017/03/python-decorators-and-use-in-django.html</id>
+        <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <h3 id="toc_0">1. Basic of functions</h3>
+
+<ul>
+<li>Functions can be assign</li>
+<li>Functions can be defined inside a function</li>
+<li>Functions can be passed as a parameter and return as a returning value</li>
+<li>Inner functions have access to the enclosing scope</li>
+</ul>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;World&#39;</span><span class="p">):</span>
+   <span class="k">print</span><span class="p">(</span><span class="s">&#39;Hello, {0}!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">)))</span>
+
+<span class="c"># assign</span>
+<span class="n">bar</span> <span class="o">=</span> <span class="n">foo</span>
+<span class="n">bar</span><span class="p">()</span>
+<span class="c"># =&gt; Hello, world!</span>
+
+
+<span class="c"># Use in parameter and return as result</span>
+<span class="k">def</span> <span class="nf">greetings</span><span class="p">(</span><span class="n">call</span><span class="p">):</span>
+    <span class="n">welcome</span> <span class="o">=</span> <span class="s">&#39;Welcome back!&#39;</span> <span class="c"># the enclosing scope to &quot;greeting_to&quot;</span>
+
+    <span class="k">def</span> <span class="nf">greeting_to</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+        <span class="n">call</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">welcome</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">greeting_to</span>
+
+<span class="n">greet</span> <span class="o">=</span> <span class="n">greetings</span><span class="p">(</span><span class="n">bar</span><span class="p">)</span> <span class="c"># set bar as a greeting function</span>
+<span class="n">greet</span><span class="p">(</span><span class="s">&#39;Terry&#39;</span><span class="p">)</span> <span class="c"># use the return function to generate greetings</span>
+<span class="c"># =&gt; Hello, Terry!</span>
+<span class="c"># =&gt; Welcome, back!</span>
+</pre></div>
+
+<h3 id="toc_1">2. Decorators</h3>
+<p>A <strong>Function Decorator</strong> is a wrapper to an existing function, in which you can do some pre-process to the parameter or post-process to the returning value of the existing funciton.</p>
+<p>The function decorator in Python must follows the below rules:</p>
+
+<ul>
+<li>It is a function that accept a function parameter(like saying <em>&ldquo;a decorator to which function&rdquo;</em>)</li>
+<li>The decorator function must define and return a function as a result, so that the client gets something act similar to the existing function(act just like a function wrapper). </li>
+<li>Do the customizing things inside the wrapper function, and call the existing function eventually</li>
+</ul>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">greeting_decorator</span><span class="p">(</span><span class="n">call</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+        <span class="n">call</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Isn&#39;t it powerful?&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+
+<span class="c"># The decorator syntax</span>
+<span class="nd">@greeting_decorator</span>
+<span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;Hello, {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+
+<span class="n">greet</span><span class="p">(</span><span class="s">&#39;Terry&#39;</span><span class="p">)</span> <span class="c"># decorated function though the function name is the same as defined</span>
+<span class="c"># =&gt; Hello, Terry </span>
+<span class="c"># =&gt; Isn&#39;t it powerful?</span>
+</pre></div>
+<p>Decorators can be chained, and can also accept extra parameters when defining the customization to the function. However, decorators that accept parameters need to add another wrapper to the simple decorator.</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">room</span><span class="p">(</span><span class="n">room_name</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">decorator_wrapper</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">&quot;Enter room: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">room_name</span><span class="p">))</span>
+            <span class="n">func</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">wrapper</span>
+    <span class="k">return</span> <span class="n">decorator_wrapper</span>
+
+<span class="k">def</span> <span class="nf">leave_on_greet</span><span class="p">(</span><span class="n">greet_func</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">greeting_wrapper</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+        <span class="n">greet_func</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Thanks, I&#39;m leaving&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">greeting_wrapper</span>
+
+
+<span class="nd">@room</span><span class="p">(</span><span class="s">&#39;Matrix&#39;</span><span class="p">)</span>
+<span class="nd">@leave_on_greet</span>
+<span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;Hello, {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+
+
+<span class="n">greet</span><span class="p">(</span><span class="s">&#39;Terry&#39;</span><span class="p">)</span>
+<span class="c"># =&gt; Enter room: Matrix</span>
+<span class="c"># =&gt; Hello, Terry</span>
+<span class="c"># =&gt; Thanks, I&#39;m leaving</span>
+</pre></div>
+
+<h3 id="toc_2">3. Example: using decorator in Django views</h3>
+<p>It is very common that you want to write decorators for the request in views.py. For example, Django itself provides <a href="https://docs.djangoproject.com/en/1.10/topics/http/decorators/">a list of decorators</a> that you can use in certain scenarios, such as restricting HTTP methods, or cache controls. There are also other examples that could be consider: logging requests or checking auth tokens.</p>
+<p>Here I write a very simple example that logs requests which a specified module name. We will have to use a new feature here that passes arguments between functions, because Django view methods can accept arguments defined in URL patterns.</p>
+<div class="highlight"><pre><span class="c"># a request log decorator which you can define the module</span>
+<span class="k">def</span> <span class="nf">log_request</span><span class="p">(</span><span class="n">module</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">decorator_wrapper</span><span class="p">(</span><span class="n">view_func</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">func_wrapper</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">&#39;[{0}] {1} {2} {3}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">get_host</span><span class="p">(),</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">()))</span>
+            <span class="k">return</span> <span class="n">view_func</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">func_wrapper</span>
+    <span class="k">return</span> <span class="n">decorator_wrapper</span>
+
+
+<span class="c"># use in views.py</span>
+<span class="nd">@log_request</span><span class="p">(</span><span class="n">module</span><span class="o">=</span><span class="s">&quot;Book&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">book_detail</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">book_id</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s">&#39;Book info: {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">book_id</span><span class="p">))</span>
+
+
+<span class="c"># URL patterns</span>
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">url</span><span class="p">(</span><span class="s">r&#39;^book/(?P&lt;book_id&gt;\d+/info$&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">book_detail</span><span class="p">),</span>
+    <span class="c"># ...</span>
+<span class="p">]</span>
+</pre></div>
+<p>Test in command line:</p>
+<div class="highlight"><pre><span class="c"># test in shell, and see the book id correctly returned</span>
+<span class="nv">$ </span>curl http://localhost/book/1/info
+Book info: 1
+
+<span class="c"># check the log in server console, everything is shown</span>
+<span class="o">[</span>Book<span class="o">]</span> localhost:8000 GET /v1/book/1/info
+</pre></div>
+
+<h3 id="toc_3">Reference</h3>
+<p>Reference: <a href="http://thecodeship.com/patterns/guide-to-python-function-decorators/">thecodeship.com/patterns/guide-to-python-function-decorators/</a></p>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[How I fix my Ubuntu with iRST(Intel Rapid Start Technology) Raid]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/12/how-i-fix-ubuntu-boot-with-irst-raid.html"/>

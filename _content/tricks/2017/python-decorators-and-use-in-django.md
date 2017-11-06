@@ -2,7 +2,7 @@
 
 - date: 2017-3-26 16:26
 - tags: python
-- categories: tricks
+- category: tricks
 
 ---------
 
