@@ -17,7 +17,7 @@ After the program has been initialized, you can open a terminal and try a few co
 # check versions
 $ docker --version
 $ docker-compose --version
-$ docker-machien --version
+$ docker-machine --version
 
 # Current images
 $ docker images
