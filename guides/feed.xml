@@ -3,14 +3,14 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/guides/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/guides/" />
-    <updated>2017-12-21T16:30:27+08:00</updated>
+    <updated>2017-12-21T21:12:40+08:00</updated>
     <id>http://terryoy.github.io/guides/</id>
     <entry>
         <title type="html"><![CDATA[Basic Usage for Docker]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2017/11/docker-basic.html"/>
         <published>2017-11-06T16:12:00+08:00</published>
-        <updated>2017-12-21T16:30:27+08:00</updated>
+        <updated>2017-12-21T16:42:54+08:00</updated>
         <id>http://terryoy.github.io/2017/11/docker-basic.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -76,7 +76,11 @@ hello-world         latest              725dcfab7d63        2 days ago          
 </pre></div>
 <p>For server instance like Ubuntu, you need an interactive shell to work with it, so the command will be a little bit different:</p>
 
-<pre><code>$ docker run --name ubuntu -ti ubuntu-core</code></pre>
+<pre><code># start a new container named 'ubuntu'
+$ docker run --name ubuntu -ti ubuntu-core
+
+# run an existing container
+$ docker container start -i ubuntu</code></pre>
 <p>You may wonder the file size of each containers, you can checkt it by <code>docker ps -s</code>. You can see a ubuntu core only uses very small space with the minimal setup.</p>
 <div class="highlight"><pre><span class="nv">$ </span>docker ps -s
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                  NAMES               SIZE
@@ -994,7 +998,7 @@ Program Library HOWTO <br/>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2014/10/common-git-commands.html"/>
         <published>2014-10-22T20:57:00+08:00</published>
-        <updated>2017-03-10T18:44:00+08:00</updated>
+        <updated>2017-12-21T21:12:40+08:00</updated>
         <id>http://terryoy.github.io/2014/10/common-git-commands.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
@@ -1193,6 +1197,16 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
 <span class="nv">$ </span>git push --force origin &lt;branch_name&gt;
 </pre></div>
 <p><a href="http://stackoverflow.com/questions/4114095/how-to-revert-git-repository-to-a-previous-commit">Ref to git revert</a>.</p>
+
+<h3 id="toc_9">10. Get Revision List</h3>
+<p><em>Updated on 2017-12-21</em></p>
+<p>Now our projects in the company uses total commit count as the build version, so I make a search on how to use command line to get that. It&#39;s related to the <code>git rev-list</code> command and I found the command quite useful in fact.</p>
+<div class="highlight"><pre><span class="c"># Get the total commit count at the current branch</span>
+<span class="nv">$ </span>git rev-list --count HEAD
+
+<span class="c"># Check different commits between two branches/tags</span>
+<span class="nv">$ </span>git rev-list --pretty --left-right &lt;BRANCH_1&gt;...&lt;BRANCH_2&gt;
+</pre></div>
 ]]>
         </content>
     </entry><entry>

@@ -235,6 +235,16 @@ ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt
 </pre></div>
 <p><a href="http://stackoverflow.com/questions/4114095/how-to-revert-git-repository-to-a-previous-commit">Ref to git revert</a>.</p>
 
+<h3 id="toc_9">10. Get Revision List</h3>
+<p><em>Updated on 2017-12-21</em></p>
+<p>Now our projects in the company uses total commit count as the build version, so I make a search on how to use command line to get that. It&#39;s related to the <code>git rev-list</code> command and I found the command quite useful in fact.</p>
+<div class="highlight"><pre><span class="c"># Get the total commit count at the current branch</span>
+<span class="nv">$ </span>git rev-list --count HEAD
+
+<span class="c"># Check different commits between two branches/tags</span>
+<span class="nv">$ </span>git rev-list --pretty --left-right &lt;BRANCH_1&gt;...&lt;BRANCH_2&gt;
+</pre></div>
+
     
     
 	<p/>

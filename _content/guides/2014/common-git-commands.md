@@ -257,3 +257,20 @@ $ git push --force origin <branch_name>
 [Ref to git revert](http://stackoverflow.com/questions/4114095/how-to-revert-git-repository-to-a-previous-commit).
 
 
+### 10. Get Revision List
+
+*Updated on 2017-12-21*
+
+Now our projects in the company uses total commit count as the build version, so I make a search on how to use command line to get that. It's related to the `git rev-list` command and I found the command quite useful in fact.
+
+```bash
+
+# Get the total commit count at the current branch
+$ git rev-list --count HEAD
+
+# Check different commits between two branches/tags
+$ git rev-list --pretty --left-right <BRANCH_1>...<BRANCH_2>
+
+```
+
+

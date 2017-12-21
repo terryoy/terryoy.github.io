@@ -105,7 +105,11 @@ $ docker rmi hello-world
 For server instance like Ubuntu, you need an interactive shell to work with it, so the command will be a little bit different:
 
 ```
+# start a new container named 'ubuntu'
 $ docker run --name ubuntu -ti ubuntu-core
+
+# run an existing container
+$ docker container start -i ubuntu
 
 ```
 

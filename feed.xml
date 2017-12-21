@@ -3,7 +3,7 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2017-12-21T16:30:27+08:00</updated>
+    <updated>2017-12-21T16:42:54+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
         <title type="html"><![CDATA[Getting Laravel Started]]></title>
@@ -57,7 +57,7 @@
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2017/11/docker-basic.html"/>
         <published>2017-11-06T16:12:00+08:00</published>
-        <updated>2017-12-21T16:30:27+08:00</updated>
+        <updated>2017-12-21T16:42:54+08:00</updated>
         <id>http://terryoy.github.io/2017/11/docker-basic.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -123,7 +123,11 @@ hello-world         latest              725dcfab7d63        2 days ago          
 </pre></div>
 <p>For server instance like Ubuntu, you need an interactive shell to work with it, so the command will be a little bit different:</p>
 
-<pre><code>$ docker run --name ubuntu -ti ubuntu-core</code></pre>
+<pre><code># start a new container named 'ubuntu'
+$ docker run --name ubuntu -ti ubuntu-core
+
+# run an existing container
+$ docker container start -i ubuntu</code></pre>
 <p>You may wonder the file size of each containers, you can checkt it by <code>docker ps -s</code>. You can see a ubuntu core only uses very small space with the minimal setup.</p>
 <div class="highlight"><pre><span class="nv">$ </span>docker ps -s
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                  NAMES               SIZE
