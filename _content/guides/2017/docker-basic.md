@@ -102,6 +102,13 @@ $ docker rmi hello-world
 
 ```
 
+For server instance like Ubuntu, you need an interactive shell to work with it, so the command will be a little bit different:
+
+```
+$ docker run --name ubuntu -ti ubuntu-core
+
+```
+
 You may wonder the file size of each containers, you can checkt it by `docker ps -s`. You can see a ubuntu core only uses very small space with the minimal setup.
 
 ```bash

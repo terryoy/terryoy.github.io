@@ -100,6 +100,9 @@ hello-world         latest              725dcfab7d63        2 days ago          
 <span class="c"># remove an image</span>
 <span class="nv">$ </span>docker rmi hello-world
 </pre></div>
+<p>For server instance like Ubuntu, you need an interactive shell to work with it, so the command will be a little bit different:</p>
+
+<pre><code>$ docker run --name ubuntu -ti ubuntu-core</code></pre>
 <p>You may wonder the file size of each containers, you can checkt it by <code>docker ps -s</code>. You can see a ubuntu core only uses very small space with the minimal setup.</p>
 <div class="highlight"><pre><span class="nv">$ </span>docker ps -s
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                  NAMES               SIZE

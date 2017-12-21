@@ -3,14 +3,14 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/guides/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/guides/" />
-    <updated>2017-11-23T21:15:55+08:00</updated>
+    <updated>2017-12-21T16:30:27+08:00</updated>
     <id>http://terryoy.github.io/guides/</id>
     <entry>
         <title type="html"><![CDATA[Basic Usage for Docker]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2017/11/docker-basic.html"/>
         <published>2017-11-06T16:12:00+08:00</published>
-        <updated>2017-11-23T21:15:55+08:00</updated>
+        <updated>2017-12-21T16:30:27+08:00</updated>
         <id>http://terryoy.github.io/2017/11/docker-basic.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -74,6 +74,9 @@ hello-world         latest              725dcfab7d63        2 days ago          
 <span class="c"># remove an image</span>
 <span class="nv">$ </span>docker rmi hello-world
 </pre></div>
+<p>For server instance like Ubuntu, you need an interactive shell to work with it, so the command will be a little bit different:</p>
+
+<pre><code>$ docker run --name ubuntu -ti ubuntu-core</code></pre>
 <p>You may wonder the file size of each containers, you can checkt it by <code>docker ps -s</code>. You can see a ubuntu core only uses very small space with the minimal setup.</p>
 <div class="highlight"><pre><span class="nv">$ </span>docker ps -s
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                  NAMES               SIZE
