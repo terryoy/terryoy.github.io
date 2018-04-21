@@ -3,9 +3,414 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2017-12-21T16:42:54+08:00</updated>
+    <updated>2018-04-21T23:27:09+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
+        <title type="html"><![CDATA[Setup ARM Development Environment with QEMU]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2018/04/setup_arm_development.html"/>
+        <published>2018-04-21T23:26:00+08:00</published>
+        <updated>2018-04-21T23:27:09+08:00</updated>
+        <id>http://terryoy.github.io/2018/04/setup_arm_development.html</id>
+        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
+        <category scheme="http://terryoy.github.io/tag/#qemu" term="qemu" label="qemu" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <h3 id="toc_0">1. Clone the kernel repository</h3>
+<div class="highlight"><pre><span class="nv">$ </span>git clone git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+
+<span class="c"># or just download the package from the mirror</span>
+<span class="nv">$ </span>wget https://mirror.tuna.tsinghua.edu.cn/kernel/v4.x/linux-4.4.1.tar.xz
+</pre></div>
+
+<h3 id="toc_1">2. Install the Cross Compiling Toolchain</h3>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install gcc-arm-linux-gnueabi
+
+<span class="c"># another option is &quot;arm-linux-gnueabihf&quot; but we use &quot;gcc-arm-gnueabi&quot; here</span>
+</pre></div>
+
+<h3 id="toc_2">3. Make the first compile</h3>
+<p>We&#39;re emulating the vexpress Cortex A9 for demo.</p>
+<div class="highlight"><pre><span class="nv">$ </span><span class="nb">export </span><span class="nv">ARCH</span><span class="o">=</span>arm  
+<span class="nv">$ </span><span class="nb">export </span><span class="nv">CROSS_COMPILE</span><span class="o">=</span>arm-linux-gnueabi-  
+<span class="nv">$ </span>make vexpress_defconfig  
+<span class="nv">$ </span>make zImage -j8  
+<span class="nv">$ </span>make modules -j8  
+<span class="nv">$ </span>make dtbs
+</pre></div>
+
+<h3 id="toc_3">4. Install QEMU</h3>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install qemu
+</pre></div>
+
+<h3 id="toc_4">5. Make Root File System</h3>
+
+<h3 id="toc_5">5.1 busybox</h3>
+<div class="highlight"><pre><span class="nv">$ </span>wget http://www.busybox.net/downloads/busybox-1.25.1.tar.bz2  
+<span class="nv">$ </span>tar xvf busybox-1.25.1.tar.bz2
+<span class="nv">$ </span>make defconfig  
+<span class="nv">$ </span>make <span class="nv">CROSS_COMPILE</span><span class="o">=</span>arm-linux-gnueabi-  
+<span class="nv">$ </span>make install <span class="nv">CROSS_COMPILE</span><span class="o">=</span>arm-linux-gnueabi-
+</pre></div>
+<p>Then you find the executables in <code>_install</code> folder. Next we start to create the rootfs.</p>
+
+<h3 id="toc_6">5.2 rootfs</h3>
+<div class="highlight"><pre><span class="nv">$ </span>sudo mkdir rootfs
+<span class="nv">$ </span>sudo mkdir rootfs/lib 
+
+<span class="c"># copy busybox to rootfs</span>
+<span class="nv">$ </span>sudo cp _install/* -r rootfs/
+
+<span class="c"># copy arm libs to lib</span>
+<span class="c"># sudo cp -P /usr/arm-linux-gnueabi/lib/* rootfs/lib/</span>
+</pre></div>
+
+<h3 id="toc_7">5.3 Create 4 tty devices</h3>
+<div class="highlight"><pre><span class="nv">$ </span>sudo mkdir -p rootfs/dev
+<span class="nv">$ </span>sudo mknod rootfs/dev/tty1 c 4 1  
+<span class="nv">$ </span>sudo mknod rootfs/dev/tty2 c 4 2  
+<span class="nv">$ </span>sudo mknod rootfs/dev/tty3 c 4 3  
+<span class="nv">$ </span>sudo mknod rootfs/dev/tty4 c 4 4
+</pre></div>
+<p>You can also create other folders in the image. (Reference: <a href="https://learningfromyoublog.wordpress.com/2016/04/05/131/">learningfromyoublog.wordpress.com/2016/04/05/131/</a>)</p>
+
+<h3 id="toc_8">5.4 Make the Image</h3>
+<div class="highlight"><pre><span class="c"># creat an empty image</span>
+<span class="nv">$ </span>dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>a9rootfs.ext3 <span class="nv">bs</span><span class="o">=</span>1M <span class="nv">count</span><span class="o">=</span>32  
+
+<span class="c"># format to ext3</span>
+<span class="nv">$ </span>mkfs.ext3 a9rootfs.ext3  
+
+<span class="c"># copy files into the image</span>
+<span class="nv">$ </span>sudo mkdir tmpfs  
+<span class="nv">$ </span>sudo mount -t ext3 a9rootfs.ext3 tmpfs/ -o loop  
+<span class="nv">$ </span>sudo cp -r rootfs/*  tmpfs/  
+<span class="nv">$ </span>sudo umount tmpfs
+</pre></div>
+
+<h3 id="toc_9">6. Start QEMU with the Image</h3>
+<div class="highlight"><pre><span class="c"># open in current console</span>
+<span class="nv">$ </span>qemu-system-arm -M vexpress-a9 -m 512M -dtb extra_folder/vexpress-v2p-ca9.dtb -kernel extra_folder/zImage -nographic -append <span class="s2">&quot;root=/dev/mmcblk0 rw console=ttyAMA0&quot;</span> -sd a9rootfs.ext3 
+
+<span class="c"># open in new window(maybe GUI)</span>
+<span class="nv">$ </span>qemu-system-arm -M vexpress-a9 -m 512M -dtb extra_folder/vexpress-v2p-ca9.dtb -kernel extra_folder/zImage -append <span class="s2">&quot;root=/dev/mmcblk0 rw&quot;</span> -sd a9rootfs.ext3
+</pre></div>
+<p>Now you enter the console of the emulator system. Press <code>Ctrl+A C</code> to exit to <code>(qemu)</code> console, or <code>Ctrl+A X</code> to exit..</p>
+]]>
+        </content>
+    </entry><entry>
+        <title type="html"><![CDATA[Learn to Use CMake to Compile Code]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2018/01/learn-to-use-cmake.html"/>
+        <published>2018-01-12T14:41:00+08:00</published>
+        <updated>2018-01-13T09:52:53+08:00</updated>
+        <id>http://terryoy.github.io/2018/01/learn-to-use-cmake.html</id>
+        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
+        <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <p>I&#39;m trying to use the Linux environment to develop C/C++ programs, but never really get on the path.</p>
+<p>It&#39;s not the language that I don&#39;t understand, but the environment, the toolchain and how to configure a project in real life is my question. Linux have many programs developed in C/C++, but compiling them myself always out of my scope, which is blocking me from deeper understanding of Linux.</p>
+<p>So here I&#39;m reading a walkthrough to help myself making a C/C++ project work.</p>
+<p><strong>CMake</strong> is said to be an OS and compiler independent build system. So you first write CMake configurations in any source directories, and then it can generate a native build environment that will compile source code, create libraries, generate wrappers and build executables in arbitrary combinations.</p>
+
+<h3 id="toc_0">0. Build Essential</h3>
+<p>First of all, if you want to compile anything in Linux, you should install the <code>build-essential</code> package first.</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt install build-essential
+</pre></div>
+<p>It contains all the common packages to build Debian packages, such as: g++, gcc, hurd, libc, dpkg, make, etc.</p>
+<p>Next step let&#39;s install the CMake package:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt install cmake
+</pre></div>
+
+<h3 id="toc_1">1. A Hello World and a CMakeLists.txt</h3>
+<p>The minimal demo has two files. </p>
+<p>A <code>hello.cpp</code> source file:</p>
+<div class="highlight"><pre><span class="cp">#include &lt;iostream&gt;</span>
+
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Hello World&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+     <span class="k">return</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+<p>A <code>CMakeLists.txt</code> config file:</p>
+
+<pre><code># Specify the minimum version for CMake
+
+cmake_minimum_required(VERSION 2.8)
+
+# Project's name
+project(hello)
+
+# Set the output folder where your program will be created
+set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/bin)
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
+set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
+
+# The following folder will be included
+include_directories(&quot;${PROJECT_SOURCE_DIR}&quot;)
+
+# Compile the program to hello
+add_executable(hello ${PROJECT_SOURCE_DIR}/hello.cpp)</code></pre>
+<p>The three lines <code>cmake_minimum_required</code>, <code>project(hello)</code>, and <code>add_executable</code> are essential.</p>
+<p>Run below two commands to compile the exectuatble:</p>
+<div class="highlight"><pre><span class="c"># Generate CMake configurations</span>
+<span class="nv">$ </span>cmake -H. -Bbuild
+
+<span class="c"># Build the executable</span>
+<span class="nv">$ </span>cmake --build build -- -j3
+</pre></div>
+
+<h3 id="toc_2">References</h3>
+<p><a href="https://tuannguyen68.gitbooks.io/learning-cmake-a-beginner-s-guide/content/chap1/chap1.html">Learning CMake: A Beginner&#39;s Guide</a>
+<a href="https://cmake.org/cmake-tutorial/">CMake Official Tutorial</a></p>
+]]>
+        </content>
+    </entry><entry>
+        <title type="html"><![CDATA[Networking in Docker]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2018/01/networking-in-docker.html"/>
+        <published>2018-01-12T11:41:00+08:00</published>
+        <updated>2018-01-13T18:16:42+08:00</updated>
+        <id>http://terryoy.github.io/2018/01/networking-in-docker.html</id>
+        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
+        <category scheme="http://terryoy.github.io/tag/#docker" term="docker" label="docker" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <p>After installed an Ubuntu container in my docker, now I&#39;m trying to learn the networking tools in Ubuntu and Docker.</p>
+
+<ol>
+<li>Networking Tools in Ubuntu Again</li>
+</ol>
+<div class="highlight"><pre><span class="c"># package for ifconfig(which is too old)</span>
+<span class="nv">$ </span>apt install net-tools
+
+<span class="c"># newer package for networking</span>
+<span class="nv">$ </span>apt install iproute2
+
+<span class="c"># ping command</span>
+<span class="nv">$ </span>apt install iputils-ping
+
+<span class="c"># check network interface</span>
+<span class="nv">$ </span>ifconfig
+eth0      Link encap:Ethernet  HWaddr 02:42:ac:11:00:02  
+          inet addr:172.17.0.2  Bcast:0.0.0.0  Mask:255.255.0.0
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:5956 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:3345 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:8376715 <span class="o">(</span>8.3 MB<span class="o">)</span>  TX bytes:186204 <span class="o">(</span>186.2 KB<span class="o">)</span>
+</pre></div>
+
+<ol>
+<li>Docker Commands for Networking</li>
+</ol>
+<p>There are three types of networks in docker, and the <code>bridge</code> network is by default presented in all docker instances.</p>
+<div class="highlight"><pre><span class="c"># List networks in Docker</span>
+<span class="nv">$ </span>docker network ls
+NETWORK ID          NAME                DRIVER              SCOPE
+a6bf46c2bc44        bridge              bridge              <span class="nb">local</span>
+e3826e52e7e6        host                host                <span class="nb">local</span>
+08a134ed472c        none                null                <span class="nb">local</span>
+
+<span class="c"># Check docker&#39;s network detail</span>
+<span class="nv">$ </span>docker network inspect bridge
+<span class="o">[</span>
+    <span class="o">{</span>
+        <span class="s2">&quot;Name&quot;</span>: <span class="s2">&quot;bridge&quot;</span>,
+        <span class="s2">&quot;Id&quot;</span>: <span class="s2">&quot;a6bf46c2bc44dc16523ac28edd5524fccef79b779ae52602c868001763cd21c4&quot;</span>,
+        <span class="s2">&quot;Created&quot;</span>: <span class="s2">&quot;2018-01-09T11:36:15.168104899Z&quot;</span>,
+        <span class="s2">&quot;Scope&quot;</span>: <span class="s2">&quot;local&quot;</span>,
+        <span class="s2">&quot;Driver&quot;</span>: <span class="s2">&quot;bridge&quot;</span>,
+        <span class="s2">&quot;EnableIPv6&quot;</span>: <span class="nb">false</span>,
+        <span class="s2">&quot;IPAM&quot;</span>: <span class="o">{</span>
+            <span class="s2">&quot;Driver&quot;</span>: <span class="s2">&quot;default&quot;</span>,
+            <span class="s2">&quot;Options&quot;</span>: null,
+            <span class="s2">&quot;Config&quot;</span>: <span class="o">[</span>
+                <span class="o">{</span>
+                    <span class="s2">&quot;Subnet&quot;</span>: <span class="s2">&quot;172.17.0.0/16&quot;</span>,
+                    <span class="s2">&quot;Gateway&quot;</span>: <span class="s2">&quot;172.17.0.1&quot;</span>
+                <span class="o">}</span>
+            <span class="o">]</span>
+        <span class="o">}</span>,
+        <span class="s2">&quot;Internal&quot;</span>: <span class="nb">false</span>,
+        <span class="s2">&quot;Attachable&quot;</span>: <span class="nb">false</span>,
+        <span class="s2">&quot;Ingress&quot;</span>: <span class="nb">false</span>,
+        <span class="s2">&quot;ConfigFrom&quot;</span>: <span class="o">{</span>
+            <span class="s2">&quot;Network&quot;</span>: <span class="s2">&quot;&quot;</span>
+        <span class="o">}</span>,
+        <span class="s2">&quot;ConfigOnly&quot;</span>: <span class="nb">false</span>,
+        <span class="s2">&quot;Containers&quot;</span>: <span class="o">{</span>
+            <span class="s2">&quot;cfc178841a7940b6cbf43c8e0dbd7fb6672af3b3e8a9020632c75352685ec685&quot;</span>: <span class="o">{</span>
+                <span class="s2">&quot;Name&quot;</span>: <span class="s2">&quot;ubuntu&quot;</span>,
+                <span class="s2">&quot;EndpointID&quot;</span>: <span class="s2">&quot;8c14adc4a61eacdc8bd2b261d2af4f17c7a966d9fcfb8c61b5f9284fa2eded45&quot;</span>,
+                <span class="s2">&quot;MacAddress&quot;</span>: <span class="s2">&quot;02:42:ac:11:00:02&quot;</span>,
+                <span class="s2">&quot;IPv4Address&quot;</span>: <span class="s2">&quot;172.17.0.2/16&quot;</span>,
+                <span class="s2">&quot;IPv6Address&quot;</span>: <span class="s2">&quot;&quot;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>,
+        <span class="s2">&quot;Options&quot;</span>: <span class="o">{</span>
+            <span class="s2">&quot;com.docker.network.bridge.default_bridge&quot;</span>: <span class="s2">&quot;true&quot;</span>,
+            <span class="s2">&quot;com.docker.network.bridge.enable_icc&quot;</span>: <span class="s2">&quot;true&quot;</span>,
+            <span class="s2">&quot;com.docker.network.bridge.enable_ip_masquerade&quot;</span>: <span class="s2">&quot;true&quot;</span>,
+            <span class="s2">&quot;com.docker.network.bridge.host_binding_ipv4&quot;</span>: <span class="s2">&quot;0.0.0.0&quot;</span>,
+            <span class="s2">&quot;com.docker.network.bridge.name&quot;</span>: <span class="s2">&quot;docker0&quot;</span>,
+            <span class="s2">&quot;com.docker.network.driver.mtu&quot;</span>: <span class="s2">&quot;1500&quot;</span>
+        <span class="o">}</span>,
+        <span class="s2">&quot;Labels&quot;</span>: <span class="o">{}</span>
+    <span class="o">}</span>
+<span class="o">]</span>
+</pre></div>
+
+<h3 id="toc_0">3. Internal Networking</h3>
+<p>By default, the container is connected within a local network(172.17.0.1/16) bridged to the host machine, host can access the net gateway ip <code>172.17.0.1</code>. The contianers should be able to access each other in the local network provided by this net gateway. When you use the command <code>docker network inspect bridge</code>, you could see the list of containers and their IPs assigned.</p>
+
+<h4 id="toc_1">3.1 Accessing container&#39;s service by port mapping</h4>
+<p>Some containers as Nginx provide a service through a local port, in which case you could use port forwarding by your local IP. For example, you can check this port forwarding by <code>docker port</code> command or just listing the containers:</p>
+<div class="highlight"><pre><span class="c"># list ports for container</span>
+<span class="nv">$ </span>docker port nginx
+80/tcp -&gt; 0.0.0.0:5000
+
+<span class="c"># list containers</span>
+<span class="nv">$ </span>docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                   PORTS                  NAMES
+cfc178841a79        ubuntu              <span class="s2">&quot;/bin/bash&quot;</span>              3 weeks ago         Up 4 hours                                      ubuntu
+0200f61f5d65        nginx               <span class="s2">&quot;nginx -g &#39;daemon of…&quot;</span>   2 months ago        Up 3 minutes             0.0.0.0:5000-&gt;80/tcp   webserver
+</pre></div>
+<p>Now you can see there is a port mapping from <code>host:5000</code> to <code>container:80</code>. </p>
+<p>By default, no port is opened for a container to host, you need to specify the port mapping at <code>docker run</code> command with <code>-p</code>. </p>
+
+<pre><code># `-d` is when you needed it run as a daemon.
+$ docker run nginx -d -p 5000:80 --name nginx nginx</code></pre>
+<p>To open a port mapping for an existing container is very tricky. It is often said that you need to create another container instance based on the current just to open a port.</p>
+]]>
+        </content>
+    </entry><entry>
+        <title type="html"><![CDATA[Exploring Ubuntu From Fundamentals(1)]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2017/12/get-to-know-the-core-ubuntu.html"/>
+        <published>2017-12-22T15:49:00+08:00</published>
+        <updated>2017-12-23T10:37:36+08:00</updated>
+        <id>http://terryoy.github.io/2017/12/get-to-know-the-core-ubuntu.html</id>
+        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <p>Recently I have installed docker on my mac. It&#39;s such a wonderful virtualized environment that I don&#39;t need to install a whole system image on VirtualBox to explore in Ubuntu. </p>
+<p>The docker image of Ubuntu is somehow essential subset of packages which give you the system environment. It doesn&#39;t even have <code>vi</code> or the <code>lsb_release</code> command for you to read the distro version. So I want to take some notes while I&#39;m exploring the fundamentals in Ubuntu.</p>
+
+<h3 id="toc_0">1. System Info</h3>
+<div class="highlight"><pre><span class="c"># Check Ubuntu version</span>
+<span class="nv">$ </span>cat /etc/issue
+<span class="nv">$ </span>cat /etc/issue.net
+Ubuntu 16.04.3 LTS
+
+<span class="c"># More information of Ubuntu</span>
+<span class="nv">$ </span>cat /etc/os-release
+<span class="nv">NAME</span><span class="o">=</span><span class="s2">&quot;Ubuntu&quot;</span>
+<span class="nv">VERSION</span><span class="o">=</span><span class="s2">&quot;16.04.3 LTS (Xenial Xerus)&quot;</span>
+<span class="nv">ID</span><span class="o">=</span>ubuntu
+<span class="nv">ID_LIKE</span><span class="o">=</span>debian
+<span class="nv">PRETTY_NAME</span><span class="o">=</span><span class="s2">&quot;Ubuntu 16.04.3 LTS&quot;</span>
+<span class="nv">VERSION_ID</span><span class="o">=</span><span class="s2">&quot;16.04&quot;</span>
+<span class="nv">HOME_URL</span><span class="o">=</span><span class="s2">&quot;http://www.ubuntu.com/&quot;</span>
+<span class="nv">SUPPORT_URL</span><span class="o">=</span><span class="s2">&quot;http://help.ubuntu.com/&quot;</span>
+<span class="nv">BUG_REPORT_URL</span><span class="o">=</span><span class="s2">&quot;http://bugs.launchpad.net/ubuntu/&quot;</span>
+<span class="nv">VERSION_CODENAME</span><span class="o">=</span>xenial
+<span class="nv">UBUNTU_CODENAME</span><span class="o">=</span>xenial
+
+<span class="c"># System Services</span>
+<span class="nv">$ </span>service --status-all
+ <span class="o">[</span> - <span class="o">]</span>  bootmisc.sh
+ <span class="o">[</span> - <span class="o">]</span>  checkfs.sh
+ <span class="o">[</span> - <span class="o">]</span>  checkroot-bootclean.sh
+ <span class="o">[</span> - <span class="o">]</span>  checkroot.sh
+ <span class="o">[</span> - <span class="o">]</span>  hostname.sh
+ <span class="o">[</span> ? <span class="o">]</span>  hwclock.sh
+ <span class="o">[</span> - <span class="o">]</span>  killprocs
+ <span class="o">[</span> - <span class="o">]</span>  mountall-bootclean.sh
+ <span class="o">[</span> - <span class="o">]</span>  mountall.sh
+ <span class="o">[</span> - <span class="o">]</span>  mountdevsubfs.sh
+ <span class="o">[</span> - <span class="o">]</span>  mountkernfs.sh
+ <span class="o">[</span> - <span class="o">]</span>  mountnfs-bootclean.sh
+ <span class="o">[</span> - <span class="o">]</span>  mountnfs.sh
+ <span class="o">[</span> ? <span class="o">]</span>  ondemand
+ <span class="o">[</span> - <span class="o">]</span>  procps
+ <span class="o">[</span> - <span class="o">]</span>  rc.local
+ <span class="o">[</span> - <span class="o">]</span>  sendsigs
+ <span class="o">[</span> - <span class="o">]</span>  umountfs
+ <span class="o">[</span> - <span class="o">]</span>  umountnfs.sh
+ <span class="o">[</span> - <span class="o">]</span>  umountroot
+ <span class="o">[</span> - <span class="o">]</span>  urandom
+
+<span class="c"># Supported Shells</span>
+<span class="nv">$ </span>cat /etc/shells
+/bin/sh
+/bin/dash
+/bin/bash
+/bin/rbash
+</pre></div>
+<p>I have install <code>vim</code> and <code>man-db</code> to acquire the ability of text editing and manual reading. Now let&#39;s check what packages we have installed.</p>
+<div class="highlight"><pre><span class="nv">$ </span>apt list --installed
+
+<span class="c"># or if you just want the count</span>
+<span class="nv">$ </span>apt list --installed | grep installed | wc -l 
+
+<span class="c"># or if you want to see a description of each pacakge</span>
+<span class="nv">$ </span>dpkg-query -l
+</pre></div>
+<p>Now I can see that the essential packages to run my system has only <strong>116</strong> packages and <strong>62</strong> of them are libs.</p>
+
+<h3 id="toc_1">2. Reading Manuals</h3>
+<p>The most important documentation tool in Linux is <code>man</code>, another is <code>info</code> from package &ldquo;texinfo&rdquo;. And there are also something you can find in <code>/usr/share/doc</code>, although many packages just use it for change logs and copyright, but the readme part is sometimes helpful information.</p>
+<p>The <code>man</code> command is in <code>man-db</code> package, and <code>info</code> is in <code>info</code> package.</p>
+
+<h4 id="toc_2">2.1 Man pages</h4>
+<p>Man pages are grouped the documents of packages into 8(or 9) sections.</p>
+
+<ul>
+<li>1 Executable programs or shell commands</li>
+<li>2 System calls (functions provided by the kernel)</li>
+<li>3 Library calls (functions within program libraries)</li>
+<li>4 Special files (usually found in /dev)</li>
+<li>5 File formats and conventions eg /etc/passwd</li>
+<li>6 Games</li>
+<li>7 Miscellaneous (including macro packages and conventions), e.g. man(7), groff(7)</li>
+<li>8 System administration commands (usually only for root)</li>
+<li>9 Kernel routines [Non standard]</li>
+</ul>
+<p>The numbers of sections you see here, are used to marked the pages when cross reference in man pages. For example, you can see &ldquo;man(7)&rdquo;, &ldquo;mandb(8)&rdquo;, etc. Sometimes there will be a same keyword in different sections. You can view all man pages of the same keyword, or specify which section you want to see, or search man pages by keyword.</p>
+<div class="highlight"><pre><span class="c"># view man page for man</span>
+<span class="nv">$ </span>man man
+
+<span class="c"># view all &quot;intro&quot; in every section</span>
+<span class="nv">$ </span>man -a intro
+
+<span class="c"># view &quot;intro&quot; in section 3</span>
+<span class="nv">$ </span>man -s 3 intro
+
+<span class="c"># list all man pages</span>
+<span class="nv">$ </span>man -k .
+
+<span class="c"># list all man pages in section 5</span>
+<span class="nv">$ </span>man -s 5 -k .
+
+<span class="c"># list all man pages in section 5 match keyword &#39;systemd&#39;</span>
+<span class="nv">$ </span>man -s 5 -k systemd
+</pre></div>
+
+<h4 id="toc_3">2.2 Info pages</h4>
+<p>This kind of document is written in <a href="https://www.gnu.org/software/texinfo/">texinfo</a>, supported in  Emacs, generated by <code>makeinfo</code>;</p>
+<p>The texinfo format has node structure, and can export to different format such as HTML, etc. The <code>info</code> command more navigation methods to the document.</p>
+<p>Read <a href="http://www.troubleshooters.com/linux/info.htm">here</a> about the keyboard interface.</p>
+
+<h4 id="toc_4">2.3 Dcoumentation paths</h4>
+
+<ul>
+<li>/usr/share/man, folder for man pages of pacakges. They&#39;re separated into different sections man(1-9) according the pacakge categories.</li>
+<li>/usr/share/info, folder for info pages, which is meant for providing more detail information, and it&#39;s generally used in GNU projects, but man pages are in much greater favour.</li>
+<li>/usr/share/doc, folder for holding other document or refernces. Most packages contains only changelog and copyright info, some provided a README file, and some package provides templates or configuration files.</li>
+</ul>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[Getting Laravel Started]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2017/11/laravel-get-started.html"/>
@@ -57,7 +462,7 @@
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2017/11/docker-basic.html"/>
         <published>2017-11-06T16:12:00+08:00</published>
-        <updated>2017-12-21T16:42:54+08:00</updated>
+        <updated>2018-01-13T10:39:55+08:00</updated>
         <id>http://terryoy.github.io/2017/11/docker-basic.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -127,7 +532,14 @@ hello-world         latest              725dcfab7d63        2 days ago          
 $ docker run --name ubuntu -ti ubuntu-core
 
 # run an existing container
-$ docker container start -i ubuntu</code></pre>
+$ docker container start -i ubuntu
+
+# attach console to a server if it has started without interactive environment
+$ docker container start ubuntu
+$ docker attach ubuntu
+
+# If you want to detach from a server without stopping it
+# use `ctrl-p ctrl-q` key sequence</code></pre>
 <p>You may wonder the file size of each containers, you can checkt it by <code>docker ps -s</code>. You can see a ubuntu core only uses very small space with the minimal setup.</p>
 <div class="highlight"><pre><span class="nv">$ </span>docker ps -s
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                  NAMES               SIZE
@@ -144,7 +556,16 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 <li>*<em>Registry, Configuration, and Certificates for the Daemon *</em>, use it when you needed.</li>
 </ul>
 
-<h3 id="toc_4">4. Docker for Mac vs Docker Toolbox</h3>
+<h4 id="toc_4">3.1 Download Images by Tags</h4>
+<div class="highlight"><pre><span class="c"># Download images/repos from registry</span>
+<span class="nv">$ </span>docker pull &lt;image&gt;:&lt;tag&gt;
+
+<span class="c"># Example of getting a core ubuntu system</span>
+<span class="nv">$ </span>docker pull ubuntu:xenial
+<span class="nv">$ </span>docker run --name ubuntu -ti ubuntu
+</pre></div>
+
+<h3 id="toc_5">4. Docker for Mac vs Docker Toolbox</h3>
 <p>Docker Toolbox is also installed by the .dmg installation. The programs include <code>docker-compose</code> and <code>docker-machine</code>.</p>
 
 <ul>
@@ -152,7 +573,7 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 <li>Using Dokcker Toolbox, you can set up one or more VM and manage them.</li>
 </ul>
 
-<h3 id="toc_5">5. Docker Architecture</h3>
+<h3 id="toc_6">5. Docker Architecture</h3>
 <p>The Docker architecture can split into 3 parts:</p>
 
 <ul>
@@ -161,7 +582,7 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 <li>Docker Registry, a cloud service which stores Docker images, such as Docker Hub and Docker Cloud(both are public registries).</li>
 </ul>
 
-<h4 id="toc_6">5.1 Docker Objects</h4>
+<h4 id="toc_7">5.1 Docker Objects</h4>
 
 <ul>
 <li>Image, a read-only template with instructions for creating Docker container.</li>
@@ -169,7 +590,7 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 <li>Service, allow you to scale containers across Docker daemons.</li>
 </ul>
 
-<h4 id="toc_7">5.2 The Underlying technology</h4>
+<h4 id="toc_8">5.2 The Underlying technology</h4>
 
 <ul>
 <li>Namespaces. When you run a container, Docker create a set of namespaces for the container, which provide a layer of isolation. The namespaces includes:
@@ -188,10 +609,10 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 <a href="https://docs.docker.com/engine/docker-overview/#docker-architecture">Docker Architecture</a>
 <a href="https://store.docker.com/">Docker Store</a> is a market where you can distribute your images.</p>
 
-<h3 id="toc_8">6. Developing Apps with Docker</h3>
+<h3 id="toc_9">6. Developing Apps with Docker</h3>
 <p>It&#39;s easy to setup Docker to deploy with your app. All you need to do is to add a <code>Dockerfile</code> in your source folder and then build the image. The official example demonstrate how a small flask app is built with Docker.</p>
 
-<h4 id="toc_9">6.1 First time image</h4>
+<h4 id="toc_10">6.1 First time image</h4>
 <p>I summarize the steps as below:</p>
 
 <ul>
@@ -224,7 +645,7 @@ slim-flask          latest              3032f935f40c        10 seconds ago      
 python              slim                a79297999298        45 hours ago        156MB
 </pre></div>
 
-<h4 id="toc_10">6.2 Create image from a container</h4>
+<h4 id="toc_11">6.2 Create image from a container</h4>
 <p>However, sometimes you want to make configurations inside a container and want to save it as an image. You can do that:</p>
 <div class="highlight"><pre><span class="nv">$ </span>docker container commit <span class="o">[</span>options<span class="o">]</span> CONTAINER <span class="o">[</span>repository:<span class="o">[</span>TAG<span class="o">]]</span>
 
@@ -232,7 +653,7 @@ python              slim                a79297999298        45 hours ago        
 <span class="nv">$ </span>docker container commit ubuntu ubuntu-image
 </pre></div>
 
-<h4 id="toc_11">6.3 Publish docker image</h4>
+<h4 id="toc_12">6.3 Publish docker image</h4>
 <p>Use it when it is needed.</p>
 <div class="highlight"><pre><span class="nv">$ </span>docker login             <span class="c"># Log in this CLI session using your Docker credentials</span>
 <span class="nv">$ </span>docker tag &lt;image&gt; username/repository:tag  <span class="c"># Tag &lt;image&gt; for upload to registry</span>
@@ -240,7 +661,7 @@ python              slim                a79297999298        45 hours ago        
 <span class="nv">$ </span>docker run username/repository:tag                   <span class="c"># Run image from a registry</span>
 </pre></div>
 
-<h3 id="toc_12">7. Docker mirrors</h3>
+<h3 id="toc_13">7. Docker mirrors</h3>
 
 <ul>
 <li>Docker(Official), <code>--registry-mirror=https://registry.docker-cn.com</code></li>
@@ -1285,309 +1706,6 @@ Host github.com
 <p>Sparkfun&#39;s tutorials:
 <a href="https://learn.sparkfun.com/tutorials/raspberry-gpio/hardware-setup">learn.sparkfun.com/tutorials/raspberry-gpio/hardware-setup</a>
 <a href="https://learn.sparkfun.com/tutorials/raspberry-gpio/python-rpigpio-example">learn.sparkfun.com/tutorials/raspberry-gpio/python-rpigpio-example</a></p>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[Linux Server Security Useful Commands]]></title>
-        <author><name>terryoy</name></author>
-        <link href="http://terryoy.github.io/2015/06/some-useful-linux-server-security-commands.html"/>
-        <published>2015-06-27T22:31:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
-        <id>http://terryoy.github.io/2015/06/some-useful-linux-server-security-commands.html</id>
-        <category scheme="http://terryoy.github.io/tag/#server" term="server" label="server" />
-        <category scheme="http://terryoy.github.io/tag/#security" term="security" label="security" />
-        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
-            <![CDATA[ <p>When suspecting your server is broken into, below is some tricks to do the server audit.</p>
-
-<h3 id="toc_0">1. Use &ldquo;last&rdquo; command to check login sessions</h3>
-<div class="highlight"><pre><span class="nv">$ </span>last
-terryoy  pts/0        58.251.197.153   Sat Jun 27 21:42   still logged in   
-terryoy  pts/2        113.116.1.68     Tue Jun 23 14:40 - 16:14  <span class="o">(</span>01:34<span class="o">)</span>    
-terryoy  pts/0        113.116.1.68     Tue Jun 23 14:38 - 16:14  <span class="o">(</span>01:35<span class="o">)</span>    
-terryoy  pts/0        183.16.85.159    Tue Jun 23 09:37 - 14:02  <span class="o">(</span>04:24<span class="o">)</span>    
-terryoy  pts/0        183.16.197.223   Mon Jun 22 17:47 - 20:10  <span class="o">(</span>02:22<span class="o">)</span>    
-terryoy  pts/6        183.16.195.96    Thu Jun 18 11:08 - 15:23  <span class="o">(</span>04:14<span class="o">)</span>    
-terryoy  pts/5        183.16.195.96    Thu Jun 18 11:08 - 15:23  <span class="o">(</span>04:14<span class="o">)</span>    
-terryoy  pts/2        183.16.190.37    Thu Jun 18 10:37 - 13:06  <span class="o">(</span>02:29<span class="o">)</span>    
-terryoy  pts/0        183.16.190.37    Thu Jun 18 10:01 - 13:01  <span class="o">(</span>02:59<span class="o">)</span>
-</pre></div>
-
-<h3 id="toc_1">2. Use &ldquo;lastlog&rdquo; to check all user&#39;s last login time</h3>
-<div class="highlight"><pre><span class="nv">$ </span>lastlog
-Username         Port     From             Latest
-root             pts/2    27.45.56.68      Sat Feb 21 15:21:40 +0800 2015
-daemon                                     **Never logged in**
-bin                                        **Never logged in**
-sys                                        **Never logged in**
-sync                                       **Never logged in**
-games                                      **Never logged in**
-man                                        **Never logged in**
-lp                                         **Never logged in**
-mail                                       **Never logged in**
-news                                       **Never logged in**
-uucp                                       **Never logged in**
-proxy                                      **Never logged in**
-</pre></div>
-
-<h3 id="toc_2">3. Check &ldquo;/var/log/auth.log&rdquo;</h3>
-<div class="highlight"><pre><span class="nv">$ </span>sudo less /var/log/auth.log
-...
-Jun 27 21:35:01 iZ940ou5p7nZ CRON<span class="o">[</span>14089<span class="o">]</span>: pam_unix<span class="o">(</span>cron:session<span class="o">)</span>: session closed <span class="k">for </span>user root
-Jun 27 21:42:55 iZ940ou5p7nZ sshd<span class="o">[</span>14108<span class="o">]</span>: Accepted password <span class="k">for </span>terryoy from 58.251.197.153 port 62430 ssh2
-Jun 27 21:42:55 iZ940ou5p7nZ sshd<span class="o">[</span>14108<span class="o">]</span>: pam_unix<span class="o">(</span>sshd:session<span class="o">)</span>: session opened <span class="k">for </span>user terryoy by <span class="o">(</span><span class="nv">uid</span><span class="o">=</span>0<span class="o">)</span>
-Jun 27 21:45:01 iZ940ou5p7nZ CRON<span class="o">[</span>14187<span class="o">]</span>: pam_unix<span class="o">(</span>cron:session<span class="o">)</span>: session opened <span class="k">for </span>user root by <span class="o">(</span><span class="nv">uid</span><span class="o">=</span>0<span class="o">)</span>
-Jun 27 21:45:01 iZ940ou5p7nZ CRON<span class="o">[</span>14187<span class="o">]</span>: pam_unix<span class="o">(</span>cron:session<span class="o">)</span>: session closed <span class="k">for </span>user root
-Jun 27 21:53:30 iZ940ou5p7nZ sudo:  terryoy : <span class="nv">TTY</span><span class="o">=</span>pts/0 ; <span class="nv">PWD</span><span class="o">=</span>/home/terryoy ; <span class="nv">USER</span><span class="o">=</span>root ; <span class="nv">COMMAND</span><span class="o">=</span>/usr/bin/apt-get install acct
-Jun 27 21:53:30 iZ940ou5p7nZ sudo: pam_unix<span class="o">(</span>sudo:session<span class="o">)</span>: session opened <span class="k">for </span>user root by terryoy<span class="o">(</span><span class="nv">uid</span><span class="o">=</span>0<span class="o">)</span>
-Jun 27 21:53:39 iZ940ou5p7nZ sudo: pam_unix<span class="o">(</span>sudo:session<span class="o">)</span>: session closed <span class="k">for </span>user root
-...
-</pre></div>
-
-<h3 id="toc_3">4. Use &ldquo;acct&rdquo; for system accounting</h3>
-<p>The &ldquo;acct&rdquo; package is a set of utilities for system accounting. </p>
-
-<pre><code>* ac, print stats about user's connect time
-* accton, turn process accounting on or off
-* last, listing of last logged in users
-* lastcomm, print info about previous executed commands
-* sa, summarize accounting info
-* dump-utmp, print an utmp file in human readable format
-* dump-acct, print an acct file in human readable format</code></pre>
-<div class="highlight"><pre><span class="c"># list user&#39;s login session time by date</span>
-<span class="nv">$ </span>ac -p -d
-
-<span class="c"># display user&#39;s last commands</span>
-<span class="nv">$ </span>lastcomm &lt;user_name&gt;
-</pre></div>
-
-<h3 id="toc_4">Reference to secure ubuntu server</h3>
-<p><a href="https://www.ftmon.org/blog/secure-ubuntu-server/">www.ftmon.org/blog/secure-ubuntu-server/</a></p>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[A Template for Program Readme on Github]]></title>
-        <author><name>terryoy</name></author>
-        <link href="http://terryoy.github.io/2015/06/program-readme-template.html"/>
-        <published>2015-06-03T16:15:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
-        <id>http://terryoy.github.io/2015/06/program-readme-template.html</id>
-        <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
-        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
-            <![CDATA[ <p>When writing a Program, the developer should be clear about the purpose, to eliminate time wasted. Refering to the <a href="http://textfiles.com/programming/writprog.pro">How to Program</a>, I propose a documatation template companied with a Software Development Life Cycle to ensure this.</p>
-
-<pre><code>1. SPECIFICATION
-2. PROGRAM DESIGN
-3. CODE DESIGN
-4. CONSTRUCTION AND DESIGN</code></pre>
-<p>So, starting a project on github, I think we should follow a basic documentation structure to answer each questions, to ensure that your purpose is clear enough.</p>
-
-<h3 id="toc_0">1. Speficication</h3>
-<p>In this stage, four things matter.</p>
-
-<ul>
-<li><p>User Interface</p>
-<p>in what approach does user interact with the program?
-what input/output?
-command line? menus? how much freedom allowed?</p></li>
-<li><p>Algorithm</p>
-<p>what specific computation behind the program?
-what method do we use?</p></li>
-<li><p>Data Structures</p>
-<p>how should the data of the problem be organized?</p></li>
-<li><p>[Generality]</p>
-<p>is it used only in a small number of situations? or is it general purpose of wide variety of circumstances?
-you need fewer choices if made for a small number of situations, and more choices and more commands for large number of situations</p></li>
-<li><p>[Robustness]
-how gracefully does the program respond to bad data or bad commands?</p></li>
-</ul>
-
-<h3 id="toc_1">2. Program Design</h3>
-<p>A design of the program may be often represented by a structure chart, but it&#39;s not the most important thing. Instead, you should divied the large program into <strong>subroutines</strong>.</p>
-
-<ul>
-<li>Design Structure
-top level routines
-    sub routines</li>
-</ul>
-<p>There&#39;re a few ideas for evaluating the desgin:</p>
-
-<pre><code>1. Keep subroutines short
-2. Keep subroutines single-purpose
-3. Keep calling sequence short
-4. Communicate data through calling sequences
-5. Limit use of flag variables
-6. Make design hierarchical</code></pre>
-
-<h3 id="toc_2">[3. Setup and Testing]</h3>
-
-<h3 id="toc_3">[4. About and License]</h3>
-<p><em>(Since the original post discontinued, I have to complete the rest of the template myself.)</em></p>
-<p>Following is a template in markdown:</p>
-
-<pre><code>### 1. Specification
-
-##### User Interface
-
-##### Algorithms
-
-##### Data Structures
-
-##### [Generality]
-
-##### [Robustness]
-
-### 2. Program Design
-
-##### Design Structure
-
-##### Public Interface
-
-### 3. Setup and Testing
-
-### 4. About
-
-### 5. License</code></pre>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[Intel Edison Get Started]]></title>
-        <author><name>terryoy</name></author>
-        <link href="http://terryoy.github.io/2015/06/edison-get-started.html"/>
-        <published>2015-06-03T16:15:00+08:00</published>
-        <updated>2016-01-03T21:36:38+08:00</updated>
-        <id>http://terryoy.github.io/2015/06/edison-get-started.html</id>
-        <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
-        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
-            <![CDATA[ <p>This guide is about the initial steps for me starting development on Intel Edison platform.</p>
-
-<h3 id="toc_0">1. The Board and Setting Up Serial Communication</h3>
-<p>The board I use to develop with Edison is the <a href="http://www.seeedstudio.com/depot/Intel-Edison-for-Arduino-p-2149.html">Intel Edison for Arduino</a> board. So first plug the Edison module on the board; secondary, I have the 6.5V 2A DC connected to supply the power to the board (or you could power up the board with the micro-USB in the middle); third, a micro-USB wire connect to the board for serial communication.</p>
-<p>I&#39;m using minicom on Mac OSX for the serial connection, but you can also use <code>screen</code> on Mac OSX and Linux(see the reference at the end of this section).</p>
-<p>If you forgot the root password, here&#39;s the way to recover it: </p>
-
-<pre><code>* on booting, press any key to stop the process
-* on the &quot;boot&gt;&quot; command line prompt, type ```run do_ota``` to redo the flashing process.</code></pre>
-<p>Then you end up with a login using &ldquo;root&rdquo; as user name and no password.</p>
-
-<ul>
-<li><a href="https://software.intel.com/zh-cn/assembling-intel-edison-board-with-arduino-expansion-board">Reference for assembling</a></li>
-<li><a href="https://software.intel.com/zh-cn/setting-up-serial-terminal-on-system-with-linux">Reference for setting up serial on Linux</a></li>
-<li><a href="https://software.intel.com/zh-cn/setting-up-serial-terminal-on-system-with-mac-os-x">Reference for setting up serial on Mac</a></li>
-</ul>
-
-<h3 id="toc_1">2. Setting up WiFi</h3>
-<p>The next thing to do is to setup the WiFi on Edison, because a large part of the development process happens on WiFi.</p>
-<div class="highlight"><pre><span class="nv">$ </span>configure_edison --wifi
-
-<span class="c"># check the wifi status</span>
-<span class="nv">$ </span>wpa_cli status
-</pre></div>
-<p>Follow the instructions of this program to complete the scanning, choosing hotspot, and reboot with WiFi.</p>
-<p>By default, <code>ssh</code> is restricted to usb, so you need to disable the restriction by using <code>configure_edison --setup</code> to setup the device name and password. It will automatically update the file &#39;/lib/systemd/system/sshd.socket&#39; and comment out this line &ldquo;BindToDevice=usb0&rdquo;. (need reboot to take effect)</p>
-
-<ul>
-<li><a href="https://software.intel.com/zh-cn/connecting-your-intel-edison-board-using-wifi">Reference for setting up WiFi</a></li>
-</ul>
-
-<h3 id="toc_2">3. Blink the LED</h3>
-<p>(to be continued when I get the board&hellip;)</p>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[Create a Root CA and Self-Sign Certificate for SSL]]></title>
-        <author><name>terryoy</name></author>
-        <link href="http://terryoy.github.io/2015/02/create-ssl-ca-root-and-self-sign.html"/>
-        <published>2015-02-23T11:03:00+08:00</published>
-        <updated>2017-04-27T16:20:42+08:00</updated>
-        <id>http://terryoy.github.io/2015/02/create-ssl-ca-root-and-self-sign.html</id>
-        <category scheme="http://terryoy.github.io/tag/#server" term="server" label="server" />
-        <category scheme="http://terryoy.github.io/tag/#security" term="security" label="security" />
-        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
-            <![CDATA[ <h3 id="toc_0">1. Concepts</h3>
-<p>Nowadays we often have HTTPS protected web access scenario, however it&#39;s expensive to purchase a certificates from authority if you&#39;re just running a small site. So it&#39;s better to create your own certificates and use your own SSL protection.</p>
-<p>The steps can be roughly described as below:</p>
-
-<pre><code>1. Create a private key (as Root CA Key), keep this very private
-2. Self-sign a root certificate
-3. Install root CA on your various workstations
-4. Create a CSR(Certificate Signing Request) for each of your authorized needed circumstances(device, server, client, etc.)
-5. Sign CA with root CA Key</code></pre>
-
-<h3 id="toc_1">2. Generate Root CA(Certificate Authority)</h3>
-<p>The first part is to create a private key and the CA, which will be used as the root CA to sign certificates.</p>
-<div class="highlight"><pre><span class="c">## Step 1: Create a private key</span>
-
-<span class="c"># generate a private root key</span>
-<span class="nv">$ </span>openssl genrsa -out rootCA.key 2048
-<span class="c"># (or) generate a private root key with passphrase protection; and if you forgot the password, you need to do everything again</span>
-<span class="nv">$ </span>openssl genrsa -out rootCA.key 2048 -des3
-
-
-<span class="c">## Step 2: Self-sign a certificate</span>
-
-<span class="nv">$ </span>openssl req -x509 -new -nodes -key rootCA.key -days 3650 -out rootCA.pem
-You are about to be asked to enter information that will be incorporated
-into your certificate request.
-What you are about to enter is what is called a Distinguished Name or a DN.
-There are quite a few fields but you can leave some blank
-For some fields there will be a default value,
-If you enter <span class="s1">&#39;.&#39;</span>, the field will be left blank.
------
-Country Name <span class="o">(</span>2 letter code<span class="o">)</span> <span class="o">[</span>AU<span class="o">]</span>:CN
-State or Province Name <span class="o">(</span>full name<span class="o">)</span> <span class="o">[</span>Some-State<span class="o">]</span>:Guangdong
-Locality Name <span class="o">(</span>eg, city<span class="o">)</span> <span class="o">[]</span>:Shenzhen
-Organization Name <span class="o">(</span>eg, company<span class="o">)</span> <span class="o">[</span>Internet Widgits Pty Ltd<span class="o">]</span>:TeaTime Production.
-Organizational Unit Name <span class="o">(</span>eg, section<span class="o">)</span> <span class="o">[]</span>:IT   
-Common Name <span class="o">(</span>e.g. server FQDN or YOUR name<span class="o">)</span> <span class="o">[]</span>:Terry Ouyang    
-Email Address <span class="o">[]</span>:terry.ouyang@gmail.com
-</pre></div>
-<p>Now we have a private root key(rootCA.key), and a root CA(rootCA.pem). If you want all the clients/PC/browsers accept your authorized certificate, you need to put your root CA in their local trusted stores(e.g. OS&#39;s trusted certificates repositories).</p>
-
-<h3 id="toc_2">3. Create Certificates and Sign with Root CA</h3>
-<p>For every device you want to authorize, you need to create their own private key, then complete the signed certificate with a certificate signing request(CSR).</p>
-<div class="highlight"><pre><span class="c">## Step 1: Create the private key</span>
-
-<span class="nv">$ </span>openssl genrsa -out device.key 2048
-
-<span class="c">## Step 2: Create the CSR (In this step you must set &quot;Common Name&quot; to your desire host if you&#39;re planning to use it as a server&#39;s certificate)</span>
-
-<span class="nv">$ </span>openssl req -new -key device.key -out device.csr
-...
-Common Name <span class="o">(</span>e.g. server FQDN or YOUR name<span class="o">)</span> <span class="o">[]</span>:terryoy.github.io
-...
-
-<span class="c">## Step 3: Create the signed certificate </span>
-
-<span class="nv">$ </span>openssl x509 -req -in device.csr -CA rootCA.pem -CAkey rootCA.key -CAcreateserial -out device.crt -days 3650
-</pre></div>
-<p>Now you have the certificate private key(device.key) and the self CA signed certificate(device.crt). You can now use them for SSL communications.</p>
-
-<h3 id="toc_3">4. Congifuration for Nginx</h3>
-<p>Below is an example of enabling the SSL function for the service configuration.</p>
-<div class="highlight"><pre>server <span class="o">{</span>
-    listen 443;
-    ssl on;
-    ssl_certificate /etc/nginx/ssl/service.crt;
-    ssl_certificate_key /etc/nginx/ssl/service.key;
-
-    ...
-<span class="o">}</span>
-</pre></div>
-<p>You can also check your server&#39;s certificate by the command below:</p>
-<div class="highlight"><pre><span class="nv">$ </span>openssl s_client -connect www.yourexample.com:443
-</pre></div>
-
-<h3 id="toc_4">5. Setup SSL Factory on Android App</h3>
-<p>There is a good reference on <a href="http://stackoverflow.com/a/6378872">stackoverflow.com</a> for this problem.</p>
-<p>If you&#39;re using cocos2d-x 3.3+, it supports that you set a certificate for the HttpClient(globally), which allows you use your own certificate for SSL verification.</p>
-<div class="highlight"><pre><span class="k">auto</span> <span class="n">path</span> <span class="o">=</span> <span class="n">FileUtils</span><span class="o">::</span><span class="n">getInstance</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">fullPathForFilename</span><span class="p">(</span><span class="s">&quot;my_cacert.pem&quot;</span><span class="p">);</span>
-<span class="n">HttpClient</span><span class="o">::</span><span class="n">getInstance</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">setSSLVerification</span><span class="p">(</span><span class="n">path</span><span class="p">);</span>
-</pre></div>
-
-<h3 id="toc_5">6. ACME Client</h3>
-<p><em>Update@2017: now you can use ACME clients and some free certificate service for personal HTTPS web sites.</em></p>
-<p>AMCE is short for Automatic Certificate Management Environment, which requires you to run a client on your server to provide checking of the ownership of your server and domain name, and provide signed certificates based on the result.</p>
-<p>Check out more information for the Free SSL/TLS Certificates: <a href="https://letsencrypt.org">letsencrypt.org</a></p>
 ]]>
         </content>
     </entry>

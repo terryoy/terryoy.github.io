@@ -3,14 +3,293 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/guides/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/guides/" />
-    <updated>2017-12-21T21:12:40+08:00</updated>
+    <updated>2018-04-21T23:27:09+08:00</updated>
     <id>http://terryoy.github.io/guides/</id>
     <entry>
+        <title type="html"><![CDATA[Setup ARM Development Environment with QEMU]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2018/04/setup_arm_development.html"/>
+        <published>2018-04-21T23:26:00+08:00</published>
+        <updated>2018-04-21T23:27:09+08:00</updated>
+        <id>http://terryoy.github.io/2018/04/setup_arm_development.html</id>
+        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
+        <category scheme="http://terryoy.github.io/tag/#qemu" term="qemu" label="qemu" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <h3 id="toc_0">1. Clone the kernel repository</h3>
+<div class="highlight"><pre><span class="nv">$ </span>git clone git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+
+<span class="c"># or just download the package from the mirror</span>
+<span class="nv">$ </span>wget https://mirror.tuna.tsinghua.edu.cn/kernel/v4.x/linux-4.4.1.tar.xz
+</pre></div>
+
+<h3 id="toc_1">2. Install the Cross Compiling Toolchain</h3>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install gcc-arm-linux-gnueabi
+
+<span class="c"># another option is &quot;arm-linux-gnueabihf&quot; but we use &quot;gcc-arm-gnueabi&quot; here</span>
+</pre></div>
+
+<h3 id="toc_2">3. Make the first compile</h3>
+<p>We&#39;re emulating the vexpress Cortex A9 for demo.</p>
+<div class="highlight"><pre><span class="nv">$ </span><span class="nb">export </span><span class="nv">ARCH</span><span class="o">=</span>arm  
+<span class="nv">$ </span><span class="nb">export </span><span class="nv">CROSS_COMPILE</span><span class="o">=</span>arm-linux-gnueabi-  
+<span class="nv">$ </span>make vexpress_defconfig  
+<span class="nv">$ </span>make zImage -j8  
+<span class="nv">$ </span>make modules -j8  
+<span class="nv">$ </span>make dtbs
+</pre></div>
+
+<h3 id="toc_3">4. Install QEMU</h3>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install qemu
+</pre></div>
+
+<h3 id="toc_4">5. Make Root File System</h3>
+
+<h3 id="toc_5">5.1 busybox</h3>
+<div class="highlight"><pre><span class="nv">$ </span>wget http://www.busybox.net/downloads/busybox-1.25.1.tar.bz2  
+<span class="nv">$ </span>tar xvf busybox-1.25.1.tar.bz2
+<span class="nv">$ </span>make defconfig  
+<span class="nv">$ </span>make <span class="nv">CROSS_COMPILE</span><span class="o">=</span>arm-linux-gnueabi-  
+<span class="nv">$ </span>make install <span class="nv">CROSS_COMPILE</span><span class="o">=</span>arm-linux-gnueabi-
+</pre></div>
+<p>Then you find the executables in <code>_install</code> folder. Next we start to create the rootfs.</p>
+
+<h3 id="toc_6">5.2 rootfs</h3>
+<div class="highlight"><pre><span class="nv">$ </span>sudo mkdir rootfs
+<span class="nv">$ </span>sudo mkdir rootfs/lib 
+
+<span class="c"># copy busybox to rootfs</span>
+<span class="nv">$ </span>sudo cp _install/* -r rootfs/
+
+<span class="c"># copy arm libs to lib</span>
+<span class="c"># sudo cp -P /usr/arm-linux-gnueabi/lib/* rootfs/lib/</span>
+</pre></div>
+
+<h3 id="toc_7">5.3 Create 4 tty devices</h3>
+<div class="highlight"><pre><span class="nv">$ </span>sudo mkdir -p rootfs/dev
+<span class="nv">$ </span>sudo mknod rootfs/dev/tty1 c 4 1  
+<span class="nv">$ </span>sudo mknod rootfs/dev/tty2 c 4 2  
+<span class="nv">$ </span>sudo mknod rootfs/dev/tty3 c 4 3  
+<span class="nv">$ </span>sudo mknod rootfs/dev/tty4 c 4 4
+</pre></div>
+<p>You can also create other folders in the image. (Reference: <a href="https://learningfromyoublog.wordpress.com/2016/04/05/131/">learningfromyoublog.wordpress.com/2016/04/05/131/</a>)</p>
+
+<h3 id="toc_8">5.4 Make the Image</h3>
+<div class="highlight"><pre><span class="c"># creat an empty image</span>
+<span class="nv">$ </span>dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>a9rootfs.ext3 <span class="nv">bs</span><span class="o">=</span>1M <span class="nv">count</span><span class="o">=</span>32  
+
+<span class="c"># format to ext3</span>
+<span class="nv">$ </span>mkfs.ext3 a9rootfs.ext3  
+
+<span class="c"># copy files into the image</span>
+<span class="nv">$ </span>sudo mkdir tmpfs  
+<span class="nv">$ </span>sudo mount -t ext3 a9rootfs.ext3 tmpfs/ -o loop  
+<span class="nv">$ </span>sudo cp -r rootfs/*  tmpfs/  
+<span class="nv">$ </span>sudo umount tmpfs
+</pre></div>
+
+<h3 id="toc_9">6. Start QEMU with the Image</h3>
+<div class="highlight"><pre><span class="c"># open in current console</span>
+<span class="nv">$ </span>qemu-system-arm -M vexpress-a9 -m 512M -dtb extra_folder/vexpress-v2p-ca9.dtb -kernel extra_folder/zImage -nographic -append <span class="s2">&quot;root=/dev/mmcblk0 rw console=ttyAMA0&quot;</span> -sd a9rootfs.ext3 
+
+<span class="c"># open in new window(maybe GUI)</span>
+<span class="nv">$ </span>qemu-system-arm -M vexpress-a9 -m 512M -dtb extra_folder/vexpress-v2p-ca9.dtb -kernel extra_folder/zImage -append <span class="s2">&quot;root=/dev/mmcblk0 rw&quot;</span> -sd a9rootfs.ext3
+</pre></div>
+<p>Now you enter the console of the emulator system. Press <code>Ctrl+A C</code> to exit to <code>(qemu)</code> console, or <code>Ctrl+A X</code> to exit..</p>
+]]>
+        </content>
+    </entry><entry>
+        <title type="html"><![CDATA[Learn to Use CMake to Compile Code]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2018/01/learn-to-use-cmake.html"/>
+        <published>2018-01-12T14:41:00+08:00</published>
+        <updated>2018-01-13T09:52:53+08:00</updated>
+        <id>http://terryoy.github.io/2018/01/learn-to-use-cmake.html</id>
+        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
+        <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <p>I&#39;m trying to use the Linux environment to develop C/C++ programs, but never really get on the path.</p>
+<p>It&#39;s not the language that I don&#39;t understand, but the environment, the toolchain and how to configure a project in real life is my question. Linux have many programs developed in C/C++, but compiling them myself always out of my scope, which is blocking me from deeper understanding of Linux.</p>
+<p>So here I&#39;m reading a walkthrough to help myself making a C/C++ project work.</p>
+<p><strong>CMake</strong> is said to be an OS and compiler independent build system. So you first write CMake configurations in any source directories, and then it can generate a native build environment that will compile source code, create libraries, generate wrappers and build executables in arbitrary combinations.</p>
+
+<h3 id="toc_0">0. Build Essential</h3>
+<p>First of all, if you want to compile anything in Linux, you should install the <code>build-essential</code> package first.</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt install build-essential
+</pre></div>
+<p>It contains all the common packages to build Debian packages, such as: g++, gcc, hurd, libc, dpkg, make, etc.</p>
+<p>Next step let&#39;s install the CMake package:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt install cmake
+</pre></div>
+
+<h3 id="toc_1">1. A Hello World and a CMakeLists.txt</h3>
+<p>The minimal demo has two files. </p>
+<p>A <code>hello.cpp</code> source file:</p>
+<div class="highlight"><pre><span class="cp">#include &lt;iostream&gt;</span>
+
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Hello World&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+     <span class="k">return</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+<p>A <code>CMakeLists.txt</code> config file:</p>
+
+<pre><code># Specify the minimum version for CMake
+
+cmake_minimum_required(VERSION 2.8)
+
+# Project's name
+project(hello)
+
+# Set the output folder where your program will be created
+set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/bin)
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
+set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
+
+# The following folder will be included
+include_directories(&quot;${PROJECT_SOURCE_DIR}&quot;)
+
+# Compile the program to hello
+add_executable(hello ${PROJECT_SOURCE_DIR}/hello.cpp)</code></pre>
+<p>The three lines <code>cmake_minimum_required</code>, <code>project(hello)</code>, and <code>add_executable</code> are essential.</p>
+<p>Run below two commands to compile the exectuatble:</p>
+<div class="highlight"><pre><span class="c"># Generate CMake configurations</span>
+<span class="nv">$ </span>cmake -H. -Bbuild
+
+<span class="c"># Build the executable</span>
+<span class="nv">$ </span>cmake --build build -- -j3
+</pre></div>
+
+<h3 id="toc_2">References</h3>
+<p><a href="https://tuannguyen68.gitbooks.io/learning-cmake-a-beginner-s-guide/content/chap1/chap1.html">Learning CMake: A Beginner&#39;s Guide</a>
+<a href="https://cmake.org/cmake-tutorial/">CMake Official Tutorial</a></p>
+]]>
+        </content>
+    </entry><entry>
+        <title type="html"><![CDATA[Networking in Docker]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2018/01/networking-in-docker.html"/>
+        <published>2018-01-12T11:41:00+08:00</published>
+        <updated>2018-01-13T18:16:42+08:00</updated>
+        <id>http://terryoy.github.io/2018/01/networking-in-docker.html</id>
+        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
+        <category scheme="http://terryoy.github.io/tag/#docker" term="docker" label="docker" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <p>After installed an Ubuntu container in my docker, now I&#39;m trying to learn the networking tools in Ubuntu and Docker.</p>
+
+<ol>
+<li>Networking Tools in Ubuntu Again</li>
+</ol>
+<div class="highlight"><pre><span class="c"># package for ifconfig(which is too old)</span>
+<span class="nv">$ </span>apt install net-tools
+
+<span class="c"># newer package for networking</span>
+<span class="nv">$ </span>apt install iproute2
+
+<span class="c"># ping command</span>
+<span class="nv">$ </span>apt install iputils-ping
+
+<span class="c"># check network interface</span>
+<span class="nv">$ </span>ifconfig
+eth0      Link encap:Ethernet  HWaddr 02:42:ac:11:00:02  
+          inet addr:172.17.0.2  Bcast:0.0.0.0  Mask:255.255.0.0
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:5956 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:3345 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:8376715 <span class="o">(</span>8.3 MB<span class="o">)</span>  TX bytes:186204 <span class="o">(</span>186.2 KB<span class="o">)</span>
+</pre></div>
+
+<ol>
+<li>Docker Commands for Networking</li>
+</ol>
+<p>There are three types of networks in docker, and the <code>bridge</code> network is by default presented in all docker instances.</p>
+<div class="highlight"><pre><span class="c"># List networks in Docker</span>
+<span class="nv">$ </span>docker network ls
+NETWORK ID          NAME                DRIVER              SCOPE
+a6bf46c2bc44        bridge              bridge              <span class="nb">local</span>
+e3826e52e7e6        host                host                <span class="nb">local</span>
+08a134ed472c        none                null                <span class="nb">local</span>
+
+<span class="c"># Check docker&#39;s network detail</span>
+<span class="nv">$ </span>docker network inspect bridge
+<span class="o">[</span>
+    <span class="o">{</span>
+        <span class="s2">&quot;Name&quot;</span>: <span class="s2">&quot;bridge&quot;</span>,
+        <span class="s2">&quot;Id&quot;</span>: <span class="s2">&quot;a6bf46c2bc44dc16523ac28edd5524fccef79b779ae52602c868001763cd21c4&quot;</span>,
+        <span class="s2">&quot;Created&quot;</span>: <span class="s2">&quot;2018-01-09T11:36:15.168104899Z&quot;</span>,
+        <span class="s2">&quot;Scope&quot;</span>: <span class="s2">&quot;local&quot;</span>,
+        <span class="s2">&quot;Driver&quot;</span>: <span class="s2">&quot;bridge&quot;</span>,
+        <span class="s2">&quot;EnableIPv6&quot;</span>: <span class="nb">false</span>,
+        <span class="s2">&quot;IPAM&quot;</span>: <span class="o">{</span>
+            <span class="s2">&quot;Driver&quot;</span>: <span class="s2">&quot;default&quot;</span>,
+            <span class="s2">&quot;Options&quot;</span>: null,
+            <span class="s2">&quot;Config&quot;</span>: <span class="o">[</span>
+                <span class="o">{</span>
+                    <span class="s2">&quot;Subnet&quot;</span>: <span class="s2">&quot;172.17.0.0/16&quot;</span>,
+                    <span class="s2">&quot;Gateway&quot;</span>: <span class="s2">&quot;172.17.0.1&quot;</span>
+                <span class="o">}</span>
+            <span class="o">]</span>
+        <span class="o">}</span>,
+        <span class="s2">&quot;Internal&quot;</span>: <span class="nb">false</span>,
+        <span class="s2">&quot;Attachable&quot;</span>: <span class="nb">false</span>,
+        <span class="s2">&quot;Ingress&quot;</span>: <span class="nb">false</span>,
+        <span class="s2">&quot;ConfigFrom&quot;</span>: <span class="o">{</span>
+            <span class="s2">&quot;Network&quot;</span>: <span class="s2">&quot;&quot;</span>
+        <span class="o">}</span>,
+        <span class="s2">&quot;ConfigOnly&quot;</span>: <span class="nb">false</span>,
+        <span class="s2">&quot;Containers&quot;</span>: <span class="o">{</span>
+            <span class="s2">&quot;cfc178841a7940b6cbf43c8e0dbd7fb6672af3b3e8a9020632c75352685ec685&quot;</span>: <span class="o">{</span>
+                <span class="s2">&quot;Name&quot;</span>: <span class="s2">&quot;ubuntu&quot;</span>,
+                <span class="s2">&quot;EndpointID&quot;</span>: <span class="s2">&quot;8c14adc4a61eacdc8bd2b261d2af4f17c7a966d9fcfb8c61b5f9284fa2eded45&quot;</span>,
+                <span class="s2">&quot;MacAddress&quot;</span>: <span class="s2">&quot;02:42:ac:11:00:02&quot;</span>,
+                <span class="s2">&quot;IPv4Address&quot;</span>: <span class="s2">&quot;172.17.0.2/16&quot;</span>,
+                <span class="s2">&quot;IPv6Address&quot;</span>: <span class="s2">&quot;&quot;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>,
+        <span class="s2">&quot;Options&quot;</span>: <span class="o">{</span>
+            <span class="s2">&quot;com.docker.network.bridge.default_bridge&quot;</span>: <span class="s2">&quot;true&quot;</span>,
+            <span class="s2">&quot;com.docker.network.bridge.enable_icc&quot;</span>: <span class="s2">&quot;true&quot;</span>,
+            <span class="s2">&quot;com.docker.network.bridge.enable_ip_masquerade&quot;</span>: <span class="s2">&quot;true&quot;</span>,
+            <span class="s2">&quot;com.docker.network.bridge.host_binding_ipv4&quot;</span>: <span class="s2">&quot;0.0.0.0&quot;</span>,
+            <span class="s2">&quot;com.docker.network.bridge.name&quot;</span>: <span class="s2">&quot;docker0&quot;</span>,
+            <span class="s2">&quot;com.docker.network.driver.mtu&quot;</span>: <span class="s2">&quot;1500&quot;</span>
+        <span class="o">}</span>,
+        <span class="s2">&quot;Labels&quot;</span>: <span class="o">{}</span>
+    <span class="o">}</span>
+<span class="o">]</span>
+</pre></div>
+
+<h3 id="toc_0">3. Internal Networking</h3>
+<p>By default, the container is connected within a local network(172.17.0.1/16) bridged to the host machine, host can access the net gateway ip <code>172.17.0.1</code>. The contianers should be able to access each other in the local network provided by this net gateway. When you use the command <code>docker network inspect bridge</code>, you could see the list of containers and their IPs assigned.</p>
+
+<h4 id="toc_1">3.1 Accessing container&#39;s service by port mapping</h4>
+<p>Some containers as Nginx provide a service through a local port, in which case you could use port forwarding by your local IP. For example, you can check this port forwarding by <code>docker port</code> command or just listing the containers:</p>
+<div class="highlight"><pre><span class="c"># list ports for container</span>
+<span class="nv">$ </span>docker port nginx
+80/tcp -&gt; 0.0.0.0:5000
+
+<span class="c"># list containers</span>
+<span class="nv">$ </span>docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                   PORTS                  NAMES
+cfc178841a79        ubuntu              <span class="s2">&quot;/bin/bash&quot;</span>              3 weeks ago         Up 4 hours                                      ubuntu
+0200f61f5d65        nginx               <span class="s2">&quot;nginx -g &#39;daemon of…&quot;</span>   2 months ago        Up 3 minutes             0.0.0.0:5000-&gt;80/tcp   webserver
+</pre></div>
+<p>Now you can see there is a port mapping from <code>host:5000</code> to <code>container:80</code>. </p>
+<p>By default, no port is opened for a container to host, you need to specify the port mapping at <code>docker run</code> command with <code>-p</code>. </p>
+
+<pre><code># `-d` is when you needed it run as a daemon.
+$ docker run nginx -d -p 5000:80 --name nginx nginx</code></pre>
+<p>To open a port mapping for an existing container is very tricky. It is often said that you need to create another container instance based on the current just to open a port.</p>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[Basic Usage for Docker]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2017/11/docker-basic.html"/>
         <published>2017-11-06T16:12:00+08:00</published>
-        <updated>2017-12-21T16:42:54+08:00</updated>
+        <updated>2018-01-13T10:39:55+08:00</updated>
         <id>http://terryoy.github.io/2017/11/docker-basic.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -80,7 +359,14 @@ hello-world         latest              725dcfab7d63        2 days ago          
 $ docker run --name ubuntu -ti ubuntu-core
 
 # run an existing container
-$ docker container start -i ubuntu</code></pre>
+$ docker container start -i ubuntu
+
+# attach console to a server if it has started without interactive environment
+$ docker container start ubuntu
+$ docker attach ubuntu
+
+# If you want to detach from a server without stopping it
+# use `ctrl-p ctrl-q` key sequence</code></pre>
 <p>You may wonder the file size of each containers, you can checkt it by <code>docker ps -s</code>. You can see a ubuntu core only uses very small space with the minimal setup.</p>
 <div class="highlight"><pre><span class="nv">$ </span>docker ps -s
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                  NAMES               SIZE
@@ -97,7 +383,16 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 <li>*<em>Registry, Configuration, and Certificates for the Daemon *</em>, use it when you needed.</li>
 </ul>
 
-<h3 id="toc_4">4. Docker for Mac vs Docker Toolbox</h3>
+<h4 id="toc_4">3.1 Download Images by Tags</h4>
+<div class="highlight"><pre><span class="c"># Download images/repos from registry</span>
+<span class="nv">$ </span>docker pull &lt;image&gt;:&lt;tag&gt;
+
+<span class="c"># Example of getting a core ubuntu system</span>
+<span class="nv">$ </span>docker pull ubuntu:xenial
+<span class="nv">$ </span>docker run --name ubuntu -ti ubuntu
+</pre></div>
+
+<h3 id="toc_5">4. Docker for Mac vs Docker Toolbox</h3>
 <p>Docker Toolbox is also installed by the .dmg installation. The programs include <code>docker-compose</code> and <code>docker-machine</code>.</p>
 
 <ul>
@@ -105,7 +400,7 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 <li>Using Dokcker Toolbox, you can set up one or more VM and manage them.</li>
 </ul>
 
-<h3 id="toc_5">5. Docker Architecture</h3>
+<h3 id="toc_6">5. Docker Architecture</h3>
 <p>The Docker architecture can split into 3 parts:</p>
 
 <ul>
@@ -114,7 +409,7 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 <li>Docker Registry, a cloud service which stores Docker images, such as Docker Hub and Docker Cloud(both are public registries).</li>
 </ul>
 
-<h4 id="toc_6">5.1 Docker Objects</h4>
+<h4 id="toc_7">5.1 Docker Objects</h4>
 
 <ul>
 <li>Image, a read-only template with instructions for creating Docker container.</li>
@@ -122,7 +417,7 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 <li>Service, allow you to scale containers across Docker daemons.</li>
 </ul>
 
-<h4 id="toc_7">5.2 The Underlying technology</h4>
+<h4 id="toc_8">5.2 The Underlying technology</h4>
 
 <ul>
 <li>Namespaces. When you run a container, Docker create a set of namespaces for the container, which provide a layer of isolation. The namespaces includes:
@@ -141,10 +436,10 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 <a href="https://docs.docker.com/engine/docker-overview/#docker-architecture">Docker Architecture</a>
 <a href="https://store.docker.com/">Docker Store</a> is a market where you can distribute your images.</p>
 
-<h3 id="toc_8">6. Developing Apps with Docker</h3>
+<h3 id="toc_9">6. Developing Apps with Docker</h3>
 <p>It&#39;s easy to setup Docker to deploy with your app. All you need to do is to add a <code>Dockerfile</code> in your source folder and then build the image. The official example demonstrate how a small flask app is built with Docker.</p>
 
-<h4 id="toc_9">6.1 First time image</h4>
+<h4 id="toc_10">6.1 First time image</h4>
 <p>I summarize the steps as below:</p>
 
 <ul>
@@ -177,7 +472,7 @@ slim-flask          latest              3032f935f40c        10 seconds ago      
 python              slim                a79297999298        45 hours ago        156MB
 </pre></div>
 
-<h4 id="toc_10">6.2 Create image from a container</h4>
+<h4 id="toc_11">6.2 Create image from a container</h4>
 <p>However, sometimes you want to make configurations inside a container and want to save it as an image. You can do that:</p>
 <div class="highlight"><pre><span class="nv">$ </span>docker container commit <span class="o">[</span>options<span class="o">]</span> CONTAINER <span class="o">[</span>repository:<span class="o">[</span>TAG<span class="o">]]</span>
 
@@ -185,7 +480,7 @@ python              slim                a79297999298        45 hours ago        
 <span class="nv">$ </span>docker container commit ubuntu ubuntu-image
 </pre></div>
 
-<h4 id="toc_11">6.3 Publish docker image</h4>
+<h4 id="toc_12">6.3 Publish docker image</h4>
 <p>Use it when it is needed.</p>
 <div class="highlight"><pre><span class="nv">$ </span>docker login             <span class="c"># Log in this CLI session using your Docker credentials</span>
 <span class="nv">$ </span>docker tag &lt;image&gt; username/repository:tag  <span class="c"># Tag &lt;image&gt; for upload to registry</span>
@@ -193,7 +488,7 @@ python              slim                a79297999298        45 hours ago        
 <span class="nv">$ </span>docker run username/repository:tag                   <span class="c"># Run image from a registry</span>
 </pre></div>
 
-<h3 id="toc_12">7. Docker mirrors</h3>
+<h3 id="toc_13">7. Docker mirrors</h3>
 
 <ul>
 <li>Docker(Official), <code>--registry-mirror=https://registry.docker-cn.com</code></li>
