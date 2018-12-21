@@ -8,6 +8,12 @@ site = {
     "name": "Hello, World!",  # your site name
     "url": "http://terryoy.github.io/",  # your site url
     # "prefix": "blog",
+    "friendly_links": [
+        {
+            "name": u'中文博客',
+            "link": 'http://terryoy.github.io/thoughts/',
+        }
+    ]
 }
 
 #: this config defined information of your site
@@ -73,7 +79,7 @@ theme = {
         "author": "terryoy",
         "disqus": "terryoy",
         #"analytics": "UA-21475122-1",
-        
+
         'navigation': [
 			{'name': 'Home', 'link': '/'},
             {'name': 'Guides', 'link':'/guides/index.html'},

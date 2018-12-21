@@ -1,6 +1,6 @@
 # Basic Usage for Docker
 - date: 2017-11-06 16:12
-- tags: linux
+- tags: linux, docker
 - category: guides
 -------
 

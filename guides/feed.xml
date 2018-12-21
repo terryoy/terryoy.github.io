@@ -3,7 +3,7 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/guides/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/guides/" />
-    <updated>2018-04-21T23:27:09+08:00</updated>
+    <updated>2018-11-23T11:25:18+08:00</updated>
     <id>http://terryoy.github.io/guides/</id>
     <entry>
         <title type="html"><![CDATA[Setup ARM Development Environment with QEMU]]></title>
@@ -171,7 +171,7 @@ add_executable(hello ${PROJECT_SOURCE_DIR}/hello.cpp)</code></pre>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2018/01/networking-in-docker.html"/>
         <published>2018-01-12T11:41:00+08:00</published>
-        <updated>2018-01-13T18:16:42+08:00</updated>
+        <updated>2018-06-10T00:01:18+08:00</updated>
         <id>http://terryoy.github.io/2018/01/networking-in-docker.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#docker" term="docker" label="docker" />
@@ -197,7 +197,7 @@ eth0      Link encap:Ethernet  HWaddr 02:42:ac:11:00:02
           UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
           RX packets:5956 errors:0 dropped:0 overruns:0 frame:0
           TX packets:3345 errors:0 dropped:0 overruns:0 carrier:0
-          collisions:0 txqueuelen:0 
+          collisions:0 txqueuelen:0
           RX bytes:8376715 <span class="o">(</span>8.3 MB<span class="o">)</span>  TX bytes:186204 <span class="o">(</span>186.2 KB<span class="o">)</span>
 </pre></div>
 
@@ -276,12 +276,88 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 cfc178841a79        ubuntu              <span class="s2">&quot;/bin/bash&quot;</span>              3 weeks ago         Up 4 hours                                      ubuntu
 0200f61f5d65        nginx               <span class="s2">&quot;nginx -g &#39;daemon of…&quot;</span>   2 months ago        Up 3 minutes             0.0.0.0:5000-&gt;80/tcp   webserver
 </pre></div>
-<p>Now you can see there is a port mapping from <code>host:5000</code> to <code>container:80</code>. </p>
-<p>By default, no port is opened for a container to host, you need to specify the port mapping at <code>docker run</code> command with <code>-p</code>. </p>
+<p>Now you can see there is a port mapping from <code>host:5000</code> to <code>container:80</code>.</p>
+<p>By default, no port is opened for a container to host, you need to specify the port mapping at <code>docker run</code> command with <code>-p</code>.</p>
 
 <pre><code># `-d` is when you needed it run as a daemon.
 $ docker run nginx -d -p 5000:80 --name nginx nginx</code></pre>
 <p>To open a port mapping for an existing container is very tricky. It is often said that you need to create another container instance based on the current just to open a port.</p>
+
+<h4 id="toc_2">3.2 Creating a Network</h4>
+<p>Now let&#39;s try something advanced. Let&#39;s create the different types of network one by one.</p>
+
+<h5 id="toc_3">3.2.1 Bridge Network</h5>
+<p>By default, the network you created will be a <code>bridged</code> network. You can add container to the network later. It creates a subnet and open only specific ports to the host to access service in the subnet, like NAT.</p>
+<div class="highlight"><pre><span class="nv">$ </span>docker network create gamezone
+<span class="nv">$ </span>docker network ls
+NETWORK ID          NAME                DRIVER              SCOPE
+0fe8bfe5222d        gamezone            bridge              <span class="nb">local</span>
+
+<span class="c"># if you want to remove the bridge network</span>
+<span class="nv">$ </span>docker network rm gamezone
+</pre></div>
+<p>Now let&#39;s create an Ubuntu container called &ldquo;gamecenter&rdquo; which connects to the gamezone network and maps port 5000 to the docker host&#39;s 15000.</p>
+<div class="highlight"><pre><span class="nv">$ </span>docker create --name gamecenter <span class="se">\</span>
+        --network gamezone <span class="se">\</span>
+        --publish 15000:5000 <span class="se">\</span>
+        -t -i ubuntu /bin/bash
+
+<span class="nv">$ </span>docker container ls -a
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS                     NAMES
+8cf4e293aae9        ubuntu              <span class="s2">&quot;/bin/bash&quot;</span>              10 minutes ago      Up 10 minutes               0.0.0.0:15000-&gt;5000/tcp   gamecenter
+
+<span class="nv">$ </span>docker network inspect gamezone
+<span class="o">[</span>
+    <span class="o">{</span>
+        <span class="s2">&quot;Name&quot;</span>: <span class="s2">&quot;gamezone&quot;</span>,
+        <span class="s2">&quot;Id&quot;</span>: <span class="s2">&quot;9b6417528a0e4a37ab9818e185a8046af06b3a9ae0eba40a2e494087676b70c9&quot;</span>,
+        <span class="s2">&quot;Created&quot;</span>: <span class="s2">&quot;2018-06-09T15:24:43.6288314Z&quot;</span>,
+        <span class="s2">&quot;Scope&quot;</span>: <span class="s2">&quot;local&quot;</span>,
+        <span class="s2">&quot;Driver&quot;</span>: <span class="s2">&quot;bridge&quot;</span>,
+        <span class="s2">&quot;EnableIPv6&quot;</span>: <span class="nb">false</span>,
+        <span class="s2">&quot;IPAM&quot;</span>: <span class="o">{</span>
+            <span class="s2">&quot;Driver&quot;</span>: <span class="s2">&quot;default&quot;</span>,
+            <span class="s2">&quot;Options&quot;</span>: <span class="o">{}</span>,
+            <span class="s2">&quot;Config&quot;</span>: <span class="o">[</span>
+                <span class="o">{</span>
+                    <span class="s2">&quot;Subnet&quot;</span>: <span class="s2">&quot;172.18.0.0/16&quot;</span>,
+                    <span class="s2">&quot;Gateway&quot;</span>: <span class="s2">&quot;172.18.0.1&quot;</span>
+                <span class="o">}</span>
+            <span class="o">]</span>
+        <span class="o">}</span>,
+        <span class="s2">&quot;Internal&quot;</span>: <span class="nb">false</span>,
+        <span class="s2">&quot;Attachable&quot;</span>: <span class="nb">false</span>,
+        <span class="s2">&quot;Ingress&quot;</span>: <span class="nb">false</span>,
+        <span class="s2">&quot;ConfigFrom&quot;</span>: <span class="o">{</span>
+            <span class="s2">&quot;Network&quot;</span>: <span class="s2">&quot;&quot;</span>
+        <span class="o">}</span>,
+        <span class="s2">&quot;ConfigOnly&quot;</span>: <span class="nb">false</span>,
+        <span class="s2">&quot;Containers&quot;</span>: <span class="o">{</span>
+            <span class="s2">&quot;8cf4e293aae932693f6769eea08665306485b17018999d8725f14b659e51c919&quot;</span>: <span class="o">{</span>
+                <span class="s2">&quot;Name&quot;</span>: <span class="s2">&quot;gamecenter&quot;</span>,
+                <span class="s2">&quot;EndpointID&quot;</span>: <span class="s2">&quot;6ca3d79c633520dbee752ab6b462404aa8507f8eb9f2b2cf840de2d3322d27bb&quot;</span>,
+                <span class="s2">&quot;MacAddress&quot;</span>: <span class="s2">&quot;02:42:ac:12:00:02&quot;</span>,
+                <span class="s2">&quot;IPv4Address&quot;</span>: <span class="s2">&quot;172.18.0.2/16&quot;</span>,
+                <span class="s2">&quot;IPv6Address&quot;</span>: <span class="s2">&quot;&quot;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>,
+        <span class="s2">&quot;Options&quot;</span>: <span class="o">{}</span>,
+        <span class="s2">&quot;Labels&quot;</span>: <span class="o">{}</span>
+    <span class="o">}</span>
+<span class="o">]</span>
+
+<span class="nv">$ </span>docker start gamecenter
+<span class="nv">$ </span>docker attach gamecenter
+<span class="nv">$ </span>ifconfig
+eth0      Link encap:Ethernet  HWaddr 02:42:ac:12:00:02  
+          inet addr:172.18.0.2  Bcast:172.18.255.255  Mask:255.255.0.0
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:20872 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:8684 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0
+          RX bytes:28266802 <span class="o">(</span>28.2 MB<span class="o">)</span>  TX bytes:476241 <span class="o">(</span>476.2 KB<span class="o">)</span>
+</pre></div>
+<p>You can notice that the container &ldquo;gamecenter&rdquo; is running in the subnet of <code>172.18.0.1</code> currently. And we have open a port <code>15000</code> on the host, to map to gamecenter&#39;s port <code>5000</code>.</p>
 ]]>
         </content>
     </entry><entry>
@@ -289,9 +365,10 @@ $ docker run nginx -d -p 5000:80 --name nginx nginx</code></pre>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2017/11/docker-basic.html"/>
         <published>2017-11-06T16:12:00+08:00</published>
-        <updated>2018-01-13T10:39:55+08:00</updated>
+        <updated>2018-11-23T11:25:18+08:00</updated>
         <id>http://terryoy.github.io/2017/11/docker-basic.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
+        <category scheme="http://terryoy.github.io/tag/#docker" term="docker" label="docker" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
             <![CDATA[ <p>Just to keep some notes when started to use docker for my development projects.</p>
 
