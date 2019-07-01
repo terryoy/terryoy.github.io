@@ -4,7 +4,8 @@ body {
   padding:50px;
   font:14px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
   color:#777;
-  font-weight:300;
+  font-weight:normal;
+  line-height: 1.7;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -62,14 +63,22 @@ code, pre {
   font-family: Consolas, "Liberation Mono", Courier New, Courier, monospace;
   color:#333;
   /*font-size:13px;*/
-}
 
-pre {
-  padding:8px 15px;
+  padding:2px 5px;
   background: #f8f8f8;  
   border-radius:5px;
   border:1px solid #e5e5e5;
+}
+
+pre {
+  padding: 8px 15px;
   overflow-x: auto;
+  line-height: 1.5;
+}
+
+pre code {
+  padding: 0;
+  border: none;
 }
 
 table {

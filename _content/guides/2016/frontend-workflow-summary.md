@@ -16,7 +16,7 @@ I'm working my job as a frontend developer currently. So I will do some research
 
 #### 2.1 Browserify
 
-Uses the same module system as nodejs that can compile, build, and pack javascript modules in node-flavoured CommonJS way for browser. You can manage front-end dependencies with npm, using `require()` method to import, and "module.exports" to export, just like the way nodejs does.
+Uses the same module system as nodejs that can compile, build, and pack javascript modules in node-flavoured CommonJS way for browser. You can manage frontend dependencies with npm, using `require()` method to import, and "module.exports" to export, just like the way nodejs does.
 
 When compiling, browserify will start with an entry file(e.g. './app.js'), then find the whole `abstract syntax tree` of the file by static analysis, and pack all the related content into one files.
 
@@ -74,7 +74,7 @@ References:
 
 ### 4. Vocabulary
 
-There are some terms in web front-end development that is not meaning obviously, so I collect some of them here.
+There are some terms in web frontend development that is not meaning obviously, so I collect some of them here.
 
 
  * [**Polyfill**](https://en.wikipedia.org/wiki/Polyfill) - a polyfill is cod e that implements a feature on web browsers that do *not* support it. It is a *shim* for a browser API.
