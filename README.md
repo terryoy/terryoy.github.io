@@ -17,7 +17,13 @@ To preview the web site, use the following command:
 $ ./_preview.sh
 ```
 
-Template for a Markdown post:
+Create a page:
+```bash
+$ ./_newpage.sh
+```
+
+
+Template for a Markdown post(_scripts/templates/page.md):
 
 ```markdown
 # Post Title
