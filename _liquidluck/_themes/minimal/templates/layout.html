@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{theme.lang}}"> 
+<html lang="{{theme.lang}}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
@@ -40,11 +40,16 @@
     <![endif]-->
 </head>
 <body>
-<div id="wrapper">   
+<div id="wrapper">
 <header id="header" class="clear">
     <h1>{{ site.name }}</h1>
     <p>I'm <i>{{ theme.author }}</i></p>
     <p class="view"><a href="https://github.com/terryoy">View My GitHub Profile</a></p>
+    {% for item in site.friendly_links %}
+    <p class="view"><a href="{{ item.link }}">{{ item.name }}</a></p>
+    {% endfor %}
+
+    <p>&nbsp;</p>
     {% if site.feed -%}
     <p><a class="feed" href="{{site.feed}}">RSS feed</a></p>
     {% else %}

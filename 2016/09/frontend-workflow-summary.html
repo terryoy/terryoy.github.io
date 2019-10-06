@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"> 
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
@@ -12,18 +12,23 @@
     <meta name="description" content="" />
     
     <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="Hello, World!" />
-    <link rel="stylesheet" href="/static/css/styles.css?v=80787" />
+    <link rel="stylesheet" href="/static/css/styles.css?v=dd9d9" />
     <link rel="stylesheet" href="/static/css/pygment_trac.css?v=a6c15" />
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 </head>
 <body>
-<div id="wrapper">   
+<div id="wrapper">
 <header id="header" class="clear">
     <h1>Hello, World!</h1>
     <p>I'm <i>terryoy</i></p>
     <p class="view"><a href="https://github.com/terryoy">View My GitHub Profile</a></p>
+    
+    <p class="view"><a href="http://terryoy.github.io/thoughts/">中文博客</a></p>
+    
+
+    <p>&nbsp;</p>
     
     <p><a class="feed" href="/feed.xml">RSS feed</a></p>
 </header><!-- #header -->
@@ -47,7 +52,7 @@
 <h3 id="toc_1">2. Javascript</h3>
 
 <h4 id="toc_2">2.1 Browserify</h4>
-<p>Uses the same module system as nodejs that can compile, build, and pack javascript modules in node-flavoured CommonJS way for browser. You can manage front-end dependencies with npm, using <code>require()</code> method to import, and &ldquo;module.exports&rdquo; to export, just like the way nodejs does.</p>
+<p>Uses the same module system as nodejs that can compile, build, and pack javascript modules in node-flavoured CommonJS way for browser. You can manage frontend dependencies with npm, using <code>require()</code> method to import, and &ldquo;module.exports&rdquo; to export, just like the way nodejs does.</p>
 <p>When compiling, browserify will start with an entry file(e.g. &#39;./app.js&#39;), then find the whole <code>abstract syntax tree</code> of the file by static analysis, and pack all the related content into one files.</p>
 <p>In order to make node modules more compatible with browser side, browserify also provides many <a href="https://github.com/substack/browserify-handbook#builtins">builtins modules</a> such as <code>events</code>, <code>os</code>, <code>querystring</code>, etc.</p>
 <p>The best part of browserify is that providing the static analysis and compiling platform, you can also have customized transformers for files other than the standard JS. This enables compiling coffee script or other favors, and also other plugins such as code coverage, in a pipe streaming way. </p>
@@ -95,7 +100,7 @@
 <h4 id="toc_8">3,2 Type Script</h4>
 
 <h3 id="toc_9">4. Vocabulary</h3>
-<p>There are some terms in web front-end development that is not meaning obviously, so I collect some of them here.</p>
+<p>There are some terms in web frontend development that is not meaning obviously, so I collect some of them here.</p>
 
 <ul>
 <li><p><a href="https://en.wikipedia.org/wiki/Polyfill"><strong>Polyfill</strong></a> - a polyfill is cod e that implements a feature on web browsers that do <em>not</em> support it. It is a <em>shim</em> for a browser API.</p></li>

@@ -1,6 +1,6 @@
 # Basic Usage for Docker
 - date: 2017-11-06 16:12
-- tags: linux
+- tags: linux, docker
 - category: guides
 -------
 
@@ -111,6 +111,13 @@ $ docker run --name ubuntu -ti ubuntu-core
 # run an existing container
 $ docker container start -i ubuntu
 
+# attach console to a server if it has started without interactive environment
+$ docker container start ubuntu
+$ docker attach ubuntu
+
+# If you want to detach from a server without stopping it
+# use `ctrl-p ctrl-q` key sequence
+
 ```
 
 You may wonder the file size of each containers, you can checkt it by `docker ps -s`. You can see a ubuntu core only uses very small space with the minimal setup.
@@ -132,6 +139,19 @@ There are some Docker preferences also mentioned in the Get Started guide, which
  * **Experimental features**. It is not recommended for production environment, then I wonder why it is turned on by default on Mac.
  * **Registry, Configuration, and Certificates for the Daemon **, use it when you needed.
  
+#### 3.1 Download Images by Tags
+
+```bash
+# Download images/repos from registry
+$ docker pull <image>:<tag>
+
+# Example of getting a core ubuntu system
+$ docker pull ubuntu:xenial
+$ docker run --name ubuntu -ti ubuntu
+
+```
+
+
 
 ### 4. Docker for Mac vs Docker Toolbox
 

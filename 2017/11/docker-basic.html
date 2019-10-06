@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"> 
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
@@ -8,22 +8,27 @@
     <meta name="apple-mobile-web-app-title" content="Hello, World!" />
     <meta name="application-name" content="Hello, World!" />
     <title>Basic Usage for Docker - Hello, World!</title>
-    <meta name="keywords" content="linux" />
+    <meta name="keywords" content="linux,docker" />
     <meta name="description" content="" />
     
     <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="Hello, World!" />
-    <link rel="stylesheet" href="/static/css/styles.css?v=80787" />
+    <link rel="stylesheet" href="/static/css/styles.css?v=dd9d9" />
     <link rel="stylesheet" href="/static/css/pygment_trac.css?v=a6c15" />
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 </head>
 <body>
-<div id="wrapper">   
+<div id="wrapper">
 <header id="header" class="clear">
     <h1>Hello, World!</h1>
     <p>I'm <i>terryoy</i></p>
     <p class="view"><a href="https://github.com/terryoy">View My GitHub Profile</a></p>
+    
+    <p class="view"><a href="http://terryoy.github.io/thoughts/">中文博客</a></p>
+    
+
+    <p>&nbsp;</p>
     
     <p><a class="feed" href="/feed.xml">RSS feed</a></p>
 </header><!-- #header -->
@@ -106,7 +111,14 @@ hello-world         latest              725dcfab7d63        2 days ago          
 $ docker run --name ubuntu -ti ubuntu-core
 
 # run an existing container
-$ docker container start -i ubuntu</code></pre>
+$ docker container start -i ubuntu
+
+# attach console to a server if it has started without interactive environment
+$ docker container start ubuntu
+$ docker attach ubuntu
+
+# If you want to detach from a server without stopping it
+# use `ctrl-p ctrl-q` key sequence</code></pre>
 <p>You may wonder the file size of each containers, you can checkt it by <code>docker ps -s</code>. You can see a ubuntu core only uses very small space with the minimal setup.</p>
 <div class="highlight"><pre><span class="nv">$ </span>docker ps -s
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                  NAMES               SIZE
@@ -123,7 +135,16 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 <li>*<em>Registry, Configuration, and Certificates for the Daemon *</em>, use it when you needed.</li>
 </ul>
 
-<h3 id="toc_4">4. Docker for Mac vs Docker Toolbox</h3>
+<h4 id="toc_4">3.1 Download Images by Tags</h4>
+<div class="highlight"><pre><span class="c"># Download images/repos from registry</span>
+<span class="nv">$ </span>docker pull &lt;image&gt;:&lt;tag&gt;
+
+<span class="c"># Example of getting a core ubuntu system</span>
+<span class="nv">$ </span>docker pull ubuntu:xenial
+<span class="nv">$ </span>docker run --name ubuntu -ti ubuntu
+</pre></div>
+
+<h3 id="toc_5">4. Docker for Mac vs Docker Toolbox</h3>
 <p>Docker Toolbox is also installed by the .dmg installation. The programs include <code>docker-compose</code> and <code>docker-machine</code>.</p>
 
 <ul>
@@ -131,7 +152,7 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 <li>Using Dokcker Toolbox, you can set up one or more VM and manage them.</li>
 </ul>
 
-<h3 id="toc_5">5. Docker Architecture</h3>
+<h3 id="toc_6">5. Docker Architecture</h3>
 <p>The Docker architecture can split into 3 parts:</p>
 
 <ul>
@@ -140,7 +161,7 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 <li>Docker Registry, a cloud service which stores Docker images, such as Docker Hub and Docker Cloud(both are public registries).</li>
 </ul>
 
-<h4 id="toc_6">5.1 Docker Objects</h4>
+<h4 id="toc_7">5.1 Docker Objects</h4>
 
 <ul>
 <li>Image, a read-only template with instructions for creating Docker container.</li>
@@ -148,7 +169,7 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 <li>Service, allow you to scale containers across Docker daemons.</li>
 </ul>
 
-<h4 id="toc_7">5.2 The Underlying technology</h4>
+<h4 id="toc_8">5.2 The Underlying technology</h4>
 
 <ul>
 <li>Namespaces. When you run a container, Docker create a set of namespaces for the container, which provide a layer of isolation. The namespaces includes:
@@ -167,10 +188,10 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 <a href="https://docs.docker.com/engine/docker-overview/#docker-architecture">Docker Architecture</a>
 <a href="https://store.docker.com/">Docker Store</a> is a market where you can distribute your images.</p>
 
-<h3 id="toc_8">6. Developing Apps with Docker</h3>
+<h3 id="toc_9">6. Developing Apps with Docker</h3>
 <p>It&#39;s easy to setup Docker to deploy with your app. All you need to do is to add a <code>Dockerfile</code> in your source folder and then build the image. The official example demonstrate how a small flask app is built with Docker.</p>
 
-<h4 id="toc_9">6.1 First time image</h4>
+<h4 id="toc_10">6.1 First time image</h4>
 <p>I summarize the steps as below:</p>
 
 <ul>
@@ -203,7 +224,7 @@ slim-flask          latest              3032f935f40c        10 seconds ago      
 python              slim                a79297999298        45 hours ago        156MB
 </pre></div>
 
-<h4 id="toc_10">6.2 Create image from a container</h4>
+<h4 id="toc_11">6.2 Create image from a container</h4>
 <p>However, sometimes you want to make configurations inside a container and want to save it as an image. You can do that:</p>
 <div class="highlight"><pre><span class="nv">$ </span>docker container commit <span class="o">[</span>options<span class="o">]</span> CONTAINER <span class="o">[</span>repository:<span class="o">[</span>TAG<span class="o">]]</span>
 
@@ -211,7 +232,7 @@ python              slim                a79297999298        45 hours ago        
 <span class="nv">$ </span>docker container commit ubuntu ubuntu-image
 </pre></div>
 
-<h4 id="toc_11">6.3 Publish docker image</h4>
+<h4 id="toc_12">6.3 Publish docker image</h4>
 <p>Use it when it is needed.</p>
 <div class="highlight"><pre><span class="nv">$ </span>docker login             <span class="c"># Log in this CLI session using your Docker credentials</span>
 <span class="nv">$ </span>docker tag &lt;image&gt; username/repository:tag  <span class="c"># Tag &lt;image&gt; for upload to registry</span>
@@ -219,7 +240,7 @@ python              slim                a79297999298        45 hours ago        
 <span class="nv">$ </span>docker run username/repository:tag                   <span class="c"># Run image from a registry</span>
 </pre></div>
 
-<h3 id="toc_12">7. Docker mirrors</h3>
+<h3 id="toc_13">7. Docker mirrors</h3>
 
 <ul>
 <li>Docker(Official), <code>--registry-mirror=https://registry.docker-cn.com</code></li>
@@ -236,7 +257,7 @@ python              slim                a79297999298        45 hours ago        
     
     <div class="sub_text">
         <span>Tags:
-            <a href="/tag/linux/">linux</a>
+            <a href="/tag/linux/">linux</a>,&nbsp;<a href="/tag/docker/">docker</a>
 		</span>
     
         
