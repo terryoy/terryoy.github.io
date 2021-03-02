@@ -52,36 +52,36 @@
 <h3 id="toc_0">1.Installing dependencies</h3>
 <p>On my MBP desktop, it&#39;s recommended to use <a href="https://laravel.com/docs/5.5/valet">Valet</a> if you want just a small additional tools to run it, and connect to existing databases on the machine. Otherwise it would be good to use a virtualbox image <a href="https://laravel.com/docs/5.5/homestead">Homestead</a> to have an all-in-one setup for development.</p>
 <p>While my Ubuntu 16 server, I would like to install dependencies by hand, so I could get familiar with what it takes to run Laravel. Now here&#39;s what I tried.</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt install php7.0 php7.0-cli php7.0-zip php7.0-mbstring php7.0-mbstring php7.0-xml
+<div class="highlight"><pre><span></span>$ sudo apt install php7.0 php7.0-cli php7.0-zip php7.0-mbstring php7.0-mbstring php7.0-xml
 </pre></div>
 <p>Then we need to install <a href="https://getcomposer.org">Composer</a> to install other php packages. It&#39;s like the <code>pip</code> to Python and the <code>npm</code> to NodeJS.</p>
-<div class="highlight"><pre><span class="c"># install to $HOME/bin</span>
-<span class="nv">$ </span><span class="nb">cd</span> ~
-<span class="nv">$ </span>wget https://getcomposer.org/installer -o composer-setup.php
-<span class="nv">$ </span>php composer-setup.php --install-dir<span class="o">=</span>bin --filename<span class="o">=</span>composer
+<div class="highlight"><pre><span></span><span class="c1"># install to $HOME/bin</span>
+$ <span class="nb">cd</span> ~
+$ wget https://getcomposer.org/installer -o composer-setup.php
+$ php composer-setup.php --install-dir<span class="o">=</span>bin --filename<span class="o">=</span>composer
 
 
-<span class="c"># (alternatively) You could try the one-line command bellow for default installation</span>
-<span class="nv">$ </span>curl -s https://getcomposer.org/installer | php
+<span class="c1"># (alternatively) You could try the one-line command bellow for default installation</span>
+$ curl -s https://getcomposer.org/installer <span class="p">|</span> php
 </pre></div>
 <p>Then try the composer command to see if you have it.</p>
-<div class="highlight"><pre><span class="nv">$ </span>composer
+<div class="highlight"><pre><span></span>$ composer
 </pre></div>
 
 <h3 id="toc_1">2.Installing Laravel Valet</h3>
 <p><strong>Valet</strong> is a lightweight solution for hosting Laravel in development, and only avaiable on OSX. It uses brew to install php7.1 and other dependencies, but first you need Composer to install Laravel Valet. So install the composer using the script above first.</p>
 <p>After composer is installed, use it to download the Valet package.</p>
-<div class="highlight"><pre><span class="nv">$ </span>composer global require laravel/valet
+<div class="highlight"><pre><span></span>$ composer global require laravel/valet
 </pre></div>
 <p>After composer install the package, you should note about where it is installed. Because you need to set the $PATH environment variables to enable the command from the packages. On OSX, the executable programs are in <code>~/.composer/vendor/bin</code>, and on Ubuntu, the path might be <code>~/.config/composer/vendor/bin</code>.</p>
 <p>Then you can use valet commands to manage your development environment.</p>
 
 <h3 id="toc_2">3.Install Laravel</h3>
 <p>Installing Laravel is similar to Valet. Use <code>composer</code> to download and install the package globally.</p>
-<div class="highlight"><pre><span class="nv">$ </span>composer global require <span class="s2">&quot;laravel/installer&quot;</span>
+<div class="highlight"><pre><span></span>$ composer global require <span class="s2">&quot;laravel/installer&quot;</span>
 </pre></div>
 <p>Then you can use <code>laravel</code> command to create a new project:</p>
-<div class="highlight"><pre><span class="nv">$ </span>laravel new myproject
+<div class="highlight"><pre><span></span>$ laravel new myproject
 </pre></div>
 
     

@@ -51,62 +51,62 @@
 <p>Copy and paste below content to your <strong><em>~/.bashrc</em></strong>.</p>
 
 <!--script src="https://gist.github.com/terryoy/6374725.js"></script-->
-<div class="highlight"><pre><span class="c"># open a browser and view raw html (e.g. &quot;cat some.html | viewhtml&quot;)</span>
-<span class="nb">alias </span><span class="nv">viewhtml</span><span class="o">=</span><span class="s1">&#39;firefox &quot;data:text/html;charset=utf-8;base64,$(base64 -w 0 &lt;&amp;0)&quot;&#39;</span>
+<div class="highlight"><pre><span></span><span class="c1"># open a browser and view raw html (e.g. &quot;cat some.html | viewhtml&quot;)</span>
+<span class="nb">alias</span> <span class="nv">viewhtml</span><span class="o">=</span><span class="s1">&#39;firefox &quot;data:text/html;charset=utf-8;base64,$(base64 -w 0 &lt;&amp;0)&quot;&#39;</span>
 
-<span class="c"># url encode / decode</span>
-<span class="nb">alias </span><span class="nv">urlencode</span><span class="o">=</span><span class="s1">&#39;python -c &quot;import sys, urllib as ul; print ul.quote_plus(sys.argv[1])&quot;&#39;</span>
-<span class="nb">alias </span><span class="nv">urldecode</span><span class="o">=</span><span class="s1">&#39;python -c &quot;import sys, urllib as ul; print ul.unquote_plus(sys.argv[1])&quot;&#39;</span>
+<span class="c1"># url encode / decode</span>
+<span class="nb">alias</span> <span class="nv">urlencode</span><span class="o">=</span><span class="s1">&#39;python -c &quot;import sys, urllib as ul; print ul.quote_plus(sys.argv[1])&quot;&#39;</span>
+<span class="nb">alias</span> <span class="nv">urldecode</span><span class="o">=</span><span class="s1">&#39;python -c &quot;import sys, urllib as ul; print ul.unquote_plus(sys.argv[1])&quot;&#39;</span>
 
-<span class="c"># url shortener</span>
-<span class="nb">alias </span><span class="nv">shortenurl</span><span class="o">=</span><span class="s2">&quot;python -c \&quot;import sys, urllib as ul; print ul.urlopen(&#39;http://tinyurl.com/api-create.php?url=%s&#39; % ul.quote_plus(sys.argv[1])).readline()\&quot;&quot;</span>
+<span class="c1"># url shortener</span>
+<span class="nb">alias</span> <span class="nv">shortenurl</span><span class="o">=</span><span class="s2">&quot;python -c \&quot;import sys, urllib as ul; print ul.urlopen(&#39;http://tinyurl.com/api-create.php?url=%s&#39; % ul.quote_plus(sys.argv[1])).readline()\&quot;&quot;</span>
 </pre></div>
 
 <h3 id="toc_0"># work with hex</h3>
-<div class="highlight"><pre><span class="c"># if you want to dump a file in hex</span>
-<span class="nv">$ </span>xxd -p file
+<div class="highlight"><pre><span></span><span class="c1"># if you want to dump a file in hex</span>
+$ xxd -p file
 
-<span class="c"># A Hex number convertor, convert decimal into hex(e.g. &quot;hex 34&quot; -&gt; 22)</span>
-<span class="nb">alias </span><span class="nv">hex</span><span class="o">=</span><span class="s1">&#39;printf &quot;%x\n&quot;&#39;</span>
+<span class="c1"># A Hex number convertor, convert decimal into hex(e.g. &quot;hex 34&quot; -&gt; 22)</span>
+<span class="nb">alias</span> <span class="nv">hex</span><span class="o">=</span><span class="s1">&#39;printf &quot;%x\n&quot;&#39;</span>
 </pre></div>
 
 <h3 id="toc_1"># mount a virtualbox disk on linux</h3>
-<div class="highlight"><pre><span class="c"># before you can mount anything, install virtualbox-fuse</span>
-<span class="nv">$ </span>sudo apt-get install virtualbox-fuse
+<div class="highlight"><pre><span></span><span class="c1"># before you can mount anything, install virtualbox-fuse</span>
+$ sudo apt-get install virtualbox-fuse
 
-<span class="c"># there are &#39;disk/&#39; folder and &#39;space/&#39; folder.</span>
-<span class="c"># &#39;vdfuse -r&#39; is for read only,</span>
-<span class="nv">$ </span>vdfuse -raf <span class="nv">$1</span> disk
-<span class="nv">$ </span>mount disk/Partition1 space
+<span class="c1"># there are &#39;disk/&#39; folder and &#39;space/&#39; folder.</span>
+<span class="c1"># &#39;vdfuse -r&#39; is for read only,</span>
+$ vdfuse -raf <span class="nv">$1</span> disk
+$ mount disk/Partition1 space
 </pre></div>
 
 <h3 id="toc_2">Set keyboard repeat rate and delay</h3>
-<div class="highlight"><pre><span class="c">#Set keyboard repeat rate and delay</span>
-<span class="c"># where 220 is the delay(ms) and 40 is repeat rate(cps)</span>
+<div class="highlight"><pre><span></span><span class="c1">#Set keyboard repeat rate and delay</span>
+<span class="c1"># where 220 is the delay(ms) and 40 is repeat rate(cps)</span>
 
-<span class="c"># under X</span>
-<span class="nv">$ </span>xset r rate 220 40
-<span class="c"># under command line(or put it in /etc/rc.local, ~/.bashrc, ~/.bash_profile, etc.)</span>
-<span class="nv">$ </span>sudo kbdrate -r 40 -d 220
+<span class="c1"># under X</span>
+$ xset r rate <span class="m">220</span> <span class="m">40</span>
+<span class="c1"># under command line(or put it in /etc/rc.local, ~/.bashrc, ~/.bash_profile, etc.)</span>
+$ sudo kbdrate -r <span class="m">40</span> -d <span class="m">220</span>
 </pre></div>
 
 <h3 id="toc_3">Merge images into a movie</h3>
-<div class="highlight"><pre><span class="c"># &quot;-framerate&quot; must be before &quot;-i&quot;, it&#39;s an input framerate, which means how many images are used in one second</span>
-<span class="c"># &quot;-r&quot; is the output framerate</span>
-<span class="c"># &quot;image%03d.jpg&quot; for &quot;image001.jpg&quot; pattern, while &quot;image%d.jpg&quot; for &quot;image1.jpg&quot;(no zero-padding) pattern</span>
-<span class="nv">$ </span>ffmpeg -framerate 4 -i image%03d.jpg -r 4 test.mp4
+<div class="highlight"><pre><span></span><span class="c1"># &quot;-framerate&quot; must be before &quot;-i&quot;, it&#39;s an input framerate, which means how many images are used in one second</span>
+<span class="c1"># &quot;-r&quot; is the output framerate</span>
+<span class="c1"># &quot;image%03d.jpg&quot; for &quot;image001.jpg&quot; pattern, while &quot;image%d.jpg&quot; for &quot;image1.jpg&quot;(no zero-padding) pattern</span>
+$ ffmpeg -framerate <span class="m">4</span> -i image%03d.jpg -r <span class="m">4</span> test.mp4
 </pre></div>
 
 <h3 id="toc_4">Check network port opens</h3>
-<div class="highlight"><pre><span class="c"># Most of the network conversations are in tcp, so it&#39;s ok to filter the port with &quot;grep tcp&quot;</span>
-<span class="nv">$ </span>sudo netstat -pl | grep tcp
+<div class="highlight"><pre><span></span><span class="c1"># Most of the network conversations are in tcp, so it&#39;s ok to filter the port with &quot;grep tcp&quot;</span>
+$ sudo netstat -pl <span class="p">|</span> grep tcp
 </pre></div>
 
 <h3 id="toc_5">Check user&#39;s default shell and change it</h3>
-<div class="highlight"><pre><span class="c"># check default shell</span>
-<span class="nv">$ </span>cat /etc/passwd | grep terryoy
-<span class="c"># change default shell(check &quot;man chsh&quot; for more)</span>
-<span class="nv">$ </span>chsh -s /bin/bash
+<div class="highlight"><pre><span></span><span class="c1"># check default shell</span>
+$ cat /etc/passwd <span class="p">|</span> grep terryoy
+<span class="c1"># change default shell(check &quot;man chsh&quot; for more)</span>
+$ chsh -s /bin/bash
 </pre></div>
 
     

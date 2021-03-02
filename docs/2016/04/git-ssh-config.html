@@ -71,16 +71,16 @@ Host github.com
 
 <h3 id="toc_3">4. No more ask of  the passphrase</h3>
 <p>Initially if you use a ssh key with passphrase, you might need to enter the passphrase every time you use it. It will be kind of annoying although provide better security. However, sometimes I don&#39;t want it to be entered every time in my private trusted computer. So we need <code>ssh-agent</code> to handle that.</p>
-<div class="highlight"><pre><span class="c"># install the openssh-client package if you&#39;re on Debian/Ubuntu</span>
-<span class="nv">$ </span>sudo apt-get install openssh-client
+<div class="highlight"><pre><span></span><span class="c1"># install the openssh-client package if you&#39;re on Debian/Ubuntu</span>
+$ sudo apt-get install openssh-client
 
-<span class="c"># the ssh-add and ssh-agent tools will be available after the installation, but you need to start ssh-agent in your .bashrc script</span>
-<span class="nv">$ </span>vi ~/.bashrc
+<span class="c1"># the ssh-add and ssh-agent tools will be available after the installation, but you need to start ssh-agent in your .bashrc script</span>
+$ vi ~/.bashrc
 <span class="nb">eval</span> <span class="k">$(</span>ssh-agent<span class="k">)</span>
 
-<span class="c"># add the ssh key to ssh-agent (the passphrase will be asked once)</span>
-<span class="nv">$ </span><span class="nb">cd</span> ~/.ssh
-<span class="nv">$ </span>ssh-add -k gitub_rsa
+<span class="c1"># add the ssh key to ssh-agent (the passphrase will be asked once)</span>
+$ <span class="nb">cd</span> ~/.ssh
+$ ssh-add -k gitub_rsa
 </pre></div>
 
     

@@ -49,45 +49,45 @@
     
 	<h3 id="toc_0">1. Creating a Database</h3>
 <p>It&#39;s a common task to create a database and assign an access user for it. This can be done by command line or by psql queries.</p>
-<div class="highlight"><pre><span class="c"># by command line</span>
-<span class="nv">$ </span>su postgres
-<span class="nv">$ </span>createuser -D -A -P myuser
-<span class="nv">$ </span>createdb -O myuser mydb
+<div class="highlight"><pre><span></span><span class="c1"># by command line</span>
+$ su postgres
+$ createuser -D -A -P myuser
+$ createdb -O myuser mydb
 
-<span class="c"># (or) a longer version for the createdb command</span>
-<span class="nv">$ </span>createdb -h localhost -p 5432 -U postgres -O myuser -E UTF8 mydb
+<span class="c1"># (or) a longer version for the createdb command</span>
+$ createdb -h localhost -p <span class="m">5432</span> -U postgres -O myuser -E UTF8 mydb
 </pre></div>
-<div class="highlight"><pre><span class="c1">--create database by psql client </span>
+<div class="highlight"><pre><span></span><span class="c1">--create database by psql client </span>
 <span class="gp">postgres=#</span> <span class="k">CREATE</span> <span class="k">USER</span> <span class="n">myuser</span> <span class="k">WITH</span> <span class="k">PASSWORD</span> <span class="s1">&#39;my_password&#39;</span><span class="p">;</span>
 <span class="gp">postgres=#</span> <span class="k">CREATE</span> <span class="k">DATABASE</span> <span class="n">mydb</span> <span class="k">WITH</span> <span class="k">OWNER</span> <span class="n">myuser</span> <span class="k">ENCODING</span> <span class="s1">&#39;UTF8&#39;</span><span class="p">;</span>
-<span class="gp">postgres=#</span> <span class="k">GRANT</span> <span class="k">ALL</span> <span class="k">PRIVILEGES</span> <span class="k">ON</span> <span class="k">DATABASE</span> <span class="s-Name">&quot;mydb&quot;</span> <span class="k">to</span> <span class="n">myuser</span><span class="p">;</span>
+<span class="gp">postgres=#</span> <span class="k">GRANT</span> <span class="k">ALL</span> <span class="k">PRIVILEGES</span> <span class="k">ON</span> <span class="k">DATABASE</span> <span class="s s-Name">&quot;mydb&quot;</span> <span class="k">to</span> <span class="n">myuser</span><span class="p">;</span>
 </pre></div>
 
 <h3 id="toc_1">2. Configuring Connection Method</h3>
 <p>Peer authentication uses system&#39;s user accounts for authentication, while MD5 authentication uses password authentication encrypted in md5.</p>
 <p>Restart Postgresql service after configuration file is changed.</p>
-<div class="highlight"><pre><span class="c"># Edit the file for the database access method</span>
-<span class="nv">$ </span>sudo vi /etc/postgresql/9.1/main/pg_hba.conf
+<div class="highlight"><pre><span></span><span class="c1"># Edit the file for the database access method</span>
+$ sudo vi /etc/postgresql/9.1/main/pg_hba.conf
 
-<span class="c"># Database administrative login by Unix domain socket</span>
-<span class="nb">local   </span>all             postgres                                peer
+<span class="c1"># Database administrative login by Unix domain socket</span>
+<span class="nb">local</span>   all             postgres                                peer
 
-<span class="c"># TYPE  DATABASE        USER            ADDRESS                 METHOD</span>
+<span class="c1"># TYPE  DATABASE        USER            ADDRESS                 METHOD</span>
 
-<span class="c"># &quot;local&quot; is for Unix domain socket connections only</span>
-<span class="nb">local   </span>all             all                                     peer
-<span class="c"># IPv4 local connections:</span>
-host    all             all             127.0.0.1/32            md5
-<span class="c"># IPv6 local connections:</span>
+<span class="c1"># &quot;local&quot; is for Unix domain socket connections only</span>
+<span class="nb">local</span>   all             all                                     peer
+<span class="c1"># IPv4 local connections:</span>
+host    all             all             <span class="m">127</span>.0.0.1/32            md5
+<span class="c1"># IPv6 local connections:</span>
 host    all             all             ::1/128                 md5
-<span class="c"># Allow replication connections from localhost, by a user with the</span>
-<span class="c"># replication privilege.</span>
-<span class="c">#local   replication     postgres                                peer</span>
-<span class="c">#host    replication     postgres        127.0.0.1/32            md5</span>
-<span class="c">#host    replication     postgres        ::1/128                 md5</span>
+<span class="c1"># Allow replication connections from localhost, by a user with the</span>
+<span class="c1"># replication privilege.</span>
+<span class="c1">#local   replication     postgres                                peer</span>
+<span class="c1">#host    replication     postgres        127.0.0.1/32            md5</span>
+<span class="c1">#host    replication     postgres        ::1/128                 md5</span>
 
 
-<span class="nv">$ </span>sudo service postgresql restart
+$ sudo service postgresql restart
 </pre></div>
 
 <h3 id="toc_2">3. Migrating Data</h3>
@@ -95,7 +95,7 @@ host    all             all             ::1/128                 md5
 
 <h4 id="toc_3">3.1 Export data to CSV files</h4>
 <p>Note: the <code>=#</code> prefix is the prompt of <code>psql</code> command line tools.</p>
-<div class="highlight"><pre><span class="c1">--Export all records from table to CSV file</span>
+<div class="highlight"><pre><span></span><span class="c1">--Export all records from table to CSV file</span>
 <span class="o">=#</span> <span class="err">\</span><span class="k">copy</span> <span class="n">my_table</span> <span class="k">to</span> <span class="s1">&#39;/path/to/table.csv&#39;</span> <span class="n">csv</span> <span class="n">header</span><span class="p">;</span>
 <span class="c1">--OR</span>
 <span class="o">=#</span> <span class="k">COPY</span> <span class="n">my_table</span> <span class="k">TO</span> <span class="s1">&#39;/path/to/table.csv&#39;</span> <span class="k">DELIMITER</span> <span class="s1">&#39;,&#39;</span> <span class="n">CSV</span> <span class="n">HEADER</span><span class="p">;</span>
@@ -106,18 +106,18 @@ host    all             all             ::1/128                 md5
 
 <h3 id="toc_4">3.2 Export schema and data to SQL files</h3>
 <p>We&#39;ll use <code>pg_dump</code> to create postgresql export files.</p>
-<div class="highlight"><pre><span class="c"># sometimes you need to specify which database version to use, due to the version mismatch of pg_dump program</span>
-<span class="nv">$ </span>pg_dump --cluster 9.3/main &lt;...other stuffs&gt;
+<div class="highlight"><pre><span></span><span class="c1"># sometimes you need to specify which database version to use, due to the version mismatch of pg_dump program</span>
+$ pg_dump --cluster <span class="m">9</span>.3/main &lt;...other stuffs&gt;
 
 
-<span class="c"># export schema with &quot;-s&quot; or &quot;--schema-only&quot;</span>
-<span class="nv">$ </span>pg_dump -s &lt;db_name&gt; &gt; export_schhema.sql
-<span class="nv">$ </span>pg_dump --schema-only &lt;db_name&gt; &gt; export_schema.sql
+<span class="c1"># export schema with &quot;-s&quot; or &quot;--schema-only&quot;</span>
+$ pg_dump -s &lt;db_name&gt; &gt; export_schhema.sql
+$ pg_dump --schema-only &lt;db_name&gt; &gt; export_schema.sql
 
 
-<span class="c"># export data</span>
-<span class="nv">$ </span>pg_dump -a &lt;db_name&gt; &gt; export_data.sql
-<span class="nv">$ </span>pg_dump --data-only &lt;db_name&gt; &gt; export_data.sql
+<span class="c1"># export data</span>
+$ pg_dump -a &lt;db_name&gt; &gt; export_data.sql
+$ pg_dump --data-only &lt;db_name&gt; &gt; export_data.sql
 </pre></div>
 
     

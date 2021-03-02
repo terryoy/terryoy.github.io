@@ -51,17 +51,17 @@
 
 <h3 id="toc_0">1. <strong>gcc</strong> and <strong>gdb</strong></h3>
 <p>There are several steps for the <strong>gcc</strong> compiler to compile a source file into a executable program. It can be set to the step output with some parameter to gcc, so you can checkout their result in file.</p>
-<div class="highlight"><pre><span class="c"># Preprocessor: This is to remove comments, replace marcos(#define), and headers(#include)</span>
-<span class="nv">$ </span>gcc -E test.c -o test.i
+<div class="highlight"><pre><span></span><span class="c1"># Preprocessor: This is to remove comments, replace marcos(#define), and headers(#include)</span>
+$ gcc -E test.c -o test.i
 
-<span class="c"># (+)Compile: This compile the source code into assembly code. Different architecture has different assembly language spec</span>
-<span class="nv">$ </span>gcc -S test.c -o test.s
+<span class="c1"># (+)Compile: This compile the source code into assembly code. Different architecture has different assembly language spec</span>
+$ gcc -S test.c -o test.s
 
-<span class="c"># (+)Assemble: this translate assembly code into binary object. You can check the file with &quot;file test.o&quot; to see the format as a &quot;object file&quot; or a &quot;ELF LSB relocatable&quot;, and the architecture of the platform(x64, etc.)</span>
-<span class="nv">$ </span>gcc -c test.c -o test.o
+<span class="c1"># (+)Assemble: this translate assembly code into binary object. You can check the file with &quot;file test.o&quot; to see the format as a &quot;object file&quot; or a &quot;ELF LSB relocatable&quot;, and the architecture of the platform(x64, etc.)</span>
+$ gcc -c test.c -o test.o
 
-<span class="c"># (+)Link: This generate the final executable</span>
-<span class="nv">$ </span>gcc test.c -o <span class="nb">test</span>
+<span class="c1"># (+)Link: This generate the final executable</span>
+$ gcc test.c -o <span class="nb">test</span>
 </pre></div>
 <p>There are other useful parameters of gcc for specific purpose, for example, optimization, or debugging.</p>
 

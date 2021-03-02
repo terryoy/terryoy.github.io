@@ -52,13 +52,13 @@
 
 <h3 id="toc_0">1. Setup Vino(VNC for gnome)</h3>
 <p>Just reference the post. </p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get vino
-<span class="c"># the preferences is the same as &quot;Desktop Sharing&quot; preference panel in Linux Mint</span>
-<span class="nv">$ </span>vino-preferences
+<div class="highlight"><pre><span></span>$ sudo apt-get vino
+<span class="c1"># the preferences is the same as &quot;Desktop Sharing&quot; preference panel in Linux Mint</span>
+$ vino-preferences
 </pre></div>
 <p>You can set up the items just as the post said in vino-preferences, but on Linux Mint it lacks out the &ldquo;Advanced settings&rdquo; mentioned in the post. So you need &ldquo;dconf-editor&rdquo; to manually set it.</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install dconf-editor
-<span class="nv">$ </span>dconf-editor
+<div class="highlight"><pre><span></span>$ sudo apt-get install dconf-editor
+$ dconf-editor
 </pre></div>
 <p>Find the config item in dconf-editor with path <strong>&ldquo;desktop.gnome.remote-access&rdquo;</strong>. You need to uncheck the &ldquo;require encryption&rdquo; to support OSX, otherwise the authentication is unsupported on OSX.</p>
 

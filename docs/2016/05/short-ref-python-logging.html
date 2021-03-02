@@ -52,9 +52,9 @@
 <h3 id="toc_0">1. Basic Config</h3>
 <p>If you want to use a programmable method other than a configuration file, the basicConfig() method is the general initializing method.</p>
 <p>The most basic form is default log, which you don&#39;t need basicConfig(). It is using console output with WARNING level.</p>
-<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">logging</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;hello&#39;</span><span class="p">)</span> <span class="c"># no output</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">logging</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s">&#39;world&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">logging</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span> <span class="c1"># no output</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">logging</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;world&#39;</span><span class="p">)</span>
 <span class="n">world</span>
 </pre></div>
 <p>The basic config contains a list of below elements:</p>
@@ -68,11 +68,11 @@
 <li>  stream      - Specify a stream for the StreamHandler, for example, a buffer output stream or stdout. It will be ignored if &ldquo;filename&rdquo; is present.</li>
 </ul>
 <p>The logger can be initialized only once when basicConfig() is called. Then </p>
-<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">logging</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s">&#39;program.log&#39;</span><span class="p">,</span> 
-        <span class="n">filemode</span><span class="o">=</span><span class="s">&#39;a&#39;</span><span class="p">,</span>
-        <span class="n">format</span><span class="o">=</span><span class="s">&quot;</span><span class="si">%(asctime)-15s</span><span class="s"> </span><span class="si">%(levelname)s</span><span class="s"> [</span><span class="si">%(module)s</span><span class="s">] </span><span class="si">%(message)s</span><span class="s">&quot;</span><span class="p">,</span>
-        <span class="n">datefmt</span><span class="o">=</span><span class="s">&quot;%Y-%m-</span><span class="si">%d</span><span class="s"> %H:%M:%S.</span><span class="si">%f</span><span class="s">&quot;</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">logging</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;program.log&#39;</span><span class="p">,</span> 
+        <span class="n">filemode</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span>
+        <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(asctime)-15s</span><span class="s2"> </span><span class="si">%(levelname)s</span><span class="s2"> [</span><span class="si">%(module)s</span><span class="s2">] </span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="n">datefmt</span><span class="o">=</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S.</span><span class="si">%f</span><span class="s2">&quot;</span><span class="p">,</span>
         <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
 </pre></div>
 
@@ -88,7 +88,7 @@
 
 <h4 id="toc_2">2.1 Logger hierarchy</h4>
 <p>The loggers used by all the modules are formed in a conceptual hierarchy by the naming with a separator(&#39;.&#39;). For example: &#39;abc.text&#39;, is the descendant of logger &#39;abc&#39;, while &#39;abc&#39; can be the parent of &#39;abc.text&#39;, &#39;abc.pdf&#39;, &#39;abc.image&#39;, etc. A good convention is to use loggers in a module sense, using in each <code>.py</code> as below:</p>
-<div class="highlight"><pre><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 </pre></div>
 <p>The root of all loggers is called the &ldquo;root&rdquo; logger, which prints the logger name as &ldquo;ROOT&rdquo; in output.
 </p>
@@ -115,48 +115,48 @@
 <h4 id="toc_5">2.4 Configuring Logging</h4>
 <p>The most usual approaches are using <code>fileConfig()</code> and <code>dictConfig()</code>. With fileConfig() you can use a <strong>.conf</strong> file to load the settings (this approach is deprecated), and with dictConfig() you can use even wider range of persistence choices, such as JSON, python file, yaml, etc.</p>
 <p>For example, I have written a small utils for command line interaction and also want to log the HTTP request details. So I defined two handlers: one for console output, another for file output so that I can review the details. The console output must be simple without unneccessary information, and the file output should contains all the time, module details for investigation. Here is my configuration using a python file. (The advantages for a python configuration is that you can also use expressions and comments.)</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">logging</span><span class="o">,</span> <span class="nn">logging.config</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span><span class="o">,</span> <span class="nn">logging.config</span>
 
 <span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s">&quot;log_config&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s">&quot;version&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s">&quot;formatters&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s">&quot;brief&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s">&quot;format&quot;</span><span class="p">:</span> <span class="s">&quot;</span><span class="si">%(message)s</span><span class="s">&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;log_config&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;formatters&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;brief&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="s">&quot;detail&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s">&quot;format&quot;</span><span class="p">:</span> <span class="s">&quot;</span><span class="si">%(asctime)-15s</span><span class="s"> </span><span class="si">%(levelname)s</span><span class="s"> [</span><span class="si">%(name)s</span><span class="s">.</span><span class="si">%(funcName)s</span><span class="s">] </span><span class="si">%(message)s</span><span class="s">&quot;</span><span class="p">,</span>
-                <span class="s">&quot;datefmt&quot;</span><span class="p">:</span> <span class="s">&#39;%Y-%m-</span><span class="si">%d</span><span class="s"> %H:%M:%S&#39;</span><span class="p">,</span>
-            <span class="p">},</span>
-        <span class="p">},</span>
-        <span class="s">&quot;handlers&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s">&quot;console&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s">&quot;class&quot;</span><span class="p">:</span> <span class="s">&quot;logging.StreamHandler&quot;</span><span class="p">,</span>
-                <span class="s">&quot;level&quot;</span><span class="p">:</span> <span class="s">&quot;INFO&quot;</span><span class="p">,</span>
-                <span class="s">&quot;formatter&quot;</span><span class="p">:</span> <span class="s">&quot;brief&quot;</span><span class="p">,</span>
-            <span class="p">},</span>
-            <span class="s">&quot;file&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s">&quot;class&quot;</span><span class="p">:</span> <span class="s">&quot;logging.handlers.RotatingFileHandler&quot;</span><span class="p">,</span>
-                <span class="s">&quot;filename&quot;</span><span class="p">:</span> <span class="s">&quot;dev.log&quot;</span><span class="p">,</span>
-                <span class="s">&quot;level&quot;</span><span class="p">:</span> <span class="s">&quot;DEBUG&quot;</span><span class="p">,</span>
-                <span class="s">&quot;formatter&quot;</span><span class="p">:</span> <span class="s">&quot;detail&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;detail&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">%(asctime)-15s</span><span class="s2"> </span><span class="si">%(levelname)s</span><span class="s2"> [</span><span class="si">%(name)s</span><span class="s2">.</span><span class="si">%(funcName)s</span><span class="s2">] </span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;datefmt&quot;</span><span class="p">:</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">,</span>
             <span class="p">},</span>
         <span class="p">},</span>
-        <span class="s">&quot;root&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s">&quot;handlers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;console&quot;</span><span class="p">,</span> <span class="s">&quot;file&quot;</span><span class="p">],</span>
-            <span class="s">&quot;level&quot;</span><span class="p">:</span> <span class="s">&quot;DEBUG&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;handlers&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;console&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;logging.StreamHandler&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;INFO&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;formatter&quot;</span><span class="p">:</span> <span class="s2">&quot;brief&quot;</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;file&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;logging.handlers.RotatingFileHandler&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;dev.log&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;DEBUG&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;formatter&quot;</span><span class="p">:</span> <span class="s2">&quot;detail&quot;</span><span class="p">,</span>
+            <span class="p">},</span>
         <span class="p">},</span>
-        <span class="s">&quot;loggers&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s">&quot;requests&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s">&quot;handlers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;file&quot;</span><span class="p">],</span>
-                <span class="s">&quot;level&quot;</span><span class="p">:</span> <span class="s">&quot;DEBUG&quot;</span><span class="p">,</span>
-                <span class="s">&quot;propagate&quot;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+        <span class="s2">&quot;root&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;handlers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;console&quot;</span><span class="p">,</span> <span class="s2">&quot;file&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;DEBUG&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;loggers&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;requests&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;handlers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;file&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;DEBUG&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;propagate&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
             <span class="p">}</span>
         <span class="p">},</span>
     <span class="p">},</span>
 <span class="p">}</span>
 
-<span class="n">logging</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">dictConfig</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s">&quot;log_config&quot;</span><span class="p">])</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">dictConfig</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;log_config&quot;</span><span class="p">])</span>
 </pre></div>
 <p>There are two formatters: &ldquo;brief&rdquo; for simply output the message body, the root loggers is default logger for all the modules I write, and also the 3rd party libraries like python <code>requests</code>. Since all the info log should appear in both <strong>console</strong> and the <strong>file</strong>, I need to put both inthe root logger. However, to avoid the unneccssary debug log showing in console, I set the level <strong>INFO</strong> in the <strong>console</strong> handler. This enables the file logger logs everything while the console doesn&#39;t. </p>
 <p>Next I discover that the library &ldquo;requests&rdquo; also have some &ldquo;INFO&rdquo; log which is unneccessary in console, so I will specificially make it disappear using the <strong>loggers</strong> config. The important thing here is to use the <strong>propagate</strong> feature. </p>

@@ -50,23 +50,23 @@
 	<p>Sometimes we need to work with VirtualBox&#39;s command line tools to make things done. Here are a collections of tasks I encountered.</p>
 
 <h3 id="toc_0">1. Converting an Linux .img format to a .vdi (VirtualBox disk)</h3>
-<div class="highlight"><pre><span class="nv">$ </span>VBoxManage convertfromraw mydisk.img mydisk.vdi --format vdi
+<div class="highlight"><pre><span></span>$ VBoxManage convertfromraw mydisk.img mydisk.vdi --format vdi
 </pre></div>
 
 <h3 id="toc_1">2. Mount virtual disk on your ubuntu system</h3>
 <p>In linux, we can use a the <code>qemu-nbd</code> and <code>kpartx</code> to mount a .vdi file on a path. The <em>qemu-nbd</em> tool can create a block device to enable it to be share via NBD(Network Block Device) protocol. Then, we will use <code>kpartx</code> to create device maps from the partition tables of the device, which makes the partition of the image mountable.</p>
-<div class="highlight"><pre><span class="c"># (prerequisites] install the dependencies</span>
-<span class="nv">$ </span>sudo apt-get install qemu-utils kpartx
+<div class="highlight"><pre><span></span><span class="c1"># (prerequisites] install the dependencies</span>
+$ sudo apt-get install qemu-utils kpartx
 
-<span class="c"># to mount the device</span>
-<span class="nv">$ </span>sudo modprobe -nbd
-<span class="nv">$ </span>sudo qemu-nbd -c /dev/nbd0 &lt;vdi_file&gt;
-<span class="nv">$ </span>sudo kpartx -a /dev/nbd0
-<span class="nv">$ </span>sudo mount /dev/mapper/nbd0p1 /mnt/&lt;mount_point&gt;
+<span class="c1"># to mount the device</span>
+$ sudo modprobe -nbd
+$ sudo qemu-nbd -c /dev/nbd0 &lt;vdi_file&gt;
+$ sudo kpartx -a /dev/nbd0
+$ sudo mount /dev/mapper/nbd0p1 /mnt/&lt;mount_point&gt;
 
-<span class="c"># delete the device when no longer needed</span>
-<span class="nv">$ </span>sudo umount /mnt/&lt;mount_point&gt;
-<span class="nv">$ </span>sudo qemu-nbd -d /dev/nbd0
+<span class="c1"># delete the device when no longer needed</span>
+$ sudo umount /mnt/&lt;mount_point&gt;
+$ sudo qemu-nbd -d /dev/nbd0
 </pre></div>
 <p>(&hellip;to be continued)</p>
 

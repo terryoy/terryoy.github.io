@@ -55,20 +55,20 @@
 <li>add a remote repository from server</li>
 <li>set up-stream and push to remote repository</li>
 </ul>
-<div class="highlight"><pre><span class="c"># initialize a repository</span>
-<span class="nv">$ </span>git init
+<div class="highlight"><pre><span></span><span class="c1"># initialize a repository</span>
+$ git init
 
-<span class="c"># set a new remote</span>
-<span class="nv">$ </span>git remote add origin https://github.com/user/repo.git
+<span class="c1"># set a new remote</span>
+$ git remote add origin https://github.com/user/repo.git
 
-<span class="c"># verify new remote</span>
-<span class="nv">$ </span>git remote -v
+<span class="c1"># verify new remote</span>
+$ git remote -v
 
-<span class="c"># (you might need to pull origin/master first if it&#39;s not empty)</span>
-<span class="nv">$ </span>git pull origin master
+<span class="c1"># (you might need to pull origin/master first if it&#39;s not empty)</span>
+$ git pull origin master
 
-<span class="c"># push to remote repository</span>
-<span class="nv">$ </span>git push --set-upstream origin master
+<span class="c1"># push to remote repository</span>
+$ git push --set-upstream origin master
 </pre></div>
 
 <h3 id="toc_1">2. Correct mistakes on the repository</h3>
@@ -79,177 +79,177 @@
 <li>Unstage files</li>
 <li>Remove sensitive data, or binary data in the history </li>
 </ul>
-<div class="highlight"><pre><span class="c"># change or delete files in the current version</span>
-<span class="c"># -- you should not simple use the common shell command &quot;mv&quot; and &quot;rm&quot;, </span>
-<span class="c"># -- because that will lose the tracking. You should use with git instead</span>
-<span class="nv">$ </span>git rm &lt;somefile&gt;
-<span class="nv">$ </span>git mv &lt;somefile&gt; &lt;otherfile&gt;
+<div class="highlight"><pre><span></span><span class="c1"># change or delete files in the current version</span>
+<span class="c1"># -- you should not simple use the common shell command &quot;mv&quot; and &quot;rm&quot;, </span>
+<span class="c1"># -- because that will lose the tracking. You should use with git instead</span>
+$ git rm &lt;somefile&gt;
+$ git mv &lt;somefile&gt; &lt;otherfile&gt;
 
 
-<span class="c"># Unstage files</span>
-<span class="c"># -- usually when you execute &quot;git status&quot;, it will prompt you how to unstage files (e.g. &#39;(use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)&#39;)</span>
-<span class="nv">$ </span>git reset HEAD &lt;file&gt;...
-<span class="c"># -- (or, in some cases)</span>
-<span class="nv">$ </span>git rm --cached &lt;file&gt;
+<span class="c1"># Unstage files</span>
+<span class="c1"># -- usually when you execute &quot;git status&quot;, it will prompt you how to unstage files (e.g. &#39;(use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)&#39;)</span>
+$ git reset HEAD &lt;file&gt;...
+<span class="c1"># -- (or, in some cases)</span>
+$ git rm --cached &lt;file&gt;
 
-<span class="c"># Remove sensitive data</span>
-<span class="c"># -- This one is more difficult. </span>
-<span class="c"># check this link: https://help.github.com/articles/remove-sensitive-data/</span>
+<span class="c1"># Remove sensitive data</span>
+<span class="c1"># -- This one is more difficult. </span>
+<span class="c1"># check this link: https://help.github.com/articles/remove-sensitive-data/</span>
 </pre></div>
 
 <h3 id="toc_2">3. Using Proxy to work with server</h3>
 <p>You can use openssh to create an ssh tunnel with a remote server, and then communicate with git server with this tunnel proxy.</p>
-<div class="highlight"><pre><span class="c"># Socks</span>
+<div class="highlight"><pre><span></span><span class="c1"># Socks</span>
 ssh -D &lt;local_proxy_port&gt; &lt;remote_user&gt;@&lt;remote_server&gt; -p &lt;remote_ssh_port&gt;
-<span class="c"># HTTPS for one site:</span>
+<span class="c1"># HTTPS for one site:</span>
 ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt; &lt;ssh_user&gt;@&lt;ssh_server&gt; -p &lt;ssh_port&gt;
 </pre></div>
 <p>Using git with proxies:</p>
-<div class="highlight"><pre><span class="c"># proxy for https</span>
-<span class="nb">export </span><span class="nv">https_proxy</span><span class="o">=</span>&lt;http_proxy_host&gt;:&lt;http_proxy_port&gt;
-<span class="c"># socks4 proxy for http</span>
-<span class="nb">export </span><span class="nv">http_proxy</span><span class="o">=</span>socks://&lt;socks4_proxy_host&gt;:&lt;socks4_proxy_port&gt;
-<span class="c"># socks5 proxy for https</span>
-<span class="nb">export </span><span class="nv">https_proxy</span><span class="o">=</span>socks5://&lt;socks5_proxy_host&gt;:&lt;socks5_proxy_port&gt;
+<div class="highlight"><pre><span></span><span class="c1"># proxy for https</span>
+<span class="nb">export</span> <span class="nv">https_proxy</span><span class="o">=</span>&lt;http_proxy_host&gt;:&lt;http_proxy_port&gt;
+<span class="c1"># socks4 proxy for http</span>
+<span class="nb">export</span> <span class="nv">http_proxy</span><span class="o">=</span>socks://&lt;socks4_proxy_host&gt;:&lt;socks4_proxy_port&gt;
+<span class="c1"># socks5 proxy for https</span>
+<span class="nb">export</span> <span class="nv">https_proxy</span><span class="o">=</span>socks5://&lt;socks5_proxy_host&gt;:&lt;socks5_proxy_port&gt;
 </pre></div>
 <p>* If in some blocked environment that can only access HTTP/HTTPS, you can consider changing your ssh service port to 80/443.</p>
 
 <h3 id="toc_3">4. Create a private Git repo on your SSH server</h3>
 <p>(reference: <a href="http://git-scm.com/book/en/v2/Git-on-the-Server-Setting-Up-the-Server">git-scm.com/book/en/v2/Git-on-the-Server-Setting-Up-the-Server</a>)</p>
-<div class="highlight"><pre><span class="c"># create a git user for remote access(optional)</span>
-<span class="nv">$ </span>sudo adduser git
-<span class="nv">$ </span><span class="nb">cd</span> /home/git/ <span class="o">&amp;&amp;</span> mkdir .ssh <span class="o">&amp;&amp;</span> chmod 700 .ssh
-<span class="nv">$ </span>touch .ssh/authorized_keys <span class="o">&amp;&amp;</span> chmod 600 .ssh/authorized_keys
-<span class="nv">$ </span>cat /tmp/id_rsa.someone.pub &gt;&gt; .ssh/authorized_keys
+<div class="highlight"><pre><span></span><span class="c1"># create a git user for remote access(optional)</span>
+$ sudo adduser git
+$ <span class="nb">cd</span> /home/git/ <span class="o">&amp;&amp;</span> mkdir .ssh <span class="o">&amp;&amp;</span> chmod <span class="m">700</span> .ssh
+$ touch .ssh/authorized_keys <span class="o">&amp;&amp;</span> chmod <span class="m">600</span> .ssh/authorized_keys
+$ cat /tmp/id_rsa.someone.pub &gt;&gt; .ssh/authorized_keys
 
-<span class="c"># create a server repo with </span>
-<span class="nv">$ </span>mkdir -p /opt/git/somerepo.git
-<span class="nv">$ </span><span class="nb">cd</span> /opt/git/somerepo.git
-<span class="nv">$ </span>git init --bare
+<span class="c1"># create a server repo with </span>
+$ mkdir -p /opt/git/somerepo.git
+$ <span class="nb">cd</span> /opt/git/somerepo.git
+$ git init --bare
 
-<span class="c"># create a local git repo(on your PC) and push to server repo</span>
-<span class="nv">$ </span><span class="nb">cd </span>myproject
-<span class="nv">$ </span>git init
-<span class="nv">$ </span>git add . <span class="o">&amp;&amp;</span> git commit -m <span class="s2">&quot;initial commit&quot;</span>
-<span class="nv">$ </span>git remote add origin git@gitserver:/opt/git/somerepo.git
-<span class="nv">$ </span>git push origin master
+<span class="c1"># create a local git repo(on your PC) and push to server repo</span>
+$ <span class="nb">cd</span> myproject
+$ git init
+$ git add . <span class="o">&amp;&amp;</span> git commit -m <span class="s2">&quot;initial commit&quot;</span>
+$ git remote add origin git@gitserver:/opt/git/somerepo.git
+$ git push origin master
 </pre></div>
 
 <h3 id="toc_4">5. Tagging</h3>
-<div class="highlight"><pre><span class="c"># list your tags</span>
-<span class="nv">$ </span>git tag
-<span class="c"># search for tags</span>
-<span class="nv">$ </span>git tag -l <span class="s2">&quot;v1.8.*&quot;</span>
+<div class="highlight"><pre><span></span><span class="c1"># list your tags</span>
+$ git tag
+<span class="c1"># search for tags</span>
+$ git tag -l <span class="s2">&quot;v1.8.*&quot;</span>
 
-<span class="c"># create a tag with annotation</span>
-<span class="nv">$ </span>git tag -a v1.0.1 -m <span class="s2">&quot;a new tag for v1.0.1&quot;</span>
-<span class="c"># create a tag for a previous commit(for example, 902acd...)</span>
-<span class="nv">$ </span>git tag -a v1.0.0 902acd
+<span class="c1"># create a tag with annotation</span>
+$ git tag -a v1.0.1 -m <span class="s2">&quot;a new tag for v1.0.1&quot;</span>
+<span class="c1"># create a tag for a previous commit(for example, 902acd...)</span>
+$ git tag -a v1.0.0 902acd
 
-<span class="c"># show tag info</span>
-<span class="nv">$ </span>git show v1.0.1
+<span class="c1"># show tag info</span>
+$ git show v1.0.1
 
-<span class="c"># push a tag to remote server</span>
-<span class="nv">$ </span>git push origin v1.0.1
-<span class="c"># or push tags</span>
-<span class="nv">$ </span>git push origin --tags 
+<span class="c1"># push a tag to remote server</span>
+$ git push origin v1.0.1
+<span class="c1"># or push tags</span>
+$ git push origin --tags 
 
-<span class="c"># You can also checkout the tags like the same way you checkout branches</span>
-<span class="nv">$ </span>git checkout -b version2 v2.0.0
+<span class="c1"># You can also checkout the tags like the same way you checkout branches</span>
+$ git checkout -b version2 v2.0.0
 
-<span class="c"># delete a tag</span>
-<span class="nv">$ </span>git tag -d <span class="s2">&quot;v1.0.1a&quot;</span>
+<span class="c1"># delete a tag</span>
+$ git tag -d <span class="s2">&quot;v1.0.1a&quot;</span>
 </pre></div>
 
 <h3 id="toc_5">6. Amend Logs</h3>
-<div class="highlight"><pre><span class="c"># Method 1:</span>
-<span class="c"># fix something after git commit</span>
-<span class="nv">$ </span>git commit -m <span class="s2">&quot;something wrong&quot;</span>
-<span class="nv">$ </span>git add &lt;...&gt;
-<span class="nv">$ </span>git rm &lt;...&gt;
+<div class="highlight"><pre><span></span><span class="c1"># Method 1:</span>
+<span class="c1"># fix something after git commit</span>
+$ git commit -m <span class="s2">&quot;something wrong&quot;</span>
+$ git add &lt;...&gt;
+$ git rm &lt;...&gt;
 
-<span class="c"># apply changes and update log to last commit</span>
-<span class="nv">$ </span>git commit --amend
+<span class="c1"># apply changes and update log to last commit</span>
+$ git commit --amend
 
-<span class="c"># Method 2:</span>
-<span class="c"># Make the last commit as unstage changes</span>
-<span class="nv">$ </span>git commit -m <span class="s2">&quot;something wrong&quot;</span>
-<span class="nv">$ </span>git reset HEAD~1
-<span class="c"># ... fix things</span>
-<span class="c"># Apply the changes and commit again</span>
-<span class="nv">$ </span>git commit --amend
+<span class="c1"># Method 2:</span>
+<span class="c1"># Make the last commit as unstage changes</span>
+$ git commit -m <span class="s2">&quot;something wrong&quot;</span>
+$ git reset HEAD~1
+<span class="c1"># ... fix things</span>
+<span class="c1"># Apply the changes and commit again</span>
+$ git commit --amend
 </pre></div>
 
 <h3 id="toc_6">7. Working with drafts (stashing)</h3>
-<div class="highlight"><pre><span class="c"># Save current uncommitted change to stash</span>
-<span class="nv">$ </span>git stash
+<div class="highlight"><pre><span></span><span class="c1"># Save current uncommitted change to stash</span>
+$ git stash
 
-<span class="c"># List existing stash</span>
-<span class="nv">$ </span>git stash list
+<span class="c1"># List existing stash</span>
+$ git stash list
 
-<span class="c"># recover last stash</span>
-<span class="nv">$ </span>git stash apply
+<span class="c1"># recover last stash</span>
+$ git stash apply
 
-<span class="c"># recover previous stashes</span>
-<span class="nv">$ </span>git stash apply stash@<span class="o">{</span>1<span class="o">}</span>
+<span class="c1"># recover previous stashes</span>
+$ git stash apply stash@<span class="o">{</span><span class="m">1</span><span class="o">}</span>
 
-<span class="c"># Delete stashes</span>
-<span class="nv">$ </span>git stash drop stash@<span class="o">{</span>0<span class="o">}</span>
+<span class="c1"># Delete stashes</span>
+$ git stash drop stash@<span class="o">{</span><span class="m">0</span><span class="o">}</span>
 </pre></div>
 <p>Reference for git stash: <a href="https://git-scm.com/docs/git-stash">https://git-scm.com/docs/git-stash</a></p>
 
 <h3 id="toc_7">8. Merge a specific commit to current branch</h3>
 <p>Git has a <code>cherry-pick</code> function that can merge a specific commit to the current branch, this save me once. :P</p>
-<div class="highlight"><pre><span class="c"># merge a sequence of commits to the current branch, </span>
-<span class="nv">$ </span>git cherry-pick &lt;commits...&gt;
+<div class="highlight"><pre><span></span><span class="c1"># merge a sequence of commits to the current branch, </span>
+$ git cherry-pick &lt;commits...&gt;
 </pre></div>
 <p>When you try to merge a commit, you will possibly cause some conflict. The cherry-pick function also has some features to help you.</p>
-<div class="highlight"><pre><span class="c"># continue the job after you resolve the conflicts</span>
-<span class="nv">$ </span>git cherry-pick --continue
+<div class="highlight"><pre><span></span><span class="c1"># continue the job after you resolve the conflicts</span>
+$ git cherry-pick --continue
 
-<span class="c"># forget current job in the sequence progress</span>
-<span class="nv">$ </span>git cherry-pick --quit
+<span class="c1"># forget current job in the sequence progress</span>
+$ git cherry-pick --quit
 
-<span class="c"># clear all the sequence and recover to the pre-sequence state</span>
-<span class="nv">$ </span>git cherry-pick --abort
+<span class="c1"># clear all the sequence and recover to the pre-sequence state</span>
+$ git cherry-pick --abort
 </pre></div>
 
 <h3 id="toc_8">9. Reverting commits</h3>
 <p>There are two types of resetting the branch to a previous state: 1. delete unpublished commits locally, 2. Undo published commits with new commits.</p>
 <p>Using <code>git reset</code> can help resetting current state.</p>
-<div class="highlight"><pre><span class="c"># delete the local commits and restore to the previous commit state</span>
-<span class="nv">$ </span>git reset --hard &lt;commit&gt;
+<div class="highlight"><pre><span></span><span class="c1"># delete the local commits and restore to the previous commit state</span>
+$ git reset --hard &lt;commit&gt;
 
-<span class="c"># if you have local uncommit changes, you should save as stash first</span>
-<span class="nv">$ </span>git stash
-<span class="nv">$ </span>git reset --hard &lt;commit&gt;
-<span class="nv">$ </span>git stash pop
+<span class="c1"># if you have local uncommit changes, you should save as stash first</span>
+$ git stash
+$ git reset --hard &lt;commit&gt;
+$ git stash pop
 </pre></div>
 <p>Using <code>git revert</code> is to make a new commit to revert previous changes(specificly).</p>
-<div class="highlight"><pre><span class="c"># cancel specific changes</span>
-<span class="nv">$ </span>git revert &lt;commit1&gt; &lt;commit2&gt; ...
+<div class="highlight"><pre><span></span><span class="c1"># cancel specific changes</span>
+$ git revert &lt;commit1&gt; &lt;commit2&gt; ...
 
-<span class="c"># cancel range of commits</span>
-<span class="nv">$ </span>git revert e647032...cee8902
-<span class="c"># cancel last two commits</span>
-<span class="nv">$ </span>git revert HEAD~2...HEAD
+<span class="c1"># cancel range of commits</span>
+$ git revert e647032...cee8902
+<span class="c1"># cancel last two commits</span>
+$ git revert HEAD~2...HEAD
 </pre></div>
 <p><font color="red">If you&#39;ve really push something wrong to github, or merging with a wrong branch which you want to recover. You could do th below things with specifc care:</font></p>
-<div class="highlight"><pre><span class="c"># (it&#39;s strongly recommended to create a backup branch first!!!)</span>
-<span class="c"># **this line recover back to a specific commit, and all the later commits will be lost!!!</span>
-<span class="nv">$ </span>git reset --hard &lt;commit&gt;
-<span class="nv">$ </span>git push --force origin &lt;branch_name&gt;
+<div class="highlight"><pre><span></span><span class="c1"># (it&#39;s strongly recommended to create a backup branch first!!!)</span>
+<span class="c1"># **this line recover back to a specific commit, and all the later commits will be lost!!!</span>
+$ git reset --hard &lt;commit&gt;
+$ git push --force origin &lt;branch_name&gt;
 </pre></div>
 <p><a href="http://stackoverflow.com/questions/4114095/how-to-revert-git-repository-to-a-previous-commit">Ref to git revert</a>.</p>
 
 <h3 id="toc_9">10. Get Revision List</h3>
 <p><em>Updated on 2017-12-21</em></p>
 <p>Now our projects in the company uses total commit count as the build version, so I make a search on how to use command line to get that. It&#39;s related to the <code>git rev-list</code> command and I found the command quite useful in fact.</p>
-<div class="highlight"><pre><span class="c"># Get the total commit count at the current branch</span>
-<span class="nv">$ </span>git rev-list --count HEAD
+<div class="highlight"><pre><span></span><span class="c1"># Get the total commit count at the current branch</span>
+$ git rev-list --count HEAD
 
-<span class="c"># Check different commits between two branches/tags</span>
-<span class="nv">$ </span>git rev-list --pretty --left-right &lt;BRANCH_1&gt;...&lt;BRANCH_2&gt;
+<span class="c1"># Check different commits between two branches/tags</span>
+$ git rev-list --pretty --left-right &lt;BRANCH_1&gt;...&lt;BRANCH_2&gt;
 </pre></div>
 
     

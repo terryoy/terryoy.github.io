@@ -79,11 +79,11 @@
 <p>After a release or a kernel upgrade, you may usually find unuseful entries in the boot menu, which are mainly for previous state recovery. So here let&#39;s see how to remove the unuseful entries.</p>
 <p>First are the unnecessary kernel entries. They exist because you install more older kernel versions lying around on your machine. So you can check if there are more than one <code>linux-headers-&lt;version&gt;</code> entry and <code>linux-image-&lt;version&gt;</code> entry, then remove the unnecessary package via package manager.</p>
 <p>Second, unwanted entries in <code>/etc/init.d/</code> such as memtest86+. Disabling them is very easy, just make them not executable then it&#39;s done.</p>
-<div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd</span> /etc/init.d/
-<span class="nv">$ </span>sudo chmod -x 20_memtest86+
+<div class="highlight"><pre><span></span>$ <span class="nb">cd</span> /etc/init.d/
+$ sudo chmod -x 20_memtest86+
 </pre></div>
 <p>And the last thing is to update grub:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo update-grub
+<div class="highlight"><pre><span></span>$ sudo update-grub
 </pre></div>
 <p>Sometimes if you just want to edit some of the boot menu item, you could lookup the <code>menuentry</code> in the file and edit the content. For example, there is a <code>30_os-prober</code> file in <code>/etc/grub.d/</code>, which checks if there are other OS exists on local drives and create boot entries for them. You can see the similar content in each OS part and using <code>cat</code> and <code>menuentry</code> to add an entry to the grub config.</p>
 
@@ -108,22 +108,22 @@ GRUB_BACKGROUND='/path/to/image.jpg'</code></pre>
 <h4 id="toc_4">4.1 Grub Rescue</h4>
 <p>Many times when grub boot failed, it will run into <code>grub-rescue</code> shell environment. It is expected that you fix something(usually try to recover the damaged boot record.) and set a bootable entry for grub to continue the boot process</p>
 <p>Below is an example of a common process.</p>
-<div class="highlight"><pre><span class="c"># check available parition</span>
+<div class="highlight"><pre><span></span><span class="c1"># check available parition</span>
 grub rescue&gt; ls
 <span class="o">(</span>hd0<span class="o">)</span>,<span class="o">(</span>hd0,msdos3<span class="o">)</span>,<span class="o">(</span>hd0,msdos2<span class="o">)</span>,<span class="o">(</span>hd0,msdos1<span class="o">)</span>
 
-<span class="c"># check available grub boot record in a partition</span>
+<span class="c1"># check available grub boot record in a partition</span>
 grub rescue&gt; ls <span class="o">(</span>hd0,msdosX<span class="o">)</span>/boot/grub
 
-<span class="c"># set boot entry</span>
-grub rescue&gt; <span class="nb">set </span><span class="nv">root</span><span class="o">=(</span>hd0,msdos3<span class="o">)</span>
-grub rescue&gt; <span class="nb">set </span><span class="nv">prefix</span><span class="o">=(</span>hd0,msdos3<span class="o">)</span>/boot/grub
+<span class="c1"># set boot entry</span>
+grub rescue&gt; <span class="nb">set</span> <span class="nv">root</span><span class="o">=(</span>hd0,msdos3<span class="o">)</span>
+grub rescue&gt; <span class="nb">set</span> <span class="nv">prefix</span><span class="o">=(</span>hd0,msdos3<span class="o">)</span>/boot/grub
 grub rescue&gt; insmod /boot/grub/normal.mod
 
-<span class="c"># go to startup screen</span>
+<span class="c1"># go to startup screen</span>
 grub rescue&gt;normal
 
-<span class="c"># (is this the alternative way?)</span>
+<span class="c1"># (is this the alternative way?)</span>
 rescue&gt;linux /boot/vmlinuz-xxx-xxx <span class="nv">root</span><span class="o">=</span>/dev/sdax
 rescue&gt;initrd /boot/initrd.img-xxx-xxx
 rescue&gt;boot

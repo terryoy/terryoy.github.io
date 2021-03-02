@@ -48,17 +48,17 @@
     </p>
     
 	<h3 id="toc_0">0. Setup</h3>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install mysql-server
-<span class="nv">$ </span>mysql -u root -p &lt;root_password&gt;
+<div class="highlight"><pre><span></span>$ sudo apt-get install mysql-server
+$ mysql -u root -p &lt;root_password&gt;
 </pre></div>
 
 <h3 id="toc_1">1. Create the database</h3>
-<div class="highlight"><pre><span class="k">CREATE</span> <span class="k">DATABASE</span> <span class="n">mytestdb</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">DATABASE</span> <span class="n">mytestdb</span><span class="p">;</span>
 <span class="k">show</span> <span class="n">databases</span><span class="p">;</span>
 </pre></div>
 
 <h3 id="toc_2">2. Create a user and grant access</h3>
-<div class="highlight"><pre><span class="k">CREATE</span> <span class="k">USER</span> <span class="s1">&#39;myuser&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span> <span class="n">IDENTIFIED</span> <span class="k">BY</span> <span class="s1">&#39;my_password&#39;</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">USER</span> <span class="s1">&#39;myuser&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span> <span class="n">IDENTIFIED</span> <span class="k">BY</span> <span class="s1">&#39;my_password&#39;</span><span class="p">;</span>
 
 <span class="k">GRANT</span> <span class="k">ALL</span> <span class="k">PRIVILEGES</span> <span class="k">ON</span> <span class="n">mytestdb</span><span class="p">.</span><span class="o">*</span> <span class="k">TO</span> <span class="s1">&#39;myuser&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="p">;</span> 
 
@@ -67,18 +67,18 @@
 </pre></div>
 
 <h3 id="toc_3">3. Login with the User</h3>
-<div class="highlight"><pre>mysql -u myuser -p mytestdb
+<div class="highlight"><pre><span></span>mysql -u myuser -p mytestdb
 </pre></div>
 
 <h3 id="toc_4">4. Import a SQL dump into database</h3>
-<div class="highlight"><pre><span class="n">USE</span> <span class="n">mytestdb</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><span class="n">USE</span> <span class="n">mytestdb</span><span class="p">;</span>
 <span class="k">source</span> <span class="n">db_dump</span><span class="p">.</span><span class="k">sql</span><span class="p">;</span>
 </pre></div>
 <p>Or you can use a command line:</p>
-<div class="highlight"><pre>mysql -u dbuser -p <span class="o">[</span>-h host<span class="o">]</span> dbname &lt; dbdump.sql
+<div class="highlight"><pre><span></span>mysql -u dbuser -p <span class="o">[</span>-h host<span class="o">]</span> dbname &lt; dbdump.sql
 </pre></div>
 <p>Exporting in command line is similar, using &ldquo;mysqldump&rdquo; command:</p>
-<div class="highlight"><pre>mysqldump -u dbuser -p dbname &gt; dbdump.sql
+<div class="highlight"><pre><span></span>mysqldump -u dbuser -p dbname &gt; dbdump.sql
 </pre></div>
 
     

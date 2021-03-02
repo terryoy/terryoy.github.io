@@ -66,10 +66,10 @@
 
 <h3 id="toc_1">2. Setting up WiFi</h3>
 <p>The next thing to do is to setup the WiFi on Edison, because a large part of the development process happens on WiFi.</p>
-<div class="highlight"><pre><span class="nv">$ </span>configure_edison --wifi
+<div class="highlight"><pre><span></span>$ configure_edison --wifi
 
-<span class="c"># check the wifi status</span>
-<span class="nv">$ </span>wpa_cli status
+<span class="c1"># check the wifi status</span>
+$ wpa_cli status
 </pre></div>
 <p>Follow the instructions of this program to complete the scanning, choosing hotspot, and reboot with WiFi.</p>
 <p>By default, <code>ssh</code> is restricted to usb, so you need to disable the restriction by using <code>configure_edison --setup</code> to setup the device name and password. It will automatically update the file &#39;/lib/systemd/system/sshd.socket&#39; and comment out this line &ldquo;BindToDevice=usb0&rdquo;. (need reboot to take effect)</p>

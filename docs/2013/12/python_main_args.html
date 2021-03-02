@@ -48,43 +48,43 @@
     </p>
     
 	<p>Part 1. Below is an example showing how to use <strong>arguments</strong> in a python script. It&#39;s taken from this <a href="http://www.tutorialspoint.com/python/python_command_line_arguments.htm">example</a>.</p>
-<div class="highlight"><pre><span class="c">#!/usr/bin/python</span>
+<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/python</span>
 
 <span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">getopt</span>
 
 <span class="k">def</span> <span class="nf">print_usage</span><span class="p">():</span>
-    <span class="k">print</span> <span class="s">&#39;main.py -i &lt;input_file&gt; -o &lt;output_file&gt;&#39;</span>
+    <span class="nb">print</span> <span class="s1">&#39;main.py -i &lt;input_file&gt; -o &lt;output_file&gt;&#39;</span>
 
 <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">argv</span><span class="p">):</span>
-    <span class="n">inputfile</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
-    <span class="n">outputfile</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+    <span class="n">inputfile</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">outputfile</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="c"># opts is a list of returning key-value pairs, args is the options left after striped</span>
-        <span class="c"># the short options &#39;hi:o:&#39;, if an option requires an input, it should be followed by a &quot;:&quot;</span>
-        <span class="c"># the long options &#39;ifile=&#39; is an option that requires an input, followed by a &quot;=&quot;</span>
-        <span class="n">opts</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="n">getopt</span><span class="o">.</span><span class="n">getopt</span><span class="p">(</span><span class="n">argv</span><span class="p">,</span> <span class="s">&#39;hi:o:&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;ifile=&#39;</span><span class="p">,</span> <span class="s">&#39;ofile=&#39;</span><span class="p">])</span>
+        <span class="c1"># opts is a list of returning key-value pairs, args is the options left after striped</span>
+        <span class="c1"># the short options &#39;hi:o:&#39;, if an option requires an input, it should be followed by a &quot;:&quot;</span>
+        <span class="c1"># the long options &#39;ifile=&#39; is an option that requires an input, followed by a &quot;=&quot;</span>
+        <span class="n">opts</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="n">getopt</span><span class="o">.</span><span class="n">getopt</span><span class="p">(</span><span class="n">argv</span><span class="p">,</span> <span class="s1">&#39;hi:o:&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;ifile=&#39;</span><span class="p">,</span> <span class="s1">&#39;ofile=&#39;</span><span class="p">])</span>
     <span class="k">except</span> <span class="n">getopt</span><span class="o">.</span><span class="n">GetoptError</span><span class="p">:</span>
         <span class="n">print_usage</span><span class="p">()</span>
         <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-    <span class="c"># print(args) # debug line</span>
+    <span class="c1"># print(args) # debug line</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">opts</span><span class="p">:</span>
         <span class="n">print_usage</span><span class="p">()</span>
         <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 
-    <span class="c"># print arguments</span>
+    <span class="c1"># print arguments</span>
     <span class="k">for</span> <span class="n">opt</span><span class="p">,</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">opts</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">opt</span> <span class="o">==</span> <span class="s">&#39;-h&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">opt</span> <span class="o">==</span> <span class="s1">&#39;-h&#39;</span><span class="p">:</span>
             <span class="n">print_usage</span><span class="p">()</span>
             <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">opt</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&quot;-i&quot;</span><span class="p">,</span> <span class="s">&quot;--ifile&quot;</span><span class="p">):</span>
+        <span class="k">elif</span> <span class="n">opt</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;-i&quot;</span><span class="p">,</span> <span class="s2">&quot;--ifile&quot;</span><span class="p">):</span>
             <span class="n">inputfile</span> <span class="o">=</span> <span class="n">arg</span>
-        <span class="k">elif</span> <span class="n">opt</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&quot;-o&quot;</span><span class="p">,</span> <span class="s">&quot;--ofile&quot;</span><span class="p">):</span>
+        <span class="k">elif</span> <span class="n">opt</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;-o&quot;</span><span class="p">,</span> <span class="s2">&quot;--ofile&quot;</span><span class="p">):</span>
             <span class="n">outputfile</span> <span class="o">=</span> <span class="n">arg</span>
-    <span class="k">print</span> <span class="s">&quot;Input file:&quot;</span><span class="p">,</span> <span class="n">inputfile</span>
-    <span class="k">print</span> <span class="s">&quot;Output file:&quot;</span><span class="p">,</span> <span class="n">outputfile</span>
+    <span class="nb">print</span> <span class="s2">&quot;Input file:&quot;</span><span class="p">,</span> <span class="n">inputfile</span>
+    <span class="nb">print</span> <span class="s2">&quot;Output file:&quot;</span><span class="p">,</span> <span class="n">outputfile</span>
 
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">main</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
 </pre></div>
 <p>Below is the example running result:</p>
@@ -100,27 +100,27 @@ $ ./main.py -i inputfile --ofile=outputfile
 Input file: inputfile
 Output file: outputfile</code></pre>
 <p>Part 2. Below is an example showing how to use <strong>configuration</strong> and <strong>exceptions</strong>.</p>
-<div class="highlight"><pre><span class="c">#!/usr/bin/python</span>
+<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/python</span>
 
 <span class="kn">from</span> <span class="nn">ConfigParser</span> <span class="kn">import</span> <span class="n">ConfigParser</span><span class="p">,</span> <span class="n">NoOptionError</span>
 <span class="kn">import</span> <span class="nn">traceback</span>
 
-<span class="c">## The configuration is a file named &quot;config.ini&quot; with below content</span>
-<span class="c"># [helloworld]</span>
-<span class="c"># name = Terry</span>
-<span class="c">##</span>
+<span class="c1">## The configuration is a file named &quot;config.ini&quot; with below content</span>
+<span class="c1"># [helloworld]</span>
+<span class="c1"># name = Terry</span>
+<span class="c1">##</span>
 
-<span class="c"># read configuration</span>
+<span class="c1"># read configuration</span>
 <span class="n">config</span> <span class="o">=</span> <span class="n">ConfigParser</span><span class="p">()</span>
-<span class="n">config</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&#39;config.ini&#39;</span><span class="p">)</span>
+<span class="n">config</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;config.ini&#39;</span><span class="p">)</span>
 
-<span class="c"># use configuration</span>
-<span class="k">print</span> <span class="s">&#39;an existing item value:&#39;</span><span class="p">,</span> <span class="s">&#39;[ name =&#39;</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;helloworld&#39;</span><span class="p">,</span> <span class="s">&#39;name&#39;</span><span class="p">),</span> <span class="s">&#39;]&#39;</span>
+<span class="c1"># use configuration</span>
+<span class="nb">print</span> <span class="s1">&#39;an existing item value:&#39;</span><span class="p">,</span> <span class="s1">&#39;[ name =&#39;</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;helloworld&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">),</span> <span class="s1">&#39;]&#39;</span>
 <span class="k">try</span><span class="p">:</span>
-    <span class="k">print</span> <span class="s">&#39;an non-existing item value:&#39;</span><span class="p">,</span> <span class="s">&#39;[ non-exist =&#39;</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;helloworld&#39;</span><span class="p">,</span> <span class="s">&#39;non-exist&#39;</span><span class="p">),</span> <span class="s">&#39;]&#39;</span>
+    <span class="nb">print</span> <span class="s1">&#39;an non-existing item value:&#39;</span><span class="p">,</span> <span class="s1">&#39;[ non-exist =&#39;</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;helloworld&#39;</span><span class="p">,</span> <span class="s1">&#39;non-exist&#39;</span><span class="p">),</span> <span class="s1">&#39;]&#39;</span>
 <span class="k">except</span> <span class="n">NoOptionError</span><span class="p">:</span>
-    <span class="c"># pass</span>
-    <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span> <span class="c"># display exception information</span>
+    <span class="c1"># pass</span>
+    <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span> <span class="c1"># display exception information</span>
 </pre></div>
 <p>Here is the output result:</p>
 

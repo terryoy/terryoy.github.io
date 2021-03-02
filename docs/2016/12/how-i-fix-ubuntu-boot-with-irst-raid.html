@@ -51,19 +51,19 @@
 <p>At first, the Windows 7 system was pre-installed. When I installed Ubuntu it failed at booting if the Windows 7 had enabled iRST. I cannot find any working solution to fix the Ubuntu problem at the time, so I just disabled Win 7&#39;s iRST, and then use the SSD as normal disk. Later I had a very good time with the Linux environment.</p>
 <p>Recently, I&#39;m going to refresh the whole system and make both clean again. So I give a second try to enable Windows 7&#39;s iRST and make Ubuntu boot correctly, and I succeeded after two days hard work!</p>
 <p>The root cause is that the raid management tool on Linux will assemble the partitions as RAID and then the <code>initramds</code> cannot find the partition with UUID. It fails like this:</p>
-<div class="highlight"><pre>Gave up waiting <span class="k">for </span>root device. Common problems:
+<div class="highlight"><pre><span></span>Gave up waiting <span class="k">for</span> root device. Common problems:
  - Boot args <span class="o">(</span>cat /proc/cmdline<span class="o">)</span>
-   - Check <span class="nv">rootdelay</span><span class="o">=</span> <span class="o">(</span>did the system <span class="nb">wait </span>long enough?<span class="o">)</span>
-   - Check <span class="nv">root</span><span class="o">=</span> <span class="o">(</span>did the system <span class="nb">wait </span><span class="k">for </span>the right device?<span class="o">)</span>
- - Missing modules <span class="o">(</span>cat /proc/modules; ls /dev<span class="o">)</span>
+   - Check <span class="nv">rootdelay</span><span class="o">=</span> <span class="o">(</span>did the system <span class="nb">wait</span> long enough?<span class="o">)</span>
+   - Check <span class="nv">root</span><span class="o">=</span> <span class="o">(</span>did the system <span class="nb">wait</span> <span class="k">for</span> the right device?<span class="o">)</span>
+ - Missing modules <span class="o">(</span>cat /proc/modules<span class="p">;</span> ls /dev<span class="o">)</span>
 ALERT! /dev/disk/by-uuid/52152d36-9dc4-42a6-8be1-3966bf397b09 does not exist. Dropping to a shell!
 
-BusyBox v1.22.1 <span class="o">(</span>Ubuntu 1:1.22.0-15ubuntu1<span class="o">)</span> built-in shell <span class="o">(</span>ash<span class="o">)</span>
-Enter <span class="s1">&#39;help&#39;</span> <span class="k">for </span>a lost of built-in commands.
+BusyBox v1.22.1 <span class="o">(</span>Ubuntu <span class="m">1</span>:1.22.0-15ubuntu1<span class="o">)</span> built-in shell <span class="o">(</span>ash<span class="o">)</span>
+Enter <span class="s1">&#39;help&#39;</span> <span class="k">for</span> a lost of built-in commands.
 <span class="o">(</span>initramfs<span class="o">)</span>
 </pre></div>
 <p>I have searched on the internet about it, finding that it&#39;s related to the block id that generated for the partitions are missing:</p>
-<div class="highlight"><pre><span class="o">(</span>initramfs<span class="o">)</span> blkid
+<div class="highlight"><pre><span></span><span class="o">(</span>initramfs<span class="o">)</span> blkid
 /dev/sda: <span class="nv">TYPE</span><span class="o">=</span><span class="s2">&quot;isw_raid_member&quot;</span>
 /dev/sdb: <span class="nv">TYPE</span><span class="o">=</span><span class="s2">&quot;isw_raid_member&quot;</span>
 
@@ -72,39 +72,39 @@ md/  md126  md127
 </pre></div>
 <p>While the partitions of <code>/dev/sda/</code> are supposed to be recognized by UUIDs, but it is created as a software RAID device(md126), so the partitions of it cannot be accessed at boot time. I have tried to install Ubuntu via my usb disk again and again, also try to use <code>chroot</code> to update the grub record and the initramfs on the partiion, and I still don&#39;t have luck. After a long frustrating period, I suddenly come up the idea: why not just disable the raid array at boot time? </p>
 <p>After I tried the below two commands in <code>initramfs</code>, it come back to normal boot after I exit the initramfs mode!</p>
-<div class="highlight"><pre><span class="o">(</span>initramfs<span class="o">)</span> mdadm --stop --scan
+<div class="highlight"><pre><span></span><span class="o">(</span>initramfs<span class="o">)</span> mdadm --stop --scan
 
 <span class="o">(</span>initramfs<span class="o">)</span> blockdev --rereadpt /dev/sda
 </pre></div>
 <p>The first command scan all the RAID array entries and close them. The second command re-read the partitions with UUIDs so you get the UUID entries for initramfs to boot.</p>
 <p>This time I have confident to make the solution permanent. First of all, I will need to use my Ubuntu usb boot disk to enter the shell(&#39;Go Back&#39; in the first step of the installation, then you find a choice for executing a shell) and mount the partition. (My target Ubuntu parition is /dev/sda3)</p>
-<div class="highlight"><pre><span class="nv">$ </span>mount /dev/sda3 /mnt
-<span class="nv">$ </span>mount -t proc /proc /mnt/proc
-<span class="nv">$ </span>mount -t sysfs /sys /mnt/sys
-<span class="nv">$ </span>mount -o <span class="nb">bind</span> /dev /mnt/dev
-<span class="nv">$ </span>chroot /mnt /bin/bash
+<div class="highlight"><pre><span></span>$ mount /dev/sda3 /mnt
+$ mount -t proc /proc /mnt/proc
+$ mount -t sysfs /sys /mnt/sys
+$ mount -o <span class="nb">bind</span> /dev /mnt/dev
+$ chroot /mnt /bin/bash
 </pre></div>
 <p>This allow me to mount the partition just as I&#39;ve booted into it. Then I will update it&#39;s boot process(e.g. grub &amp; initramfs).</p>
-<div class="highlight"><pre><span class="nv">$ </span>grub-install /dev/sda
-<span class="nv">$ </span>update-grub
+<div class="highlight"><pre><span></span>$ grub-install /dev/sda
+$ update-grub
 
-<span class="nv">$ </span>vi /etc/initramfs-tools/script/local-top/mdadm
+$ vi /etc/initramfs-tools/script/local-top/mdadm
 mdadm --stop --scan
 blockdev --rereadpt /dev/sda
 
-<span class="nv">$ </span>chmod +x /etc/initramfs-tools/script/local-top/mdadm
-<span class="nv">$ </span>update-initramfs -u
+$ chmod +x /etc/initramfs-tools/script/local-top/mdadm
+$ update-initramfs -u
 </pre></div>
 <p>Voilà! My Ubuntu&#39;s back!&hellip;wait, my Windows 7 has gone! It seems that GRUB has erase my Windows 7 boot entry. This doesn&#39;t stop me now. It&#39;s easy to get Windows back.</p>
 <p>I tried to run <code>update-grub</code> again, but it doesn&#39;t recognize the Windows boot entry even though os-prober is enabled. So I need to add it manually:</p>
-<div class="highlight"><pre><span class="c"># check the Windows partition UUID</span>
-<span class="nv">$ </span>blkid
+<div class="highlight"><pre><span></span><span class="c1"># check the Windows partition UUID</span>
+$ blkid
 
-<span class="nv">$ </span>vi /boot/grub/grub.cfg
-<span class="c"># (look for the section of &quot;/etc/grub.d/40_custom&quot; and add the content below)</span>
+$ vi /boot/grub/grub.cfg
+<span class="c1"># (look for the section of &quot;/etc/grub.d/40_custom&quot; and add the content below)</span>
 menuentry <span class="s2">&quot;Windows 7&quot;</span> <span class="o">{</span>
     insmod ntfs
-    <span class="nb">set </span><span class="nv">root</span><span class="o">=</span><span class="s1">&#39;(hd0,1)&#39;</span>
+    <span class="nb">set</span> <span class="nv">root</span><span class="o">=</span><span class="s1">&#39;(hd0,1)&#39;</span>
     search --no-floppy --fs-uuid --set 76B0EE43B0EE0987
     chainloader +1
 <span class="o">}</span>

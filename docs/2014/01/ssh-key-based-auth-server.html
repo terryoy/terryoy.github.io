@@ -51,23 +51,23 @@
 
 <h2 id="toc_0">1. Create a New User on Server</h2>
 <p>In a traditional way, people use the command &ldquo;useradd&rdquo; to create user account, then together with other commands to setup the group, the home folder for the user.</p>
-<div class="highlight"><pre><span class="nv">$ </span>useradd terry
-<span class="nv">$ </span>passwd terry
-<span class="nv">$ </span>mkdir /home/terry
-<span class="nv">$ </span>chown -R terry:users /home/terry
+<div class="highlight"><pre><span></span>$ useradd terry
+$ passwd terry
+$ mkdir /home/terry
+$ chown -R terry:users /home/terry
 </pre></div>
 <p>In a debian way, there is one command which does it all: &ldquo;adduser&rdquo;.</p>
-<div class="highlight"><pre><span class="nv">$ </span>adduser edmund
+<div class="highlight"><pre><span></span>$ adduser edmund
 Adding user <span class="s1">&#39;edmund&#39;</span> ...
-Adding new group <span class="s1">&#39;edmund&#39;</span> <span class="o">(</span>1001<span class="o">)</span> ...
-Adding new user <span class="s1">&#39;edmund&#39;</span> <span class="o">(</span>1001<span class="o">)</span> with group <span class="s1">&#39;edmund&#39;</span> ...
+Adding new group <span class="s1">&#39;edmund&#39;</span> <span class="o">(</span><span class="m">1001</span><span class="o">)</span> ...
+Adding new user <span class="s1">&#39;edmund&#39;</span> <span class="o">(</span><span class="m">1001</span><span class="o">)</span> with group <span class="s1">&#39;edmund&#39;</span> ...
 Creating home directory <span class="s1">&#39;/home/edmund&#39;</span> ...
 Copying files from <span class="s1">&#39;/etc/skel&#39;</span> ...
 Enter new UNIX password: 
 Retype new UNIX password: 
 passwd: password updated successfully
-Changing the user information <span class="k">for </span>edmund
-Enter the new value, or press ENTER <span class="k">for </span>the default
+Changing the user information <span class="k">for</span> edmund
+Enter the new value, or press ENTER <span class="k">for</span> the default
     Full Name <span class="o">[]</span>: 
     Room Number <span class="o">[]</span>: 
     Work Phone <span class="o">[]</span>: 
@@ -79,23 +79,23 @@ Is the information correct? <span class="o">[</span>Y/n<span class="o">]</span>
 <h2 id="toc_1">2. Generate SSH Key and Apply to Server</h2>
 <p>With SSH key login, user require a public/private key pairs to authenticate the login. SSH can use both &ldquo;RSA&rdquo; and &ldquo;DSA&rdquo; keys, however according to the <a href="https://help.ubuntu.com/community/SSH/OpenSSH/Keys#Key-Based_SSH_Logins">ubuntu guide</a>, &ldquo;RSA&rdquo; is the only recommended choice for new keys. </p>
 <p>First thing you should keep in mind, the private key should <strong>NOT</strong> allow to be accessed by anybody else(e.g. set &ldquo;700&rdquo; with chmod). We will create the RSA keys in your <strong>local</strong> machine, then copy the public key to the <strong>remote</strong> server.</p>
-<div class="highlight"><pre><span class="nv">$ </span>mkdir ~/.ssh
-<span class="nv">$ </span>chmod 700 ~/.ssh      <span class="c"># set access right only to user self</span>
-<span class="nv">$ </span>ssh-keygen -t rsa     <span class="c"># **or you could use &quot;ssh-keygen -t rsa -b 4096&quot; for more secure login, default is 2048**.</span>
+<div class="highlight"><pre><span></span>$ mkdir ~/.ssh
+$ chmod <span class="m">700</span> ~/.ssh      <span class="c1"># set access right only to user self</span>
+$ ssh-keygen -t rsa     <span class="c1"># **or you could use &quot;ssh-keygen -t rsa -b 4096&quot; for more secure login, default is 2048**.</span>
 Generating public/private rsa key pair.
-Enter file in which to save the key <span class="o">(</span>/home/edmund/.ssh/id_rsa<span class="o">)</span>: 
-Enter passphrase <span class="o">(</span>empty <span class="k">for </span>no passphrase<span class="o">)</span>: 
+Enter file <span class="k">in</span> which to save the key <span class="o">(</span>/home/edmund/.ssh/id_rsa<span class="o">)</span>: 
+Enter passphrase <span class="o">(</span>empty <span class="k">for</span> no passphrase<span class="o">)</span>: 
 Enter same passphrase again: 
-Your identification has been saved in /home/edmund/.ssh/id_rsa.
-Your public key has been saved in /home/edmund/.ssh/id_rsa.pub.
+Your identification has been saved <span class="k">in</span> /home/edmund/.ssh/id_rsa.
+Your public key has been saved <span class="k">in</span> /home/edmund/.ssh/id_rsa.pub.
 
-<span class="c"># next copy the public key to server. you can use a one-command way or manually copy the key to server.</span>
-<span class="nv">$ </span>ssh-copy-id user@machine      <span class="c"># one-command way</span>
-<span class="c"># manually way: copy the public key to server, and add it to authorized_key</span>
-<span class="nv">$ </span>scp ~/.ssh/id_rsa.pub user@machine:~/.ssh/my_rsa.pub
-<span class="nv">$ </span>ssh user@machine
-<span class="nv">$ </span><span class="nb">cd</span> ~/.ssh
-<span class="nv">$ </span>cat my_rsa.pub &gt;&gt; authorized_keys
+<span class="c1"># next copy the public key to server. you can use a one-command way or manually copy the key to server.</span>
+$ ssh-copy-id user@machine      <span class="c1"># one-command way</span>
+<span class="c1"># manually way: copy the public key to server, and add it to authorized_key</span>
+$ scp ~/.ssh/id_rsa.pub user@machine:~/.ssh/my_rsa.pub
+$ ssh user@machine
+$ <span class="nb">cd</span> ~/.ssh
+$ cat my_rsa.pub &gt;&gt; authorized_keys
 </pre></div>
 
 <h2 id="toc_2">3. Update SSH Daemon configuration on Server</h2>
@@ -121,17 +121,17 @@ If you want to revoke an authorized key for some user, you can find the user&#39
 <hr/>
 
 <h4 id="toc_3"><em>Extra Bonus: below is a small trick to use the keys to encrypt/decrypt text for daily use.</em></h4>
-<div class="highlight"><pre><span class="c"># encrypt a text file, and output to a file</span>
-<span class="nv">$ </span>openssl enc -aes-256-cbc -e -in textfile.txt -out encrypted.txt -pass pass:some_password
-<span class="c"># decrypt a text file, and output to a file(else it will print to the console)</span>
-<span class="nv">$ </span>openssl enc -aes-256-cbc -d -in encrypted.txt -out textfile.txt -pass pass:some_password
+<div class="highlight"><pre><span></span><span class="c1"># encrypt a text file, and output to a file</span>
+$ openssl enc -aes-256-cbc -e -in textfile.txt -out encrypted.txt -pass pass:some_password
+<span class="c1"># decrypt a text file, and output to a file(else it will print to the console)</span>
+$ openssl enc -aes-256-cbc -d -in encrypted.txt -out textfile.txt -pass pass:some_password
 
-<span class="c"># encode in base64 (the &quot;enc&quot; option let you specify a cipher, e.g. &quot;-base64&quot; here)</span>
-<span class="nv">$ </span>openssl enc -base64 -e -in tetfile.txt
-<span class="nv">$ </span>openssl enc -base64 -e <span class="o">&lt;&lt;&lt;</span> <span class="s2">&quot;Encode this text please&quot;</span>
-<span class="nv">$ </span>openssl base64 -e <span class="o">&lt;&lt;&lt;</span> <span class="s2">&quot;Encode this text please&quot;</span>
-<span class="c"># decode in base64</span>
-<span class="nv">$ </span>openssl base64 -d <span class="o">&lt;&lt;&lt;</span> <span class="s2">&quot;RW5jb2RlIHRoaXMgdGV4dCBwbGVhc2UK&quot;</span>
+<span class="c1"># encode in base64 (the &quot;enc&quot; option let you specify a cipher, e.g. &quot;-base64&quot; here)</span>
+$ openssl enc -base64 -e -in tetfile.txt
+$ openssl enc -base64 -e <span class="o">&lt;&lt;&lt;</span> <span class="s2">&quot;Encode this text please&quot;</span>
+$ openssl base64 -e <span class="o">&lt;&lt;&lt;</span> <span class="s2">&quot;Encode this text please&quot;</span>
+<span class="c1"># decode in base64</span>
+$ openssl base64 -d <span class="o">&lt;&lt;&lt;</span> <span class="s2">&quot;RW5jb2RlIHRoaXMgdGV4dCBwbGVhc2UK&quot;</span>
 </pre></div>
 
     

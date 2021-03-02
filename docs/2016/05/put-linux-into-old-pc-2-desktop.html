@@ -51,20 +51,20 @@
 
 <h4 id="toc_1">2.1 Xorg and Openbox</h4>
 <p>To use a desktop environment, <strong>Xorg</strong> is the package you won&#39;t miss(for more information you can also check the <a href="htts://www.x.org/">x.org</a> and <a href="https://www.freedesktop.org/">freedesktop.org</a> web-sites. I choose <strong>Openbox</strong> as the window manager, which is one of the most lightweight window manager. It is the best showcase of minimalism, yet the functions shall be simple enough for customization. The window manager is not a desktop environment, it is just simply a manager to windows, their styles and behaviors. A complete desktop environment is not necessary, or maybe it&#39;s the chance that I could design my own.</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install xorg
-<span class="c"># now you can enter the GUI environment by command &quot;startx&quot;, but you still need a window manager to do further things</span>
-<span class="nv">$ </span>sudo apt-get install openbox obconf openbox-themes
-<span class="c"># the above packages and their dependencies will allow you to build and configure an Openbox system, along with choices of themes.</span>
+<div class="highlight"><pre><span></span>$ sudo apt-get install xorg
+<span class="c1"># now you can enter the GUI environment by command &quot;startx&quot;, but you still need a window manager to do further things</span>
+$ sudo apt-get install openbox obconf openbox-themes
+<span class="c1"># the above packages and their dependencies will allow you to build and configure an Openbox system, along with choices of themes.</span>
 </pre></div>
 <p>What&#39;s interesting about &ldquo;startx&rdquo; is that, if you try it after you install xorg and before any Window Manager, you&#39;ll get a graphical shell environment with mouse available. The font is definitly different from what you had in the normal console. It is I think the essential GUI environment possible. And if you press Ctrl+D to exit the session, you get back to your original console environment, so the <strong>xorg-session</strong> is exited.</p>
 <p>After installing the openbox package, it&#39;s not yet completed. You also need to add the a <code>~/.xinitrc</code> configuration so that it calls the openbox when you execute &ldquo;startx&rdquo;.</p>
-<div class="highlight"><pre><span class="nv">$ </span><span class="nb">echo</span> <span class="s2">&quot;exec openbox-session&quot;</span> &gt; ~/.xinitrc
-<span class="nv">$ </span>startx
+<div class="highlight"><pre><span></span>$ <span class="nb">echo</span> <span class="s2">&quot;exec openbox-session&quot;</span> &gt; ~/.xinitrc
+$ startx
 </pre></div>
 <p>Now you can see GUI environment by Openbox. Right click on the desktop and you get a start menu, you can start a terminal emulator or configure the openbox using <em>Obconf</em>.</p>
 <p>If you see an error says cannot get access to ~/.Xauthority, it&#39;s possibly you ran it in root user. It doesn&#39;t need to be root user, and you should chown the file to yourself.</p>
 <p>Before going to the next step, let&#39;s look for a better console terminal than the system default one(xterm), otherwise it&#39;s inconvenient to work on multiple sessions and copy&amp;paste text. The <code>lxterminal</code> is lightweight and good enough.</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install lxterminal
+<div class="highlight"><pre><span></span>$ sudo apt-get install lxterminal
 </pre></div>
 <p>Then you can try it out with the right-click menu and select &ldquo;Terminal emulator&rdquo;. You can check the key-bindings in LXterminal&#39;s Preferences menu.</p>
 <p>Next we try to do more about the customization.</p>
@@ -125,17 +125,17 @@
 
 <h4 id="toc_6">2.3 A simple web browser that do the trick</h4>
 <p>After searching the apt-cache library for web browser, I discover there is a simple browser called <code>surf</code>, which uses WebKit/Gtk to render. I think this tool is well enough for browsing modern web sites, and also friendly to command line. So I pick it for the initial choice of a browser for me to search information online on this computer.</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install surf
+<div class="highlight"><pre><span></span>$ sudo apt-get install surf
 </pre></div>
 <p><strong>Surf</strong> has no tab support, no menu no any distractions. If you want to navigate to urls, hit <strong>Ctrl-g</strong> to enter a new URL.</p>
 <p>Reference for &ldquo;surf&rdquo;: <a href="http://surf.suckless.org/">http://surf.suckless.org/</a></p>
 <p>Next I also give a try to Chromium, the open source version of Chrome. It seems this more sophisticated version of webkit browser also works fine under linux. The performance on loading static web site is quick. So I decided to use Chromium as my default currently.</p>
 <p>But now we have a problem here, what if I want to change the default browser in OpenBox? Debian provides a program call <strong>update-alternatives</strong> so that you could set default program for specific purpose.</p>
-<div class="highlight"><pre><span class="c"># list current default program settings</span>
-<span class="nv">$ </span>update-alternatives --get-selections
+<div class="highlight"><pre><span></span><span class="c1"># list current default program settings</span>
+$ update-alternatives --get-selections
 
-<span class="c"># update a default program</span>
-<span class="nv">$ </span>sudo update-alternatives --config x-www-browser
+<span class="c1"># update a default program</span>
+$ sudo update-alternatives --config x-www-browser
 </pre></div>
 <p>It will prompt you an option list of possible programs, so that you can easily decide which program to use.</p>
 

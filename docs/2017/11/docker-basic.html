@@ -52,60 +52,60 @@
 <h3 id="toc_0">0. Get Started</h3>
 <p>For my mac, download the .dmg file from official web site. Then it will run a program with a task icon in the top bar.</p>
 <p>After the program has been initialized, you can open a terminal and try a few commands:</p>
-<div class="highlight"><pre><span class="c"># check versions</span>
-<span class="nv">$ </span>docker --version
-<span class="nv">$ </span>docker-compose --version
-<span class="nv">$ </span>docker-machine --version
+<div class="highlight"><pre><span></span><span class="c1"># check versions</span>
+$ docker --version
+$ docker-compose --version
+$ docker-machine --version
 
-<span class="c"># Current images</span>
-<span class="nv">$ </span>docker images
+<span class="c1"># Current images</span>
+$ docker images
 
-<span class="c"># Running instances</span>
-<span class="nv">$ </span>docker ps
+<span class="c1"># Running instances</span>
+$ docker ps
 </pre></div>
 
 <h3 id="toc_1">1. First Instance</h3>
 <p>The docker official Hello World image is small enough, which you can try as your first instance.</p>
-<div class="highlight"><pre><span class="nv">$ </span>docker run hello-world
+<div class="highlight"><pre><span></span>$ docker run hello-world
 </pre></div>
 <p>The image does not exist locally currently, but docker will continue to try downloading it and then run it.</p>
 <p>Then, you wil see the image locally.</p>
-<div class="highlight"><pre><span class="nv">$ </span>docker images
+<div class="highlight"><pre><span></span>$ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-hello-world         latest              725dcfab7d63        2 days ago          1.84kB
+hello-world         latest              725dcfab7d63        <span class="m">2</span> days ago          <span class="m">1</span>.84kB
 </pre></div>
 <p>However, the container for this image is not visible in the list because <strong>the process has existed</strong>. You need to use a <code>-a</code> parameter to see it:</p>
-<div class="highlight"><pre><span class="nv">$ </span>docker ps -a
+<div class="highlight"><pre><span></span>$ docker ps -a
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                     PORTS               NAMES
-c32eac048fda        hello-world         <span class="s2">&quot;/hello&quot;</span>            5 minutes ago       Exited <span class="o">(</span>0<span class="o">)</span> 5 minutes ago                       cranky_shaw
+c32eac048fda        hello-world         <span class="s2">&quot;/hello&quot;</span>            <span class="m">5</span> minutes ago       Exited <span class="o">(</span><span class="m">0</span><span class="o">)</span> <span class="m">5</span> minutes ago                       cranky_shaw
 </pre></div>
 
 <h3 id="toc_2">2. Server Instance</h3>
 <p>The Hello World container doesn&#39;t do anything. If you want to try something interesting, try the <a href="https://docs.docker.com/docker-for-mac/#explore-the-application-and-run-examples">nginx image</a> instead.</p>
-<div class="highlight"><pre><span class="nv">$ </span>docker run -d -p 8001:80 --name webserver1 nginx
+<div class="highlight"><pre><span></span>$ docker run -d -p <span class="m">8001</span>:80 --name webserver1 nginx
 </pre></div>
 <p>I choose a different port for the server, just to show how the port mapping is handled. When you check the instance with <code>docker ps</code>, you can see the image name, instance name, and the port mapping and get the meaning. When the container is up, you can access <code>http://localhost:8001/</code> to see the nginx home page.</p>
-<div class="highlight"><pre><span class="nv">$ </span>docker ps 
+<div class="highlight"><pre><span></span>$ docker ps 
 CONTAINER ID        IMAGE               COMMAND                  CREATED              STATUS              PORTS                  NAMES
-6f6ba1d3f285        nginx               <span class="s2">&quot;nginx -g &#39;daemon ...&quot;</span>   About a minute ago   Up About a minute   0.0.0.0:8001-&gt;80/tcp   webserver1
+6f6ba1d3f285        nginx               <span class="s2">&quot;nginx -g &#39;daemon ...&quot;</span>   About a minute ago   Up About a minute   <span class="m">0</span>.0.0.0:8001-&gt;80/tcp   webserver1
 
-<span class="nv">$ </span>docker images
+$ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-nginx               latest              40960efd7b8f        38 hours ago        108MB
-hello-world         latest              725dcfab7d63        2 days ago          1.84kB
+nginx               latest              40960efd7b8f        <span class="m">38</span> hours ago        108MB
+hello-world         latest              725dcfab7d63        <span class="m">2</span> days ago          <span class="m">1</span>.84kB
 </pre></div>
 <p>A good point is that you can see how much disk usage every image uses. Now you can stop the service, or remove the unused resources by commands.</p>
-<div class="highlight"><pre><span class="c"># container life cycle methods</span>
-<span class="nv">$ </span>docker stop webserver1
-<span class="nv">$ </span>docker start webserver1
-<span class="nv">$ </span>docker restart webserver1
+<div class="highlight"><pre><span></span><span class="c1"># container life cycle methods</span>
+$ docker stop webserver1
+$ docker start webserver1
+$ docker restart webserver1
 
 
-<span class="c"># remove a container</span>
-<span class="nv">$ </span>docker rm webserver1
+<span class="c1"># remove a container</span>
+$ docker rm webserver1
 
-<span class="c"># remove an image</span>
-<span class="nv">$ </span>docker rmi hello-world
+<span class="c1"># remove an image</span>
+$ docker rmi hello-world
 </pre></div>
 <p>For server instance like Ubuntu, you need an interactive shell to work with it, so the command will be a little bit different:</p>
 
@@ -122,10 +122,10 @@ $ docker attach ubuntu
 # If you want to detach from a server without stopping it
 # use `ctrl-p ctrl-q` key sequence</code></pre>
 <p>You may wonder the file size of each containers, you can checkt it by <code>docker ps -s</code>. You can see a ubuntu core only uses very small space with the minimal setup.</p>
-<div class="highlight"><pre><span class="nv">$ </span>docker ps -s
+<div class="highlight"><pre><span></span>$ docker ps -s
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                  NAMES               SIZE
-070a6e845653        ubuntu              <span class="s2">&quot;/bin/bash&quot;</span>              About an hour ago   Up About an hour                           ubuntu              96.7MB <span class="o">(</span>virtual 219MB<span class="o">)</span>
-0200f61f5d65        nginx               <span class="s2">&quot;nginx -g &#39;daemon ...&quot;</span>   2 hours ago         Up 2 hours          0.0.0.0:5000-&gt;80/tcp   webserver           2B <span class="o">(</span>virtual 108MB<span class="o">)</span>
+070a6e845653        ubuntu              <span class="s2">&quot;/bin/bash&quot;</span>              About an hour ago   Up About an hour                           ubuntu              <span class="m">96</span>.7MB <span class="o">(</span>virtual 219MB<span class="o">)</span>
+0200f61f5d65        nginx               <span class="s2">&quot;nginx -g &#39;daemon ...&quot;</span>   <span class="m">2</span> hours ago         Up <span class="m">2</span> hours          <span class="m">0</span>.0.0.0:5000-&gt;80/tcp   webserver           2B <span class="o">(</span>virtual 108MB<span class="o">)</span>
 </pre></div>
 
 <h3 id="toc_3">3. Other Settings</h3>
@@ -138,12 +138,12 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 </ul>
 
 <h4 id="toc_4">3.1 Download Images by Tags</h4>
-<div class="highlight"><pre><span class="c"># Download images/repos from registry</span>
-<span class="nv">$ </span>docker pull &lt;image&gt;:&lt;tag&gt;
+<div class="highlight"><pre><span></span><span class="c1"># Download images/repos from registry</span>
+$ docker pull &lt;image&gt;:&lt;tag&gt;
 
-<span class="c"># Example of getting a core ubuntu system</span>
-<span class="nv">$ </span>docker pull ubuntu:xenial
-<span class="nv">$ </span>docker run --name ubuntu -ti ubuntu
+<span class="c1"># Example of getting a core ubuntu system</span>
+$ docker pull ubuntu:xenial
+$ docker run --name ubuntu -ti ubuntu
 </pre></div>
 
 <h3 id="toc_5">4. Docker for Mac vs Docker Toolbox</h3>
@@ -202,15 +202,15 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 <li>Write a flask <code>app.py</code> and a <code>requirements.txt</code> as usual.</li>
 <li>Build the docker image and then run with it.</li>
 </ul>
-<div class="highlight"><pre><span class="c"># prepare the source files(...skipped here)</span>
-<span class="nv">$ </span>ls
+<div class="highlight"><pre><span></span><span class="c1"># prepare the source files(...skipped here)</span>
+$ ls
 Dockerfile    app.py      requirements.txt
 
-<span class="c"># build the image</span>
-<span class="nv">$ </span>docker build -t slim-flask .
+<span class="c1"># build the image</span>
+$ docker build -t slim-flask .
 
-<span class="c"># create and run the container</span>
-<span class="nv">$ </span>docker run -p 4000:80 slim-flask
+<span class="c1"># create and run the container</span>
+$ docker run -p <span class="m">4000</span>:80 slim-flask
  * Running on http://0.0.0.0:80/ <span class="o">(</span>Press CTRL+C to quit<span class="o">)</span>
 </pre></div>
 <p>The result will be:</p>
@@ -220,26 +220,26 @@ Dockerfile    app.py      requirements.txt
 <li>A Python docker image is downloaded, which takes the size of 156MB or 691MB depends on if you choose the &ldquo;slim&rdquo; version.</li>
 <li>A flask image for your app is genenrated, which contains the content from the original python image, the pip installed packages from requirements, and your source files. So the size is slightly bigger than the python image.</li>
 </ul>
-<div class="highlight"><pre><span class="nv">$ </span>docker images 
+<div class="highlight"><pre><span></span>$ docker images 
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-slim-flask          latest              3032f935f40c        10 seconds ago      166MB
-python              slim                a79297999298        45 hours ago        156MB
+slim-flask          latest              3032f935f40c        <span class="m">10</span> seconds ago      166MB
+python              slim                a79297999298        <span class="m">45</span> hours ago        156MB
 </pre></div>
 
 <h4 id="toc_11">6.2 Create image from a container</h4>
 <p>However, sometimes you want to make configurations inside a container and want to save it as an image. You can do that:</p>
-<div class="highlight"><pre><span class="nv">$ </span>docker container commit <span class="o">[</span>options<span class="o">]</span> CONTAINER <span class="o">[</span>repository:<span class="o">[</span>TAG<span class="o">]]</span>
+<div class="highlight"><pre><span></span>$ docker container commit <span class="o">[</span>options<span class="o">]</span> CONTAINER <span class="o">[</span>repository:<span class="o">[</span>TAG<span class="o">]]</span>
 
-<span class="c"># example</span>
-<span class="nv">$ </span>docker container commit ubuntu ubuntu-image
+<span class="c1"># example</span>
+$ docker container commit ubuntu ubuntu-image
 </pre></div>
 
 <h4 id="toc_12">6.3 Publish docker image</h4>
 <p>Use it when it is needed.</p>
-<div class="highlight"><pre><span class="nv">$ </span>docker login             <span class="c"># Log in this CLI session using your Docker credentials</span>
-<span class="nv">$ </span>docker tag &lt;image&gt; username/repository:tag  <span class="c"># Tag &lt;image&gt; for upload to registry</span>
-<span class="nv">$ </span>docker push username/repository:tag            <span class="c"># Upload tagged image to registry</span>
-<span class="nv">$ </span>docker run username/repository:tag                   <span class="c"># Run image from a registry</span>
+<div class="highlight"><pre><span></span>$ docker login             <span class="c1"># Log in this CLI session using your Docker credentials</span>
+$ docker tag &lt;image&gt; username/repository:tag  <span class="c1"># Tag &lt;image&gt; for upload to registry</span>
+$ docker push username/repository:tag            <span class="c1"># Upload tagged image to registry</span>
+$ docker run username/repository:tag                   <span class="c1"># Run image from a registry</span>
 </pre></div>
 
 <h3 id="toc_13">7. Docker mirrors</h3>

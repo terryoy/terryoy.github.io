@@ -142,15 +142,15 @@ $ ./adb shell</code></pre>
 
 <h2 id="toc_7">4. Start a New Cross-platform Project</h2>
 <p>There is one script for creating a new cocos2d-x project under the path <code>./tools/project-creator/</code></p>
-<div class="highlight"><pre><span class="nv">$ </span>./create_project.py
+<div class="highlight"><pre><span></span>$ ./create_project.py
 Usage: create_project.py -project PROJECT_NAME -package PACKAGE_NAME -language PROGRAMING_LANGUAGE
 Options:
-  -project   PROJECT_NAME          Project name, <span class="k">for </span>example: MyGame
-  -package   PACKAGE_NAME          Package name, <span class="k">for </span>example: com.MyCompany.MyAwesomeGame
-  -language  PROGRAMING_LANGUAGE   Major programing lanauge you want to used, should be <span class="o">[</span>cpp | lua | javascript<span class="o">]</span>
+  -project   PROJECT_NAME          Project name, <span class="k">for</span> example: MyGame
+  -package   PACKAGE_NAME          Package name, <span class="k">for</span> example: com.MyCompany.MyAwesomeGame
+  -language  PROGRAMING_LANGUAGE   Major programing lanauge you want to used, should be <span class="o">[</span>cpp <span class="p">|</span> lua <span class="p">|</span> javascript<span class="o">]</span>
 
-Sample 1: ./create_project.py -project MyGame -package com.MyCompany.AwesomeGame
-Sample 2: ./create_project.py -project MyGame -package com.MyCompany.AwesomeGame -language javascript
+Sample <span class="m">1</span>: ./create_project.py -project MyGame -package com.MyCompany.AwesomeGame
+Sample <span class="m">2</span>: ./create_project.py -project MyGame -package com.MyCompany.AwesomeGame -language javascript
 </pre></div>
 <p>The new project will be created under <code>./projects/</code> under the root folder of cocos2d-x, and it is not easy if you want to put it outside this folder(for example, another git repos), because the project&#39;s dependencies uses relative paths to the cocos2d-x&#39;s components. It might differs in Xcode or in Eclipse, etc. So here we don&#39;t discuss further.</p>
 

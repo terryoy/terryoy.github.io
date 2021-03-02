@@ -50,46 +50,46 @@
 	<p>When suspecting your server is broken into, below is some tricks to do the server audit.</p>
 
 <h3 id="toc_0">1. Use &ldquo;last&rdquo; command to check login sessions</h3>
-<div class="highlight"><pre><span class="nv">$ </span>last
-terryoy  pts/0        58.251.197.153   Sat Jun 27 21:42   still logged in   
-terryoy  pts/2        113.116.1.68     Tue Jun 23 14:40 - 16:14  <span class="o">(</span>01:34<span class="o">)</span>    
-terryoy  pts/0        113.116.1.68     Tue Jun 23 14:38 - 16:14  <span class="o">(</span>01:35<span class="o">)</span>    
-terryoy  pts/0        183.16.85.159    Tue Jun 23 09:37 - 14:02  <span class="o">(</span>04:24<span class="o">)</span>    
-terryoy  pts/0        183.16.197.223   Mon Jun 22 17:47 - 20:10  <span class="o">(</span>02:22<span class="o">)</span>    
-terryoy  pts/6        183.16.195.96    Thu Jun 18 11:08 - 15:23  <span class="o">(</span>04:14<span class="o">)</span>    
-terryoy  pts/5        183.16.195.96    Thu Jun 18 11:08 - 15:23  <span class="o">(</span>04:14<span class="o">)</span>    
-terryoy  pts/2        183.16.190.37    Thu Jun 18 10:37 - 13:06  <span class="o">(</span>02:29<span class="o">)</span>    
-terryoy  pts/0        183.16.190.37    Thu Jun 18 10:01 - 13:01  <span class="o">(</span>02:59<span class="o">)</span>
+<div class="highlight"><pre><span></span>$ last
+terryoy  pts/0        <span class="m">58</span>.251.197.153   Sat Jun <span class="m">27</span> <span class="m">21</span>:42   still logged <span class="k">in</span>   
+terryoy  pts/2        <span class="m">113</span>.116.1.68     Tue Jun <span class="m">23</span> <span class="m">14</span>:40 - <span class="m">16</span>:14  <span class="o">(</span><span class="m">01</span>:34<span class="o">)</span>    
+terryoy  pts/0        <span class="m">113</span>.116.1.68     Tue Jun <span class="m">23</span> <span class="m">14</span>:38 - <span class="m">16</span>:14  <span class="o">(</span><span class="m">01</span>:35<span class="o">)</span>    
+terryoy  pts/0        <span class="m">183</span>.16.85.159    Tue Jun <span class="m">23</span> <span class="m">09</span>:37 - <span class="m">14</span>:02  <span class="o">(</span><span class="m">04</span>:24<span class="o">)</span>    
+terryoy  pts/0        <span class="m">183</span>.16.197.223   Mon Jun <span class="m">22</span> <span class="m">17</span>:47 - <span class="m">20</span>:10  <span class="o">(</span><span class="m">02</span>:22<span class="o">)</span>    
+terryoy  pts/6        <span class="m">183</span>.16.195.96    Thu Jun <span class="m">18</span> <span class="m">11</span>:08 - <span class="m">15</span>:23  <span class="o">(</span><span class="m">04</span>:14<span class="o">)</span>    
+terryoy  pts/5        <span class="m">183</span>.16.195.96    Thu Jun <span class="m">18</span> <span class="m">11</span>:08 - <span class="m">15</span>:23  <span class="o">(</span><span class="m">04</span>:14<span class="o">)</span>    
+terryoy  pts/2        <span class="m">183</span>.16.190.37    Thu Jun <span class="m">18</span> <span class="m">10</span>:37 - <span class="m">13</span>:06  <span class="o">(</span><span class="m">02</span>:29<span class="o">)</span>    
+terryoy  pts/0        <span class="m">183</span>.16.190.37    Thu Jun <span class="m">18</span> <span class="m">10</span>:01 - <span class="m">13</span>:01  <span class="o">(</span><span class="m">02</span>:59<span class="o">)</span>
 </pre></div>
 
 <h3 id="toc_1">2. Use &ldquo;lastlog&rdquo; to check all user&#39;s last login time</h3>
-<div class="highlight"><pre><span class="nv">$ </span>lastlog
+<div class="highlight"><pre><span></span>$ lastlog
 Username         Port     From             Latest
-root             pts/2    27.45.56.68      Sat Feb 21 15:21:40 +0800 2015
-daemon                                     **Never logged in**
-bin                                        **Never logged in**
-sys                                        **Never logged in**
-sync                                       **Never logged in**
-games                                      **Never logged in**
-man                                        **Never logged in**
-lp                                         **Never logged in**
-mail                                       **Never logged in**
-news                                       **Never logged in**
-uucp                                       **Never logged in**
-proxy                                      **Never logged in**
+root             pts/2    <span class="m">27</span>.45.56.68      Sat Feb <span class="m">21</span> <span class="m">15</span>:21:40 +0800 <span class="m">2015</span>
+daemon                                     **Never logged <span class="k">in</span>**
+bin                                        **Never logged <span class="k">in</span>**
+sys                                        **Never logged <span class="k">in</span>**
+sync                                       **Never logged <span class="k">in</span>**
+games                                      **Never logged <span class="k">in</span>**
+man                                        **Never logged <span class="k">in</span>**
+lp                                         **Never logged <span class="k">in</span>**
+mail                                       **Never logged <span class="k">in</span>**
+news                                       **Never logged <span class="k">in</span>**
+uucp                                       **Never logged <span class="k">in</span>**
+proxy                                      **Never logged <span class="k">in</span>**
 </pre></div>
 
 <h3 id="toc_2">3. Check &ldquo;/var/log/auth.log&rdquo;</h3>
-<div class="highlight"><pre><span class="nv">$ </span>sudo less /var/log/auth.log
+<div class="highlight"><pre><span></span>$ sudo less /var/log/auth.log
 ...
-Jun 27 21:35:01 iZ940ou5p7nZ CRON<span class="o">[</span>14089<span class="o">]</span>: pam_unix<span class="o">(</span>cron:session<span class="o">)</span>: session closed <span class="k">for </span>user root
-Jun 27 21:42:55 iZ940ou5p7nZ sshd<span class="o">[</span>14108<span class="o">]</span>: Accepted password <span class="k">for </span>terryoy from 58.251.197.153 port 62430 ssh2
-Jun 27 21:42:55 iZ940ou5p7nZ sshd<span class="o">[</span>14108<span class="o">]</span>: pam_unix<span class="o">(</span>sshd:session<span class="o">)</span>: session opened <span class="k">for </span>user terryoy by <span class="o">(</span><span class="nv">uid</span><span class="o">=</span>0<span class="o">)</span>
-Jun 27 21:45:01 iZ940ou5p7nZ CRON<span class="o">[</span>14187<span class="o">]</span>: pam_unix<span class="o">(</span>cron:session<span class="o">)</span>: session opened <span class="k">for </span>user root by <span class="o">(</span><span class="nv">uid</span><span class="o">=</span>0<span class="o">)</span>
-Jun 27 21:45:01 iZ940ou5p7nZ CRON<span class="o">[</span>14187<span class="o">]</span>: pam_unix<span class="o">(</span>cron:session<span class="o">)</span>: session closed <span class="k">for </span>user root
-Jun 27 21:53:30 iZ940ou5p7nZ sudo:  terryoy : <span class="nv">TTY</span><span class="o">=</span>pts/0 ; <span class="nv">PWD</span><span class="o">=</span>/home/terryoy ; <span class="nv">USER</span><span class="o">=</span>root ; <span class="nv">COMMAND</span><span class="o">=</span>/usr/bin/apt-get install acct
-Jun 27 21:53:30 iZ940ou5p7nZ sudo: pam_unix<span class="o">(</span>sudo:session<span class="o">)</span>: session opened <span class="k">for </span>user root by terryoy<span class="o">(</span><span class="nv">uid</span><span class="o">=</span>0<span class="o">)</span>
-Jun 27 21:53:39 iZ940ou5p7nZ sudo: pam_unix<span class="o">(</span>sudo:session<span class="o">)</span>: session closed <span class="k">for </span>user root
+Jun <span class="m">27</span> <span class="m">21</span>:35:01 iZ940ou5p7nZ CRON<span class="o">[</span><span class="m">14089</span><span class="o">]</span>: pam_unix<span class="o">(</span>cron:session<span class="o">)</span>: session closed <span class="k">for</span> user root
+Jun <span class="m">27</span> <span class="m">21</span>:42:55 iZ940ou5p7nZ sshd<span class="o">[</span><span class="m">14108</span><span class="o">]</span>: Accepted password <span class="k">for</span> terryoy from <span class="m">58</span>.251.197.153 port <span class="m">62430</span> ssh2
+Jun <span class="m">27</span> <span class="m">21</span>:42:55 iZ940ou5p7nZ sshd<span class="o">[</span><span class="m">14108</span><span class="o">]</span>: pam_unix<span class="o">(</span>sshd:session<span class="o">)</span>: session opened <span class="k">for</span> user terryoy by <span class="o">(</span><span class="nv">uid</span><span class="o">=</span><span class="m">0</span><span class="o">)</span>
+Jun <span class="m">27</span> <span class="m">21</span>:45:01 iZ940ou5p7nZ CRON<span class="o">[</span><span class="m">14187</span><span class="o">]</span>: pam_unix<span class="o">(</span>cron:session<span class="o">)</span>: session opened <span class="k">for</span> user root by <span class="o">(</span><span class="nv">uid</span><span class="o">=</span><span class="m">0</span><span class="o">)</span>
+Jun <span class="m">27</span> <span class="m">21</span>:45:01 iZ940ou5p7nZ CRON<span class="o">[</span><span class="m">14187</span><span class="o">]</span>: pam_unix<span class="o">(</span>cron:session<span class="o">)</span>: session closed <span class="k">for</span> user root
+Jun <span class="m">27</span> <span class="m">21</span>:53:30 iZ940ou5p7nZ sudo:  terryoy : <span class="nv">TTY</span><span class="o">=</span>pts/0 <span class="p">;</span> <span class="nv">PWD</span><span class="o">=</span>/home/terryoy <span class="p">;</span> <span class="nv">USER</span><span class="o">=</span>root <span class="p">;</span> <span class="nv">COMMAND</span><span class="o">=</span>/usr/bin/apt-get install acct
+Jun <span class="m">27</span> <span class="m">21</span>:53:30 iZ940ou5p7nZ sudo: pam_unix<span class="o">(</span>sudo:session<span class="o">)</span>: session opened <span class="k">for</span> user root by terryoy<span class="o">(</span><span class="nv">uid</span><span class="o">=</span><span class="m">0</span><span class="o">)</span>
+Jun <span class="m">27</span> <span class="m">21</span>:53:39 iZ940ou5p7nZ sudo: pam_unix<span class="o">(</span>sudo:session<span class="o">)</span>: session closed <span class="k">for</span> user root
 ...
 </pre></div>
 
@@ -103,11 +103,11 @@ Jun 27 21:53:39 iZ940ou5p7nZ sudo: pam_unix<span class="o">(</span>sudo:session<
 * sa, summarize accounting info
 * dump-utmp, print an utmp file in human readable format
 * dump-acct, print an acct file in human readable format</code></pre>
-<div class="highlight"><pre><span class="c"># list user&#39;s login session time by date</span>
-<span class="nv">$ </span>ac -p -d
+<div class="highlight"><pre><span></span><span class="c1"># list user&#39;s login session time by date</span>
+$ ac -p -d
 
-<span class="c"># display user&#39;s last commands</span>
-<span class="nv">$ </span>lastcomm &lt;user_name&gt;
+<span class="c1"># display user&#39;s last commands</span>
+$ lastcomm &lt;user_name&gt;
 </pre></div>
 
 <h3 id="toc_4">Reference to secure ubuntu server</h3>

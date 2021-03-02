@@ -51,13 +51,13 @@
 <p>The docker image of Ubuntu is somehow essential subset of packages which give you the system environment. It doesn&#39;t even have <code>vi</code> or the <code>lsb_release</code> command for you to read the distro version. So I want to take some notes while I&#39;m exploring the fundamentals in Ubuntu.</p>
 
 <h3 id="toc_0">1. System Info</h3>
-<div class="highlight"><pre><span class="c"># Check Ubuntu version</span>
-<span class="nv">$ </span>cat /etc/issue
-<span class="nv">$ </span>cat /etc/issue.net
-Ubuntu 16.04.3 LTS
+<div class="highlight"><pre><span></span><span class="c1"># Check Ubuntu version</span>
+$ cat /etc/issue
+$ cat /etc/issue.net
+Ubuntu <span class="m">16</span>.04.3 LTS
 
-<span class="c"># More information of Ubuntu</span>
-<span class="nv">$ </span>cat /etc/os-release
+<span class="c1"># More information of Ubuntu</span>
+$ cat /etc/os-release
 <span class="nv">NAME</span><span class="o">=</span><span class="s2">&quot;Ubuntu&quot;</span>
 <span class="nv">VERSION</span><span class="o">=</span><span class="s2">&quot;16.04.3 LTS (Xenial Xerus)&quot;</span>
 <span class="nv">ID</span><span class="o">=</span>ubuntu
@@ -70,8 +70,8 @@ Ubuntu 16.04.3 LTS
 <span class="nv">VERSION_CODENAME</span><span class="o">=</span>xenial
 <span class="nv">UBUNTU_CODENAME</span><span class="o">=</span>xenial
 
-<span class="c"># System Services</span>
-<span class="nv">$ </span>service --status-all
+<span class="c1"># System Services</span>
+$ service --status-all
  <span class="o">[</span> - <span class="o">]</span>  bootmisc.sh
  <span class="o">[</span> - <span class="o">]</span>  checkfs.sh
  <span class="o">[</span> - <span class="o">]</span>  checkroot-bootclean.sh
@@ -94,21 +94,21 @@ Ubuntu 16.04.3 LTS
  <span class="o">[</span> - <span class="o">]</span>  umountroot
  <span class="o">[</span> - <span class="o">]</span>  urandom
 
-<span class="c"># Supported Shells</span>
-<span class="nv">$ </span>cat /etc/shells
+<span class="c1"># Supported Shells</span>
+$ cat /etc/shells
 /bin/sh
 /bin/dash
 /bin/bash
 /bin/rbash
 </pre></div>
 <p>I have install <code>vim</code> and <code>man-db</code> to acquire the ability of text editing and manual reading. Now let&#39;s check what packages we have installed.</p>
-<div class="highlight"><pre><span class="nv">$ </span>apt list --installed
+<div class="highlight"><pre><span></span>$ apt list --installed
 
-<span class="c"># or if you just want the count</span>
-<span class="nv">$ </span>apt list --installed | grep installed | wc -l 
+<span class="c1"># or if you just want the count</span>
+$ apt list --installed <span class="p">|</span> grep installed <span class="p">|</span> wc -l 
 
-<span class="c"># or if you want to see a description of each pacakge</span>
-<span class="nv">$ </span>dpkg-query -l
+<span class="c1"># or if you want to see a description of each pacakge</span>
+$ dpkg-query -l
 </pre></div>
 <p>Now I can see that the essential packages to run my system has only <strong>116</strong> packages and <strong>62</strong> of them are libs.</p>
 
@@ -131,23 +131,23 @@ Ubuntu 16.04.3 LTS
 <li>9 Kernel routines [Non standard]</li>
 </ul>
 <p>The numbers of sections you see here, are used to marked the pages when cross reference in man pages. For example, you can see &ldquo;man(7)&rdquo;, &ldquo;mandb(8)&rdquo;, etc. Sometimes there will be a same keyword in different sections. You can view all man pages of the same keyword, or specify which section you want to see, or search man pages by keyword.</p>
-<div class="highlight"><pre><span class="c"># view man page for man</span>
-<span class="nv">$ </span>man man
+<div class="highlight"><pre><span></span><span class="c1"># view man page for man</span>
+$ man man
 
-<span class="c"># view all &quot;intro&quot; in every section</span>
-<span class="nv">$ </span>man -a intro
+<span class="c1"># view all &quot;intro&quot; in every section</span>
+$ man -a intro
 
-<span class="c"># view &quot;intro&quot; in section 3</span>
-<span class="nv">$ </span>man -s 3 intro
+<span class="c1"># view &quot;intro&quot; in section 3</span>
+$ man -s <span class="m">3</span> intro
 
-<span class="c"># list all man pages</span>
-<span class="nv">$ </span>man -k .
+<span class="c1"># list all man pages</span>
+$ man -k .
 
-<span class="c"># list all man pages in section 5</span>
-<span class="nv">$ </span>man -s 5 -k .
+<span class="c1"># list all man pages in section 5</span>
+$ man -s <span class="m">5</span> -k .
 
-<span class="c"># list all man pages in section 5 match keyword &#39;systemd&#39;</span>
-<span class="nv">$ </span>man -s 5 -k systemd
+<span class="c1"># list all man pages in section 5 match keyword &#39;systemd&#39;</span>
+$ man -s <span class="m">5</span> -k systemd
 </pre></div>
 
 <h4 id="toc_3">2.2 Info pages</h4>

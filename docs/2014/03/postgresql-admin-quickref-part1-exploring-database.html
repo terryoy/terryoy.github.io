@@ -64,15 +64,15 @@ Data files for an instance:
     pg_xlog     -   WAL(Write-Ahead Log) transaction log
 Log files: <code>/var/log/postgresql/</code></p>
 <p>PostgreSQL command line programs:</p>
-<div class="highlight"><pre><span class="c"># check psql version</span>
-<span class="nv">$ </span>psql --version
-<span class="c"># check configuration variables</span>
-<span class="nv">$ </span>pg_config
-<span class="c"># run a single command</span>
-<span class="nv">$ </span>psql -c <span class="s2">&quot;\d&quot;</span>
+<div class="highlight"><pre><span></span><span class="c1"># check psql version</span>
+$ psql --version
+<span class="c1"># check configuration variables</span>
+$ pg_config
+<span class="c1"># run a single command</span>
+$ psql -c <span class="s2">&quot;\d&quot;</span>
 </pre></div>
 <p>PSQL text client:</p>
-<div class="highlight"><pre><span class="c1">-- line comment</span>
+<div class="highlight"><pre><span></span><span class="c1">-- line comment</span>
 <span class="o">/</span> <span class="o">*</span><span class="n">multi</span><span class="o">-</span><span class="nb">line</span> <span class="k">comment</span><span class="o">*</span> <span class="o">/</span>
 <span class="c1">-- check server version</span>
 <span class="gp">postgres=#</span> <span class="k">SELECT</span> <span class="k">version</span><span class="p">();</span>
@@ -81,12 +81,12 @@ Log files: <code>/var/log/postgresql/</code></p>
 </pre></div>
 
 <h3 id="toc_2">2. Server Stats</h3>
-<div class="highlight"><pre><span class="c"># list databases</span>
-<span class="nv">$ </span>psql -l
-<span class="c"># list tables in a database</span>
-<span class="nv">$ </span>psql -c <span class="s2">&quot;\d&quot;</span> -d somedb
+<div class="highlight"><pre><span></span><span class="c1"># list databases</span>
+$ psql -l
+<span class="c1"># list tables in a database</span>
+$ psql -c <span class="s2">&quot;\d&quot;</span> -d somedb
 </pre></div>
-<div class="highlight"><pre><span class="c1">-- check server uptime</span>
+<div class="highlight"><pre><span></span><span class="c1">-- check server uptime</span>
 <span class="gp">postgres=#</span> <span class="k">SELECT</span> <span class="n">date_trunc</span><span class="p">(</span><span class="s1">&#39;second&#39;</span><span class="p">,</span> <span class="k">current_timestamp</span> <span class="o">-</span> <span class="n">pg_postmaster_start_time</span><span class="p">())</span> <span class="k">as</span> <span class="n">uptime</span><span class="p">;</span>
 
 <span class="go">-- list database names</span>
@@ -160,7 +160,7 @@ Log files: <code>/var/log/postgresql/</code></p>
 </pre></div>
 
 <h3 id="toc_3">3. Schema and Table</h3>
-<div class="highlight"><pre><span class="c1">-- Show definition of a table(including References to this table)</span>
+<div class="highlight"><pre><span></span><span class="c1">-- Show definition of a table(including References to this table)</span>
 <span class="gp">postgres=#</span> <span class="kp">\d+</span> <span class="ss">some_table</span>
 </pre></div>
 <p>(to be continue)</p>

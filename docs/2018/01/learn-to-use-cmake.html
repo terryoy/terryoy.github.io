@@ -54,17 +54,17 @@
 
 <h3 id="toc_0">0. Build Essential</h3>
 <p>First of all, if you want to compile anything in Linux, you should install the <code>build-essential</code> package first.</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt install build-essential
+<div class="highlight"><pre><span></span>$ sudo apt install build-essential
 </pre></div>
 <p>It contains all the common packages to build Debian packages, such as: g++, gcc, hurd, libc, dpkg, make, etc.</p>
 <p>Next step let&#39;s install the CMake package:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt install cmake
+<div class="highlight"><pre><span></span>$ sudo apt install cmake
 </pre></div>
 
 <h3 id="toc_1">1. A Hello World and a CMakeLists.txt</h3>
 <p>The minimal demo has two files. </p>
 <p>A <code>hello.cpp</code> source file:</p>
-<div class="highlight"><pre><span class="cp">#include &lt;iostream&gt;</span>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
 
 <span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
 
@@ -94,11 +94,11 @@ include_directories(&quot;${PROJECT_SOURCE_DIR}&quot;)
 add_executable(hello ${PROJECT_SOURCE_DIR}/hello.cpp)</code></pre>
 <p>The three lines <code>cmake_minimum_required</code>, <code>project(hello)</code>, and <code>add_executable</code> are essential.</p>
 <p>Run below two commands to compile the exectuatble:</p>
-<div class="highlight"><pre><span class="c"># Generate CMake configurations</span>
-<span class="nv">$ </span>cmake -H. -Bbuild
+<div class="highlight"><pre><span></span><span class="c1"># Generate CMake configurations</span>
+$ cmake -H. -Bbuild
 
-<span class="c"># Build the executable</span>
-<span class="nv">$ </span>cmake --build build -- -j3
+<span class="c1"># Build the executable</span>
+$ cmake --build build -- -j3
 </pre></div>
 
 <h3 id="toc_2">References</h3>

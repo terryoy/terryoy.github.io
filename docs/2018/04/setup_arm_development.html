@@ -48,83 +48,83 @@
     </p>
     
 	<h3 id="toc_0">1. Clone the kernel repository</h3>
-<div class="highlight"><pre><span class="nv">$ </span>git clone git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+<div class="highlight"><pre><span></span>$ git clone git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
 
-<span class="c"># or just download the package from the mirror</span>
-<span class="nv">$ </span>wget https://mirror.tuna.tsinghua.edu.cn/kernel/v4.x/linux-4.4.1.tar.xz
+<span class="c1"># or just download the package from the mirror</span>
+$ wget https://mirror.tuna.tsinghua.edu.cn/kernel/v4.x/linux-4.4.1.tar.xz
 </pre></div>
 
 <h3 id="toc_1">2. Install the Cross Compiling Toolchain</h3>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install gcc-arm-linux-gnueabi
+<div class="highlight"><pre><span></span>$ sudo apt-get install gcc-arm-linux-gnueabi
 
-<span class="c"># another option is &quot;arm-linux-gnueabihf&quot; but we use &quot;gcc-arm-gnueabi&quot; here</span>
+<span class="c1"># another option is &quot;arm-linux-gnueabihf&quot; but we use &quot;gcc-arm-gnueabi&quot; here</span>
 </pre></div>
 
 <h3 id="toc_2">3. Make the first compile</h3>
 <p>We&#39;re emulating the vexpress Cortex A9 for demo.</p>
-<div class="highlight"><pre><span class="nv">$ </span><span class="nb">export </span><span class="nv">ARCH</span><span class="o">=</span>arm  
-<span class="nv">$ </span><span class="nb">export </span><span class="nv">CROSS_COMPILE</span><span class="o">=</span>arm-linux-gnueabi-  
-<span class="nv">$ </span>make vexpress_defconfig  
-<span class="nv">$ </span>make zImage -j8  
-<span class="nv">$ </span>make modules -j8  
-<span class="nv">$ </span>make dtbs
+<div class="highlight"><pre><span></span>$ <span class="nb">export</span> <span class="nv">ARCH</span><span class="o">=</span>arm  
+$ <span class="nb">export</span> <span class="nv">CROSS_COMPILE</span><span class="o">=</span>arm-linux-gnueabi-  
+$ make vexpress_defconfig  
+$ make zImage -j8  
+$ make modules -j8  
+$ make dtbs
 </pre></div>
 
 <h3 id="toc_3">4. Install QEMU</h3>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install qemu
+<div class="highlight"><pre><span></span>$ sudo apt-get install qemu
 </pre></div>
 
 <h3 id="toc_4">5. Make Root File System</h3>
 
 <h3 id="toc_5">5.1 busybox</h3>
-<div class="highlight"><pre><span class="nv">$ </span>wget http://www.busybox.net/downloads/busybox-1.25.1.tar.bz2  
-<span class="nv">$ </span>tar xvf busybox-1.25.1.tar.bz2
-<span class="nv">$ </span>make defconfig  
-<span class="nv">$ </span>make <span class="nv">CROSS_COMPILE</span><span class="o">=</span>arm-linux-gnueabi-  
-<span class="nv">$ </span>make install <span class="nv">CROSS_COMPILE</span><span class="o">=</span>arm-linux-gnueabi-
+<div class="highlight"><pre><span></span>$ wget http://www.busybox.net/downloads/busybox-1.25.1.tar.bz2  
+$ tar xvf busybox-1.25.1.tar.bz2
+$ make defconfig  
+$ make <span class="nv">CROSS_COMPILE</span><span class="o">=</span>arm-linux-gnueabi-  
+$ make install <span class="nv">CROSS_COMPILE</span><span class="o">=</span>arm-linux-gnueabi-
 </pre></div>
 <p>Then you find the executables in <code>_install</code> folder. Next we start to create the rootfs.</p>
 
 <h3 id="toc_6">5.2 rootfs</h3>
-<div class="highlight"><pre><span class="nv">$ </span>sudo mkdir rootfs
-<span class="nv">$ </span>sudo mkdir rootfs/lib 
+<div class="highlight"><pre><span></span>$ sudo mkdir rootfs
+$ sudo mkdir rootfs/lib 
 
-<span class="c"># copy busybox to rootfs</span>
-<span class="nv">$ </span>sudo cp _install/* -r rootfs/
+<span class="c1"># copy busybox to rootfs</span>
+$ sudo cp _install/* -r rootfs/
 
-<span class="c"># copy arm libs to lib</span>
-<span class="c"># sudo cp -P /usr/arm-linux-gnueabi/lib/* rootfs/lib/</span>
+<span class="c1"># copy arm libs to lib</span>
+<span class="c1"># sudo cp -P /usr/arm-linux-gnueabi/lib/* rootfs/lib/</span>
 </pre></div>
 
 <h3 id="toc_7">5.3 Create 4 tty devices</h3>
-<div class="highlight"><pre><span class="nv">$ </span>sudo mkdir -p rootfs/dev
-<span class="nv">$ </span>sudo mknod rootfs/dev/tty1 c 4 1  
-<span class="nv">$ </span>sudo mknod rootfs/dev/tty2 c 4 2  
-<span class="nv">$ </span>sudo mknod rootfs/dev/tty3 c 4 3  
-<span class="nv">$ </span>sudo mknod rootfs/dev/tty4 c 4 4
+<div class="highlight"><pre><span></span>$ sudo mkdir -p rootfs/dev
+$ sudo mknod rootfs/dev/tty1 c <span class="m">4</span> <span class="m">1</span>  
+$ sudo mknod rootfs/dev/tty2 c <span class="m">4</span> <span class="m">2</span>  
+$ sudo mknod rootfs/dev/tty3 c <span class="m">4</span> <span class="m">3</span>  
+$ sudo mknod rootfs/dev/tty4 c <span class="m">4</span> <span class="m">4</span>
 </pre></div>
 <p>You can also create other folders in the image. (Reference: <a href="https://learningfromyoublog.wordpress.com/2016/04/05/131/">learningfromyoublog.wordpress.com/2016/04/05/131/</a>)</p>
 
 <h3 id="toc_8">5.4 Make the Image</h3>
-<div class="highlight"><pre><span class="c"># creat an empty image</span>
-<span class="nv">$ </span>dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>a9rootfs.ext3 <span class="nv">bs</span><span class="o">=</span>1M <span class="nv">count</span><span class="o">=</span>32  
+<div class="highlight"><pre><span></span><span class="c1"># creat an empty image</span>
+$ dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>a9rootfs.ext3 <span class="nv">bs</span><span class="o">=</span>1M <span class="nv">count</span><span class="o">=</span><span class="m">32</span>  
 
-<span class="c"># format to ext3</span>
-<span class="nv">$ </span>mkfs.ext3 a9rootfs.ext3  
+<span class="c1"># format to ext3</span>
+$ mkfs.ext3 a9rootfs.ext3  
 
-<span class="c"># copy files into the image</span>
-<span class="nv">$ </span>sudo mkdir tmpfs  
-<span class="nv">$ </span>sudo mount -t ext3 a9rootfs.ext3 tmpfs/ -o loop  
-<span class="nv">$ </span>sudo cp -r rootfs/*  tmpfs/  
-<span class="nv">$ </span>sudo umount tmpfs
+<span class="c1"># copy files into the image</span>
+$ sudo mkdir tmpfs  
+$ sudo mount -t ext3 a9rootfs.ext3 tmpfs/ -o loop  
+$ sudo cp -r rootfs/*  tmpfs/  
+$ sudo umount tmpfs
 </pre></div>
 
 <h3 id="toc_9">6. Start QEMU with the Image</h3>
-<div class="highlight"><pre><span class="c"># open in current console</span>
-<span class="nv">$ </span>qemu-system-arm -M vexpress-a9 -m 512M -dtb extra_folder/vexpress-v2p-ca9.dtb -kernel extra_folder/zImage -nographic -append <span class="s2">&quot;root=/dev/mmcblk0 rw console=ttyAMA0&quot;</span> -sd a9rootfs.ext3 
+<div class="highlight"><pre><span></span><span class="c1"># open in current console</span>
+$ qemu-system-arm -M vexpress-a9 -m 512M -dtb extra_folder/vexpress-v2p-ca9.dtb -kernel extra_folder/zImage -nographic -append <span class="s2">&quot;root=/dev/mmcblk0 rw console=ttyAMA0&quot;</span> -sd a9rootfs.ext3 
 
-<span class="c"># open in new window(maybe GUI)</span>
-<span class="nv">$ </span>qemu-system-arm -M vexpress-a9 -m 512M -dtb extra_folder/vexpress-v2p-ca9.dtb -kernel extra_folder/zImage -append <span class="s2">&quot;root=/dev/mmcblk0 rw&quot;</span> -sd a9rootfs.ext3
+<span class="c1"># open in new window(maybe GUI)</span>
+$ qemu-system-arm -M vexpress-a9 -m 512M -dtb extra_folder/vexpress-v2p-ca9.dtb -kernel extra_folder/zImage -append <span class="s2">&quot;root=/dev/mmcblk0 rw&quot;</span> -sd a9rootfs.ext3
 </pre></div>
 <p>Now you enter the console of the emulator system. Press <code>Ctrl+A C</code> to exit to <code>(qemu)</code> console, or <code>Ctrl+A X</code> to exit..</p>
 

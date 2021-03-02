@@ -59,17 +59,17 @@
 
 <h3 id="toc_1">2. Generate Root CA(Certificate Authority)</h3>
 <p>The first part is to create a private key and the CA, which will be used as the root CA to sign certificates.</p>
-<div class="highlight"><pre><span class="c">## Step 1: Create a private key</span>
+<div class="highlight"><pre><span></span><span class="c1">## Step 1: Create a private key</span>
 
-<span class="c"># generate a private root key</span>
-<span class="nv">$ </span>openssl genrsa -out rootCA.key 2048
-<span class="c"># (or) generate a private root key with passphrase protection; and if you forgot the password, you need to do everything again</span>
-<span class="nv">$ </span>openssl genrsa -out rootCA.key 2048 -des3
+<span class="c1"># generate a private root key</span>
+$ openssl genrsa -out rootCA.key <span class="m">2048</span>
+<span class="c1"># (or) generate a private root key with passphrase protection; and if you forgot the password, you need to do everything again</span>
+$ openssl genrsa -out rootCA.key <span class="m">2048</span> -des3
 
 
-<span class="c">## Step 2: Self-sign a certificate</span>
+<span class="c1">## Step 2: Self-sign a certificate</span>
 
-<span class="nv">$ </span>openssl req -x509 -new -nodes -key rootCA.key -days 3650 -out rootCA.pem
+$ openssl req -x509 -new -nodes -key rootCA.key -days <span class="m">3650</span> -out rootCA.pem
 You are about to be asked to enter information that will be incorporated
 into your certificate request.
 What you are about to enter is what is called a Distinguished Name or a DN.
@@ -77,7 +77,7 @@ There are quite a few fields but you can leave some blank
 For some fields there will be a default value,
 If you enter <span class="s1">&#39;.&#39;</span>, the field will be left blank.
 -----
-Country Name <span class="o">(</span>2 letter code<span class="o">)</span> <span class="o">[</span>AU<span class="o">]</span>:CN
+Country Name <span class="o">(</span><span class="m">2</span> letter code<span class="o">)</span> <span class="o">[</span>AU<span class="o">]</span>:CN
 State or Province Name <span class="o">(</span>full name<span class="o">)</span> <span class="o">[</span>Some-State<span class="o">]</span>:Guangdong
 Locality Name <span class="o">(</span>eg, city<span class="o">)</span> <span class="o">[]</span>:Shenzhen
 Organization Name <span class="o">(</span>eg, company<span class="o">)</span> <span class="o">[</span>Internet Widgits Pty Ltd<span class="o">]</span>:TeaTime Production.
@@ -89,42 +89,42 @@ Email Address <span class="o">[]</span>:terry.ouyang@gmail.com
 
 <h3 id="toc_2">3. Create Certificates and Sign with Root CA</h3>
 <p>For every device you want to authorize, you need to create their own private key, then complete the signed certificate with a certificate signing request(CSR).</p>
-<div class="highlight"><pre><span class="c">## Step 1: Create the private key</span>
+<div class="highlight"><pre><span></span><span class="c1">## Step 1: Create the private key</span>
 
-<span class="nv">$ </span>openssl genrsa -out device.key 2048
+$ openssl genrsa -out device.key <span class="m">2048</span>
 
-<span class="c">## Step 2: Create the CSR (In this step you must set &quot;Common Name&quot; to your desire host if you&#39;re planning to use it as a server&#39;s certificate)</span>
+<span class="c1">## Step 2: Create the CSR (In this step you must set &quot;Common Name&quot; to your desire host if you&#39;re planning to use it as a server&#39;s certificate)</span>
 
-<span class="nv">$ </span>openssl req -new -key device.key -out device.csr
+$ openssl req -new -key device.key -out device.csr
 ...
 Common Name <span class="o">(</span>e.g. server FQDN or YOUR name<span class="o">)</span> <span class="o">[]</span>:terryoy.github.io
 ...
 
-<span class="c">## Step 3: Create the signed certificate </span>
+<span class="c1">## Step 3: Create the signed certificate </span>
 
-<span class="nv">$ </span>openssl x509 -req -in device.csr -CA rootCA.pem -CAkey rootCA.key -CAcreateserial -out device.crt -days 3650
+$ openssl x509 -req -in device.csr -CA rootCA.pem -CAkey rootCA.key -CAcreateserial -out device.crt -days <span class="m">3650</span>
 </pre></div>
 <p>Now you have the certificate private key(device.key) and the self CA signed certificate(device.crt). You can now use them for SSL communications.</p>
 
 <h3 id="toc_3">4. Congifuration for Nginx</h3>
 <p>Below is an example of enabling the SSL function for the service configuration.</p>
-<div class="highlight"><pre>server <span class="o">{</span>
-    listen 443;
-    ssl on;
-    ssl_certificate /etc/nginx/ssl/service.crt;
-    ssl_certificate_key /etc/nginx/ssl/service.key;
+<div class="highlight"><pre><span></span>server <span class="o">{</span>
+    listen <span class="m">443</span><span class="p">;</span>
+    ssl on<span class="p">;</span>
+    ssl_certificate /etc/nginx/ssl/service.crt<span class="p">;</span>
+    ssl_certificate_key /etc/nginx/ssl/service.key<span class="p">;</span>
 
     ...
 <span class="o">}</span>
 </pre></div>
 <p>You can also check your server&#39;s certificate by the command below:</p>
-<div class="highlight"><pre><span class="nv">$ </span>openssl s_client -connect www.yourexample.com:443
+<div class="highlight"><pre><span></span>$ openssl s_client -connect www.yourexample.com:443
 </pre></div>
 
 <h3 id="toc_4">5. Setup SSL Factory on Android App</h3>
 <p>There is a good reference on <a href="http://stackoverflow.com/a/6378872">stackoverflow.com</a> for this problem.</p>
 <p>If you&#39;re using cocos2d-x 3.3+, it supports that you set a certificate for the HttpClient(globally), which allows you use your own certificate for SSL verification.</p>
-<div class="highlight"><pre><span class="k">auto</span> <span class="n">path</span> <span class="o">=</span> <span class="n">FileUtils</span><span class="o">::</span><span class="n">getInstance</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">fullPathForFilename</span><span class="p">(</span><span class="s">&quot;my_cacert.pem&quot;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><span class="k">auto</span> <span class="n">path</span> <span class="o">=</span> <span class="n">FileUtils</span><span class="o">::</span><span class="n">getInstance</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">fullPathForFilename</span><span class="p">(</span><span class="s">&quot;my_cacert.pem&quot;</span><span class="p">);</span>
 <span class="n">HttpClient</span><span class="o">::</span><span class="n">getInstance</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">setSSLVerification</span><span class="p">(</span><span class="n">path</span><span class="p">);</span>
 </pre></div>
 
