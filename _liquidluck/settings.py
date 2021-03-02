@@ -20,8 +20,8 @@ site = {
 #: 1. where the resources  2. how should the site be generated
 config = {
     "source": "../_content",
-    "output": "../doc",
-    "static": "../doc/static",
+    "output": "../docs",
+    "static": "../docs/static",
     "static_prefix": "/static/",
     "permalink": "{{date.year}}/{{date.month}}/{{filename}}.html",
     "relative_url": False,

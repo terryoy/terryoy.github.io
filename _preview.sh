@@ -4,6 +4,6 @@
 #liquidluck server
 #cd ..
 
-cd doc 
+cd docs 
 python -m http.server --bind 127.0.0.1 8000
 cd ..
