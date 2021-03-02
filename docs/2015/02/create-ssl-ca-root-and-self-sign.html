@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="/static/css/pygment_trac.css?v=a6c15" />
     <!-- Google AdSense -->
     <script data-ad-client="ca-pub-6012718593977391" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -46,7 +47,7 @@
 	<h1>Create a Root CA and Self-Sign Certificate for SSL</h1>
     <p class="sub_text">2015-02-23 by <i>terryoy</i>, in <a href="/tricks/">tricks</a>
     </p>
-    
+
 	<h3 id="toc_0">1. Concepts</h3>
 <p>Nowadays we often have HTTPS protected web access scenario, however it&#39;s expensive to purchase a certificates from authority if you&#39;re just running a small site. So it&#39;s better to create your own certificates and use your own SSL protection.</p>
 <p>The steps can be roughly described as below:</p>
@@ -133,22 +134,32 @@ $ openssl x509 -req -in device.csr -CA rootCA.pem -CAkey rootCA.key -CAcreateser
 <p>AMCE is short for Automatic Certificate Management Environment, which requires you to run a client on your server to provide checking of the ownership of your server and domain name, and provide signed certificates based on the result.</p>
 <p>Check out more information for the Free SSL/TLS Certificates: <a href="https://letsencrypt.org">letsencrypt.org</a></p>
 
-    
-    
+
+
 	<p/>
 	<hr/>
-    
+
     <div class="sub_text">
         <span>Tags:
             <a href="/tag/server/">server</a>,&nbsp;<a href="/tag/security/">security</a>
 		</span>
-    
+
         
     </div>
     
 
 	<p/>
-	
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <ins class="adsbygoogle"
+           style="display:block; text-align:center;"
+           data-ad-layout="in-article"
+           data-ad-format="fluid"
+           data-ad-client="ca-pub-6012718593977391"
+           data-ad-slot="1086396907"></ins>
+      <script>
+           (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
     
     <div id="disqus_thread"></div>
     <script type="text/javascript">
@@ -164,6 +175,14 @@ $ openssl x509 -req -in device.csr -CA rootCA.pem -CAkey rootCA.key -CAcreateser
 </article></section>
 
 <footer id="footer">
+  <amp-ad width="100vw" height="320"
+       type="adsense"
+       data-ad-client="ca-pub-6012718593977391"
+       data-ad-slot="1828084194"
+       data-auto-format="rspv"
+       data-full-width="">
+    <div overflow=""></div>
+  </amp-ad>
     <p><small>Hosted on GitHub Pages &mdash;<br/> Theme adopted from <a href="https://github.com/orderedlist">orderedlist</a></small></p>
 </footer><!-- #footer -->
 </div><!-- #wrapper -->
