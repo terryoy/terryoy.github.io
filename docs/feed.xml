@@ -3,14 +3,14 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2020-03-01T23:31:20+08:00</updated>
+    <updated>2020-02-01T10:09:37+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
         <title type="html"><![CDATA[How to Write a Shell Script?]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2019/07/how-to-write-a-shell-script-.html"/>
         <published>2019-07-01T18:11:00+08:00</published>
-        <updated>2019-07-01T18:44:40+08:00</updated>
+        <updated>2020-02-01T10:09:36+08:00</updated>
         <id>http://terryoy.github.io/2019/07/how-to-write-a-shell-script-.html</id>
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -51,7 +51,7 @@
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2018/04/setup_arm_development.html"/>
         <published>2018-04-21T23:26:00+08:00</published>
-        <updated>2018-04-21T23:27:09+08:00</updated>
+        <updated>2020-02-01T10:09:36+08:00</updated>
         <id>http://terryoy.github.io/2018/04/setup_arm_development.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#qemu" term="qemu" label="qemu" />
@@ -143,7 +143,7 @@ $ qemu-system-arm -M vexpress-a9 -m 512M -dtb extra_folder/vexpress-v2p-ca9.dtb 
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2018/01/learn-to-use-cmake.html"/>
         <published>2018-01-12T14:41:00+08:00</published>
-        <updated>2018-01-13T09:52:53+08:00</updated>
+        <updated>2020-02-01T10:09:36+08:00</updated>
         <id>http://terryoy.github.io/2018/01/learn-to-use-cmake.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
@@ -212,7 +212,7 @@ $ cmake --build build -- -j3
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2018/01/networking-in-docker.html"/>
         <published>2018-01-12T11:41:00+08:00</published>
-        <updated>2018-06-10T00:01:18+08:00</updated>
+        <updated>2020-02-01T10:09:36+08:00</updated>
         <id>http://terryoy.github.io/2018/01/networking-in-docker.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#docker" term="docker" label="docker" />
@@ -406,7 +406,7 @@ eth0      Link encap:Ethernet  HWaddr <span class="m">02</span>:42:ac:12:00:02
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2017/12/setup_arm_development.html"/>
         <published>2017-12-31T00:00:00+08:00</published>
-        <updated>2020-03-01T23:31:20+08:00</updated>
+        <updated>2020-02-01T10:09:36+08:00</updated>
         <id>http://terryoy.github.io/2017/12/setup_arm_development.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#misc" term="misc" label="misc" />
@@ -498,7 +498,7 @@ $ qemu-system-arm -M vexpress-a9 -m 512M -dtb extra_folder/vexpress-v2p-ca9.dtb 
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2017/12/get-to-know-the-core-ubuntu.html"/>
         <published>2017-12-22T15:49:00+08:00</published>
-        <updated>2017-12-23T10:37:36+08:00</updated>
+        <updated>2020-02-01T10:09:37+08:00</updated>
         <id>http://terryoy.github.io/2017/12/get-to-know-the-core-ubuntu.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -624,7 +624,7 @@ $ man -s <span class="m">5</span> -k systemd
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2017/11/laravel-get-started.html"/>
         <published>2017-11-24T10:37:00+08:00</published>
-        <updated>2017-11-24T12:23:25+08:00</updated>
+        <updated>2020-02-01T10:09:36+08:00</updated>
         <id>http://terryoy.github.io/2017/11/laravel-get-started.html</id>
         <category scheme="http://terryoy.github.io/tag/#php" term="php" label="php" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -671,7 +671,7 @@ $ curl -s https://getcomposer.org/installer <span class="p">|</span> php
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2017/11/docker-basic.html"/>
         <published>2017-11-06T16:12:00+08:00</published>
-        <updated>2018-11-23T11:25:18+08:00</updated>
+        <updated>2020-02-01T10:09:36+08:00</updated>
         <id>http://terryoy.github.io/2017/11/docker-basic.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#docker" term="docker" label="docker" />
@@ -887,7 +887,7 @@ $ docker run username/repository:tag                   <span class="c1"># Run im
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2017/03/python-decorators-and-use-in-django.html"/>
         <published>2017-03-26T16:26:00+08:00</published>
-        <updated>2017-11-06T20:37:45+08:00</updated>
+        <updated>2020-02-01T10:09:37+08:00</updated>
         <id>http://terryoy.github.io/2017/03/python-decorators-and-use-in-django.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -1023,7 +1023,7 @@ Book info: <span class="m">1</span>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2017/03/linux-redis-usage.html"/>
         <published>2017-03-10T22:20:00+08:00</published>
-        <updated>2017-03-10T22:22:41+08:00</updated>
+        <updated>2020-02-01T10:09:36+08:00</updated>
         <id>http://terryoy.github.io/2017/03/linux-redis-usage.html</id>
         <category scheme="http://terryoy.github.io/tag/#database" term="database" label="database" />
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
@@ -1041,7 +1041,7 @@ $ redis-cli
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/12/how-i-fix-ubuntu-boot-with-irst-raid.html"/>
         <published>2016-12-29T00:05:00+08:00</published>
-        <updated>2016-12-29T01:24:58+08:00</updated>
+        <updated>2020-02-01T10:09:37+08:00</updated>
         <id>http://terryoy.github.io/2016/12/how-i-fix-ubuntu-boot-with-irst-raid.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -1115,7 +1115,7 @@ menuentry <span class="s2">&quot;Windows 7&quot;</span> <span class="o">{</span>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/10/working-with-grub2-linux.html"/>
         <published>2016-10-21T10:21:00+08:00</published>
-        <updated>2016-12-28T11:35:52+08:00</updated>
+        <updated>2020-02-01T10:09:37+08:00</updated>
         <id>http://terryoy.github.io/2016/10/working-with-grub2-linux.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -1214,7 +1214,7 @@ rescue&gt;boot
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/09/frontend-workflow-summary.html"/>
         <published>2016-09-18T23:45:00+08:00</published>
-        <updated>2019-07-01T18:31:54+08:00</updated>
+        <updated>2020-02-01T10:09:36+08:00</updated>
         <id>http://terryoy.github.io/2016/09/frontend-workflow-summary.html</id>
         <category scheme="http://terryoy.github.io/tag/#frontend" term="frontend" label="frontend" />
         <category scheme="http://terryoy.github.io/tag/#study" term="study" label="study" />
@@ -1288,7 +1288,7 @@ rescue&gt;boot
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/06/put-linux-into-old-pc-3-localization.html"/>
         <published>2016-06-28T21:03:00+08:00</published>
-        <updated>2016-09-18T23:43:37+08:00</updated>
+        <updated>2020-02-01T10:09:36+08:00</updated>
         <id>http://terryoy.github.io/2016/06/put-linux-into-old-pc-3-localization.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#study" term="study" label="study" />
@@ -1351,7 +1351,7 @@ $ sudo apt-get install fonts-wqy-microhei fonts-wqy-zenhei
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/05/short-ref-python-logging.html"/>
         <published>2016-05-26T19:55:00+08:00</published>
-        <updated>2017-05-27T23:47:55+08:00</updated>
+        <updated>2020-02-01T10:09:37+08:00</updated>
         <id>http://terryoy.github.io/2016/05/short-ref-python-logging.html</id>
         <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
@@ -1477,7 +1477,7 @@ $ sudo apt-get install fonts-wqy-microhei fonts-wqy-zenhei
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/05/put-linux-into-old-pc-2-desktop.html"/>
         <published>2016-05-18T09:47:00+08:00</published>
-        <updated>2016-08-31T10:42:42+08:00</updated>
+        <updated>2020-02-01T10:09:36+08:00</updated>
         <id>http://terryoy.github.io/2016/05/put-linux-into-old-pc-2-desktop.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#study" term="study" label="study" />
@@ -1580,7 +1580,7 @@ $ sudo update-alternatives --config x-www-browser
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/05/put-linux-into-old-pc-1-hardware.html"/>
         <published>2016-05-15T21:04:00+08:00</published>
-        <updated>2016-09-18T23:43:37+08:00</updated>
+        <updated>2020-02-01T10:09:36+08:00</updated>
         <id>http://terryoy.github.io/2016/05/put-linux-into-old-pc-1-hardware.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#study" term="study" label="study" />
@@ -1723,7 +1723,7 @@ $ nmcli device wifi connect &lt;SSID<span class="p">|</span>BSSID&gt; password &
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/04/git-ssh-config.html"/>
         <published>2016-04-17T16:11:00+08:00</published>
-        <updated>2016-08-31T10:42:42+08:00</updated>
+        <updated>2020-02-01T10:09:37+08:00</updated>
         <id>http://terryoy.github.io/2016/04/git-ssh-config.html</id>
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
         <category scheme="http://terryoy.github.io/tag/#virtualbox" term="virtualbox" label="virtualbox" />
@@ -1770,7 +1770,7 @@ $ ssh-add -k gitub_rsa
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/02/ubuntu-desktop-sharing-to-osx.html"/>
         <published>2016-02-26T10:52:00+08:00</published>
-        <updated>2016-02-26T11:11:36+08:00</updated>
+        <updated>2020-02-01T10:09:37+08:00</updated>
         <id>http://terryoy.github.io/2016/02/ubuntu-desktop-sharing-to-osx.html</id>
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
         <category scheme="http://terryoy.github.io/tag/#osx" term="osx" label="osx" />
@@ -1803,7 +1803,7 @@ $ dconf-editor
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2016/02/vbox-cmd-tools-tricks.html"/>
         <published>2016-02-17T11:01:00+08:00</published>
-        <updated>2017-01-10T17:41:18+08:00</updated>
+        <updated>2020-02-01T10:09:37+08:00</updated>
         <id>http://terryoy.github.io/2016/02/vbox-cmd-tools-tricks.html</id>
         <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
         <category scheme="http://terryoy.github.io/tag/#virtualbox" term="virtualbox" label="virtualbox" />
