@@ -13,15 +13,18 @@ site = {
             "name": u'中文博客',
             "link": 'http://terryoy.github.io/thoughts/',
         }
-    ]
+    ],
+    "google_adsense": "ca-pub-6012718593977391",
+    "google_adslot_nav": "1828084194",
+    "google_adslot_post": "1086396907",
 }
 
 #: this config defined information of your site
 #: 1. where the resources  2. how should the site be generated
 config = {
     "source": "../_content",
-    "output": "../",
-    "static": "../static",
+    "output": "../docs",
+    "static": "../docs/static",
     "static_prefix": "/static/",
     "permalink": "{{date.year}}/{{date.month}}/{{filename}}.html",
     "relative_url": False,

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <title>Hello, World!</title>
-    <link href="http://terryoy.github.io/feed.xml" rel="self" />
-    <link href="http://terryoy.github.io/" />
-    <updated>2020-02-01T10:09:37+08:00</updated>
-    <id>http://terryoy.github.io/</id>
+    <link href="http://terryoy.github.io/guides/feed.xml" rel="self" />
+    <link href="http://terryoy.github.io/guides/" />
+    <updated>2020-02-01T10:09:36+08:00</updated>
+    <id>http://terryoy.github.io/guides/</id>
     <entry>
         <title type="html"><![CDATA[How to Write a Shell Script?]]></title>
         <author><name>terryoy</name></author>
@@ -494,179 +494,6 @@ $ qemu-system-arm -M vexpress-a9 -m 512M -dtb extra_folder/vexpress-v2p-ca9.dtb 
 ]]>
         </content>
     </entry><entry>
-        <title type="html"><![CDATA[Exploring Ubuntu From Fundamentals(1)]]></title>
-        <author><name>terryoy</name></author>
-        <link href="http://terryoy.github.io/2017/12/get-to-know-the-core-ubuntu.html"/>
-        <published>2017-12-22T15:49:00+08:00</published>
-        <updated>2020-02-01T10:09:37+08:00</updated>
-        <id>http://terryoy.github.io/2017/12/get-to-know-the-core-ubuntu.html</id>
-        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
-        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
-            <![CDATA[ <p>Recently I have installed docker on my mac. It&#39;s such a wonderful virtualized environment that I don&#39;t need to install a whole system image on VirtualBox to explore in Ubuntu. </p>
-<p>The docker image of Ubuntu is somehow essential subset of packages which give you the system environment. It doesn&#39;t even have <code>vi</code> or the <code>lsb_release</code> command for you to read the distro version. So I want to take some notes while I&#39;m exploring the fundamentals in Ubuntu.</p>
-
-<h3 id="toc_0">1. System Info</h3>
-<div class="highlight"><pre><span></span><span class="c1"># Check Ubuntu version</span>
-$ cat /etc/issue
-$ cat /etc/issue.net
-Ubuntu <span class="m">16</span>.04.3 LTS
-
-<span class="c1"># More information of Ubuntu</span>
-$ cat /etc/os-release
-<span class="nv">NAME</span><span class="o">=</span><span class="s2">&quot;Ubuntu&quot;</span>
-<span class="nv">VERSION</span><span class="o">=</span><span class="s2">&quot;16.04.3 LTS (Xenial Xerus)&quot;</span>
-<span class="nv">ID</span><span class="o">=</span>ubuntu
-<span class="nv">ID_LIKE</span><span class="o">=</span>debian
-<span class="nv">PRETTY_NAME</span><span class="o">=</span><span class="s2">&quot;Ubuntu 16.04.3 LTS&quot;</span>
-<span class="nv">VERSION_ID</span><span class="o">=</span><span class="s2">&quot;16.04&quot;</span>
-<span class="nv">HOME_URL</span><span class="o">=</span><span class="s2">&quot;http://www.ubuntu.com/&quot;</span>
-<span class="nv">SUPPORT_URL</span><span class="o">=</span><span class="s2">&quot;http://help.ubuntu.com/&quot;</span>
-<span class="nv">BUG_REPORT_URL</span><span class="o">=</span><span class="s2">&quot;http://bugs.launchpad.net/ubuntu/&quot;</span>
-<span class="nv">VERSION_CODENAME</span><span class="o">=</span>xenial
-<span class="nv">UBUNTU_CODENAME</span><span class="o">=</span>xenial
-
-<span class="c1"># System Services</span>
-$ service --status-all
- <span class="o">[</span> - <span class="o">]</span>  bootmisc.sh
- <span class="o">[</span> - <span class="o">]</span>  checkfs.sh
- <span class="o">[</span> - <span class="o">]</span>  checkroot-bootclean.sh
- <span class="o">[</span> - <span class="o">]</span>  checkroot.sh
- <span class="o">[</span> - <span class="o">]</span>  hostname.sh
- <span class="o">[</span> ? <span class="o">]</span>  hwclock.sh
- <span class="o">[</span> - <span class="o">]</span>  killprocs
- <span class="o">[</span> - <span class="o">]</span>  mountall-bootclean.sh
- <span class="o">[</span> - <span class="o">]</span>  mountall.sh
- <span class="o">[</span> - <span class="o">]</span>  mountdevsubfs.sh
- <span class="o">[</span> - <span class="o">]</span>  mountkernfs.sh
- <span class="o">[</span> - <span class="o">]</span>  mountnfs-bootclean.sh
- <span class="o">[</span> - <span class="o">]</span>  mountnfs.sh
- <span class="o">[</span> ? <span class="o">]</span>  ondemand
- <span class="o">[</span> - <span class="o">]</span>  procps
- <span class="o">[</span> - <span class="o">]</span>  rc.local
- <span class="o">[</span> - <span class="o">]</span>  sendsigs
- <span class="o">[</span> - <span class="o">]</span>  umountfs
- <span class="o">[</span> - <span class="o">]</span>  umountnfs.sh
- <span class="o">[</span> - <span class="o">]</span>  umountroot
- <span class="o">[</span> - <span class="o">]</span>  urandom
-
-<span class="c1"># Supported Shells</span>
-$ cat /etc/shells
-/bin/sh
-/bin/dash
-/bin/bash
-/bin/rbash
-</pre></div>
-<p>I have install <code>vim</code> and <code>man-db</code> to acquire the ability of text editing and manual reading. Now let&#39;s check what packages we have installed.</p>
-<div class="highlight"><pre><span></span>$ apt list --installed
-
-<span class="c1"># or if you just want the count</span>
-$ apt list --installed <span class="p">|</span> grep installed <span class="p">|</span> wc -l 
-
-<span class="c1"># or if you want to see a description of each pacakge</span>
-$ dpkg-query -l
-</pre></div>
-<p>Now I can see that the essential packages to run my system has only <strong>116</strong> packages and <strong>62</strong> of them are libs.</p>
-
-<h3 id="toc_1">2. Reading Manuals</h3>
-<p>The most important documentation tool in Linux is <code>man</code>, another is <code>info</code> from package &ldquo;texinfo&rdquo;. And there are also something you can find in <code>/usr/share/doc</code>, although many packages just use it for change logs and copyright, but the readme part is sometimes helpful information.</p>
-<p>The <code>man</code> command is in <code>man-db</code> package, and <code>info</code> is in <code>info</code> package.</p>
-
-<h4 id="toc_2">2.1 Man pages</h4>
-<p>Man pages are grouped the documents of packages into 8(or 9) sections.</p>
-
-<ul>
-<li>1 Executable programs or shell commands</li>
-<li>2 System calls (functions provided by the kernel)</li>
-<li>3 Library calls (functions within program libraries)</li>
-<li>4 Special files (usually found in /dev)</li>
-<li>5 File formats and conventions eg /etc/passwd</li>
-<li>6 Games</li>
-<li>7 Miscellaneous (including macro packages and conventions), e.g. man(7), groff(7)</li>
-<li>8 System administration commands (usually only for root)</li>
-<li>9 Kernel routines [Non standard]</li>
-</ul>
-<p>The numbers of sections you see here, are used to marked the pages when cross reference in man pages. For example, you can see &ldquo;man(7)&rdquo;, &ldquo;mandb(8)&rdquo;, etc. Sometimes there will be a same keyword in different sections. You can view all man pages of the same keyword, or specify which section you want to see, or search man pages by keyword.</p>
-<div class="highlight"><pre><span></span><span class="c1"># view man page for man</span>
-$ man man
-
-<span class="c1"># view all &quot;intro&quot; in every section</span>
-$ man -a intro
-
-<span class="c1"># view &quot;intro&quot; in section 3</span>
-$ man -s <span class="m">3</span> intro
-
-<span class="c1"># list all man pages</span>
-$ man -k .
-
-<span class="c1"># list all man pages in section 5</span>
-$ man -s <span class="m">5</span> -k .
-
-<span class="c1"># list all man pages in section 5 match keyword &#39;systemd&#39;</span>
-$ man -s <span class="m">5</span> -k systemd
-</pre></div>
-
-<h4 id="toc_3">2.2 Info pages</h4>
-<p>This kind of document is written in <a href="https://www.gnu.org/software/texinfo/">texinfo</a>, supported in  Emacs, generated by <code>makeinfo</code>;</p>
-<p>The texinfo format has node structure, and can export to different format such as HTML, etc. The <code>info</code> command more navigation methods to the document.</p>
-<p>Read <a href="http://www.troubleshooters.com/linux/info.htm">here</a> about the keyboard interface.</p>
-
-<h4 id="toc_4">2.3 Dcoumentation paths</h4>
-
-<ul>
-<li>/usr/share/man, folder for man pages of pacakges. They&#39;re separated into different sections man(1-9) according the pacakge categories.</li>
-<li>/usr/share/info, folder for info pages, which is meant for providing more detail information, and it&#39;s generally used in GNU projects, but man pages are in much greater favour.</li>
-<li>/usr/share/doc, folder for holding other document or refernces. Most packages contains only changelog and copyright info, some provided a README file, and some package provides templates or configuration files.</li>
-</ul>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[Getting Laravel Started]]></title>
-        <author><name>terryoy</name></author>
-        <link href="http://terryoy.github.io/2017/11/laravel-get-started.html"/>
-        <published>2017-11-24T10:37:00+08:00</published>
-        <updated>2020-02-01T10:09:36+08:00</updated>
-        <id>http://terryoy.github.io/2017/11/laravel-get-started.html</id>
-        <category scheme="http://terryoy.github.io/tag/#php" term="php" label="php" />
-        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
-            <![CDATA[ <p>After I found that PHP7.1 is in-the-box with OSX, it motivates me to start learning PHP(a.k.a. &ldquo;the best language in the world&rdquo; :P) and give some try to small projects. What I got from my friend is that <a href="https://laravel.com/">Laravel</a> is the quite popular web framework for PHP. So now I setting up the development and deployment environment to get started.</p>
-
-<h3 id="toc_0">1.Installing dependencies</h3>
-<p>On my MBP desktop, it&#39;s recommended to use <a href="https://laravel.com/docs/5.5/valet">Valet</a> if you want just a small additional tools to run it, and connect to existing databases on the machine. Otherwise it would be good to use a virtualbox image <a href="https://laravel.com/docs/5.5/homestead">Homestead</a> to have an all-in-one setup for development.</p>
-<p>While my Ubuntu 16 server, I would like to install dependencies by hand, so I could get familiar with what it takes to run Laravel. Now here&#39;s what I tried.</p>
-<div class="highlight"><pre><span></span>$ sudo apt install php7.0 php7.0-cli php7.0-zip php7.0-mbstring php7.0-mbstring php7.0-xml
-</pre></div>
-<p>Then we need to install <a href="https://getcomposer.org">Composer</a> to install other php packages. It&#39;s like the <code>pip</code> to Python and the <code>npm</code> to NodeJS.</p>
-<div class="highlight"><pre><span></span><span class="c1"># install to $HOME/bin</span>
-$ <span class="nb">cd</span> ~
-$ wget https://getcomposer.org/installer -o composer-setup.php
-$ php composer-setup.php --install-dir<span class="o">=</span>bin --filename<span class="o">=</span>composer
-
-
-<span class="c1"># (alternatively) You could try the one-line command bellow for default installation</span>
-$ curl -s https://getcomposer.org/installer <span class="p">|</span> php
-</pre></div>
-<p>Then try the composer command to see if you have it.</p>
-<div class="highlight"><pre><span></span>$ composer
-</pre></div>
-
-<h3 id="toc_1">2.Installing Laravel Valet</h3>
-<p><strong>Valet</strong> is a lightweight solution for hosting Laravel in development, and only avaiable on OSX. It uses brew to install php7.1 and other dependencies, but first you need Composer to install Laravel Valet. So install the composer using the script above first.</p>
-<p>After composer is installed, use it to download the Valet package.</p>
-<div class="highlight"><pre><span></span>$ composer global require laravel/valet
-</pre></div>
-<p>After composer install the package, you should note about where it is installed. Because you need to set the $PATH environment variables to enable the command from the packages. On OSX, the executable programs are in <code>~/.composer/vendor/bin</code>, and on Ubuntu, the path might be <code>~/.config/composer/vendor/bin</code>.</p>
-<p>Then you can use valet commands to manage your development environment.</p>
-
-<h3 id="toc_2">3.Install Laravel</h3>
-<p>Installing Laravel is similar to Valet. Use <code>composer</code> to download and install the package globally.</p>
-<div class="highlight"><pre><span></span>$ composer global require <span class="s2">&quot;laravel/installer&quot;</span>
-</pre></div>
-<p>Then you can use <code>laravel</code> command to create a new project:</p>
-<div class="highlight"><pre><span></span>$ laravel new myproject
-</pre></div>
-]]>
-        </content>
-    </entry><entry>
         <title type="html"><![CDATA[Basic Usage for Docker]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2017/11/docker-basic.html"/>
@@ -883,142 +710,6 @@ $ docker run username/repository:tag                   <span class="c1"># Run im
 ]]>
         </content>
     </entry><entry>
-        <title type="html"><![CDATA[Python Function Decorators and The Use in Django]]></title>
-        <author><name>terryoy</name></author>
-        <link href="http://terryoy.github.io/2017/03/python-decorators-and-use-in-django.html"/>
-        <published>2017-03-26T16:26:00+08:00</published>
-        <updated>2020-02-01T10:09:37+08:00</updated>
-        <id>http://terryoy.github.io/2017/03/python-decorators-and-use-in-django.html</id>
-        <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
-        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
-            <![CDATA[ <h3 id="toc_0">1. Basic of functions</h3>
-
-<ul>
-<li>Functions can be assign</li>
-<li>Functions can be defined inside a function</li>
-<li>Functions can be passed as a parameter and return as a returning value</li>
-<li>Inner functions have access to the enclosing scope</li>
-</ul>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;World&#39;</span><span class="p">):</span>
-   <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello, </span><span class="si">{0}</span><span class="s1">!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">)))</span>
-
-<span class="c1"># assign</span>
-<span class="n">bar</span> <span class="o">=</span> <span class="n">foo</span>
-<span class="n">bar</span><span class="p">()</span>
-<span class="c1"># =&gt; Hello, world!</span>
-
-
-<span class="c1"># Use in parameter and return as result</span>
-<span class="k">def</span> <span class="nf">greetings</span><span class="p">(</span><span class="n">call</span><span class="p">):</span>
-    <span class="n">welcome</span> <span class="o">=</span> <span class="s1">&#39;Welcome back!&#39;</span> <span class="c1"># the enclosing scope to &quot;greeting_to&quot;</span>
-
-    <span class="k">def</span> <span class="nf">greeting_to</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
-        <span class="n">call</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">welcome</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">greeting_to</span>
-
-<span class="n">greet</span> <span class="o">=</span> <span class="n">greetings</span><span class="p">(</span><span class="n">bar</span><span class="p">)</span> <span class="c1"># set bar as a greeting function</span>
-<span class="n">greet</span><span class="p">(</span><span class="s1">&#39;Terry&#39;</span><span class="p">)</span> <span class="c1"># use the return function to generate greetings</span>
-<span class="c1"># =&gt; Hello, Terry!</span>
-<span class="c1"># =&gt; Welcome, back!</span>
-</pre></div>
-
-<h3 id="toc_1">2. Decorators</h3>
-<p>A <strong>Function Decorator</strong> is a wrapper to an existing function, in which you can do some pre-process to the parameter or post-process to the returning value of the existing funciton.</p>
-<p>The function decorator in Python must follows the below rules:</p>
-
-<ul>
-<li>It is a function that accept a function parameter(like saying <em>&ldquo;a decorator to which function&rdquo;</em>)</li>
-<li>The decorator function must define and return a function as a result, so that the client gets something act similar to the existing function(act just like a function wrapper). </li>
-<li>Do the customizing things inside the wrapper function, and call the existing function eventually</li>
-</ul>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">greeting_decorator</span><span class="p">(</span><span class="n">call</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
-        <span class="n">call</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Isn&#39;t it powerful?&quot;</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">wrapper</span>
-
-
-<span class="c1"># The decorator syntax</span>
-<span class="nd">@greeting_decorator</span>
-<span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello, </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
-
-<span class="n">greet</span><span class="p">(</span><span class="s1">&#39;Terry&#39;</span><span class="p">)</span> <span class="c1"># decorated function though the function name is the same as defined</span>
-<span class="c1"># =&gt; Hello, Terry </span>
-<span class="c1"># =&gt; Isn&#39;t it powerful?</span>
-</pre></div>
-<p>Decorators can be chained, and can also accept extra parameters when defining the customization to the function. However, decorators that accept parameters need to add another wrapper to the simple decorator.</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">room</span><span class="p">(</span><span class="n">room_name</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">decorator_wrapper</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
-        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Enter room: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">room_name</span><span class="p">))</span>
-            <span class="n">func</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">wrapper</span>
-    <span class="k">return</span> <span class="n">decorator_wrapper</span>
-
-<span class="k">def</span> <span class="nf">leave_on_greet</span><span class="p">(</span><span class="n">greet_func</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">greeting_wrapper</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
-        <span class="n">greet_func</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Thanks, I&#39;m leaving&quot;</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">greeting_wrapper</span>
-
-
-<span class="nd">@room</span><span class="p">(</span><span class="s1">&#39;Matrix&#39;</span><span class="p">)</span>
-<span class="nd">@leave_on_greet</span>
-<span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello, </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
-
-
-<span class="n">greet</span><span class="p">(</span><span class="s1">&#39;Terry&#39;</span><span class="p">)</span>
-<span class="c1"># =&gt; Enter room: Matrix</span>
-<span class="c1"># =&gt; Hello, Terry</span>
-<span class="c1"># =&gt; Thanks, I&#39;m leaving</span>
-</pre></div>
-
-<h3 id="toc_2">3. Example: using decorator in Django views</h3>
-<p>It is very common that you want to write decorators for the request in views.py. For example, Django itself provides <a href="https://docs.djangoproject.com/en/1.10/topics/http/decorators/">a list of decorators</a> that you can use in certain scenarios, such as restricting HTTP methods, or cache controls. There are also other examples that could be consider: logging requests or checking auth tokens.</p>
-<p>Here I write a very simple example that logs requests which a specified module name. We will have to use a new feature here that passes arguments between functions, because Django view methods can accept arguments defined in URL patterns.</p>
-<div class="highlight"><pre><span></span><span class="c1"># a request log decorator which you can define the module</span>
-<span class="k">def</span> <span class="nf">log_request</span><span class="p">(</span><span class="n">module</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">decorator_wrapper</span><span class="p">(</span><span class="n">view_func</span><span class="p">):</span>
-        <span class="k">def</span> <span class="nf">func_wrapper</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[</span><span class="si">{0}</span><span class="s1">] </span><span class="si">{1}</span><span class="s1"> </span><span class="si">{2}</span><span class="s1"> </span><span class="si">{3}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">get_host</span><span class="p">(),</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">()))</span>
-            <span class="k">return</span> <span class="n">view_func</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">func_wrapper</span>
-    <span class="k">return</span> <span class="n">decorator_wrapper</span>
-
-
-<span class="c1"># use in views.py</span>
-<span class="nd">@log_request</span><span class="p">(</span><span class="n">module</span><span class="o">=</span><span class="s2">&quot;Book&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">book_detail</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">book_id</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s1">&#39;Book info: </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">book_id</span><span class="p">))</span>
-
-
-<span class="c1"># URL patterns</span>
-<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^book/(?P&lt;book_id&gt;\d+/info$&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">book_detail</span><span class="p">),</span>
-    <span class="c1"># ...</span>
-<span class="p">]</span>
-</pre></div>
-<p>Test in command line:</p>
-<div class="highlight"><pre><span></span><span class="c1"># test in shell, and see the book id correctly returned</span>
-$ curl http://localhost/book/1/info
-Book info: <span class="m">1</span>
-
-<span class="c1"># check the log in server console, everything is shown</span>
-<span class="o">[</span>Book<span class="o">]</span> localhost:8000 GET /v1/book/1/info
-</pre></div>
-
-<h3 id="toc_3">Reference</h3>
-<p>Reference: <a href="http://thecodeship.com/patterns/guide-to-python-function-decorators/">thecodeship.com/patterns/guide-to-python-function-decorators/</a></p>
-]]>
-        </content>
-    </entry><entry>
         <title type="html"><![CDATA[Usage for Redis on Linux]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2017/03/linux-redis-usage.html"/>
@@ -1034,179 +725,6 @@ Book info: <span class="m">1</span>
 <span class="c1"># login redis</span>
 $ redis-cli
 </pre></div>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[How I fix my Ubuntu with iRST(Intel Rapid Start Technology) Raid]]></title>
-        <author><name>terryoy</name></author>
-        <link href="http://terryoy.github.io/2016/12/how-i-fix-ubuntu-boot-with-irst-raid.html"/>
-        <published>2016-12-29T00:05:00+08:00</published>
-        <updated>2020-02-01T10:09:37+08:00</updated>
-        <id>http://terryoy.github.io/2016/12/how-i-fix-ubuntu-boot-with-irst-raid.html</id>
-        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
-        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
-            <![CDATA[ <p>I have bought a Haier X3 laptop with a 500GB hard disk and a 32GB SSD with which you could use to boot and cache disk rapidly for Windows via Intel&#39;s technology. However, I&#39;m a Linux fan, so I also need to install Ubuntu on my computer.</p>
-<p>At first, the Windows 7 system was pre-installed. When I installed Ubuntu it failed at booting if the Windows 7 had enabled iRST. I cannot find any working solution to fix the Ubuntu problem at the time, so I just disabled Win 7&#39;s iRST, and then use the SSD as normal disk. Later I had a very good time with the Linux environment.</p>
-<p>Recently, I&#39;m going to refresh the whole system and make both clean again. So I give a second try to enable Windows 7&#39;s iRST and make Ubuntu boot correctly, and I succeeded after two days hard work!</p>
-<p>The root cause is that the raid management tool on Linux will assemble the partitions as RAID and then the <code>initramds</code> cannot find the partition with UUID. It fails like this:</p>
-<div class="highlight"><pre><span></span>Gave up waiting <span class="k">for</span> root device. Common problems:
- - Boot args <span class="o">(</span>cat /proc/cmdline<span class="o">)</span>
-   - Check <span class="nv">rootdelay</span><span class="o">=</span> <span class="o">(</span>did the system <span class="nb">wait</span> long enough?<span class="o">)</span>
-   - Check <span class="nv">root</span><span class="o">=</span> <span class="o">(</span>did the system <span class="nb">wait</span> <span class="k">for</span> the right device?<span class="o">)</span>
- - Missing modules <span class="o">(</span>cat /proc/modules<span class="p">;</span> ls /dev<span class="o">)</span>
-ALERT! /dev/disk/by-uuid/52152d36-9dc4-42a6-8be1-3966bf397b09 does not exist. Dropping to a shell!
-
-BusyBox v1.22.1 <span class="o">(</span>Ubuntu <span class="m">1</span>:1.22.0-15ubuntu1<span class="o">)</span> built-in shell <span class="o">(</span>ash<span class="o">)</span>
-Enter <span class="s1">&#39;help&#39;</span> <span class="k">for</span> a lost of built-in commands.
-<span class="o">(</span>initramfs<span class="o">)</span>
-</pre></div>
-<p>I have searched on the internet about it, finding that it&#39;s related to the block id that generated for the partitions are missing:</p>
-<div class="highlight"><pre><span></span><span class="o">(</span>initramfs<span class="o">)</span> blkid
-/dev/sda: <span class="nv">TYPE</span><span class="o">=</span><span class="s2">&quot;isw_raid_member&quot;</span>
-/dev/sdb: <span class="nv">TYPE</span><span class="o">=</span><span class="s2">&quot;isw_raid_member&quot;</span>
-
-<span class="o">(</span>initramfs<span class="o">)</span> ls /dev/md*
-md/  md126  md127
-</pre></div>
-<p>While the partitions of <code>/dev/sda/</code> are supposed to be recognized by UUIDs, but it is created as a software RAID device(md126), so the partitions of it cannot be accessed at boot time. I have tried to install Ubuntu via my usb disk again and again, also try to use <code>chroot</code> to update the grub record and the initramfs on the partiion, and I still don&#39;t have luck. After a long frustrating period, I suddenly come up the idea: why not just disable the raid array at boot time? </p>
-<p>After I tried the below two commands in <code>initramfs</code>, it come back to normal boot after I exit the initramfs mode!</p>
-<div class="highlight"><pre><span></span><span class="o">(</span>initramfs<span class="o">)</span> mdadm --stop --scan
-
-<span class="o">(</span>initramfs<span class="o">)</span> blockdev --rereadpt /dev/sda
-</pre></div>
-<p>The first command scan all the RAID array entries and close them. The second command re-read the partitions with UUIDs so you get the UUID entries for initramfs to boot.</p>
-<p>This time I have confident to make the solution permanent. First of all, I will need to use my Ubuntu usb boot disk to enter the shell(&#39;Go Back&#39; in the first step of the installation, then you find a choice for executing a shell) and mount the partition. (My target Ubuntu parition is /dev/sda3)</p>
-<div class="highlight"><pre><span></span>$ mount /dev/sda3 /mnt
-$ mount -t proc /proc /mnt/proc
-$ mount -t sysfs /sys /mnt/sys
-$ mount -o <span class="nb">bind</span> /dev /mnt/dev
-$ chroot /mnt /bin/bash
-</pre></div>
-<p>This allow me to mount the partition just as I&#39;ve booted into it. Then I will update it&#39;s boot process(e.g. grub &amp; initramfs).</p>
-<div class="highlight"><pre><span></span>$ grub-install /dev/sda
-$ update-grub
-
-$ vi /etc/initramfs-tools/script/local-top/mdadm
-mdadm --stop --scan
-blockdev --rereadpt /dev/sda
-
-$ chmod +x /etc/initramfs-tools/script/local-top/mdadm
-$ update-initramfs -u
-</pre></div>
-<p>Voilà! My Ubuntu&#39;s back!&hellip;wait, my Windows 7 has gone! It seems that GRUB has erase my Windows 7 boot entry. This doesn&#39;t stop me now. It&#39;s easy to get Windows back.</p>
-<p>I tried to run <code>update-grub</code> again, but it doesn&#39;t recognize the Windows boot entry even though os-prober is enabled. So I need to add it manually:</p>
-<div class="highlight"><pre><span></span><span class="c1"># check the Windows partition UUID</span>
-$ blkid
-
-$ vi /boot/grub/grub.cfg
-<span class="c1"># (look for the section of &quot;/etc/grub.d/40_custom&quot; and add the content below)</span>
-menuentry <span class="s2">&quot;Windows 7&quot;</span> <span class="o">{</span>
-    insmod ntfs
-    <span class="nb">set</span> <span class="nv">root</span><span class="o">=</span><span class="s1">&#39;(hd0,1)&#39;</span>
-    search --no-floppy --fs-uuid --set 76B0EE43B0EE0987
-    chainloader +1
-<span class="o">}</span>
-</pre></div>
-<p>Then reboot. It is finally OK.</p>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[Working with Grub2 in Linux]]></title>
-        <author><name>terryoy</name></author>
-        <link href="http://terryoy.github.io/2016/10/working-with-grub2-linux.html"/>
-        <published>2016-10-21T10:21:00+08:00</published>
-        <updated>2020-02-01T10:09:37+08:00</updated>
-        <id>http://terryoy.github.io/2016/10/working-with-grub2-linux.html</id>
-        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
-        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
-            <![CDATA[ <p><strong>Grub2</strong>(GRUB: the GRand Unified Bootloader) is the main bootloader in Debian/Ubuntu distribution. I have always wanted to know the details to change or fix the booting process. So I did a research and make a note here.</p>
-
-<h3 id="toc_0">1. Overview</h3>
-<p>Normally we should use the util <code>update-grub</code> to update the grub2 boot entries. In grub(the older, not grub2), we need to update the boot menu file <code>/boot/grub/menu.lst</code> carefully to manage the entries. In this case, it could be easy to make mistakes, or inconvenient while editing the file and get required information at the same time. </p>
-<p>In grub2 with <code>update-grub</code>, this process can be managed in updating a general setting file and a list of scripts that generate entries. These files are:</p>
-
-<ul>
-<li><code>/etc/default/grub</code>, general grub settings,</li>
-<li><code>/etc/grub.d/*</code>, this directory contains a list of executable scripts and will be processed in order. You can add the files according to the convention:
-
-<ul>
-<li>&ldquo;00_*&rdquo;: It is reserved for 00_header.</li>
-<li>&ldquo;10_*&rdquo;: Native boot entries.</li>
-<li>&ldquo;20_*&rdquo;: Third party apps (e.g. memtest86+).</li>
-</ul></li>
-</ul>
-<p>The number namespace in-between is configuratble by system installer and/or administrator. The order of other number will be reflected in the menu if you set 01_otheros, 11_otheros, etc.</p>
-<p>For example, I have below config files in <code>/etc/init.d/</code> for a ubuntu installation:</p>
-
-<pre><code>00_header
-05_debian_theme
-10_linux
-20_linux_gen
-30_os-prober
-30_uefi_firmware
-40_custom
-41_custom</code></pre>
-
-<h3 id="toc_1">2. Clean up Grub2 Menu</h3>
-<p>After a release or a kernel upgrade, you may usually find unuseful entries in the boot menu, which are mainly for previous state recovery. So here let&#39;s see how to remove the unuseful entries.</p>
-<p>First are the unnecessary kernel entries. They exist because you install more older kernel versions lying around on your machine. So you can check if there are more than one <code>linux-headers-&lt;version&gt;</code> entry and <code>linux-image-&lt;version&gt;</code> entry, then remove the unnecessary package via package manager.</p>
-<p>Second, unwanted entries in <code>/etc/init.d/</code> such as memtest86+. Disabling them is very easy, just make them not executable then it&#39;s done.</p>
-<div class="highlight"><pre><span></span>$ <span class="nb">cd</span> /etc/init.d/
-$ sudo chmod -x 20_memtest86+
-</pre></div>
-<p>And the last thing is to update grub:</p>
-<div class="highlight"><pre><span></span>$ sudo update-grub
-</pre></div>
-<p>Sometimes if you just want to edit some of the boot menu item, you could lookup the <code>menuentry</code> in the file and edit the content. For example, there is a <code>30_os-prober</code> file in <code>/etc/grub.d/</code>, which checks if there are other OS exists on local drives and create boot entries for them. You can see the similar content in each OS part and using <code>cat</code> and <code>menuentry</code> to add an entry to the grub config.</p>
-
-<h3 id="toc_2">3. Grub2 Settings</h3>
-<p>In the general setting file <code>/etc/default/grub</code>, there are some basic settings that you could change.</p>
-
-<pre><code># (template of /etc/default/grub)
-# 1. Default boot entry, can be the index or the title of the boot item; SAVEDEFAULT option let you save every last choice as next default
-GRUB_DEFAULT=0
-GRUB_SAVEDEFAULT=true
-
-# 2. Go directly to the default boot entry unless you press 'shift' or 'esc' at startup. The &quot;QUIET&quot; option will display the count down of the hidden timeout before going to boot, which you can use a chance for a boot splash
-GRUB_HIDDEN_TIMEOUT=0
-GRUB_HIDDEN_TIMEOUT_QUIET=true
-
-# 3. Grub background, just simply set the image path(supports '.png', '.tga', '.jpg' or '.jpeg')
-GRUB_BACKGROUND='/path/to/image.jpg'</code></pre>
-<p>Ref: (run as shell cmd) <code>info -f grub -s &#39;Simple configuration&#39;</code></p>
-
-<h3 id="toc_3">4. Grub2 tools</h3>
-
-<h4 id="toc_4">4.1 Grub Rescue</h4>
-<p>Many times when grub boot failed, it will run into <code>grub-rescue</code> shell environment. It is expected that you fix something(usually try to recover the damaged boot record.) and set a bootable entry for grub to continue the boot process</p>
-<p>Below is an example of a common process.</p>
-<div class="highlight"><pre><span></span><span class="c1"># check available parition</span>
-grub rescue&gt; ls
-<span class="o">(</span>hd0<span class="o">)</span>,<span class="o">(</span>hd0,msdos3<span class="o">)</span>,<span class="o">(</span>hd0,msdos2<span class="o">)</span>,<span class="o">(</span>hd0,msdos1<span class="o">)</span>
-
-<span class="c1"># check available grub boot record in a partition</span>
-grub rescue&gt; ls <span class="o">(</span>hd0,msdosX<span class="o">)</span>/boot/grub
-
-<span class="c1"># set boot entry</span>
-grub rescue&gt; <span class="nb">set</span> <span class="nv">root</span><span class="o">=(</span>hd0,msdos3<span class="o">)</span>
-grub rescue&gt; <span class="nb">set</span> <span class="nv">prefix</span><span class="o">=(</span>hd0,msdos3<span class="o">)</span>/boot/grub
-grub rescue&gt; insmod /boot/grub/normal.mod
-
-<span class="c1"># go to startup screen</span>
-grub rescue&gt;normal
-
-<span class="c1"># (is this the alternative way?)</span>
-rescue&gt;linux /boot/vmlinuz-xxx-xxx <span class="nv">root</span><span class="o">=</span>/dev/sdax
-rescue&gt;initrd /boot/initrd.img-xxx-xxx
-rescue&gt;boot
-</pre></div>
-
-<h3 id="toc_5">Reference</h3>
-
-<h1 id="toc_6"></h1>
-<p>The GRUB manual: (run in linux shell) <code>info grub</code></p>
-<p>Clean up Grub2 entries: <a href="http://www.howtogeek.com/howto/17787/clean-up-the-new-ubuntu-grub2-boot-menu/">www.howtogeek.com/howto/17787/clean-up-the-new-ubuntu-grub2-boot-menu/</a>. (There is also a link to an article for the old <code>grub</code>)</p>
-<p>How to Configure Grub2 boot loader settings: <a href="http://www.howtogeek.com/196655/how-to-configure-the-grub2-boot-loaders-settings/">www.howtogeek.com/196655/how-to-configure-the-grub2-boot-loaders-settings/</a></p>
 ]]>
         </content>
     </entry><entry>
@@ -1344,132 +862,6 @@ $ sudo apt-get install fonts-wqy-microhei fonts-wqy-zenhei
 <p><a name="ref"></a>
 [1] Debian i18n: <a href="https://www.debian.org/doc/manuals/debian-reference/ch08.en.html">www.debian.org/doc/manuals/debian-reference/ch08.en.html</a> <br/>
 [2] IBus: <a href="https://wiki.archlinux.org/index.php/IBus">wiki.archlinux.org/index.php/IBus</a></p>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[A Short Reference of Python Logging]]></title>
-        <author><name>terryoy</name></author>
-        <link href="http://terryoy.github.io/2016/05/short-ref-python-logging.html"/>
-        <published>2016-05-26T19:55:00+08:00</published>
-        <updated>2020-02-01T10:09:37+08:00</updated>
-        <id>http://terryoy.github.io/2016/05/short-ref-python-logging.html</id>
-        <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
-        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
-            <![CDATA[ <p>I have for many times use the logging function, but never understand it completely. So I go through the document and make some notes, hoping it will help me use it more quickly in the future. </p>
-
-<h3 id="toc_0">1. Basic Config</h3>
-<p>If you want to use a programmable method other than a configuration file, the basicConfig() method is the general initializing method.</p>
-<p>The most basic form is default log, which you don&#39;t need basicConfig(). It is using console output with WARNING level.</p>
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">logging</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span> <span class="c1"># no output</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">logging</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;world&#39;</span><span class="p">)</span>
-<span class="n">world</span>
-</pre></div>
-<p>The basic config contains a list of below elements:</p>
-
-<ul>
-<li>  filename    - Using a <em>FileHandler</em> to output the log</li>
-<li>  filemode    - file open mode(&#39;r&#39;, &#39;w&#39;, &#39;a&#39;), mainly used to choose append or write a new log file</li>
-<li>  format      - A string for specifying the log output template, If you want to lookup a list of supported keywords, look for section &#39;LogRecord attributes&#39; in the python official document</li>
-<li>  datefmt     - A specified date/time format.</li>
-<li>  level       - set the <em>root</em> loglevel for the logger</li>
-<li>  stream      - Specify a stream for the StreamHandler, for example, a buffer output stream or stdout. It will be ignored if &ldquo;filename&rdquo; is present.</li>
-</ul>
-<p>The logger can be initialized only once when basicConfig() is called. Then </p>
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">logging</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;program.log&#39;</span><span class="p">,</span> 
-        <span class="n">filemode</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span>
-        <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(asctime)-15s</span><span class="s2"> </span><span class="si">%(levelname)s</span><span class="s2"> [</span><span class="si">%(module)s</span><span class="s2">] </span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">,</span>
-        <span class="n">datefmt</span><span class="o">=</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S.</span><span class="si">%f</span><span class="s2">&quot;</span><span class="p">,</span>
-        <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
-</pre></div>
-
-<h3 id="toc_1">2. Configuration Object and the Modular Approach</h3>
-<p>When choosing the Modular Approach of logging, you need to deal with 4 elements:</p>
-
-<ul>
-<li>  loggers     - the interface that application modules used to log things</li>
-<li>  handlers    - send the log records (that loggers created) to the appropriate destinations</li>
-<li>  filters     - provide a finer grained facility for determining which log records should be output</li>
-<li>  formatters  - specify the layout of the log records in the final output</li>
-</ul>
-
-<h4 id="toc_2">2.1 Logger hierarchy</h4>
-<p>The loggers used by all the modules are formed in a conceptual hierarchy by the naming with a separator(&#39;.&#39;). For example: &#39;abc.text&#39;, is the descendant of logger &#39;abc&#39;, while &#39;abc&#39; can be the parent of &#39;abc.text&#39;, &#39;abc.pdf&#39;, &#39;abc.image&#39;, etc. A good convention is to use loggers in a module sense, using in each <code>.py</code> as below:</p>
-<div class="highlight"><pre><span></span><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
-</pre></div>
-<p>The root of all loggers is called the &ldquo;root&rdquo; logger, which prints the logger name as &ldquo;ROOT&rdquo; in output.
-</p>
-
-<h4 id="toc_3">2.2 Useful handlers</h4>
-<p>There are some useful handlers in the section of python <em>Logging Howto</em> document. Some of them are listed as here:</p>
-
-<ul>
-<li>  StreamHandler   - to stream object (default stdin?)</li>
-<li>  FileHandler     - to a disk file</li>
-<li>  <strong>RotatingFileHandler</strong>         - from <em>BaseRotatingHandler</em>, send logs to files, rotating log file with a maximum file size.</li>
-<li>  <strong>TimedRotatingFileHandler</strong>    - from <em>BaseRotatingHandler</em>, send logs to files, rotating log file at a certain timed intervals.</li>
-<li>  SocketHandler/DatagramHandler   - send log messages to TCP/IP and UDP sockets</li>
-<li>  SMTPHandler     - Send to a designated email address</li>
-<li>  NullHandler     - Do nothing, it&#39;s used in development that supports logging with this mock</li>
-</ul>
-<p>This shows the variety of logging output scenarios, which you could look them up in the python doc.</p>
-
-<h4 id="toc_4">2.3 The propagation of loggers</h4>
-<p>Look at the flow of logging in the below diagram from <a href="https://docs.python.org/2/howto/logging.html#logging-advanced-tutorial">python&#39;s tutorial</a>,</p>
-<p><img src="https://docs.python.org/2/_images/logging_flow.png" alt="logging flow"/></p>
-<p>When a log record is send to the logger in the module, it will first check if its own filter(the filter of a logger) reject it, then pass to its handler; if propagation is set to true(by default), it will pass the log record to it&#39;s parent too, so the log record will bubble up till the root logger, and each logger will judge by their handler and filter to decide whether to output the log record. So we often setup a top level logger, and then configure a child logger only if needed.</p>
-
-<h4 id="toc_5">2.4 Configuring Logging</h4>
-<p>The most usual approaches are using <code>fileConfig()</code> and <code>dictConfig()</code>. With fileConfig() you can use a <strong>.conf</strong> file to load the settings (this approach is deprecated), and with dictConfig() you can use even wider range of persistence choices, such as JSON, python file, yaml, etc.</p>
-<p>For example, I have written a small utils for command line interaction and also want to log the HTTP request details. So I defined two handlers: one for console output, another for file output so that I can review the details. The console output must be simple without unneccessary information, and the file output should contains all the time, module details for investigation. Here is my configuration using a python file. (The advantages for a python configuration is that you can also use expressions and comments.)</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span><span class="o">,</span> <span class="nn">logging.config</span>
-
-<span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;log_config&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s2">&quot;formatters&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;brief&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">,</span>
-            <span class="p">},</span>
-            <span class="s2">&quot;detail&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">%(asctime)-15s</span><span class="s2"> </span><span class="si">%(levelname)s</span><span class="s2"> [</span><span class="si">%(name)s</span><span class="s2">.</span><span class="si">%(funcName)s</span><span class="s2">] </span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;datefmt&quot;</span><span class="p">:</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">,</span>
-            <span class="p">},</span>
-        <span class="p">},</span>
-        <span class="s2">&quot;handlers&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;console&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;logging.StreamHandler&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;INFO&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;formatter&quot;</span><span class="p">:</span> <span class="s2">&quot;brief&quot;</span><span class="p">,</span>
-            <span class="p">},</span>
-            <span class="s2">&quot;file&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;logging.handlers.RotatingFileHandler&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;dev.log&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;DEBUG&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;formatter&quot;</span><span class="p">:</span> <span class="s2">&quot;detail&quot;</span><span class="p">,</span>
-            <span class="p">},</span>
-        <span class="p">},</span>
-        <span class="s2">&quot;root&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;handlers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;console&quot;</span><span class="p">,</span> <span class="s2">&quot;file&quot;</span><span class="p">],</span>
-            <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;DEBUG&quot;</span><span class="p">,</span>
-        <span class="p">},</span>
-        <span class="s2">&quot;loggers&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;requests&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;handlers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;file&quot;</span><span class="p">],</span>
-                <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;DEBUG&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;propagate&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-            <span class="p">}</span>
-        <span class="p">},</span>
-    <span class="p">},</span>
-<span class="p">}</span>
-
-<span class="n">logging</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">dictConfig</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;log_config&quot;</span><span class="p">])</span>
-</pre></div>
-<p>There are two formatters: &ldquo;brief&rdquo; for simply output the message body, the root loggers is default logger for all the modules I write, and also the 3rd party libraries like python <code>requests</code>. Since all the info log should appear in both <strong>console</strong> and the <strong>file</strong>, I need to put both inthe root logger. However, to avoid the unneccssary debug log showing in console, I set the level <strong>INFO</strong> in the <strong>console</strong> handler. This enables the file logger logs everything while the console doesn&#39;t. </p>
-<p>Next I discover that the library &ldquo;requests&rdquo; also have some &ldquo;INFO&rdquo; log which is unneccessary in console, so I will specificially make it disappear using the <strong>loggers</strong> config. The important thing here is to use the <strong>propagate</strong> feature. </p>
-<p>The &ldquo;file&rdquo; logger wants the requests&#39; debug log, so I need to set the level to DEBUG. By default, it will propagate the log record to the &ldquo;root&rdquo; logger which make it appear to console. So I will use <code>propagate: False</code> to disable the propagation. Then the log records  will stay in the &ldquo;requests&rdquo; logger and will be invisible to the &ldquo;root&rdquo; logger.</p>
-<p>If you&#39;re not sure what to config with, write a small example project to experiment the result.</p>
 ]]>
         </content>
     </entry><entry>
@@ -1719,117 +1111,881 @@ $ nmcli device wifi connect &lt;SSID<span class="p">|</span>BSSID&gt; password &
 ]]>
         </content>
     </entry><entry>
-        <title type="html"><![CDATA[Config your git repository to use SSH Key]]></title>
+        <title type="html"><![CDATA[Raspberry Pi Hardware GPIO with Python]]></title>
         <author><name>terryoy</name></author>
-        <link href="http://terryoy.github.io/2016/04/git-ssh-config.html"/>
-        <published>2016-04-17T16:11:00+08:00</published>
-        <updated>2020-02-01T10:09:37+08:00</updated>
-        <id>http://terryoy.github.io/2016/04/git-ssh-config.html</id>
-        <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
-        <category scheme="http://terryoy.github.io/tag/#virtualbox" term="virtualbox" label="virtualbox" />
-        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
-            <![CDATA[ <p>It is very time-consuming typing user and password every time when you do git pull/push to sync your code. Using the rsa ssh key for the authentication will save you a lot of time.</p>
-
-<h3 id="toc_0">1. Generate SSH Key</h3>
-<p>Just use the method I mentioned before in <a href="/2014/01/ssh-key-based-auth-server.html#toc_1">this article</a>, you will get a public/private key pair. Upload the public key to your github or other git hosting service.</p>
-
-<h3 id="toc_1">2. Config your local SSH</h3>
-<p>Create or open the file <code>~/.ssh/config</code> for ssh key config. The content will be similar as below:</p>
-
-<pre><code>Host dev
- HostName dev.local
- IdentityFile ~/.ssh/dev_rsa
-Host github.com
- HostName github.com
- IdentityFile ~/.ssh/github_rsa</code></pre>
-<p>You can use a &ldquo;host&rdquo; alias for ssh connect instead of the full host name, this would be convenient if you might switch server host.</p>
-
-<h3 id="toc_2">3. Choose the correct git url</h3>
-<p>Usually public git hosting services use HTTPS or GIT protocol, and your private repository can use SSH protocol like in <a href="/2014/10/common-git-commands.html#toc_3">this article</a>.</p>
-
-<pre><code>* Git URL: git@bitbucket.org:&lt;accountname&gt;/&lt;reponame&gt;.git  
-* Use with alias: git@bitbucket:&lt;accountname&gt;/&lt;reponame&gt;.git</code></pre>
-
-<h3 id="toc_3">4. No more ask of  the passphrase</h3>
-<p>Initially if you use a ssh key with passphrase, you might need to enter the passphrase every time you use it. It will be kind of annoying although provide better security. However, sometimes I don&#39;t want it to be entered every time in my private trusted computer. So we need <code>ssh-agent</code> to handle that.</p>
-<div class="highlight"><pre><span></span><span class="c1"># install the openssh-client package if you&#39;re on Debian/Ubuntu</span>
-$ sudo apt-get install openssh-client
-
-<span class="c1"># the ssh-add and ssh-agent tools will be available after the installation, but you need to start ssh-agent in your .bashrc script</span>
-$ vi ~/.bashrc
-<span class="nb">eval</span> <span class="k">$(</span>ssh-agent<span class="k">)</span>
-
-<span class="c1"># add the ssh key to ssh-agent (the passphrase will be asked once)</span>
-$ <span class="nb">cd</span> ~/.ssh
-$ ssh-add -k gitub_rsa
-</pre></div>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[Ubuntu Desktop Sharing to Mac OSX]]></title>
-        <author><name>terryoy</name></author>
-        <link href="http://terryoy.github.io/2016/02/ubuntu-desktop-sharing-to-osx.html"/>
-        <published>2016-02-26T10:52:00+08:00</published>
-        <updated>2020-02-01T10:09:37+08:00</updated>
-        <id>http://terryoy.github.io/2016/02/ubuntu-desktop-sharing-to-osx.html</id>
+        <link href="http://terryoy.github.io/2015/09/rpi-hardware-begin-gpio-python.html"/>
+        <published>2015-09-06T20:02:00+08:00</published>
+        <updated>2020-02-01T10:09:36+08:00</updated>
+        <id>http://terryoy.github.io/2015/09/rpi-hardware-begin-gpio-python.html</id>
+        <category scheme="http://terryoy.github.io/tag/#rpi" term="rpi" label="rpi" />
         <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
-        <category scheme="http://terryoy.github.io/tag/#osx" term="osx" label="osx" />
+        <category scheme="http://terryoy.github.io/tag/#hardware" term="hardware" label="hardware" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
-            <![CDATA[ <p>I have a spare laptop rest in my house which I seldom use(I major use my macbook pro for work), but it&#39;s still good for developing projects and runs Linuxi Mint. So I want it to be available any time when I&#39;m at home so I could use it to continue my side project works. With ssh and VNC, I can setup both the command line and desktop environment online so I don&#39;t need to open the laptop, but use my macbook to access the environment. Then I have the convenience that the laptop can put anywhere in the house and clear my desktop.</p>
-<p>I found <a href="http://www.fiz-ix.com/2012/12/ubuntu-to-mac-os-x-screen-sharing-with-vinagre/">this post</a> very useful to do the trick. It uses &ldquo;vino&rdquo; with easily setup steps, and you can get &ldquo;Vinagre&rdquo; VNC client on Linux ox,  but you need some notices about the access on OSX. So I write my process here.</p>
+            <![CDATA[ <p>This article is for beginner to learn how to work with RPi.GPIO. It collects a bunch of useful information and examples of GPIO/SPI/I2C programs.</p>
 
-<h3 id="toc_0">1. Setup Vino(VNC for gnome)</h3>
-<p>Just reference the post. </p>
-<div class="highlight"><pre><span></span>$ sudo apt-get vino
-<span class="c1"># the preferences is the same as &quot;Desktop Sharing&quot; preference panel in Linux Mint</span>
-$ vino-preferences
-</pre></div>
-<p>You can set up the items just as the post said in vino-preferences, but on Linux Mint it lacks out the &ldquo;Advanced settings&rdquo; mentioned in the post. So you need &ldquo;dconf-editor&rdquo; to manually set it.</p>
-<div class="highlight"><pre><span></span>$ sudo apt-get install dconf-editor
-$ dconf-editor
-</pre></div>
-<p>Find the config item in dconf-editor with path <strong>&ldquo;desktop.gnome.remote-access&rdquo;</strong>. You need to uncheck the &ldquo;require encryption&rdquo; to support OSX, otherwise the authentication is unsupported on OSX.</p>
+<h3 id="toc_0">1. Raspberry Pi Hardware Documentation</h3>
+<p>First of all, the hardware documentation for rpi is here:
+<a href="https://www.raspberrypi.org/documentation/hardware/README.md">https://www.raspberrypi.org/documentation/hardware/README.md</a></p>
+<p>GPIO Pin out: <a href="http://pi.gadgetoid.com/pinout">http://pi.gadgetoid.com/pinout</a>. Now here&#39;s a screenshot of the pinouts.</p>
+<p><img src="http://terryoy-github.u.qiniudn.com/blog/2015/rpi-gpio-pinout.png" alt="http://terryoy-github.u.qiniudn.com/blog/2015/rpi-gpio-pinout.png"/></p>
+<p>SPI: <a href="https://www.raspberrypi.org/documentation/hardware/raspberrypi/spi/README.md">https://www.raspberrypi.org/documentation/hardware/raspberrypi/spi/README.md</a></p>
+<p>Low level Peripherals: <a href="http://elinux.org/RPi_Low-level_peripherals">http://elinux.org/RPi_Low-level_peripherals</a></p>
 
-<h3 id="toc_1">2. Using Screen Sharing on Mac OSX</h3>
-<p>Turn on the &ldquo;Spotlight&rdquo; with keyboard shortcut <code>cmd+K</code>, enter &ldquo;screen sharing&rdquo; and you can find the default desktop sharing client app on Mac OSX.</p>
-<p>Type &ldquo;vnc://your_server_ip:5900&rdquo; and then you get the prompt to enter password for the access. That&#39;s it!</p>
+<h3 id="toc_1">2. Basic GPIO</h3>
+<p>(to be continued)</p>
 
-<h3 id="toc_2">3. More</h3>
-<p>The post also talked about using the <code>avahi</code> service to broadcast the desktop sharing service to OSX. It is an advanced option to try, I will update it if I have tried.</p>
+<h3 id="toc_2">References:</h3>
+<p>Sparkfun&#39;s tutorials:
+<a href="https://learn.sparkfun.com/tutorials/raspberry-gpio/hardware-setup">learn.sparkfun.com/tutorials/raspberry-gpio/hardware-setup</a>
+<a href="https://learn.sparkfun.com/tutorials/raspberry-gpio/python-rpigpio-example">learn.sparkfun.com/tutorials/raspberry-gpio/python-rpigpio-example</a></p>
 ]]>
         </content>
     </entry><entry>
-        <title type="html"><![CDATA[VirtualBox Command Line Tricks]]></title>
+        <title type="html"><![CDATA[Intel Edison Get Started]]></title>
         <author><name>terryoy</name></author>
-        <link href="http://terryoy.github.io/2016/02/vbox-cmd-tools-tricks.html"/>
-        <published>2016-02-17T11:01:00+08:00</published>
-        <updated>2020-02-01T10:09:37+08:00</updated>
-        <id>http://terryoy.github.io/2016/02/vbox-cmd-tools-tricks.html</id>
-        <category scheme="http://terryoy.github.io/tag/#shell" term="shell" label="shell" />
-        <category scheme="http://terryoy.github.io/tag/#virtualbox" term="virtualbox" label="virtualbox" />
+        <link href="http://terryoy.github.io/2015/06/edison-get-started.html"/>
+        <published>2015-06-03T16:15:00+08:00</published>
+        <updated>2020-02-01T10:09:36+08:00</updated>
+        <id>http://terryoy.github.io/2015/06/edison-get-started.html</id>
+        <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
         <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
-            <![CDATA[ <p>Sometimes we need to work with VirtualBox&#39;s command line tools to make things done. Here are a collections of tasks I encountered.</p>
+            <![CDATA[ <p>This guide is about the initial steps for me starting development on Intel Edison platform.</p>
 
-<h3 id="toc_0">1. Converting an Linux .img format to a .vdi (VirtualBox disk)</h3>
-<div class="highlight"><pre><span></span>$ VBoxManage convertfromraw mydisk.img mydisk.vdi --format vdi
+<h3 id="toc_0">1. The Board and Setting Up Serial Communication</h3>
+<p>The board I use to develop with Edison is the <a href="http://www.seeedstudio.com/depot/Intel-Edison-for-Arduino-p-2149.html">Intel Edison for Arduino</a> board. So first plug the Edison module on the board; secondary, I have the 6.5V 2A DC connected to supply the power to the board (or you could power up the board with the micro-USB in the middle); third, a micro-USB wire connect to the board for serial communication.</p>
+<p>I&#39;m using minicom on Mac OSX for the serial connection, but you can also use <code>screen</code> on Mac OSX and Linux(see the reference at the end of this section).</p>
+<p>If you forgot the root password, here&#39;s the way to recover it: </p>
+
+<pre><code>* on booting, press any key to stop the process
+* on the &quot;boot&gt;&quot; command line prompt, type ```run do_ota``` to redo the flashing process.</code></pre>
+<p>Then you end up with a login using &ldquo;root&rdquo; as user name and no password.</p>
+
+<ul>
+<li><a href="https://software.intel.com/zh-cn/assembling-intel-edison-board-with-arduino-expansion-board">Reference for assembling</a></li>
+<li><a href="https://software.intel.com/zh-cn/setting-up-serial-terminal-on-system-with-linux">Reference for setting up serial on Linux</a></li>
+<li><a href="https://software.intel.com/zh-cn/setting-up-serial-terminal-on-system-with-mac-os-x">Reference for setting up serial on Mac</a></li>
+</ul>
+
+<h3 id="toc_1">2. Setting up WiFi</h3>
+<p>The next thing to do is to setup the WiFi on Edison, because a large part of the development process happens on WiFi.</p>
+<div class="highlight"><pre><span></span>$ configure_edison --wifi
+
+<span class="c1"># check the wifi status</span>
+$ wpa_cli status
+</pre></div>
+<p>Follow the instructions of this program to complete the scanning, choosing hotspot, and reboot with WiFi.</p>
+<p>By default, <code>ssh</code> is restricted to usb, so you need to disable the restriction by using <code>configure_edison --setup</code> to setup the device name and password. It will automatically update the file &#39;/lib/systemd/system/sshd.socket&#39; and comment out this line &ldquo;BindToDevice=usb0&rdquo;. (need reboot to take effect)</p>
+
+<ul>
+<li><a href="https://software.intel.com/zh-cn/connecting-your-intel-edison-board-using-wifi">Reference for setting up WiFi</a></li>
+</ul>
+
+<h3 id="toc_2">3. Blink the LED</h3>
+<p>(to be continued when I get the board&hellip;)</p>
+]]>
+        </content>
+    </entry><entry>
+        <title type="html"><![CDATA[A Template for Program Readme on Github]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2015/06/program-readme-template.html"/>
+        <published>2015-06-03T16:15:00+08:00</published>
+        <updated>2020-02-01T10:09:36+08:00</updated>
+        <id>http://terryoy.github.io/2015/06/program-readme-template.html</id>
+        <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <p>When writing a Program, the developer should be clear about the purpose, to eliminate time wasted. Refering to the <a href="http://textfiles.com/programming/writprog.pro">How to Program</a>, I propose a documatation template companied with a Software Development Life Cycle to ensure this.</p>
+
+<pre><code>1. SPECIFICATION
+2. PROGRAM DESIGN
+3. CODE DESIGN
+4. CONSTRUCTION AND DESIGN</code></pre>
+<p>So, starting a project on github, I think we should follow a basic documentation structure to answer each questions, to ensure that your purpose is clear enough.</p>
+
+<h3 id="toc_0">1. Speficication</h3>
+<p>In this stage, four things matter.</p>
+
+<ul>
+<li><p>User Interface</p>
+<p>in what approach does user interact with the program?
+what input/output?
+command line? menus? how much freedom allowed?</p></li>
+<li><p>Algorithm</p>
+<p>what specific computation behind the program?
+what method do we use?</p></li>
+<li><p>Data Structures</p>
+<p>how should the data of the problem be organized?</p></li>
+<li><p>[Generality]</p>
+<p>is it used only in a small number of situations? or is it general purpose of wide variety of circumstances?
+you need fewer choices if made for a small number of situations, and more choices and more commands for large number of situations</p></li>
+<li><p>[Robustness]
+how gracefully does the program respond to bad data or bad commands?</p></li>
+</ul>
+
+<h3 id="toc_1">2. Program Design</h3>
+<p>A design of the program may be often represented by a structure chart, but it&#39;s not the most important thing. Instead, you should divied the large program into <strong>subroutines</strong>.</p>
+
+<ul>
+<li>Design Structure
+top level routines
+    sub routines</li>
+</ul>
+<p>There&#39;re a few ideas for evaluating the desgin:</p>
+
+<pre><code>1. Keep subroutines short
+2. Keep subroutines single-purpose
+3. Keep calling sequence short
+4. Communicate data through calling sequences
+5. Limit use of flag variables
+6. Make design hierarchical</code></pre>
+
+<h3 id="toc_2">[3. Setup and Testing]</h3>
+
+<h3 id="toc_3">[4. About and License]</h3>
+<p><em>(Since the original post discontinued, I have to complete the rest of the template myself.)</em></p>
+<p>Following is a template in markdown:</p>
+
+<pre><code>### 1. Specification
+
+##### User Interface
+
+##### Algorithms
+
+##### Data Structures
+
+##### [Generality]
+
+##### [Robustness]
+
+### 2. Program Design
+
+##### Design Structure
+
+##### Public Interface
+
+### 3. Setup and Testing
+
+### 4. About
+
+### 5. License</code></pre>
+]]>
+        </content>
+    </entry><entry>
+        <title type="html"><![CDATA[A JNI Guide on Android]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2014/11/jni-guide-on-android.html"/>
+        <published>2014-11-27T16:06:00+08:00</published>
+        <updated>2020-02-01T10:09:36+08:00</updated>
+        <id>http://terryoy.github.io/2014/11/jni-guide-on-android.html</id>
+        <category scheme="http://terryoy.github.io/tag/#cpp" term="cpp" label="cpp" />
+        <category scheme="http://terryoy.github.io/tag/#android" term="android" label="android" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <h3 id="toc_0">1. Begin a JNI Project</h3>
+<p>To create a JNI project in ADT, first is to setup NDK support for the workspace.  Open <em>&ldquo;Preferences&rdquo; -&gt; &ldquo;Android&rdquo; -&gt; &ldquo;NDK&rdquo;</em>, set the <em>NDK Locaiton</em> to your ndk root.</p>
+<p>After you create a new Android project, native support is not yet enabled. Right click on the project, and select <em>&ldquo;Android Tools&rdquo; -&gt; &ldquo;Add Native Support&hellip;&rdquo;</em>. It prompts a &ldquo;Library Name&rdquo; input for you to type in the native library name you want to use. On succeed, it will generate a &ldquo;jni&rdquo; folders containing a &ldquo;.cpp&rdquo; file and a &ldquo;Android.mk&rdquo; makefile.</p>
+<p><em>***a small hint on creating project: if you created an project without an initial activity (which it&#39;s possible when your only interest is in building an native app), you need to specify your MainActivity in the AndroidManifest.xml. On the &ldquo;Application&rdquo; sheet in Manifest editor, first add a &ldquo;Activity&rdquo; node, which connects to your Activity subclass; then create an &ldquo;Intent Filter&rdquo; node, and then an &ldquo;Action&rdquo; node and a &ldquo;Category&rdquo; node under the IntentFilter node. The Action node selects &ldquo;android.intent.action.MAIN&rdquo;, and the Category node selects &ldquo;android.intent.category.LAUNCHER&rdquo;.</em></p>
+
+<h3 id="toc_1">2. Information on Android.mk</h3>
+<p>The syntax of Android.mk is based on <a href="http://www.gnu.org/software/make/">GNU Make</a>. This file is only a snippet of the whole make process. The whole process also includes an Application.mk and a Android.mk provided by the NDK build system. </p>
+<div class="highlight"><pre><span></span><span class="c"># my-dir is a macro defined by Android, which provides the path for where the make file is.</span>
+<span class="nv">LOCAL_PATH</span> <span class="o">:=</span> <span class="k">$(</span>call my-dir<span class="k">)</span>
+
+<span class="c"># CLEAR_VARS clears all the &quot;LOCAL_*&quot; variables except &quot;LOCAL_PATH&quot;</span>
+<span class="cp">include $(CLEAR_VARS)</span>
+
+<span class="nv">LOCAL_MODULE</span>    <span class="o">:=</span> jnidemo <span class="c1"># provide the lib name (e.g. libjnidemo.so), and also the name to load in Java Class</span>
+<span class="nv">LOCAL_SRC_FILES</span> <span class="o">:=</span> jnidemo.cpp <span class="c1"># a source file list to compile and build into the library</span>
+
+<span class="c">#LOCAL_SHARE_LIBRARIES := avilib # (optional 1): if you depends on other libraries, you can load it here</span>
+
+<span class="c"># build the library</span>
+<span class="cp">include $(BUILD_SHARED_LIBRARY)</span>
+
+<span class="c">#$(call import-module,transcode/avilib) # (optional 2): put the 3rd party library outside project folder, under NDK_MODULE_PATH and import it using this line</span>
+</pre></div>
+<p><em>* If you have more than one library to build, just duplicate the part from &ldquo;include $(CLEAR_VARS)&rdquo; to &ldquo;include $(BUILD_SHARED_LIBRARY)&rdquo;.</em></p>
+<p><em>* NDK build also supports executable build, only by replacing &ldquo;include $(BUILD_SHARED_LIBRARY)&rdquo; with &ldquo;include $(BUILD_EXECUTABLE)&rdquo;, the output will also be in libs/<arch> folder, but will not be packed into an .apk file.</em></p>
+<p>_* If you need to trigger build under command line, go to the project root folder, and type <code>ndk-build</code> to build.</p>
+
+<h3 id="toc_2">3. Import JNI library in Java Class</h3>
+<p>Use the code below to load a library in the Java class.</p>
+<div class="highlight"><pre><span></span><span class="kd">static</span> <span class="p">{</span>
+    <span class="n">System</span><span class="p">.</span><span class="na">loadLibrary</span><span class="p">(</span><span class="s">&quot;jnidemo&quot;</span><span class="p">);</span>
+    <span class="c1">// System.load(&quot;c:/path/to/library.so&quot;); // this is not recommended since it would be platform dependent</span>
+<span class="p">}</span>
 </pre></div>
 
-<h3 id="toc_1">2. Mount virtual disk on your ubuntu system</h3>
-<p>In linux, we can use a the <code>qemu-nbd</code> and <code>kpartx</code> to mount a .vdi file on a path. The <em>qemu-nbd</em> tool can create a block device to enable it to be share via NBD(Network Block Device) protocol. Then, we will use <code>kpartx</code> to create device maps from the partition tables of the device, which makes the partition of the image mountable.</p>
-<div class="highlight"><pre><span></span><span class="c1"># (prerequisites] install the dependencies</span>
-$ sudo apt-get install qemu-utils kpartx
+<h3 id="toc_3">4. Working With Native Functions</h3>
+<p>There are two sides of the JNI interface: Java calling C/C++, and C/C++ calling Java. In Java, you can call a native funciton implmeneted by a C/C++ shared library; and in C/C++, you might also need to trigger Java methods inside C/C++ code. So let&#39;s talk about both respectively.</p>
 
-<span class="c1"># to mount the device</span>
-$ sudo modprobe -nbd
-$ sudo qemu-nbd -c /dev/nbd0 &lt;vdi_file&gt;
-$ sudo kpartx -a /dev/nbd0
-$ sudo mount /dev/mapper/nbd0p1 /mnt/&lt;mount_point&gt;
+<h4 id="toc_4">4.1 Java Calling C/C++</h4>
+<p>In a Java class, you can define a native method which will be implmemented by C/C++ code. In this case, you can call native C/C++ functions from Java.</p>
+<div class="highlight"><pre><span></span><span class="n">Class</span> <span class="n">A</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="kd">native</span> <span class="n">String</span> <span class="nf">stringFromJNI</span><span class="p">();</span> <span class="c1">// native method</span>
 
-<span class="c1"># delete the device when no longer needed</span>
-$ sudo umount /mnt/&lt;mount_point&gt;
-$ sudo qemu-nbd -d /dev/nbd0
+    <span class="kd">static</span> <span class="p">{</span> <span class="c1">// load the shared library that contains the native method</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">loadLibrary</span><span class="p">(</span><span class="s">&quot;jnidemo&quot;</span><span class="p">);</span>
+    <span class="p">}</span> 
+<span class="p">}</span>
 </pre></div>
-<p>(&hellip;to be continued)</p>
+<p>You can use <code>javah -classpath bin/classes com.teatime.jnidemo.A</code> to generate the C/C++ header for the java native methods. It will create a &ldquo;com_teatime_jnidemo_A.h&rdquo; file as below: </p>
+<div class="highlight"><pre><span></span><span class="cm">/* DO NOT EDIT THIS FILE - it is machine generated */</span>
+<span class="cp">#include</span> <span class="cpf">&lt;jni.h&gt;</span><span class="cp"></span>
+<span class="cm">/* Header for class com_teatime_jnidemo_A */</span>
+
+<span class="cp">#ifndef _Included_com_teatime_jnidemo_A</span>
+<span class="cp">#define _Included_com_teatime_jnidemo_A</span>
+<span class="cp">#ifdef __cplusplus</span>
+<span class="k">extern</span> <span class="s">&quot;C&quot;</span> <span class="p">{</span>
+<span class="cp">#endif</span>
+<span class="cm">/*</span>
+<span class="cm"> * Class:     com_teatime_jnidemo_A</span>
+<span class="cm"> * Method:    stringFromJNI</span>
+<span class="cm"> * Signature: ()Ljava/lang/String;</span>
+<span class="cm"> */</span>
+<span class="n">JNIEXPORT</span> <span class="n">jstring</span> <span class="n">JNICALL</span> <span class="n">Java_com_teatime_jnidemo_A_stringFromJNI</span>
+  <span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="p">,</span> <span class="n">jobject</span><span class="p">);</span>
+
+<span class="cp">#ifdef __cplusplus</span>
+<span class="p">}</span>
+<span class="cp">#endif</span>
+<span class="cp">#endif</span>
+</pre></div>
+<p>Here you can see the Java method signature is converted to something have similar meaning: &ldquo;jstring&rdquo; means the Java String class, &ldquo;jobject&rdquo; is for the object instance which calls  this method. </p>
+
+<hr/>
+<p>However, you don&#39;t really want to type this command to generate every file you make, so a more convenient way is to setup a &ldquo;Run -&gt; External Tools -&gt; External Tools Configurations&rdquo; to trigger it inside Eclipse IDE. The configuration will be like below: (note that the path segment is joined by &ldquo;:&rdquo; on mac/linux and &ldquo;;&rdquo; on windows)</p>
+
+<pre><code>Name: Generate C/C++ Header File
+Location: ${system_path:javah}
+Working Directory: ${project_loc}/jni
+Arguments: -classpath &quot;${project_classpath}:${env_var:ANDROID_SDK_HOME}/platforms/android-15/android.jar&quot; ${java_type_name}
+Refresh -&gt; Refresh Resources upon completions; The project containing the selected resource
+Common -&gt; Display in favourites menu -&gt; External Tools</code></pre>
+
+<hr/>
+<p>There are type mappings betwine Java and C as below. For more information you could check out the JNI document <a href="http://docs.oracle.com/javase/1.5.0/docs/guide/jni/spec/types.html">here</a>.</p>
+<p><img src="http://terryoy-github.u.qiniudn.com/blog/2014/jni_primitive_types.png" alt="Primitive Types"/>
+<img src="http://terryoy-github.u.qiniudn.com/blog/2014/jni_reference_types.gif" alt="Reference Types"/></p>
+
+<h4 id="toc_5">4.2 C/C++ Calling Java</h4>
+<p>In C/C++, you need to include <code>jni.h</code> and use <code>JNIEnv</code> to work with the Java methods in JVM. The JNIEnv object is to keep everything consistent inside JVM. </p>
+
+<blockquote>
+<p>typedef const struct JNINativeInterface *JNIEnv; </p>
+</blockquote>
+<p>There&#39;s a list of functions for JNIEnv object you can check out <a href="http://docs.oracle.com/javase/1.5.0/docs/guide/jni/spec/functions.html#wp23720">here</a></p>
+<p>For primitive types, you can  use directly convert to the c types directly. For  Here are some examples:</p>
+<div class="highlight"><pre><span></span><span class="c1">// primitive types</span>
+<span class="kt">int</span> <span class="n">cvalue</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+<span class="n">jint</span> <span class="n">value</span> <span class="o">=</span> <span class="n">cvalue</span><span class="p">;</span>
+
+<span class="c1">// create Java string</span>
+<span class="n">jstring</span> <span class="n">javaString</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">NewStringUTF</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="s">&quot;Hello World!&quot;</span><span class="p">);</span>
+<span class="c1">// convert Java string to C string</span>
+<span class="k">const</span> <span class="n">jbyte</span> <span class="o">*</span><span class="n">str</span><span class="p">;</span>
+<span class="n">jboolean</span> <span class="n">isCopy</span><span class="p">;</span>
+<span class="n">str</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetStringUTFChars</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">javaString</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">isCopy</span><span class="p">);</span> <span class="c1">// isCopy tells the function to get a copy or return the original string</span>
+<span class="c1">// release string after GetStringChars/GetStringUTFChars</span>
+<span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">ReleaseStringUTFChars</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">javaString</span><span class="p">,</span> <span class="n">str</span><span class="p">);</span>
+
+<span class="c1">// operating array</span>
+<span class="n">jintArray</span> <span class="n">javaArray</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">NewIntArray</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="mi">0</span> <span class="o">!=</span> <span class="n">javaArray</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// this only creates a java array</span>
+    <span class="c1">// approach 1: you can ask for a C array pointer to operate on it</span>
+    <span class="n">jint</span><span class="o">*</span> <span class="n">nativeDirectArray</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetIntArrayElements</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">javaArray</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">isCopy</span><span class="p">);</span> <span class="c1">// isCopy tells the function to get a copy or the original</span>
+    <span class="c1">// ... do something</span>
+    <span class="c1">// release the pointer ref, otherwise will cause memory leak</span>
+    <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">ReleaseIntArrayElements</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">javaArray</span><span class="p">,</span> <span class="n">nativeDirectArray</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// last param can be: 0, JNI_COMMIT, JNI_ABORT</span>
+    <span class="c1">// 0: apply the content and release the native array</span>
+    <span class="c1">// JNI_COMMIT: apply the content, don&#39;t release the native array</span>
+    <span class="c1">// JNI_ABORT: don&#39;t apply the content, but release the array</span>
+
+    <span class="c1">// aproach 2: work with a local array, and submit changes when needed</span>
+    <span class="n">jint</span> <span class="n">nativeArray</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+    <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetIntArrayRegion</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">javaArray</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">nativeArray</span><span class="p">);</span> <span class="c1">// copy the content to nativeArray</span>
+    <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">setIntArrayRegion</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">javaArray</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">nativeArray</span><span class="p">);</span> <span class="c1">// apply the changes back to the original array</span>
+<span class="p">}</span>
+
+<span class="c1">// calling a method</span>
+<span class="n">jmethodID</span> <span class="n">isntanceMethodId</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetMethodID</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">clazz</span><span class="p">,</span> <span class="s">&quot;instanceMethod&quot;</span><span class="p">,</span> <span class="s">&quot;()Ljava/lang/String;&quot;</span><span class="p">);</span>
+<span class="n">jstring</span> <span class="n">stringValue</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">CallStringMethod</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">instanceMethodId</span><span class="p">);</span>
+</pre></div>
+<p>Often you will need to checkout the method signature of the Java class, so that you can lookup the method in JNI interface. Here is a small trick to print the method signature in JNI style.</p>
+<div class="highlight"><pre><span></span>$ <span class="nb">cd</span> bin/classes
+$ javap -s com.jnidemo.MyJNIClass
+</pre></div>
+
+<h3 id="toc_6">5. References</h3>
+<p>Best Practices for using Java Native Interface: <a href="http://www.ibm.com/developerworks/library/j-jni/">http://www.ibm.com/developerworks/library/j-jni/</a> <br/>
+JNI Documentation: <a href="http://docs.oracle.com/javase/1.5.0/docs/guide/jni/spec/jniTOC.html">http://docs.oracle.com/javase/1.5.0/docs/guide/jni/spec/jniTOC.html</a> <br/></p>
+]]>
+        </content>
+    </entry><entry>
+        <title type="html"><![CDATA[Finding Information for C/C++ Library on Linux]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2014/10/finding-information-linux-c-library.html"/>
+        <published>2014-10-30T09:38:00+08:00</published>
+        <updated>2020-02-01T10:09:36+08:00</updated>
+        <id>http://terryoy.github.io/2014/10/finding-information-linux-c-library.html</id>
+        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
+        <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <p>Developing on Linux often needs shared libraries most of the time. Below is a few references for finding the information about the libraries you are dealing with.</p>
+
+<h3 id="toc_0">1. Naming Convention</h3>
+<p>All C standard libraries on linux has the name convention <em>&ldquo;lib<strong>xxx</strong>&rdquo;</em>. If you search packages of a library, you can use the (debian) command below to look for it:</p>
+<div class="highlight"><pre><span></span>$ apt-cache search libxxx
+</pre></div>
+
+<h3 id="toc_1">2. Library Packages</h3>
+<p>Usually, there are three packages of a library you could deal with. </p>
+
+<ul>
+<li>libxxx - this is the binary package of the shared library, usually has a &ldquo;lib<name>.so.<version>&rdquo; file on the path /usr/lib/ or /usr/local/lib. It is also needed at runtime.</li>
+<li>libxxx-dev - this is the package which enables you to compile and link the library.</li>
+<li>libxxx-dbg - this is the package which contains the debug symbols for debugging the program. where the files are usually installed at &ldquo;/usr/lib/debug/&rdquo;.</li>
+</ul>
+<p>If you want to know what files are installed on you system of a package, below are a few commands to do so:</p>
+<div class="highlight"><pre><span></span>$ dpkg-query -L &lt;package_name&gt;
+$ dpkg-query -c &lt;.deb_file&gt;
+
+<span class="c1"># if you want to check files without installing the package</span>
+<span class="c1"># use the apt-file program(it will cache the file lists of all packages)</span>
+$ apt-file update
+$ apt-file list &lt;package_name&gt;
+</pre></div>
+
+<h3 id="toc_2">3. List Libraries on Your System</h3>
+<p>Below command can list all the share libraries and their locations, so you could whether a libray is installed and registered on which path.</p>
+<div class="highlight"><pre><span></span>$ ldconfig -p
+
+<span class="c1"># find a library(SDL) for example</span>
+$ ldconfig -p <span class="p">|</span> grep -i sdl
+</pre></div>
+<p>For the <code>ld</code> program, it searches &ldquo;/usr/lib/&rdquo; for libraries by default, but it also include the paths defined in &ldquo;/etc/ld.so.conf&rdquo; and &ldquo;/etc/ld.so.conf.d/&rdquo;.</p>
+
+<h3 id="toc_3">4. Checking The Information of Library Files</h3>
+<p>A library usually contains two parts: static(.a) and shared(.so). You can check the both parts with the commands below:</p>
+<div class="highlight"><pre><span></span><span class="c1"># listing object files in static (archive) library</span>
+$ ar tf /usr/lib/i386-linux-gnu/libSDL2.a
+SDL.o
+SDL_assert.o
+SDL_error.o
+SDL_hints.o
+SDL_log.o
+...
+
+<span class="c1"># listing symbols in object files(.o), archive library(.a), and shared library(.so)</span>
+$ nm object.o
+$ nm lib.a
+$ nm -D lib.so 
+$ nm --dynamic lib.so
+</pre></div>
+
+<h3 id="toc_4">5. Development Reference</h3>
+<p>Usually the &ldquo;-dev&rdquo; package contains some documentation or example files under path &ldquo;/usr/share/doc/lib<name>-dev/&rdquo;. It is very useful to checkout these materials locally. For examples:</p>
+<div class="highlight"><pre><span></span><span class="c1"># open the documentation home page(xdg-open is a general command to open file, you can replace it with &quot;iceaweasel&quot; etc.)</span>
+$ xdg-open /usr/share/doc/libusb-dev/html/index.html
+
+<span class="c1"># extract the examples </span>
+$ tar -zxvf /usr/share/doc/libsdl2-dev/examples/examples.tar.gz
+</pre></div>
+
+<h3 id="toc_5">6. More Information</h3>
+<p>Static, Shared Dynamic and Loadable Linux Libraries <br/>
+<a href="http://www.yolinux.com/TUTORIALS/LibraryArchives-StaticAndDynamic.html">http://www.yolinux.com/TUTORIALS/LibraryArchives-StaticAndDynamic.html</a><br/>
+Program Library HOWTO <br/>
+<a href="http://tldp.org/HOWTO/Program-Library-HOWTO/index.html">http://tldp.org/HOWTO/Program-Library-HOWTO/index.html</a></p>
+]]>
+        </content>
+    </entry><entry>
+        <title type="html"><![CDATA[A Guide of Common Git Tasks]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2014/10/common-git-commands.html"/>
+        <published>2014-10-22T20:57:00+08:00</published>
+        <updated>2020-02-01T10:09:36+08:00</updated>
+        <id>http://terryoy.github.io/2014/10/common-git-commands.html</id>
+        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
+        <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <h3 id="toc_0">1. Initialize a Git project</h3>
+<p>Usually, starting a git project include&#39;s the following steps:</p>
+
+<ul>
+<li>initialize local repository</li>
+<li>add a remote repository from server</li>
+<li>set up-stream and push to remote repository</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="c1"># initialize a repository</span>
+$ git init
+
+<span class="c1"># set a new remote</span>
+$ git remote add origin https://github.com/user/repo.git
+
+<span class="c1"># verify new remote</span>
+$ git remote -v
+
+<span class="c1"># (you might need to pull origin/master first if it&#39;s not empty)</span>
+$ git pull origin master
+
+<span class="c1"># push to remote repository</span>
+$ git push --set-upstream origin master
+</pre></div>
+
+<h3 id="toc_1">2. Correct mistakes on the repository</h3>
+<p>Usually there are some mistakes we will commit to git repository, so here are a few tips to correct the mistakes:</p>
+
+<ul>
+<li>Change file name/path</li>
+<li>Unstage files</li>
+<li>Remove sensitive data, or binary data in the history </li>
+</ul>
+<div class="highlight"><pre><span></span><span class="c1"># change or delete files in the current version</span>
+<span class="c1"># -- you should not simple use the common shell command &quot;mv&quot; and &quot;rm&quot;, </span>
+<span class="c1"># -- because that will lose the tracking. You should use with git instead</span>
+$ git rm &lt;somefile&gt;
+$ git mv &lt;somefile&gt; &lt;otherfile&gt;
+
+
+<span class="c1"># Unstage files</span>
+<span class="c1"># -- usually when you execute &quot;git status&quot;, it will prompt you how to unstage files (e.g. &#39;(use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)&#39;)</span>
+$ git reset HEAD &lt;file&gt;...
+<span class="c1"># -- (or, in some cases)</span>
+$ git rm --cached &lt;file&gt;
+
+<span class="c1"># Remove sensitive data</span>
+<span class="c1"># -- This one is more difficult. </span>
+<span class="c1"># check this link: https://help.github.com/articles/remove-sensitive-data/</span>
+</pre></div>
+
+<h3 id="toc_2">3. Using Proxy to work with server</h3>
+<p>You can use openssh to create an ssh tunnel with a remote server, and then communicate with git server with this tunnel proxy.</p>
+<div class="highlight"><pre><span></span><span class="c1"># Socks</span>
+ssh -D &lt;local_proxy_port&gt; &lt;remote_user&gt;@&lt;remote_server&gt; -p &lt;remote_ssh_port&gt;
+<span class="c1"># HTTPS for one site:</span>
+ssh -L &lt;local_proxy_port&gt;:&lt;destination_host&gt;:&lt;destination_port&gt; &lt;ssh_user&gt;@&lt;ssh_server&gt; -p &lt;ssh_port&gt;
+</pre></div>
+<p>Using git with proxies:</p>
+<div class="highlight"><pre><span></span><span class="c1"># proxy for https</span>
+<span class="nb">export</span> <span class="nv">https_proxy</span><span class="o">=</span>&lt;http_proxy_host&gt;:&lt;http_proxy_port&gt;
+<span class="c1"># socks4 proxy for http</span>
+<span class="nb">export</span> <span class="nv">http_proxy</span><span class="o">=</span>socks://&lt;socks4_proxy_host&gt;:&lt;socks4_proxy_port&gt;
+<span class="c1"># socks5 proxy for https</span>
+<span class="nb">export</span> <span class="nv">https_proxy</span><span class="o">=</span>socks5://&lt;socks5_proxy_host&gt;:&lt;socks5_proxy_port&gt;
+</pre></div>
+<p>* If in some blocked environment that can only access HTTP/HTTPS, you can consider changing your ssh service port to 80/443.</p>
+
+<h3 id="toc_3">4. Create a private Git repo on your SSH server</h3>
+<p>(reference: <a href="http://git-scm.com/book/en/v2/Git-on-the-Server-Setting-Up-the-Server">git-scm.com/book/en/v2/Git-on-the-Server-Setting-Up-the-Server</a>)</p>
+<div class="highlight"><pre><span></span><span class="c1"># create a git user for remote access(optional)</span>
+$ sudo adduser git
+$ <span class="nb">cd</span> /home/git/ <span class="o">&amp;&amp;</span> mkdir .ssh <span class="o">&amp;&amp;</span> chmod <span class="m">700</span> .ssh
+$ touch .ssh/authorized_keys <span class="o">&amp;&amp;</span> chmod <span class="m">600</span> .ssh/authorized_keys
+$ cat /tmp/id_rsa.someone.pub &gt;&gt; .ssh/authorized_keys
+
+<span class="c1"># create a server repo with </span>
+$ mkdir -p /opt/git/somerepo.git
+$ <span class="nb">cd</span> /opt/git/somerepo.git
+$ git init --bare
+
+<span class="c1"># create a local git repo(on your PC) and push to server repo</span>
+$ <span class="nb">cd</span> myproject
+$ git init
+$ git add . <span class="o">&amp;&amp;</span> git commit -m <span class="s2">&quot;initial commit&quot;</span>
+$ git remote add origin git@gitserver:/opt/git/somerepo.git
+$ git push origin master
+</pre></div>
+
+<h3 id="toc_4">5. Tagging</h3>
+<div class="highlight"><pre><span></span><span class="c1"># list your tags</span>
+$ git tag
+<span class="c1"># search for tags</span>
+$ git tag -l <span class="s2">&quot;v1.8.*&quot;</span>
+
+<span class="c1"># create a tag with annotation</span>
+$ git tag -a v1.0.1 -m <span class="s2">&quot;a new tag for v1.0.1&quot;</span>
+<span class="c1"># create a tag for a previous commit(for example, 902acd...)</span>
+$ git tag -a v1.0.0 902acd
+
+<span class="c1"># show tag info</span>
+$ git show v1.0.1
+
+<span class="c1"># push a tag to remote server</span>
+$ git push origin v1.0.1
+<span class="c1"># or push tags</span>
+$ git push origin --tags 
+
+<span class="c1"># You can also checkout the tags like the same way you checkout branches</span>
+$ git checkout -b version2 v2.0.0
+
+<span class="c1"># delete a tag</span>
+$ git tag -d <span class="s2">&quot;v1.0.1a&quot;</span>
+</pre></div>
+
+<h3 id="toc_5">6. Amend Logs</h3>
+<div class="highlight"><pre><span></span><span class="c1"># Method 1:</span>
+<span class="c1"># fix something after git commit</span>
+$ git commit -m <span class="s2">&quot;something wrong&quot;</span>
+$ git add &lt;...&gt;
+$ git rm &lt;...&gt;
+
+<span class="c1"># apply changes and update log to last commit</span>
+$ git commit --amend
+
+<span class="c1"># Method 2:</span>
+<span class="c1"># Make the last commit as unstage changes</span>
+$ git commit -m <span class="s2">&quot;something wrong&quot;</span>
+$ git reset HEAD~1
+<span class="c1"># ... fix things</span>
+<span class="c1"># Apply the changes and commit again</span>
+$ git commit --amend
+</pre></div>
+
+<h3 id="toc_6">7. Working with drafts (stashing)</h3>
+<div class="highlight"><pre><span></span><span class="c1"># Save current uncommitted change to stash</span>
+$ git stash
+
+<span class="c1"># List existing stash</span>
+$ git stash list
+
+<span class="c1"># recover last stash</span>
+$ git stash apply
+
+<span class="c1"># recover previous stashes</span>
+$ git stash apply stash@<span class="o">{</span><span class="m">1</span><span class="o">}</span>
+
+<span class="c1"># Delete stashes</span>
+$ git stash drop stash@<span class="o">{</span><span class="m">0</span><span class="o">}</span>
+</pre></div>
+<p>Reference for git stash: <a href="https://git-scm.com/docs/git-stash">https://git-scm.com/docs/git-stash</a></p>
+
+<h3 id="toc_7">8. Merge a specific commit to current branch</h3>
+<p>Git has a <code>cherry-pick</code> function that can merge a specific commit to the current branch, this save me once. :P</p>
+<div class="highlight"><pre><span></span><span class="c1"># merge a sequence of commits to the current branch, </span>
+$ git cherry-pick &lt;commits...&gt;
+</pre></div>
+<p>When you try to merge a commit, you will possibly cause some conflict. The cherry-pick function also has some features to help you.</p>
+<div class="highlight"><pre><span></span><span class="c1"># continue the job after you resolve the conflicts</span>
+$ git cherry-pick --continue
+
+<span class="c1"># forget current job in the sequence progress</span>
+$ git cherry-pick --quit
+
+<span class="c1"># clear all the sequence and recover to the pre-sequence state</span>
+$ git cherry-pick --abort
+</pre></div>
+
+<h3 id="toc_8">9. Reverting commits</h3>
+<p>There are two types of resetting the branch to a previous state: 1. delete unpublished commits locally, 2. Undo published commits with new commits.</p>
+<p>Using <code>git reset</code> can help resetting current state.</p>
+<div class="highlight"><pre><span></span><span class="c1"># delete the local commits and restore to the previous commit state</span>
+$ git reset --hard &lt;commit&gt;
+
+<span class="c1"># if you have local uncommit changes, you should save as stash first</span>
+$ git stash
+$ git reset --hard &lt;commit&gt;
+$ git stash pop
+</pre></div>
+<p>Using <code>git revert</code> is to make a new commit to revert previous changes(specificly).</p>
+<div class="highlight"><pre><span></span><span class="c1"># cancel specific changes</span>
+$ git revert &lt;commit1&gt; &lt;commit2&gt; ...
+
+<span class="c1"># cancel range of commits</span>
+$ git revert e647032...cee8902
+<span class="c1"># cancel last two commits</span>
+$ git revert HEAD~2...HEAD
+</pre></div>
+<p><font color="red">If you&#39;ve really push something wrong to github, or merging with a wrong branch which you want to recover. You could do th below things with specifc care:</font></p>
+<div class="highlight"><pre><span></span><span class="c1"># (it&#39;s strongly recommended to create a backup branch first!!!)</span>
+<span class="c1"># **this line recover back to a specific commit, and all the later commits will be lost!!!</span>
+$ git reset --hard &lt;commit&gt;
+$ git push --force origin &lt;branch_name&gt;
+</pre></div>
+<p><a href="http://stackoverflow.com/questions/4114095/how-to-revert-git-repository-to-a-previous-commit">Ref to git revert</a>.</p>
+
+<h3 id="toc_9">10. Get Revision List</h3>
+<p><em>Updated on 2017-12-21</em></p>
+<p>Now our projects in the company uses total commit count as the build version, so I make a search on how to use command line to get that. It&#39;s related to the <code>git rev-list</code> command and I found the command quite useful in fact.</p>
+<div class="highlight"><pre><span></span><span class="c1"># Get the total commit count at the current branch</span>
+$ git rev-list --count HEAD
+
+<span class="c1"># Check different commits between two branches/tags</span>
+$ git rev-list --pretty --left-right &lt;BRANCH_1&gt;...&lt;BRANCH_2&gt;
+</pre></div>
+]]>
+        </content>
+    </entry><entry>
+        <title type="html"><![CDATA[Linux C Learning (Part 1)]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2014/08/learning-linux-c-part-1.html"/>
+        <published>2014-08-20T23:34:00+08:00</published>
+        <updated>2020-02-01T10:09:36+08:00</updated>
+        <id>http://terryoy.github.io/2014/08/learning-linux-c-part-1.html</id>
+        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
+        <category scheme="http://terryoy.github.io/tag/#programming" term="programming" label="programming" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <p>Below is some study notes for Linux C Programming from a web course. It can serve as a coding reference in the future, or a walkthrough summary of the study. As I already have the knowledge of C Programming Language, so I will not cover the language detail here, but only the development environment under Linux.</p>
+
+<h3 id="toc_0">1. <strong>gcc</strong> and <strong>gdb</strong></h3>
+<p>There are several steps for the <strong>gcc</strong> compiler to compile a source file into a executable program. It can be set to the step output with some parameter to gcc, so you can checkout their result in file.</p>
+<div class="highlight"><pre><span></span><span class="c1"># Preprocessor: This is to remove comments, replace marcos(#define), and headers(#include)</span>
+$ gcc -E test.c -o test.i
+
+<span class="c1"># (+)Compile: This compile the source code into assembly code. Different architecture has different assembly language spec</span>
+$ gcc -S test.c -o test.s
+
+<span class="c1"># (+)Assemble: this translate assembly code into binary object. You can check the file with &quot;file test.o&quot; to see the format as a &quot;object file&quot; or a &quot;ELF LSB relocatable&quot;, and the architecture of the platform(x64, etc.)</span>
+$ gcc -c test.c -o test.o
+
+<span class="c1"># (+)Link: This generate the final executable</span>
+$ gcc test.c -o <span class="nb">test</span>
+</pre></div>
+<p>There are other useful parameters of gcc for specific purpose, for example, optimization, or debugging.</p>
+
+<ul>
+<li>&ldquo;-O[level]&rdquo;, optimzation level, (0,1,2,3)</li>
+<li>&ldquo;-g&rdquo;, generate debug info, gdb needed</li>
+<li>&ldquo;-Wall&rdquo;, enable all warnings and errors</li>
+<li>&ldquo;-Werror&rdquo;, enable errors</li>
+<li>&ldquo;-D&rdquo;, define macro in command line</li>
+<li>&ldquo;-I&rdquo;, set the location of headers</li>
+<li>&ldquo;-std=C99&rdquo;, use C99 standard</li>
+</ul>
+<p>The <strong>gdb</strong> debugging tool can be used to trace the program with some useful commands:</p>
+
+<ul>
+<li>&ldquo;l&rdquo;, list source code with line numbers</li>
+<li>&ldquo;n&rdquo;, proceed next line</li>
+<li>&ldquo;b [line number]&rdquo;, set a breakpoint at the code with the line number</li>
+<li>&ldquo;c&rdquo;, continue running until finish or meets the next break point</li>
+<li>&ldquo;p [variable]&rdquo;, print the instant value of a variable</li>
+</ul>
+]]>
+        </content>
+    </entry><entry>
+        <title type="html"><![CDATA[Creating A New Database in MySql]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2014/06/create-database-mysql.html"/>
+        <published>2014-06-04T14:40:00+08:00</published>
+        <updated>2020-02-01T10:09:36+08:00</updated>
+        <id>http://terryoy.github.io/2014/06/create-database-mysql.html</id>
+        <category scheme="http://terryoy.github.io/tag/#database" term="database" label="database" />
+        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <h3 id="toc_0">0. Setup</h3>
+<div class="highlight"><pre><span></span>$ sudo apt-get install mysql-server
+$ mysql -u root -p &lt;root_password&gt;
+</pre></div>
+
+<h3 id="toc_1">1. Create the database</h3>
+<div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">DATABASE</span> <span class="n">mytestdb</span><span class="p">;</span>
+<span class="k">show</span> <span class="n">databases</span><span class="p">;</span>
+</pre></div>
+
+<h3 id="toc_2">2. Create a user and grant access</h3>
+<div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">USER</span> <span class="s1">&#39;myuser&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span> <span class="n">IDENTIFIED</span> <span class="k">BY</span> <span class="s1">&#39;my_password&#39;</span><span class="p">;</span>
+
+<span class="k">GRANT</span> <span class="k">ALL</span> <span class="k">PRIVILEGES</span> <span class="k">ON</span> <span class="n">mytestdb</span><span class="p">.</span><span class="o">*</span> <span class="k">TO</span> <span class="s1">&#39;myuser&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="p">;</span> 
+
+<span class="c1">-- or alternatively, with more powerful access</span>
+<span class="k">GRANT</span> <span class="k">ALL</span> <span class="k">PRIVILEGES</span> <span class="k">ON</span> <span class="n">mytestdb</span><span class="p">.</span><span class="o">*</span> <span class="k">TO</span> <span class="s1">&#39;admin&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span> <span class="k">WITH</span> <span class="k">GRANT</span> <span class="k">OPTION</span><span class="p">;</span>
+</pre></div>
+
+<h3 id="toc_3">3. Login with the User</h3>
+<div class="highlight"><pre><span></span>mysql -u myuser -p mytestdb
+</pre></div>
+
+<h3 id="toc_4">4. Import a SQL dump into database</h3>
+<div class="highlight"><pre><span></span><span class="n">USE</span> <span class="n">mytestdb</span><span class="p">;</span>
+<span class="k">source</span> <span class="n">db_dump</span><span class="p">.</span><span class="k">sql</span><span class="p">;</span>
+</pre></div>
+<p>Or you can use a command line:</p>
+<div class="highlight"><pre><span></span>mysql -u dbuser -p <span class="o">[</span>-h host<span class="o">]</span> dbname &lt; dbdump.sql
+</pre></div>
+<p>Exporting in command line is similar, using &ldquo;mysqldump&rdquo; command:</p>
+<div class="highlight"><pre><span></span>mysqldump -u dbuser -p dbname &gt; dbdump.sql
+</pre></div>
+]]>
+        </content>
+    </entry><entry>
+        <title type="html"><![CDATA[Use Ctypes to Wrap C Libraries in Python]]></title>
+        <author><name>terryoy</name></author>
+        <link href="http://terryoy.github.io/2014/03/using-ctypes-to-wrap-c-library.html"/>
+        <published>2014-03-23T07:57:00+08:00</published>
+        <updated>2020-02-01T10:09:36+08:00</updated>
+        <id>http://terryoy.github.io/2014/03/using-ctypes-to-wrap-c-library.html</id>
+        <category scheme="http://terryoy.github.io/tag/#python" term="python" label="python" />
+        <category scheme="http://terryoy.github.io/tag/#linux" term="linux" label="linux" />
+        <content type="html" xml:base="http://terryoy.github.io/" xml:lang="en">
+            <![CDATA[ <p>In Linux, many libraries are provided in C dll with headers. It is not easy to try with the features if you&#39;re a Python programmer, unless you know how to work with C library i Python.</p>
+<p>There is a tool to do it, which is <em><strong>ctypes</strong></em>. You can operate on data types, structs, pointers and functions with it. Now here is a brief guide on how to do it. <a href="http://stackoverflow.com/questions/1942298/wrapping-a-c-library-in-python-c-cython-or-ctypes">Here</a> is also a comparison of ctypes with other solutions.</p>
+
+<h3 id="toc_0">1. Loading Libraries</h3>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">ctypes</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">libc</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="s1">&#39;libc.so.6&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">libc</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span>
+<span class="mi">1804289383</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">libc</span><span class="o">.</span><span class="n">atoi</span><span class="p">(</span><span class="s2">&quot;12345&quot;</span><span class="p">)</span>
+<span class="mi">12345</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">libtest</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="s1">&#39;./test.so&#39;</span><span class="p">)</span> <span class="c1"># you can also load the shared library by location, but you cannot load static library</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">ctypes.util</span> <span class="kn">import</span> <span class="n">find_library</span> <span class="c1"># if you need to find the library name</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">find_library</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">)</span>
+<span class="s1">&#39;libc.so.6&#39;</span>
+</pre></div>
+<p>The &ldquo;ctypes.CDLL()&rdquo; method will return a class that wraps a Standard C library. Alternatively, there is a &ldquo;ctypes.WinDLL()&rdquo; method that wraps a Windows stdcall library.</p>
+<p>Ctypes assumes that all methods accept &ldquo;int&rdquo; or &ldquo;char*&rdquo; as parameters and return &ldquo;int&rdquo;, in other cases it doesn&#39;t work properly. So we&#39;ll need to define some attributes for the functions to fix that.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">libc</span><span class="o">.</span><span class="n">atof</span><span class="p">(</span><span class="s2">&quot;12345.123&quot;</span><span class="p">)</span>
+<span class="mi">531599</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">libc</span><span class="o">.</span><span class="n">atof</span><span class="o">.</span><span class="n">restype</span><span class="o">=</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">libc</span><span class="o">.</span><span class="n">atof</span><span class="p">(</span><span class="s2">&quot;12345.123&quot;</span><span class="p">)</span>
+<span class="mf">12345.123</span>
+</pre></div>
+<p>So every function in the library you can have three attributes to handle that: </p>
+
+<ul>
+<li>  <strong><em>func</em>.argtypes</strong> = [ ]       - a sequence of arguments </li>
+<li>  <strong><em>func</em>.restype</strong> = xxx        - the type of return value </li>
+<li>  <strong><em>func</em>.errcheck</strong> = method(result, func, args)        - a method that manipulates the <em>result</em>(return value) of the executed <em>func</em>, and also passed with the original <em>args</em> of this execution. </li>
+</ul>
+<p><a href="http://docs.python.org/2/library/ctypes.html#fundamental-data-types">Here</a> is a list of fundamental data types that you could use in <em>argtypes</em> and <em>restype</em>.</p>
+
+<h3 id="toc_1">2. Structures and Pointers</h3>
+<p>Since we&#39;ll need to define the parameters of the C functions, we need to have a way to work with structure and pointers.</p>
+<p>With Ctypes, we can define a structure class by deriving from <em>ctype.Structure</em>.</p>
+<div class="highlight"><pre><span></span><span class="c1"># in C we have this structure:</span>
+<span class="c1">#</span>
+<span class="c1"># struct Point {</span>
+<span class="c1">#     double x, y;</span>
+<span class="c1"># }</span>
+<span class="c1">#</span>
+
+<span class="c1"># in Python we create this class to represent a structure</span>
+<span class="k">class</span> <span class="nc">Point</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">Structure</span><span class="p">):</span>
+    <span class="n">_fields_</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">)];</span>
+</pre></div>
+<p>If you want to define an array with ctypes, you can simply use the mutiply method:</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">int_arr</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="o">*</span><span class="mi">4</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">int_arr</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">__main__</span><span class="o">.</span><span class="n">c_long_Array_4</span><span class="s1">&#39;&gt;</span>
+</pre></div>
+<p>We could use _ctypes.POINTER() to define the pointer type of ctype types(fundamental types and structures).</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">type_int_p</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">)</span> <span class="c1"># type of a pointer</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">type_int_p</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">__main__</span><span class="o">.</span><span class="n">LP_c_long</span><span class="s1">&#39;&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">type_int_pp</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">int_p</span><span class="p">)</span> <span class="c1"># type of a pointer of the integer pointer</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">type_int_pp</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">__main__</span><span class="o">.</span><span class="n">LP_LP_c_long</span><span class="s1">&#39;&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">type_point_p</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">Point</span><span class="p">)</span> <span class="c1"># type of a pointer of the structure Point above</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">type_point_p</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">__main__</span><span class="o">.</span><span class="n">LP_Point</span><span class="s1">&#39;&gt;</span>
+</pre></div>
+
+<h3 id="toc_2">3. Initialize Variables and Pass Arguments to C</h3>
+<p>The ctypes data types all have a kind of construction method to initialize variables with values. The instance will be a ctype object with the respective value as defined in C.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">ival</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>    <span class="c1"># integer value</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">ival</span>
+<span class="n">c_long</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">ival</span><span class="o">.</span><span class="n">value</span>      <span class="c1"># you can convert it&#39;s value to a python value by the &quot;value&quot; attribute</span>
+<span class="mi">100</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">dval</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">(</span><span class="mf">200.25</span><span class="p">)</span>  <span class="c1"># double value</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">dval</span>
+<span class="n">c_double</span><span class="p">(</span><span class="mf">200.25</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">dval</span><span class="o">.</span><span class="n">value</span>
+<span class="mf">200.25</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">sval</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_char_p</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">)</span>     <span class="c1"># string value</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">sval</span>    <span class="c1"># you can see the value is representing a pointer address instead of string</span>
+<span class="n">c_char_p</span><span class="p">(</span><span class="mi">3071487276</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">sval</span><span class="o">.</span><span class="n">value</span>
+<span class="s1">&#39;Hello, world!&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">libc</span><span class="o">.</span><span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">sval</span><span class="p">)</span> <span class="c1"># but it can be printed as string with &quot;printf&quot; in C</span>
+<span class="n">Hello</span><span class="p">,</span> <span class="n">world</span><span class="err">!</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">ret</span>     <span class="c1"># (the return value of &quot;printf&quot; is the printed string length)</span>
+<span class="mi">13</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">structval</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>     <span class="c1"># the Point structure defined above, you can also initialize like &quot;Point(0, 10)&quot;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">structval</span>
+<span class="o">&lt;</span><span class="n">__main__</span><span class="o">.</span><span class="n">Point</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0xb74466a4</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="p">(</span><span class="n">structval</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">structval</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+<p>When we pass objects to functions, we can pass by <em>pointer</em>. In this case we&#39;ll have two companion methods <em>byref()</em> and <em>pointer()</em> that works with pointers. Also, for a pointer object you can access it&#39;s value by the <em>contents</em> attribute.
+The <em>byref()</em> method create a parameter object of pointer, which you can only use in functions(notice the &ldquo;cparam&rdquo; object), while the <em>pointer()</em> method returns a pointer object which you can manipulate later.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">intc</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">byref</span><span class="p">(</span><span class="n">intc</span><span class="p">)</span>      <span class="c1"># the byref() returns a parameter object that only can be used as a foreign function&#39;s parameter(notice a &quot;cparam&quot; object). </span>
+<span class="o">&lt;</span><span class="n">cparam</span> <span class="s1">&#39;P&#39;</span> <span class="p">(</span><span class="mh">0xb7124a70</span><span class="p">)</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">intp</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">pointer</span><span class="p">(</span><span class="n">intc</span><span class="p">)</span>     <span class="c1"># the pointer() returns a pointer object that you can further work with it</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">intp</span>
+<span class="o">&lt;</span><span class="n">__main__</span><span class="o">.</span><span class="n">LP_c_long</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0xb713392c</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">intp</span><span class="o">.</span><span class="n">contents</span>   <span class="c1"># access the data to which the pointer points</span>
+<span class="n">c_long</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">intp</span><span class="o">.</span><span class="n">contents</span><span class="o">.</span><span class="n">value</span>
+<span class="mi">100</span>
+</pre></div>
+
+<h3 id="toc_3">4. Accessing Structure and Variables from C</h3>
+<p>We need not only passing data to C functions, but also getting some pre-defined data structure or variables in C. So let&#39;s talk about a few things you want to import from C.</p>
+<p>For <strong>enums</strong> in C, you&#39;ll need to define them again in Python. Since it&#39;s a representative of basic data types like integer, it&#39;s easy to act in the same way as in C.</p>
+<p>For <strong>Structures</strong>, you&#39;ll need to define the similar classes, derived from ctypes. Structure, and declare the <code>_fields_</code> attributes as mentioned above in Section 2. After that, you can use <strong>in_dll()</strong> method to load an object within the library. (BTW, If you don&#39;t need to access the attribute of that object, it&#39;s not necessary to set the <code>_fields_</code> attribute.)</p>
+<div class="highlight"><pre><span></span><span class="n">libaa</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="s1">&#39;libaa.so.1&#39;</span><span class="p">)</span> <span class="c1"># the ascii-art lib</span>
+
+<span class="k">class</span> <span class="nc">RenderSettings</span><span class="p">(</span><span class="n">Structure</span><span class="p">):</span>
+    <span class="n">_pack_</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">_fields_</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;brightness&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;contrast&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;gamma&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_float</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;dithering_mode&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;inversion&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;random&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">),</span>
+    <span class="p">]</span>
+
+<span class="n">DEFAULT_RENDER_SETTINGS</span> <span class="o">=</span> <span class="n">RenderSettings</span><span class="o">.</span><span class="n">in_dll</span><span class="p">(</span><span class="n">libaa</span><span class="p">,</span> <span class="s1">&#39;aa_defrenderparams&#39;</span><span class="p">)</span>
+</pre></div>
+<p>Sometimes the Structure object is a constant which you cannot change any value of it, it&#39;s better to have a <strong>clone()</strong> method to make a copy to chang it. The <strong>clone()</strong> method defined below can act as </p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Structure</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">Structure</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">clone</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)()</span>
+        <span class="n">ctypes</span><span class="o">.</span><span class="n">pointer</span><span class="p">(</span><span class="n">clone</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span>
+        <span class="k">return</span> <span class="n">clone</span>
+</pre></div>
+<p>For <strong>basic data types</strong>, it&#39;s the same way to use the in_dll() method in the simple types. (e.g. &ldquo;ctypes.c_int.in_dll(libaa, &#39;some_int&#39;)&rdquo;)</p>
+
+<h3 id="toc_4">5. Playing with Functions</h3>
+<p>In Section 1, we already talked about how to import the functions from C and use them. However there are a few things to remember. Below is an example of calling the functions. </p>
+
+<ul>
+<li>First, you should declare all the related types and structures in the function&#39;s arguments and return value. </li>
+<li>Second, basic types can be auto converted into ctypes types, but for those are not, ensure they are in ctypes form.</li>
+<li>Third, remember to use ctypes.pointer() or ctypes.byref() for passing the pointer arguments.</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="c1"># it&#39;s a good practice to declare the structures and the functions at first like in C </span>
+
+<span class="c1"># ... </span>
+<span class="c1"># declare Structures </span>
+<span class="k">class</span> <span class="nc">Context</span><span class="p">(</span><span class="n">Structure</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="n">ContextPtr</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">Context</span><span class="p">)</span>
+
+<span class="c1"># ... </span>
+<span class="c1"># declare functions</span>
+<span class="n">aa_init</span> <span class="o">=</span> <span class="n">libaa</span><span class="o">.</span><span class="n">aa_init</span>
+<span class="n">aa_init</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">DriverPtr</span><span class="p">,</span> <span class="n">HardwareSettingsPtr</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">]</span> <span class="c1"># parameters are (pointer of struct &quot;Driver&quot;, pointer of struct HardwareSetting, and a pointer of &quot;void&quot;)</span>
+<span class="n">aa_init</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ContextPtr</span> 
+
+<span class="n">aa_fastrender</span> <span class="o">=</span> <span class="n">libaa</span><span class="o">.</span><span class="n">aa_fastrender</span>
+<span class="n">aa_fastrender</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ContextPtr</span><span class="p">]</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">]</span> 
+
+<span class="c1"># calling aa_init() and aa_fastrender()</span>
+<span class="n">context</span> <span class="o">=</span> <span class="n">aa_init</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">pointer</span><span class="p">(</span><span class="n">aa_mem_d</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">pointer</span><span class="p">(</span><span class="n">settings</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+<span class="c1"># ...</span>
+<span class="n">aa_fastrender</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span><span class="n">height</span><span class="p">)</span>
+</pre></div>
+<p>By now, you should have the knowledge to play with C libraries. Just start playing around with those libraries you can find in /usr/lib and /usr/include. Enjoy!</p>
 ]]>
         </content>
     </entry>
