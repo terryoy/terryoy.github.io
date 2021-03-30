@@ -17,7 +17,7 @@ function get_date() {
 # Tags
 function get_tags() {
   echo "choose tags: "
-  ls -1p tag/ | grep '/$' | sed 's/\/$//' | sort | column
+  ls -1p docs/tag/ | grep '/$' | sed 's/\/$//' | sort | column
   read -p "> " tags
 }
 
