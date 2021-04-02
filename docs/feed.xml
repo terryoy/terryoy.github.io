@@ -3,14 +3,14 @@
     <title>Hello, World!</title>
     <link href="http://terryoy.github.io/feed.xml" rel="self" />
     <link href="http://terryoy.github.io/" />
-    <updated>2021-04-02T14:44:42+08:00</updated>
+    <updated>2021-04-02T14:54:10+08:00</updated>
     <id>http://terryoy.github.io/</id>
     <entry>
         <title type="html"><![CDATA[LambdaChip Alonzo “Unboxing” (at WoodHouse BBQ)]]></title>
         <author><name>terryoy</name></author>
         <link href="http://terryoy.github.io/2021/03/lambdachip-alonzo--unboxing---at-woodhouse-bbq-.html"/>
         <published>2021-03-29T21:57:00+08:00</published>
-        <updated>2021-04-02T14:44:42+08:00</updated>
+        <updated>2021-04-02T14:54:10+08:00</updated>
         <id>http://terryoy.github.io/2021/03/lambdachip-alonzo--unboxing---at-woodhouse-bbq-.html</id>
         <category scheme="http://terryoy.github.io/tag/#embedded" term="embedded" label="embedded" />
         <category scheme="http://terryoy.github.io/tag/#hardware" term="hardware" label="hardware" />
@@ -27,17 +27,17 @@
 <p>Instead of getting a fine assembled box of the product(like you always do when you buy something), we got pieces of the every bits we need to assembled a final box of the bundle. So this unboxing is kind of like a &ldquo;time-reversed&rdquo; experience, (or &ldquo;inverting entropy&rdquo; as in the film <em>Tenet</em>), which you start with the pieces and end with a box.</p>
 <p>First, the paper case as the last image. Then came the manual and the wires:</p>
 <p><img src="https://pic.lucki.cn/upics/2021-03-30-2055bR6IVu.png" alt="LambdaChip manual and the wires"/></p>
-<p>As you can see, there is the USB dongle for Type C, and the white wire with both USB Type C at each end. So it gives you to the flexibility to connect to a Type A or Type C receptable on PC or or Mobile or any other USB charger. There is another grey wire which is a JTAG connector for the Saruman Debugger. Also, there are some pieces of aclyric board in the plastic bag, which will make a protection case for the Alonzo board.</p>
+<p>As you can see, there is the USB dongle for Type C, and the white wire with both USB Type C at each end. So it gives you the flexibility to connect to a Type A or Type C receptable, on PC or or Mobile or any other USB charger. There is another grey wire which is a JTAG connector for the Saruman Debugger. Also, there are some pieces of aclyric board in the plastic bag, which will make a protection case for the Alonzo board.</p>
 <p>Then we got a few more to assemble, the foam holder and the boards: the <strong>Alonzo</strong> and the <strong>Saruman Debugger</strong>.</p>
 <p><img src="https://pic.lucki.cn/upics/2021-03-30-2129gzXVU2.png" alt="Foam holder with boards"/>
 <img src="https://pic.lucki.cn/upics/2021-03-30-2226POKTbs.png" alt="Back of the board"/></p>
-<p>For saving the cost,  we didn&#39;t get the TF card that comes with the bundle(also because we are so easy to get one in HuaQiangBei market), but we got a bag for carrying all the things you need to play with the Alonzo board.</p>
+<p>For saving the cost, we didn&#39;t get the TF card that comes with the bundle(also because we are so easy to get one in HuaQiangBei market), but we got a bag for carrying all the things you need to play with the Alonzo board(I believe it is also included in the bundle package).</p>
 <p><img src="https://pic.lucki.cn/upics/2021-03-30-2130M5MtuE.png" alt="bag"/></p>
 <p>Finally, we arrived at the very beginning of &ldquo;the unboxing&rdquo; - the box!</p>
 <p><img src="https://pic.lucki.cn/upics/2021-03-30-2111AomBZK.png" alt="Alonzo Bundle Box"/></p>
 
 <h2 id="toc_2">The Assembled Board</h2>
-<p>After I soldered the pins, and also assembled the aclyric case for the board, so here are some more closer look to the Alonzo board.</p>
+<p>After a few days, I soldered the pins, and also assembled the aclyric case for the board, so here are some more closer look to the Alonzo board.</p>
 <p><img src="https://pic.lucki.cn/upics/2021-03-30-2112UIfSjk.png" alt="Assembleded Alonzo"/>
 <img src="https://pic.lucki.cn/upics/2021-03-30-2233FvKetN.png" alt="Assembled Alonzo 1"/></p>
 
