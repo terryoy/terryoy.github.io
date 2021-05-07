@@ -20,7 +20,7 @@ site = {
     ],
     "google_adsense": "ca-pub-6012718593977391",
     "google_adslot_nav": "1828084194",
-    "google_adslot_post": "1086396907",
+    # "google_adslot_post": "1086396907",
 }
 
 #: this config defined information of your site

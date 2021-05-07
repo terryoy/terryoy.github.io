@@ -26,27 +26,34 @@ First, the paper case as the last image. Then came the manual and the wires:
 
 ![LambdaChip manual and the wires](https://pic.lucki.cn/upics/2021-03-30-2055bR6IVu.png)
 
-As you can see, there is the USB dongle for Type C, and the white wire with both USB Type C at each end. So it gives you to the flexibility to connect to a Type A or Type C receptable on PC or or Mobile or any other USB charger. There is another grey wire which is a JTAG connector for the Saruman Debugger. Also, there are some pieces of aclyric board in the plastic bag, which will make a protection case for the Alonzo board.
+As you can see, there is the USB dongle for Type C, and the white wire with both USB Type C at each end. So it gives you the flexibility to connect to a Type A or Type C receptable, on PC or or Mobile or any other USB charger. There is another grey wire which is a JTAG connector for the Saruman Debugger. Also, there are some pieces of aclyric board in the plastic bag, which will make a protection case for the Alonzo board.
 
-Then we get the foam holder and the boards: the **Alonzo** and the **Saruman Debugger**.
+Then we got a few more to assemble, the foam holder and the boards: the **Alonzo** and the **Saruman Debugger**.
 
 ![Foam holder with boards](https://pic.lucki.cn/upics/2021-03-30-2129gzXVU2.png)
 ![Back of the board](https://pic.lucki.cn/upics/2021-03-30-2226POKTbs.png)
 
-For saving the cost,  we didn't get the TF card that comes with the bundle(also because we are so easy to get one in HuaQiangBei market), but we got a bag for carrying all the things you need to play with the Alonzo board.
+For saving the cost, we didn't get the TF card that comes with the bundle(also because we are so easy to get one in HuaQiangBei market), but we got a bag for carrying all the things you need to play with the Alonzo board(I believe it is also included in the bundle package).
 
 ![bag](https://pic.lucki.cn/upics/2021-03-30-2130M5MtuE.png)
 
 
-Finally, we arrived at the beginning of "the unboxing" - the box!
+Finally, we arrived at the very beginning of "the unboxing" - the box!
 
 ![Alonzo Bundle Box](https://pic.lucki.cn/upics/2021-03-30-2111AomBZK.png)
 
 
 ## The Assembled Board
 
-After I soldered the pins, and also assembled the aclyric case for the board, so here are some more closer look to the Alonzo board.
+After a few days, I soldered the pins, and also assembled the aclyric case for the board, so here are some more closer look to the Alonzo board.
 
 
 ![Assembleded Alonzo](https://pic.lucki.cn/upics/2021-03-30-2112UIfSjk.png)
 ![Assembled Alonzo 1](https://pic.lucki.cn/upics/2021-03-30-2233FvKetN.png)
+
+
+## Next
+
+In the next article, I will show you an example of blinking the LED light with scheme script in Alonzo, and talk about the programming experience to this board.
+
+
