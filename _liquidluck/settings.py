@@ -10,6 +10,10 @@ site = {
     # "prefix": "blog",
     "friendly_links": [
         {
+            "name": "My GitHub Profile",
+            "link": "https://github.com/terryoy",
+        },
+        {
             "name": u'中文博客',
             "link": 'http://terryoy.github.io/thoughts/',
         }

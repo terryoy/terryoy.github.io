@@ -45,19 +45,24 @@
 <body>
 <div id="wrapper">
 <header id="header" class="clear">
-    <h1>{{ site.name }}</h1>
-    <p>I'm <i>{{ theme.author }}</i></p>
-    <p class="view"><a href="https://github.com/terryoy">View My GitHub Profile</a></p>
-    {% for item in site.friendly_links %}
-    <p class="view"><a href="{{ item.link }}">{{ item.name }}</a></p>
-    {% endfor %}
+    <section class="header-title">
+      <h1>{{ site.name }}</h1>
+      <p>I'm <i>{{ theme.author }}</i></p>
+    </section>
 
-    <p>&nbsp;</p>
-    {% if site.feed -%}
-    <p><a class="feed" href="{{site.feed}}">RSS feed</a></p>
-    {% else %}
-    <p><a class="feed" href="{{ content_url('feed.xml') }}">RSS feed</a></p>
-    {%- endif %}
+    <section class="header-friendly-links">
+      {% for item in site.friendly_links %}
+        <p class="view"><a href="{{ item.link }}">{{ item.name }}</a></p>
+      {% endfor %}
+
+      {% if site.feed -%}
+        <p class="view"><a class="feed" href="{{site.feed}}">RSS feed</a></p>
+      {% else %}
+        <p class="view"><a class="feed" href="{{ content_url('feed.xml') }}">RSS feed</a></p>
+      {%- endif %}
+      
+    </section>
+
 </header><!-- #header -->
 
 {%- block nav %}
